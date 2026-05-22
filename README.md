@@ -1,8 +1,8 @@
 # 🧠 Leakage-Free Ensemble Spiking Neural Network for Network Intrusion Detection
 
-[![Python 3.12](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/downloads/)
-[![PyTorch](https://img.shields.io/badge/PyTorch-2.x-ee4c2c.svg)](https://pytorch.org/)
-[![snnTorch](https://img.shields.io/badge/snnTorch-0.9-green.svg)](https://snntorch.readthedocs.io/)
+[![Python 3.12](https://img.shields.io/badge/Python-3.12.12-blue.svg)](https://www.python.org/downloads/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.6.0-ee4c2c.svg)](https://pytorch.org/)
+[![snnTorch](https://img.shields.io/badge/snnTorch-0.9.1-green.svg)](https://snntorch.readthedocs.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > **Official code repository** for the paper:
@@ -100,6 +100,33 @@ jupyter notebook notebook.ipynb
 
 ---
 
+## 🔬 Reproducing Paper Results
+
+All results reported in the paper were produced with the following environment:
+
+| Component | Version |
+|---|---|
+| Python | 3.12.12 |
+| PyTorch | 2.6.0 (CUDA) |
+| snnTorch | 0.9.1 |
+| scikit-learn | 1.6.1 |
+| imbalanced-learn | 0.13.0 |
+| NumPy | 2.4.3 |
+| Pandas | 3.0.1 |
+| Platform | Kaggle (Tesla T4, 16 GB VRAM) |
+
+To reproduce the exact results from the paper, run all cells in `notebook.ipynb` **sequentially from top to bottom**. The notebook contains:
+
+| Paper Reference | Notebook Section | What It Produces |
+|---|---|---|
+| **Table I** — Ensemble SNN results | Section 8 (`main()` call) | Classification report, confusion matrix, ROC curves |
+| **Table II** — Baseline comparison | Section 9.1 → 9.3 | ANN and Random Forest classification reports |
+| **Fig. 1–6** | Section 8 (auto-generated) | Training curves, confusion matrices, F1 bars, ROC |
+
+> **Seed:** All random states are fixed to `SEED = 42`. Running the full notebook on the same hardware produces identical results.
+
+---
+
 ## ⚙️ Hyperparameters
 
 | Parameter | Value | Description |
@@ -121,8 +148,11 @@ jupyter notebook notebook.ipynb
 
 The notebook includes two baseline models trained with **identical data splits, features, and preprocessing** for a fair comparison:
 
-1. **ANN Baseline** — Feed-forward MLP with residual connection (512→512→256→C)
-2. **Random Forest Baseline** — scikit-learn RandomForestClassifier (100 trees, max depth 25)
+| Model | Type | Architecture | Optimizer | Section |
+|---|---|---|---|---|
+| **Ensemble SNN** | Spiking | Rate + Temporal + Population + Meta-Learner | AdamW + OneCycleLR | §8 |
+| **ANN** | Feed-forward | 512→512→256→C (residual) | AdamW + OneCycleLR | §9.2 |
+| **Random Forest** | Traditional ML | 100 trees, max depth 25 | — | §9.3 |
 
 ---
 
