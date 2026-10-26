@@ -67,7 +67,6 @@ The training partition is capped at 500{,}000 rows. Benign rows are subsampled, 
 \centering
 \caption{Support per class after the feature-group split. Only training is capped.}
 \label{tab:data}
-\small
 \setlength{\tabcolsep}{3pt}
 \begin{tabular}{lrrrr}
 \toprule
@@ -104,7 +103,9 @@ For a false-alarm budget $\tau$, the threshold $t_\tau$ is the empirical $(1-\ta
 
 \section{Models}
 
-\textbf{Ensemble SNN (E-SNN).} Three branches share the same architecture and differ only in how the 70 features become spikes over $T = 12$ time steps. The \emph{rate} branch uses a deterministic phase-accumulator code. The \emph{temporal} branch emits a single spike whose latency decreases with feature value. The \emph{population} branch expands each feature into four Gaussian receptive fields and rate-codes their activations. Each branch has two hidden layers of 128 and 64 leaky integrate-and-fire neurons with learnable decay, layer normalisation and dropout of 0.2, followed by a linear readout averaged over time. The three branch outputs are combined as $0.6$ times a softmax-weighted average plus $0.4$ times a small meta-network. The model has 86{,}013 parameters and is trained with surrogate gradients (fast sigmoid, slope 25) using snnTorch~\cite{eshraghian2023}, for at most 35 epochs with early stopping on tuning macro-F1.
+\textbf{Input.} Every model receives one static vector of 70 flow statistics per flow, as exported by CICFlowMeter (durations, packet and byte counts, inter-arrival statistics, flag counts and similar). None of the models sees packet sequences. The time steps of the SNN are therefore an encoding device that turns each static value into a short spike train; they do not correspond to time in the network trace.
+
+\textbf{Ensemble SNN (E-SNN).} Three branches share the same architecture and differ only in how the 70 features become spikes over $T = 12$ time steps. The \emph{rate} branch uses a deterministic phase-accumulator code. The \emph{temporal} branch emits a single spike whose latency decreases with feature value. The \emph{population} branch expands each feature into four Gaussian receptive fields and rate-codes their activations. The three codes suit different features. Rate coding preserves magnitude for smooth, wide-range statistics such as byte rates, latency coding gives the largest values the earliest spikes, and population coding separates the narrow bands that many protocol-specific features such as flag counts and window sizes take. Each branch has two hidden layers of 128 and 64 leaky integrate-and-fire neurons with learnable decay, layer normalisation and dropout of 0.2, followed by a linear readout averaged over time. The three branch outputs are combined as $0.6$ times a softmax-weighted average plus $0.4$ times a small meta-network. This mixture was fixed in an earlier version of the study and not tuned here; the architecture screen below includes the pure weighted average ($1.0/0$) as one variant. The model has 86{,}013 parameters and is trained with surrogate gradients (fast sigmoid, slope 25) using snnTorch~\cite{eshraghian2023}, for at most 35 epochs with early stopping on tuning macro-F1.
 
 \textbf{Matched ANN.} A two-hidden-layer perceptron whose width is chosen by parameter count alone to match the E-SNN (85{,}945 parameters). It sees the quantile-scaled features directly.
 
@@ -126,7 +127,6 @@ Table~\ref{tab:main} reports test results at the primary 5\% budget. The achieve
 \centering
 \caption{Test results at the 5\% benign false-alarm budget (mean $\pm$ s.d., three seeds). ADR: attack detection rate.}
 \label{tab:main}
-\small
 \setlength{\tabcolsep}{4pt}
 \begin{tabular}{lccc}
 \toprule
@@ -177,7 +177,6 @@ Table~\ref{tab:screen} lists the five E-SNN variants. The rule fixed before the 
 \centering
 \caption{Architecture screen at $T = 8$, seed 42. Variants ranked on tuning macro-F1 (argmax decision); test macro-F1 at the 5\% budget. Seed 42 of the original reached 0.756 at $T = 8$.}
 \label{tab:screen}
-\small
 \setlength{\tabcolsep}{4pt}
 \begin{tabular}{lcc}
 \toprule
@@ -198,9 +197,8 @@ Table~\ref{tab:perclass} lists per-class F1. Nine of the thirteen classes are de
 
 \begin{table}[t]
 \centering
-\caption{Per-class test F1 at the 5\% budget, mean of three seeds. Classes with F1 $\geq 0.96$ for all models are omitted.}
+\caption{Per-class test F1 at the 5\% budget, mean of three seeds. Classes with F1 $\geq 0.96$ for all models are omitted (DoS-Slowloris, for example, ranges from 0.964 for the E-SNN to 0.998 for XGBoost).}
 \label{tab:perclass}
-\small
 \setlength{\tabcolsep}{4pt}
 \begin{tabular}{lccccc}
 \toprule
@@ -216,6 +214,8 @@ Web Attacks & 0.360 & 0.171 & 0.393 & 0.319 & 0.464 \\
 
 The feature-group audit explains three of these. Of 193{,}360 FTP-BruteForce flows, 193{,}353 fall into just 54 distinct vectors, and every one of those vectors also appears under another label. The reverse holds for DoS-SlowHTTPTest, where 139{,}884 of 139{,}890 flows share vectors with other classes. Both attacks leave short, nearly empty TCP connections that the flow extractor can summarise identically, and in that case no classifier working on these features can tell them apart. Infiltration is different. Its flows are spread over 140{,}610 groups, but 88{,}810 of them share a vector with benign traffic, which is consistent with the known labelling problems in this class~\cite{liu2022}. Across the whole dataset, 68{,}467 groups carry conflicting labels, and a classifier that predicts the majority label of each group would still be wrong on 1.10\% of rows. Any reported error below that floor on this representation is a sign of leakage.
 
+Web Attacks behaves differently again. Its ranking quality is high (one-vs-rest ROC AUC 0.994 for the seed-42 E-SNN and 1.000 for XGBoost), yet its F1 is low because the class has only 179 test flows against 2.7 million benign ones. At the 5\% budget the E-SNN finds 98 of the 179 attacks but also assigns 661 other flows to the class (precision 0.13). XGBoost finds 160 with 342 false assignments (precision 0.32). A small false-positive rate on the benign majority is enough to swamp a class this rare, so AUC overstates how usable the detector is for it, and average precision (0.49 and 0.85) gives a fairer picture.
+
 \subsection{Operation counts and runtime}
 
 We counted operations with forward hooks on 4{,}400 class-balanced flows. In a linear layer that receives binary input, each nonzero input contributes one accumulate (AC) per output neuron; any other linear layer contributes multiply-accumulates (MACs). Table~\ref{tab:eff} reports counts per flow for the original $T = 12$ models. The energy column applies the 45\,nm estimates of Horowitz~\cite{horowitz2014} (0.9\,pJ per 32-bit AC, 4.6\,pJ per MAC) and should be read only as a comparison between the models. It ignores membrane updates, memory traffic and encoding, which often dominate on real hardware.
@@ -224,7 +224,6 @@ We counted operations with forward hooks on 4{,}400 class-balanced flows. In a l
 \centering
 \caption{Synaptic operations per flow and a first-order energy estimate. CPU time is single-thread, batch 4{,}400.}
 \label{tab:eff}
-\small
 \setlength{\tabcolsep}{3.5pt}
 \begin{tabular}{lrrrr}
 \toprule
