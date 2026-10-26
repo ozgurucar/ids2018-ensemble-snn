@@ -40,6 +40,20 @@ API: `POST /api/predict` (multipart CSV, `model=esnn|esnn_t4|xgb`), `POST /api/f
 
 The demo flows come from the public dataset and may overlap the test split, so demo numbers are not an evaluation.
 
+## Verify the claims yourself
+
+Every number in the paper can be checked from this repository:
+
+| Claim | How to check |
+|---|---|
+| Main table, per-class F1 | `results/v3/experiments/*/summary.json` (per-seed records, hashes of checkpoints and test outputs) |
+| Time-window ablation, architecture screen | `results/v4/` |
+| Operation counts | `python scripts/profile_all_steps.py` (needs the checkpoints from Kaggle; see the script) |
+| The service works | `docker compose up --build`, then the demo button or `app/replay.py` |
+| Transfer to another network | Download `sweety18/cicids2017-full-dataset` from Kaggle, then `python scripts/cross_dataset_cic2017.py combine.csv out.json` |
+
+The transfer test is deliberately unforgiving: the frozen 2018 models are scored on CIC-IDS2017 without refitting anything. False alarms rise to 23–26%, and with a threshold refitted on local benign traffic only, 23–32% of attack flows are detected. Slow application-layer DoS (GoldenEye, Slowloris) is the exception. Expect to retrain on your own traffic before relying on these models.
+
 ## Reproduce training
 
 The full pipeline (24 runs) is in `idsresearch/`; `python -m idsresearch --help`. It was run on Kaggle with the `solarmainframe/ids-intrusion-csv` dataset. `python -m idsresearch smoke --out /tmp/smoke` checks the code on synthetic data. `scripts/profile_efficiency.py` reproduces the operation counts.

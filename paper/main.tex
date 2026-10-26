@@ -95,9 +95,9 @@ Every preprocessing step is fitted on the training partition only. Constant colu
 
 \subsection{Decision rule}
 
-All models output 13 class scores, which we treat as logits $z$ (tree ensembles use log-probabilities). Because training was class-capped, we first add a prior offset $\log \pi_c^{\text{full}} - \log \pi_c^{\text{train}}$~\cite{saerens2002}. A single temperature $T_\text{cal}$ is then fitted by minimising negative log-likelihood on the probability-calibration rows~\cite{guo2017}. The alarm score is the attack log-odds
+All models output 13 class scores, which we treat as logits $z$ (tree ensembles use log-probabilities). Because training was class-capped, we first add a prior offset $\log \pi_c^{\mathrm{full}} - \log \pi_c^{\mathrm{train}}$~\cite{saerens2002}. A single temperature $T_\mathrm{cal}$ is then fitted by minimising negative log-likelihood on the probability-calibration rows~\cite{guo2017}. The alarm score is the attack log-odds
 \begin{equation}
-s(x) = \log \sum_{c \neq \text{Benign}} e^{z_c/T_\text{cal}} - z_\text{Benign}/T_\text{cal}.
+s(x) = \log \sum_{c \neq \mathrm{Benign}} e^{z_c/T_\mathrm{cal}} - z_\mathrm{Benign}/T_\mathrm{cal}.
 \end{equation}
 For a false-alarm budget $\tau$, the threshold $t_\tau$ is the empirical $(1-\tau)$ quantile of $s$ over benign rows of the alarm-calibration partition. A flow raises an alarm if $s(x) > t_\tau$ and is then assigned the most probable attack class. We use $\tau \in \{1\%, 5\%, 10\%\}$ and fix $\tau = 5\%$ as the primary budget before testing. Test labels are never used to pick a threshold, a temperature or a checkpoint.
 
@@ -171,7 +171,7 @@ Matched ANN & -- & $0.756 \pm 0.004$ & $0.771$ & 0 & 0.39\,$\mu$J \\
 
 \subsection{Architecture screen}
 
-Five E-SNN variants are listed in Table~\ref{tab:screen}. The rule fixed before the run was to rank them by tuning-partition macro-F1 and confirm only the winner. The wider network ranked first on tuning data by a clear margin, yet on test it was no better than the others, and every variant fell within the seed spread of the original. We read this as a sign that the tuning partition rewards fitting the easy majority classes, while the hard classes are limited by the label conflicts described in the next subsection. WIDE_CONFIRMATION
+Five E-SNN variants are listed in Table~\ref{tab:screen}. The rule fixed before the run was to rank them by tuning-partition macro-F1 and confirm only the winner. The wider network ranked first on tuning data by a clear margin, yet on test it was no better than the others, and every variant fell within the seed spread of the original. We read this as a sign that the tuning partition rewards fitting the easy majority classes, while the hard classes are limited by the label conflicts described in the next subsection. Retrained with all three seeds, the wide variant reaches $0.770 \pm 0.014$ at the 5\% budget and $0.803 \pm 0.007$ at 1\%. That is no better than the original at $T = 8$ ($0.766 \pm 0.014$ and $0.800 \pm 0.001$), at roughly three times the parameter count. Its seed-42 run reproduced the screening result to the last digit (0.7620), which also confirms that training on Kaggle is deterministic for a fixed seed.
 
 \begin{table}[t]
 \centering
