@@ -1,0 +1,247 @@
+{
+  "rows": 2214468,
+  "label_counts": {
+    "BENIGN": 1672837,
+    "DoS Hulk": 231073,
+    "PortScan": 158930,
+    "DDoS": 128027,
+    "DoS GoldenEye": 10293,
+    "DoS slowloris": 5796,
+    "DoS Slowhttptest": 5499,
+    "Bot": 1966,
+    "Infiltration": 36,
+    "Heartbleed": 11
+  },
+  "protocol_imputation": "17 for ports 53,67,68,123,137,138,161,162,500,1900,5353, else 6",
+  "threshold": "2018 alarm calibration, 5% benign budget; nothing refitted",
+  "models": {
+    "esnn": {
+      "site_recalibrated_5pct": {
+        "threshold": 2.37,
+        "false_alarm_rate": 0.04974181600370149,
+        "detection_rate_all_attacks": 0.230383785270784,
+        "per_label": {
+          "BENIGN": 0.04974181600370149,
+          "Bot": 0.0,
+          "DDoS": 0.19165488529763253,
+          "DoS GoldenEye": 0.8547556591858545,
+          "DoS Hulk": 0.3628204074037209,
+          "DoS Slowhttptest": 0.44880887434078925,
+          "DoS slowloris": 0.8687025534851622,
+          "Heartbleed": 0.0,
+          "Infiltration": 0.0,
+          "PortScan": 0.0006732523752595482
+        }
+      },
+      "false_alarm_rate": 0.26208112326544664,
+      "detection_rate_all_attacks": 0.6300156379527759,
+      "detection_rate_seen_families": 0.6770414695968016,
+      "detection_rate_unseen_types": 0.5167892488407648,
+      "seconds": 170.21470545899865,
+      "per_label": {
+        "BENIGN": {
+          "n": 1672837,
+          "alarm_rate": 0.26208112326544664,
+          "correct_family": null
+        },
+        "Bot": {
+          "n": 1966,
+          "alarm_rate": 0.24821973550356052,
+          "correct_family": 0.0
+        },
+        "DDoS": {
+          "n": 128027,
+          "alarm_rate": 0.5251782827059917,
+          "correct_family": 0.46552680294000487
+        },
+        "DoS GoldenEye": {
+          "n": 10293,
+          "alarm_rate": 0.9969882444379675,
+          "correct_family": 0.9889245118041388
+        },
+        "DoS Hulk": {
+          "n": 231073,
+          "alarm_rate": 0.7472184114976652,
+          "correct_family": 0.49674778100427136
+        },
+        "DoS Slowhttptest": {
+          "n": 5499,
+          "alarm_rate": 0.48536097472267686,
+          "correct_family": 0.0
+        },
+        "DoS slowloris": {
+          "n": 5796,
+          "alarm_rate": 0.9970669427191167,
+          "correct_family": 0.9898205659075224
+        },
+        "Heartbleed": {
+          "n": 11,
+          "alarm_rate": 0.0,
+          "correct_family": null
+        },
+        "Infiltration": {
+          "n": 36,
+          "alarm_rate": 0.0,
+          "correct_family": 0.0
+        },
+        "PortScan": {
+          "n": 158930,
+          "alarm_rate": 0.5168250173032153,
+          "correct_family": null
+        }
+      }
+    },
+    "esnn_t4": {
+      "site_recalibrated_5pct": {
+        "threshold": -1.802,
+        "false_alarm_rate": 0.049945063419171494,
+        "detection_rate_all_attacks": 0.2392034429343963,
+        "per_label": {
+          "BENIGN": 0.049945063419171494,
+          "Bot": 0.0,
+          "DDoS": 0.0004061643247127559,
+          "DoS GoldenEye": 0.998056931895463,
+          "DoS Hulk": 0.3299996105126951,
+          "DoS Slowhttptest": 0.3947990543735225,
+          "DoS slowloris": 0.9956866804692892,
+          "Heartbleed": 0.0,
+          "Infiltration": 0.0,
+          "PortScan": 0.22046813062354495
+        }
+      },
+      "false_alarm_rate": 0.2275924073893631,
+      "detection_rate_all_attacks": 0.4195734734533289,
+      "detection_rate_seen_families": 0.36143092320154696,
+      "detection_rate_unseen_types": 0.5595661283117634,
+      "seconds": 98.01148558299974,
+      "per_label": {
+        "BENIGN": {
+          "n": 1672837,
+          "alarm_rate": 0.2275924073893631,
+          "correct_family": null
+        },
+        "Bot": {
+          "n": 1966,
+          "alarm_rate": 0.0,
+          "correct_family": 0.0
+        },
+        "DDoS": {
+          "n": 128027,
+          "alarm_rate": 0.12705132511110936,
+          "correct_family": 0.05091113593226429
+        },
+        "DoS GoldenEye": {
+          "n": 10293,
+          "alarm_rate": 0.9997085397843194,
+          "correct_family": 0.9916448071504906
+        },
+        "DoS Hulk": {
+          "n": 231073,
+          "alarm_rate": 0.44871101340269093,
+          "correct_family": 0.2796605401756155
+        },
+        "DoS Slowhttptest": {
+          "n": 5499,
+          "alarm_rate": 0.41734860883797054,
+          "correct_family": 0.0
+        },
+        "DoS slowloris": {
+          "n": 5796,
+          "alarm_rate": 0.9970669427191167,
+          "correct_family": 0.8548999309868875
+        },
+        "Heartbleed": {
+          "n": 11,
+          "alarm_rate": 0.0,
+          "correct_family": null
+        },
+        "Infiltration": {
+          "n": 36,
+          "alarm_rate": 0.027777777777777776,
+          "correct_family": 0.027777777777777776
+        },
+        "PortScan": {
+          "n": 158930,
+          "alarm_rate": 0.5596048574844271,
+          "correct_family": null
+        }
+      }
+    },
+    "xgb": {
+      "site_recalibrated_5pct": {
+        "threshold": -2.067,
+        "false_alarm_rate": 0.05027623714908437,
+        "detection_rate_all_attacks": 0.31714765218386687,
+        "per_label": {
+          "BENIGN": 0.05027623714908437,
+          "Bot": 0.6078331637843337,
+          "DDoS": 0.17437727979254375,
+          "DoS GoldenEye": 0.28796269309239286,
+          "DoS Hulk": 0.2589830919233316,
+          "DoS Slowhttptest": 0.16312056737588654,
+          "DoS slowloris": 0.9637681159420289,
+          "Heartbleed": 0.0,
+          "Infiltration": 0.0,
+          "PortScan": 0.49686025294154657
+        }
+      },
+      "false_alarm_rate": 0.2522965477210272,
+      "detection_rate_all_attacks": 0.4935241889773665,
+      "detection_rate_seen_families": 0.4908907993415036,
+      "detection_rate_unseen_types": 0.49986472967956663,
+      "seconds": 183.6179267919979,
+      "per_label": {
+        "BENIGN": {
+          "n": 1672837,
+          "alarm_rate": 0.2522965477210272,
+          "correct_family": null
+        },
+        "Bot": {
+          "n": 1966,
+          "alarm_rate": 0.7950152594099695,
+          "correct_family": 0.6154628687690743
+        },
+        "DDoS": {
+          "n": 128027,
+          "alarm_rate": 0.21271294336350927,
+          "correct_family": 0.2122755356292032
+        },
+        "DoS GoldenEye": {
+          "n": 10293,
+          "alarm_rate": 0.43233265325949677,
+          "correct_family": 0.4180511026911493
+        },
+        "DoS Hulk": {
+          "n": 231073,
+          "alarm_rate": 0.6384129690617251,
+          "correct_family": 0.6160304319414212
+        },
+        "DoS Slowhttptest": {
+          "n": 5499,
+          "alarm_rate": 0.26313875250045465,
+          "correct_family": 0.0
+        },
+        "DoS slowloris": {
+          "n": 5796,
+          "alarm_rate": 0.972567287784679,
+          "correct_family": 0.9704968944099379
+        },
+        "Heartbleed": {
+          "n": 11,
+          "alarm_rate": 0.0,
+          "correct_family": null
+        },
+        "Infiltration": {
+          "n": 36,
+          "alarm_rate": 0.25,
+          "correct_family": 0.16666666666666666
+        },
+        "PortScan": {
+          "n": 158930,
+          "alarm_rate": 0.4998993267476247,
+          "correct_family": null
+        }
+      }
+    }
+  }
+}
