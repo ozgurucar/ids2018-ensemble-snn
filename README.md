@@ -11,6 +11,8 @@ Leakage-controlled comparison of a three-branch spiking network with a parameter
 | CatBoost | 0.791 ± 0.005 | 0.965 |
 | XGBoost | 0.808 ± 0.005 | 0.967 |
 
+Time-window ablation (v4, same partitions): the E-SNN keeps its accuracy with 4 time steps instead of 12 (macro-F1 0.766 ± 0.015 vs 0.769 ± 0.022) while synaptic events per flow fall from 339,801 to 116,864. A five-variant architecture screen (selected on the tuning partition, all test results reported) found no clear improvement. Records: `results/v4/`.
+
 Paper: `paper/main.tex` (PDF in `paper/main.pdf`). Raw run records: `results/v3/`.
 
 ## Run the detector
@@ -28,11 +30,13 @@ python app/replay.py app/samples/demo_flows.csv --url http://localhost:8000
 Without Docker:
 
 ```bash
-uv venv -p 3.12 .venv && uv pip install -p .venv/bin/python --extra-index-url https://download.pytorch.org/whl/cpu --index-strategy unsafe-best-match -r app/requirements.txt
-PYTHONPATH=.:app .venv/bin/uvicorn server:app --app-dir app --port 8000
+uv venv -p 3.12 ~/.venvs/ids && uv pip install -p ~/.venvs/ids/bin/python --extra-index-url https://download.pytorch.org/whl/cpu --index-strategy unsafe-best-match -r app/requirements.txt
+PYTHONPATH=.:app ~/.venvs/ids/bin/uvicorn server:app --app-dir app --port 8000
 ```
 
-API: `POST /api/predict` (multipart CSV, `model=esnn|xgb`), `POST /api/flows` (JSON `{"model": "esnn", "flows": [...]}`), `GET /api/demo`.
+(Keep the virtual environment outside iCloud-synced folders such as Desktop.)
+
+API: `POST /api/predict` (multipart CSV, `model=esnn|esnn_t4|xgb`), `POST /api/flows` (JSON `{"model": "esnn", "flows": [...]}`), `GET /api/demo`.
 
 The demo flows come from the public dataset and may overlap the test split, so demo numbers are not an evaluation.
 

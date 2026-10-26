@@ -23,6 +23,8 @@ ROOT = Path(__file__).resolve().parent
 MODELS = ROOT / "models"
 CONFIG = ROOT.parent / "configs" / "group_ce.json"
 TAU = "0.05"
+# Spiking checkpoints and the time window each was trained with.
+SPIKING = {"esnn": ("esnn.pt", 12), "esnn_t4": ("esnn_t4.pt", 4)}
 
 
 def sha256(path):
@@ -33,17 +35,19 @@ class Detector:
     def __init__(self, name):
         self.name = name
         self.config = Config.read(CONFIG)
+        if name in SPIKING:
+            self.config = Config(**{**self.config.dictionary(), "steps": SPIKING[name][1]})
         # Only load pickles shipped with this repository by the v3 run.
         self.preprocessor = joblib.load(MODELS / "preprocessor.joblib")
         rule = json.loads((MODELS / f"{name}_calibration.json").read_text())
-        checkpoint = MODELS / ("esnn.pt" if name == "esnn" else f"{name}.joblib")
+        checkpoint = MODELS / (SPIKING[name][0] if name in SPIKING else f"{name}.joblib")
         if sha256(checkpoint) != rule["checkpoint_sha256"]:
             raise ValueError(f"{checkpoint.name} does not match its calibration record")
         self.offset = np.asarray(rule["training_prior_offset"])
         self.temperature = rule["temperature"]["temperature"]
         self.threshold = rule["thresholds"][TAU]["threshold"]
         n_features = len(self.preprocessor.columns_)
-        if name == "esnn":
+        if name in SPIKING:
             self.model = build("esnn", n_features, len(CLASSES), self.config)
             self.model.load_state_dict(torch.load(checkpoint, map_location="cpu", weights_only=True))
             self.model.eval()
@@ -65,7 +69,7 @@ class Detector:
         return self.preprocessor.transform(X)
 
     def logits(self, X):
-        if self.name == "esnn":
+        if self.name in SPIKING:
             with torch.no_grad():
                 return neural_logits(self.model, X, 4096, "cpu").astype(float)
         return np.log(np.maximum(tree_proba(self.model, X).astype(float), 1e-12))

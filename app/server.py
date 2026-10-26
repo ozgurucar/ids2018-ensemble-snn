@@ -13,14 +13,15 @@ from detector import Detector, true_labels
 ROOT = Path(__file__).resolve().parent
 SAMPLES = ROOT / "samples" / "demo_flows.csv"
 MAX_ROWS = 200_000
+MODELS = ("esnn", "esnn_t4", "xgb")
 
 app = FastAPI(title="IDS2018 E-SNN detector", version="3.0")
 
 
-@lru_cache(maxsize=2)
+@lru_cache(maxsize=3)
 def detector(name):
-    if name not in ("esnn", "xgb"):
-        raise HTTPException(400, "model must be esnn or xgb")
+    if name not in MODELS:
+        raise HTTPException(400, f"model must be one of {MODELS}")
     return Detector(name)
 
 
@@ -53,7 +54,7 @@ def index():
 
 @app.get("/health")
 def health():
-    return {"status": "ok", "models": ["esnn", "xgb"], "demo": SAMPLES.exists()}
+    return {"status": "ok", "models": list(MODELS), "demo": SAMPLES.exists()}
 
 
 @app.post("/api/predict")
