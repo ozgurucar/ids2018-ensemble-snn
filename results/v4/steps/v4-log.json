@@ -1,0 +1,13 @@
+{
+  "parent": "/kaggle/input/notebooks/ozgurucar/notebookeb0d7e9071/ids2018-v3/experiments/group_ce",
+  "runs": {
+    "4": {
+      "experiment_id": "106b178b6032b3d3943ce15cdfe3bf0468a3207a2cf98ade298e76545ef56a77",
+      "seconds": 6154.879380941391
+    },
+    "8": {
+      "experiment_id": "6bca8faf9dd1c6abd4dcfb7f3213a616fad8dad25604b53196c84fb74b459618",
+      "seconds": 7835.588568687439
+    }
+  }
+}

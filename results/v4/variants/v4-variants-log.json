@@ -1,0 +1,61 @@
+{
+  "parent": "/kaggle/input/notebooks/ozgurucar/notebookeb0d7e9071/ids2018-v3/experiments/group_ce",
+  "runs": {
+    "fast_lr": {
+      "change": {
+        "dropout": 0.1,
+        "lr": 0.001
+      },
+      "experiment_id": "502113a7b97b890dff1bce2c23333cda26e69fc4d3e65c1fd7f2ee075f03dde7",
+      "seconds": 1748.7463326454163,
+      "test_adr": 0.9586708892305451,
+      "test_macro_f1_tau05": 0.7539440209685453,
+      "tune_macro_f1": 0.7920359971553493
+    },
+    "pop8": {
+      "change": {
+        "populations": 8
+      },
+      "experiment_id": "e76929883a14fa9b0c08f79845cb4569362a1ee8a5dac85a5c430730c01e7e33",
+      "seconds": 1910.0805501937866,
+      "test_adr": 0.9595718903002443,
+      "test_macro_f1_tau05": 0.7679822042854814,
+      "tune_macro_f1": 0.7871713793003371
+    },
+    "population_only": {
+      "change": {
+        "branches": [
+          "population"
+        ]
+      },
+      "experiment_id": "5c237d0e77d8a1e6cab1fbce056525bb08596fea576159f0845463010f80a8e4",
+      "seconds": 1189.0269050598145,
+      "test_adr": 0.9575283431932244,
+      "test_macro_f1_tau05": 0.7528538781406786,
+      "tune_macro_f1": 0.7753492714897668
+    },
+    "weighted_fusion": {
+      "change": {
+        "alpha": 1.0
+      },
+      "experiment_id": "5bcd91e66cb28ab3e5303f0a1315f2e20f6200ebddd69ff89f753ea1b4390a98",
+      "seconds": 2871.804756641388,
+      "test_adr": 0.9594741220990641,
+      "test_macro_f1_tau05": 0.7598953930379031,
+      "tune_macro_f1": 0.8015739984905353
+    },
+    "wide": {
+      "change": {
+        "hidden": [
+          256,
+          128
+        ]
+      },
+      "experiment_id": "5dbcf0a20bbda5e9d3a2be208f3a759dfa24266c14142efa83512176e5cb6a84",
+      "seconds": 2366.2167155742645,
+      "test_adr": 0.9595488860176136,
+      "test_macro_f1_tau05": 0.7619679947892197,
+      "tune_macro_f1": 0.8326164520130674
+    }
+  }
+}
