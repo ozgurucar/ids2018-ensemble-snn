@@ -43,6 +43,10 @@ def main():
     a.add_argument("--left", required=True)
     a.add_argument("--right", required=True)
     a.add_argument("--out", required=True)
+    a = sub.add_parser("derive")
+    a.add_argument("--parent", required=True)
+    a.add_argument("--out", required=True)
+    a.add_argument("--changes", required=True, help="JSON object of model-only config fields")
     a = sub.add_parser("smoke")
     a.add_argument("--out", required=True)
     a.add_argument("--device", choices=("cpu", "cuda"), default="cpu")
@@ -68,6 +72,10 @@ def main():
     elif args.command == "profile":
         from .profile import profile
         print(profile(args.experiment, args.model, args.seed, args.device))
+    elif args.command == "derive":
+        import json
+        from .derive import derive
+        print(derive(args.parent, args.out, json.loads(args.changes))["experiment_id"])
     elif args.command == "compare":
         from .comparison import compare
         compare(args.left, args.right, args.out)
