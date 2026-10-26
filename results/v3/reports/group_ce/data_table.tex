@@ -1,0 +1,24 @@
+\begin{table*}[t]
+\centering
+\caption{DRAFT / REAL: Sample support at each stage. Only training is capped; no synthetic oversampling is used in the primary protocol.}
+\label{tab:data}
+\begin{tabular}{lrrrrr}
+\toprule
+Class & Train before cap & Train used & Tune & Cal. & Test \\
+\midrule
+Benign & 8091973 & 335515 & 1362310 & 1330511 & 2699900 \\
+Bot & 175152 & 16651 & 22981 & 33237 & 54821 \\
+DDoS-HOIC & 413702 & 26260 & 68256 & 69218 & 134836 \\
+DDoS-LOIC-UDP & 1066 & 1066 & 159 & 181 & 324 \\
+DDoS-LOIC-HTTP & 345577 & 23516 & 57929 & 57319 & 115366 \\
+DoS-GoldenEye & 24933 & 10601 & 4135 & 4078 & 8362 \\
+DoS-Hulk & 277195 & 20762 & 46577 & 45539 & 92601 \\
+DoS-SlowHTTPTest & 121394 & 14486 & 6487 & 568 & 11441 \\
+DoS-Slowloris & 6422 & 6422 & 1053 & 1064 & 2451 \\
+FTP-BruteForce & 178337 & 16781 & 1879 & 6095 & 7049 \\
+Infiltration & 96827 & 13497 & 16205 & 16432 & 32470 \\
+SSH-Bruteforce & 106524 & 13887 & 9435 & 9888 & 61742 \\
+Web Attacks & 556 & 556 & 87 & 106 & 179 \\
+\bottomrule
+\end{tabular}
+\end{table*}

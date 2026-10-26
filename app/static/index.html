@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>E-SNN Intrusion Detector</title>
+<style>
+  :root { --bg:#f7f7f5; --fg:#1d1d1b; --muted:#6b6b66; --card:#fff; --line:#e3e2dd; --alarm:#b3261e; --ok:#1e6b3a; --accent:#2f5dab; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#161615; --fg:#ecebe6; --muted:#9d9c96; --card:#1f1f1d; --line:#33332f; --alarm:#f2766d; --ok:#6cc58c; --accent:#8fb0ea; } }
+  body { margin:0; background:var(--bg); color:var(--fg); font:15px/1.5 system-ui, sans-serif; }
+  main { max-width:1000px; margin:0 auto; padding:24px 16px 48px; }
+  h1 { font-size:22px; margin:0 0 4px; }
+  p.lead { color:var(--muted); margin:0 0 20px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px; margin-bottom:16px; }
+  .row { display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+  button, select, input[type=file] { font:inherit; }
+  button { background:var(--accent); color:#fff; border:0; border-radius:6px; padding:8px 14px; cursor:pointer; }
+  button.secondary { background:transparent; color:var(--accent); border:1px solid var(--accent); }
+  .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:10px; }
+  .stat b { display:block; font-size:22px; }
+  .stat span { color:var(--muted); font-size:13px; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th, td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); }
+  .scroll { overflow-x:auto; max-height:480px; }
+  .alarm { color:var(--alarm); font-weight:600; }
+  .benign { color:var(--ok); }
+  #error { color:var(--alarm); }
+</style>
+</head>
+<body>
+<main>
+  <h1>E-SNN Intrusion Detector</h1>
+  <p class="lead">Upload CICFlowMeter flow records (CSE-CIC-IDS2018 format). Each flow is scored by the spiking ensemble or the XGBoost baseline with the alarm threshold fitted at a 5% benign false-alarm budget.</p>
+
+  <div class="card row">
+    <label>Model
+      <select id="model">
+        <option value="esnn">Ensemble SNN</option>
+        <option value="xgb">XGBoost baseline</option>
+      </select>
+    </label>
+    <input type="file" id="file" accept=".csv">
+    <button id="upload">Analyse CSV</button>
+    <button id="demo" class="secondary">Run bundled demo</button>
+    <span id="error"></span>
+  </div>
+
+  <div id="result" hidden>
+    <div class="card stats" id="stats"></div>
+    <div class="card"><div class="scroll"><table id="table"></table></div></div>
+  </div>
+</main>
+<script>
+const $ = id => document.getElementById(id);
+async function call(request) {
+  $("error").textContent = "Scoring...";
+  try {
+    const response = await request;
+    const body = await response.json();
+    if (!response.ok) throw new Error(body.detail || response.statusText);
+    $("error").textContent = "";
+    show(body);
+  } catch (e) { $("error").textContent = e.message; }
+}
+function pct(x) { return x == null ? "n/a" : (100 * x).toFixed(2) + "%"; }
+function show({summary: s, rows}) {
+  const items = [["Flows", s.rows], ["Alarms", s.alarms], ["Flows / s", s.flows_per_second.toLocaleString()]];
+  if (s.accuracy != null) items.push(["Accuracy", pct(s.accuracy)], ["Detection rate", pct(s.detection_rate)], ["False alarms", pct(s.false_alarm_rate)]);
+  $("stats").innerHTML = items.map(([k, v]) => `<div class="stat"><b>${v}</b><span>${k}</span></div>`).join("");
+  const cols = Object.keys(rows[0] || {});
+  $("table").innerHTML = `<tr>${cols.map(c => `<th>${c}</th>`).join("")}</tr>` + rows.map(r =>
+    `<tr>${cols.map(c => `<td class="${c === "prediction" ? (r.alarm ? "alarm" : "benign") : ""}">${r[c]}</td>`).join("")}</tr>`).join("");
+  $("result").hidden = false;
+}
+$("upload").onclick = () => {
+  const f = $("file").files[0];
+  if (!f) { $("error").textContent = "Choose a CSV first"; return; }
+  const data = new FormData(); data.append("file", f); data.append("model", $("model").value);
+  call(fetch("/api/predict", {method: "POST", body: data}));
+};
+$("demo").onclick = () => call(fetch(`/api/demo?model=${$("model").value}`));
+</script>
+</body>
+</html>

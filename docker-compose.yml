@@ -1,0 +1,7 @@
+services:
+  detector:
+    build: .
+    image: ids2018-esnn:v3
+    ports:
+      - "127.0.0.1:8000:8000"
+    restart: unless-stopped

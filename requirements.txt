@@ -1,15 +1,13 @@
-# Exact versions matching the Kaggle environment (v168, April 2026)
-# used to produce the results reported in the paper.
-torch==2.6.0
-numpy==2.4.3
-pandas==3.0.1
-scikit-learn==1.6.1
-snntorch==0.9.1
-imbalanced-learn==0.13.0
-matplotlib==3.10.1
-seaborn==0.13.2
-tqdm==4.67.1
-
-# Jupyter (for local execution)
-jupyter>=1.0.0
-ipywidgets>=8.0.0
+# Compatibility ranges. Record the exact Kaggle resolution before real experiments.
+# Each prepared experiment and trained model saves installed package versions.
+numpy>=2.0,<3
+pandas>=2.2,<4
+scipy>=1.13,<2
+scikit-learn>=1.6,<2
+torch>=2.6,<3
+snntorch==1.0.0
+xgboost>=2.1,<4
+matplotlib>=3.9,<4
+joblib>=1.4,<2
+pytest>=8,<10
+catboost>=1.2,<2

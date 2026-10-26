@@ -1,0 +1,32 @@
+{
+  "experiment_id": "21150856e4bbcc6957776fd87d493df8012d6a6fa67c0ebf7d5158d71a862572",
+  "readiness": {
+    "blockers": [
+      "Development suite informed by previously inspected test results; independent confirmation required",
+      "Real timestamp review is not verified"
+    ],
+    "note": "Passing is a numerical provenance check, not publication acceptance or proof of generalisation.",
+    "numerical_export_allowed": false,
+    "warnings": []
+  },
+  "sources": {
+    "__init__.py": "553ef578eadb5153441693d86f152faf03d8f96ce23ca5843419d4acef3fc891",
+    "__main__.py": "8a613aa380472d8233a89f01b64982d5130aa1c809917390bf2830dfb996953d",
+    "comparison.py": "5a25956d377645deb2c0c7baa1e0b84d7ea5a1fa98c83596af8d837f40e4ff24",
+    "config.py": "e6e3c84780a12f045b12b3bb4fc851d7a8c2907030a4e154f919b5b641bc9373",
+    "data.py": "aa89f81fc1a2393d4e1ee536da9d27294183e174db5b01535d4c5bcd60350fee",
+    "decision.py": "de13d0bd95382c5c2940f00c3bdfa23eaeb229b0cf86c7c7789a4f8f510a804c",
+    "evaluation_v3.py": "1498de3c461341da6ecd60dac9730afc09b30f50212b3a64b80636b24be64394",
+    "groups.py": "61140974f5b46ef46642b78d97e906258f28cafc1b7a0ec193c66a3318e01f02",
+    "kaggle.py": "ba5a5c65ff1b71c358555bb0bdd553d5617eda75736e369a1357700ca2d48553",
+    "metrics.py": "17fa9d34369c085cd36b7076ae95f3333fb8775f073ac5544fa088f0ade198ab",
+    "models.py": "de55dcb16afd5925641e39656c7d34330f5801a24ec35589937aca262714999c",
+    "pipeline.py": "036f345a02bf4879317f7ede0e107765ce2a266ce7e3f4cc052ae73ff05c5da9",
+    "profile.py": "02ba8e46fe2268c35be50f7f07655c4848fc58c1b8bc847d3d70f14926a009e4",
+    "provenance.py": "9801438e7bd715f264918540bdd3091e136ea52f7d302e56277b0b5f3bff7ce5",
+    "reporting.py": "02af3c2ea19da7bceb043895a3d25bc8e95bd09a3f82da01ee6f074177300e07",
+    "suite.py": "2c994bdecaa7d34844c64c1cc23adc8f7d00d40f86ea634d583bfe788ee2bf3a",
+    "synthetic.py": "cb6ee3c28cc986aed3fd1b2d6469be12e7ce85438e7b9632c9a551c31111c40c",
+    "training.py": "1b62f7940839c93a0467b9330c38cbaabdf3690230c4da5f69f85f8562be04ef"
+  }
+}

@@ -1,0 +1,145 @@
+{
+  "by_class": {
+    "Benign": {
+      "groups": 10163403,
+      "rows": 13484694,
+      "rows_in_conflicting_groups": 1150654
+    },
+    "Bot": {
+      "groups": 144535,
+      "rows": 286191,
+      "rows_in_conflicting_groups": 0
+    },
+    "DDoS-HOIC": {
+      "groups": 198861,
+      "rows": 686012,
+      "rows_in_conflicting_groups": 0
+    },
+    "DDoS-LOIC-HTTP": {
+      "groups": 575012,
+      "rows": 576191,
+      "rows_in_conflicting_groups": 0
+    },
+    "DDoS-LOIC-UDP": {
+      "groups": 1730,
+      "rows": 1730,
+      "rows_in_conflicting_groups": 0
+    },
+    "DoS-GoldenEye": {
+      "groups": 41392,
+      "rows": 41508,
+      "rows_in_conflicting_groups": 0
+    },
+    "DoS-Hulk": {
+      "groups": 145199,
+      "rows": 461912,
+      "rows_in_conflicting_groups": 0
+    },
+    "DoS-SlowHTTPTest": {
+      "groups": 55,
+      "rows": 139890,
+      "rows_in_conflicting_groups": 139884
+    },
+    "DoS-Slowloris": {
+      "groups": 9712,
+      "rows": 10990,
+      "rows_in_conflicting_groups": 0
+    },
+    "FTP-BruteForce": {
+      "groups": 54,
+      "rows": 193360,
+      "rows_in_conflicting_groups": 193353
+    },
+    "Infiltration": {
+      "groups": 140610,
+      "rows": 161934,
+      "rows_in_conflicting_groups": 88810
+    },
+    "SSH-Bruteforce": {
+      "groups": 94048,
+      "rows": 187589,
+      "rows_in_conflicting_groups": 30
+    },
+    "Web Attacks": {
+      "groups": 859,
+      "rows": 928,
+      "rows_in_conflicting_groups": 7
+    }
+  },
+  "conflicting_groups": 68467,
+  "definition": "Paired pandas uint64 fingerprints over canonical zero-filled float32 predictors before learned feature selection; excludes label/time/flow identifiers. Hash collisions are not exhaustively ruled out. This is not flow or session identity.",
+  "empirical_representation_error_floor": 0.010963271015354038,
+  "error_floor_scope": "Empirical deterministic-classifier floor on this representation and observed labels, not a population Bayes bound or a macro-F1 bound.",
+  "groups": 11446995,
+  "largest_groups": [
+    {
+      "label_counts": {
+        "DoS-SlowHTTPTest": 62024,
+        "FTP-BruteForce": 87297,
+        "SSH-Bruteforce": 10
+      },
+      "rows": 149331
+    },
+    {
+      "label_counts": {
+        "DoS-SlowHTTPTest": 1028,
+        "FTP-BruteForce": 64336,
+        "SSH-Bruteforce": 10
+      },
+      "rows": 65374
+    },
+    {
+      "label_counts": {
+        "DoS-SlowHTTPTest": 47172,
+        "FTP-BruteForce": 12733,
+        "SSH-Bruteforce": 4
+      },
+      "rows": 59909
+    },
+    {
+      "label_counts": {
+        "SSH-Bruteforce": 41959
+      },
+      "rows": 41959
+    },
+    {
+      "label_counts": {
+        "SSH-Bruteforce": 32880
+      },
+      "rows": 32880
+    },
+    {
+      "label_counts": {
+        "Benign": 12731
+      },
+      "rows": 12731
+    },
+    {
+      "label_counts": {
+        "Benign": 12699
+      },
+      "rows": 12699
+    },
+    {
+      "label_counts": {
+        "Benign": 12346
+      },
+      "rows": 12346
+    },
+    {
+      "label_counts": {
+        "Benign": 11653
+      },
+      "rows": 11653
+    },
+    {
+      "label_counts": {
+        "Benign": 10863
+      },
+      "rows": 10863
+    }
+  ],
+  "rows": 16232929,
+  "rows_in_conflicting_groups": 1572738,
+  "rows_in_repeated_groups": 5483620
+}

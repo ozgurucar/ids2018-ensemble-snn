@@ -1,0 +1,9 @@
+{
+  "blockers": [
+    "Development suite informed by previously inspected test results; independent confirmation required",
+    "Real timestamp review is not verified"
+  ],
+  "note": "Passing is a numerical provenance check, not publication acceptance or proof of generalisation.",
+  "numerical_export_allowed": false,
+  "warnings": []
+}

@@ -1,0 +1,69 @@
+{
+  "schema": 3,
+  "development_only": true,
+  "feature_selection": "nonconstant",
+  "prior_correction": true,
+  "probability_calibration": true,
+  "threshold_method": "empirical",
+  "np_delta": 0.05,
+  "calibration_fit_cap": 100000,
+  "selection_metric": "corrected_macro_f1",
+  "catboost_trees": 600,
+  "provenance": "real",
+  "timestamp_policy": "recorded_unverified",
+  "split": "feature_groups",
+  "ratios": [
+    0.6,
+    0.1,
+    0.1,
+    0.2
+  ],
+  "split_seed": 2026,
+  "session_gap_minutes": 30,
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "models": [
+    "esnn",
+    "ann"
+  ],
+  "train_cap": 500000,
+  "rare_preserve": 10000,
+  "scaler": "quantile",
+  "correlation_threshold": 0.98,
+  "dominant_fraction": 0.98,
+  "hidden": [
+    128,
+    64
+  ],
+  "steps": 12,
+  "populations": 4,
+  "branches": [
+    "rate",
+    "temporal",
+    "population"
+  ],
+  "alpha": 0.6,
+  "dropout": 0.2,
+  "epochs": 35,
+  "patience": 10,
+  "batch_size": 1024,
+  "lr": 0.0004,
+  "weight_decay": 0.001,
+  "weight_ceiling": 15.0,
+  "loss": "weighted_ce",
+  "focal_gamma": 2.0,
+  "taus": [
+    0.01,
+    0.05,
+    0.1
+  ],
+  "primary_tau": 0.05,
+  "rf_trees": 200,
+  "xgb_trees": 400,
+  "min_calibration_benign": 1000,
+  "max_files": null,
+  "selection_note": "Pre-specified configuration; alpha is not claimed validation-optimal."
+}

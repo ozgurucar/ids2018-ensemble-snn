@@ -1,0 +1,11 @@
+numpy==2.0.2
+pandas==2.3.3
+scipy==1.16.3
+scikit-learn==1.6.1
+torch==2.10.0+cu128
+snntorch==1.0.0
+xgboost==3.2.0
+matplotlib==3.10.0
+joblib==1.5.3
+catboost==1.2.10
+pytest==8.4.2

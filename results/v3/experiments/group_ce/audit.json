@@ -1,0 +1,368 @@
+{
+  "classes": {
+    "Benign": {
+      "by_day": {
+        "2018-02-14": 667621,
+        "2018-02-15": 996077,
+        "2018-02-16": 446772,
+        "2018-02-20": 7372557,
+        "2018-02-21": 360833,
+        "2018-02-22": 1048204,
+        "2018-02-23": 1048009,
+        "2018-02-28": 544200,
+        "2018-03-01": 238037,
+        "2018-03-02": 762384
+      },
+      "first": "2018-02-14T01:00:00.000000000",
+      "groups_by_gap_minutes": {
+        "15": 19,
+        "30": 19,
+        "5": 19,
+        "60": 19
+      },
+      "last": "2018-03-02T12:59:59.000000000",
+      "n": 13484694,
+      "span_minutes": 23759.983333333334
+    },
+    "Bot": {
+      "by_day": {
+        "2018-03-02": 286191
+      },
+      "first": "2018-03-02T01:00:00.000000000",
+      "groups_by_gap_minutes": {
+        "15": 2,
+        "30": 2,
+        "5": 2,
+        "60": 2
+      },
+      "last": "2018-03-02T12:59:59.000000000",
+      "n": 286191,
+      "span_minutes": 719.9833333333333
+    },
+    "DDoS-HOIC": {
+      "by_day": {
+        "2018-02-21": 686012
+      },
+      "first": "2018-02-21T02:11:08.000000000",
+      "groups_by_gap_minutes": {
+        "15": 1,
+        "30": 1,
+        "5": 1,
+        "60": 1
+      },
+      "last": "2018-02-21T02:33:29.000000000",
+      "n": 686012,
+      "span_minutes": 22.35
+    },
+    "DDoS-LOIC-HTTP": {
+      "by_day": {
+        "2018-02-20": 576191
+      },
+      "first": "2018-02-20T01:14:17.000000000",
+      "groups_by_gap_minutes": {
+        "15": 2,
+        "30": 2,
+        "5": 2,
+        "60": 2
+      },
+      "last": "2018-02-20T11:16:48.000000000",
+      "n": 576191,
+      "span_minutes": 602.5166666666667
+    },
+    "DDoS-LOIC-UDP": {
+      "by_day": {
+        "2018-02-21": 1730
+      },
+      "first": "2018-02-21T10:08:51.000000000",
+      "groups_by_gap_minutes": {
+        "15": 1,
+        "30": 1,
+        "5": 1,
+        "60": 1
+      },
+      "last": "2018-02-21T10:43:16.000000000",
+      "n": 1730,
+      "span_minutes": 34.416666666666664
+    },
+    "DoS-GoldenEye": {
+      "by_day": {
+        "2018-02-15": 41508
+      },
+      "first": "2018-02-15T09:27:42.000000000",
+      "groups_by_gap_minutes": {
+        "15": 1,
+        "30": 1,
+        "5": 4,
+        "60": 1
+      },
+      "last": "2018-02-15T10:02:59.000000000",
+      "n": 41508,
+      "span_minutes": 35.28333333333333
+    },
+    "DoS-Hulk": {
+      "by_day": {
+        "2018-02-16": 461912
+      },
+      "first": "2018-02-16T01:45:27.000000000",
+      "groups_by_gap_minutes": {
+        "15": 1,
+        "30": 1,
+        "5": 1,
+        "60": 1
+      },
+      "last": "2018-02-16T01:48:44.000000000",
+      "n": 461912,
+      "span_minutes": 3.283333333333333
+    },
+    "DoS-SlowHTTPTest": {
+      "by_day": {
+        "2018-02-16": 139890
+      },
+      "first": "2018-02-16T10:12:14.000000000",
+      "groups_by_gap_minutes": {
+        "15": 1,
+        "30": 1,
+        "5": 1,
+        "60": 1
+      },
+      "last": "2018-02-16T10:58:08.000000000",
+      "n": 139890,
+      "span_minutes": 45.9
+    },
+    "DoS-Slowloris": {
+      "by_day": {
+        "2018-02-15": 10990
+      },
+      "first": "2018-02-15T11:00:12.000000000",
+      "groups_by_gap_minutes": {
+        "15": 1,
+        "30": 1,
+        "5": 1,
+        "60": 1
+      },
+      "last": "2018-02-15T11:42:01.000000000",
+      "n": 10990,
+      "span_minutes": 41.81666666666667
+    },
+    "FTP-BruteForce": {
+      "by_day": {
+        "2018-02-14": 193360
+      },
+      "first": "2018-02-14T10:33:26.000000000",
+      "groups_by_gap_minutes": {
+        "15": 1,
+        "30": 1,
+        "5": 1,
+        "60": 1
+      },
+      "last": "2018-02-14T12:10:31.000000000",
+      "n": 193360,
+      "span_minutes": 97.08333333333333
+    },
+    "Infiltration": {
+      "by_day": {
+        "2018-02-28": 68871,
+        "2018-03-01": 93063
+      },
+      "first": "2018-02-28T01:42:00.000000000",
+      "groups_by_gap_minutes": {
+        "15": 4,
+        "30": 4,
+        "5": 4,
+        "60": 4
+      },
+      "last": "2018-03-01T10:54:59.000000000",
+      "n": 161934,
+      "span_minutes": 1992.9833333333333
+    },
+    "SSH-Bruteforce": {
+      "by_day": {
+        "2018-02-14": 187589
+      },
+      "first": "2018-02-14T02:01:21.000000000",
+      "groups_by_gap_minutes": {
+        "15": 1,
+        "30": 1,
+        "5": 1,
+        "60": 1
+      },
+      "last": "2018-02-14T03:32:30.000000000",
+      "n": 187589,
+      "span_minutes": 91.15
+    },
+    "Web Attacks": {
+      "by_day": {
+        "2018-02-22": 362,
+        "2018-02-23": 566
+      },
+      "first": "2018-02-22T01:51:39.000000000",
+      "groups_by_gap_minutes": {
+        "15": 7,
+        "30": 7,
+        "5": 8,
+        "60": 5
+      },
+      "last": "2018-02-23T11:02:58.000000000",
+      "n": 928,
+      "span_minutes": 1991.3166666666666
+    }
+  },
+  "dataset": {
+    "cleaning_note": "Float32 and zero imputation retained for continuity; missing/true-zero equivalence is explicitly audited, not assumed harmless.",
+    "dataset_id": "f5cb3d325a2d5dba8c601f5dfe41dfbaa76d202ecce423680423f025c51127af",
+    "dropped_timestamp": 14,
+    "files": [
+      {
+        "file": "02-14-2018.csv",
+        "kept": 1048570,
+        "rows": 1048575,
+        "sha256": "acff8bc61376ee031d80878ee6099e0b1a87a1bd711d8068298421418c9f8147"
+      },
+      {
+        "file": "02-15-2018.csv",
+        "kept": 1048575,
+        "rows": 1048575,
+        "sha256": "fa2947a8256d81ee9103ae16139d62d0e17aa23e696ee80d9e76fb51c01c9c4b"
+      },
+      {
+        "file": "02-16-2018.csv",
+        "kept": 1048574,
+        "rows": 1048575,
+        "sha256": "1a4919faa0c49c7af97230b0c2d076eba23ee6dd81103a3801d51ac316355d8b"
+      },
+      {
+        "file": "02-20-2018.csv",
+        "kept": 7948748,
+        "rows": 7948748,
+        "sha256": "7287a4d7740a1dddbf330ceb2beb6a4889d33ba63674558a68b5eb50d16711df"
+      },
+      {
+        "file": "02-21-2018.csv",
+        "kept": 1048575,
+        "rows": 1048575,
+        "sha256": "a5f4a1c2689e0aa6566c03a58466de9c407c0be0cbd3cc69306544026611be04"
+      },
+      {
+        "file": "02-22-2018.csv",
+        "kept": 1048566,
+        "rows": 1048575,
+        "sha256": "da33c927018274f9d49b145baa00e4ce0526c25b3b890b34c489e247b5e24544"
+      },
+      {
+        "file": "02-23-2018.csv",
+        "kept": 1048575,
+        "rows": 1048575,
+        "sha256": "d0a7f5059d9823b6e9b392b759e306481a3502d190dea7a1b5502ae079ea069b"
+      },
+      {
+        "file": "02-28-2018.csv",
+        "kept": 613071,
+        "rows": 613104,
+        "sha256": "f15e2a12304446058a0186c8ad67de2bd15735a9ba5c70c9a1f4c4242ab06771"
+      },
+      {
+        "file": "03-01-2018.csv",
+        "kept": 331100,
+        "rows": 331125,
+        "sha256": "b0534c5d7d8b41e03df71c6966c995d116a8ed28e61f377c8b14cdf5d28f4edf"
+      },
+      {
+        "file": "03-02-2018.csv",
+        "kept": 1048575,
+        "rows": 1048575,
+        "sha256": "d96f38e7496aba83475031e6fb8c6fdf1abf6aa1b71325a917798f3c7de93de1"
+      }
+    ],
+    "nonfinite_replaced_with_zero": {
+      "ACK Flag Cnt": 0,
+      "Active Max": 0,
+      "Active Mean": 0,
+      "Active Min": 0,
+      "Active Std": 0,
+      "Bwd Blk Rate Avg": 0,
+      "Bwd Byts/b Avg": 0,
+      "Bwd Header Len": 0,
+      "Bwd IAT Max": 0,
+      "Bwd IAT Mean": 0,
+      "Bwd IAT Min": 0,
+      "Bwd IAT Std": 0,
+      "Bwd IAT Tot": 0,
+      "Bwd PSH Flags": 0,
+      "Bwd Pkt Len Max": 0,
+      "Bwd Pkt Len Mean": 0,
+      "Bwd Pkt Len Min": 0,
+      "Bwd Pkt Len Std": 0,
+      "Bwd Pkts/b Avg": 0,
+      "Bwd Pkts/s": 0,
+      "Bwd Seg Size Avg": 0,
+      "Bwd URG Flags": 0,
+      "CWE Flag Count": 0,
+      "Down/Up Ratio": 0,
+      "Dst Port": 0,
+      "ECE Flag Cnt": 0,
+      "FIN Flag Cnt": 0,
+      "Flow Byts/s": 95760,
+      "Flow Duration": 0,
+      "Flow IAT Max": 0,
+      "Flow IAT Mean": 0,
+      "Flow IAT Min": 0,
+      "Flow IAT Std": 0,
+      "Flow Pkts/s": 95760,
+      "Fwd Act Data Pkts": 0,
+      "Fwd Blk Rate Avg": 0,
+      "Fwd Byts/b Avg": 0,
+      "Fwd Header Len": 0,
+      "Fwd IAT Max": 0,
+      "Fwd IAT Mean": 0,
+      "Fwd IAT Min": 0,
+      "Fwd IAT Std": 0,
+      "Fwd IAT Tot": 0,
+      "Fwd PSH Flags": 0,
+      "Fwd Pkt Len Max": 0,
+      "Fwd Pkt Len Mean": 0,
+      "Fwd Pkt Len Min": 0,
+      "Fwd Pkt Len Std": 0,
+      "Fwd Pkts/b Avg": 0,
+      "Fwd Pkts/s": 0,
+      "Fwd Seg Size Avg": 0,
+      "Fwd Seg Size Min": 0,
+      "Fwd URG Flags": 0,
+      "Idle Max": 0,
+      "Idle Mean": 0,
+      "Idle Min": 0,
+      "Idle Std": 0,
+      "Init Bwd Win Byts": 0,
+      "Init Fwd Win Byts": 0,
+      "PSH Flag Cnt": 0,
+      "Pkt Len Max": 0,
+      "Pkt Len Mean": 0,
+      "Pkt Len Min": 0,
+      "Pkt Len Std": 0,
+      "Pkt Len Var": 0,
+      "Pkt Size Avg": 0,
+      "Protocol": 0,
+      "RST Flag Cnt": 0,
+      "SYN Flag Cnt": 0,
+      "Subflow Bwd Byts": 0,
+      "Subflow Bwd Pkts": 0,
+      "Subflow Fwd Byts": 0,
+      "Subflow Fwd Pkts": 0,
+      "Tot Bwd Pkts": 0,
+      "Tot Fwd Pkts": 0,
+      "TotLen Bwd Pkts": 0,
+      "TotLen Fwd Pkts": 0,
+      "URG Flag Cnt": 0
+    },
+    "repeated_headers": 59,
+    "retained": 16232929,
+    "sampling": "all rows before split",
+    "timestamp_format": "%d/%m/%Y %H:%M:%S"
+  },
+  "review_required": [
+    "Compare raw timestamps against source capture documentation; inspect missing AM/PM.",
+    "Do not add 12 hours globally or use attack labels to silently repair clocks.",
+    "Time groups do not establish independently captured attack sessions.",
+    "Verify dropped-row counts and minority-class coverage."
+  ],
+  "timestamp_status": "unverified"
+}
