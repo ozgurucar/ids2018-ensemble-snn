@@ -2,3 +2,5 @@
 __pycache__/
 *.pyc
 .DS_Store
+kaggle/v4-steps/build/
+kaggle/*/build/

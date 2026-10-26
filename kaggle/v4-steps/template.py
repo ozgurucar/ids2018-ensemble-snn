@@ -22,9 +22,9 @@ assert len(parents) == 1, parents
 PARENT = parents[0]
 locks = [p for p in Path("/kaggle/input").rglob("requirements-run.lock.txt") if "test-temp" not in str(p)]
 print("parent", PARENT, "lock", locks, flush=True)
-lock = [l for l in Path(locks[0]).read_text().splitlines() if l and not l.startswith(("torch", "nvidia", "triton"))]
+lock = [l for l in Path(locks[0]).read_text().splitlines() if l and not l.startswith(("nvidia", "triton"))]
 (WORK/"lock.txt").write_text("\n".join(lock)+"\n")
-subprocess.run([sys.executable, "-m", "pip", "install", "-q", "--disable-pip-version-check", "-r", str(WORK/"lock.txt")], check=False)
+subprocess.run([sys.executable, "-m", "pip", "install", "-q", "--disable-pip-version-check", "--extra-index-url", "https://download.pytorch.org/whl/cu128", "-r", str(WORK/"lock.txt")], check=False)
 os.environ.setdefault("OMP_NUM_THREADS", "2")
 sys.path.insert(0, str(REPO))
 
