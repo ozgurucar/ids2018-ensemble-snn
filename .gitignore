@@ -4,3 +4,4 @@ __pycache__/
 .DS_Store
 kaggle/v4-steps/build/
 kaggle/*/build/
+results/v5/**/test_log_odds.npy
