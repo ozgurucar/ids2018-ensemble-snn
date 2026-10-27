@@ -35,10 +35,38 @@ Differences are first model minus second model, in macro-F1 points x 100 would b
 | Enc-ANN | 0.762, 0.806, 0.794, 0.760, 0.773 | 0.779 [0.754, 0.804] | 0.825, 0.850, 0.856, 0.848, 0.831 | 0.842 [0.825, 0.859] |
 | XGBoost | 0.814, 0.803, 0.809, 0.804, 0.810 | 0.808 [0.802, 0.813] | 0.859, 0.858, 0.857, 0.859, 0.859 | 0.858 [0.857, 0.859] |
 
-## Time-window equivalence (Welch TOST, margin 0.02)
+## Equivalence: time windows and model pairs (Welch TOST, margin 0.02)
 
 | a | b | metric | tau | diff | 90% CI | p TOST | equivalent? |
 |---|---|---|---|---|---|---|---|
+| T4:esnn | T4:ann | macro_f1_13 | 0.05 | +0.0107 | [-0.000, +0.022] | 0.074 | no |
+| T4:esnn | T4:ann | macro_f1_13 | 0.01 | +0.0209 | [+0.004, +0.038] | 0.539 | no |
+| T4:esnn | T4:ann | macro_f1_11 | 0.05 | +0.0079 | [-0.005, +0.021] | 0.059 | no |
+| T4:esnn | T4:ann | macro_f1_11 | 0.01 | +0.0200 | [+0.000, +0.040] | 0.499 | no |
+| T4:esnn | T4:encoded_ann | macro_f1_13 | 0.05 | -0.0129 | [-0.033, +0.007] | 0.258 | no |
+| T4:esnn | T4:encoded_ann | macro_f1_13 | 0.01 | -0.0160 | [-0.037, +0.005] | 0.368 | no |
+| T4:esnn | T4:encoded_ann | macro_f1_11 | 0.05 | -0.0136 | [-0.029, +0.002] | 0.237 | no |
+| T4:esnn | T4:encoded_ann | macro_f1_11 | 0.01 | -0.0173 | [-0.037, +0.003] | 0.397 | no |
+| T4:esnn | T4:xgb | macro_f1_13 | 0.05 | -0.0419 | [-0.053, -0.031] | 0.995 | no |
+| T4:esnn | T4:xgb | macro_f1_13 | 0.01 | -0.0519 | [-0.068, -0.035] | 0.994 | no |
+| T4:esnn | T4:xgb | macro_f1_11 | 0.05 | -0.0300 | [-0.043, -0.017] | 0.912 | no |
+| T4:esnn | T4:xgb | macro_f1_11 | 0.01 | -0.0419 | [-0.061, -0.022] | 0.962 | no |
+| T4:esnn | T4:ple_mlp | macro_f1_13 | 0.05 | +0.0049 | [-0.006, +0.016] | 0.020 | yes |
+| T4:esnn | T4:ple_mlp | macro_f1_13 | 0.01 | +0.0061 | [-0.011, +0.024] | 0.087 | no |
+| T4:esnn | T4:ple_mlp | macro_f1_11 | 0.05 | +0.0045 | [-0.008, +0.017] | 0.031 | yes |
+| T4:esnn | T4:ple_mlp | macro_f1_11 | 0.01 | +0.0059 | [-0.015, +0.027] | 0.121 | no |
+| T4:encoded_ann | T4:ann | macro_f1_13 | 0.05 | +0.0236 | [+0.004, +0.043] | 0.643 | no |
+| T4:encoded_ann | T4:ann | macro_f1_13 | 0.01 | +0.0368 | [+0.019, +0.055] | 0.939 | no |
+| T4:encoded_ann | T4:ann | macro_f1_11 | 0.05 | +0.0215 | [+0.009, +0.034] | 0.593 | no |
+| T4:encoded_ann | T4:ann | macro_f1_11 | 0.01 | +0.0372 | [+0.028, +0.047] | 0.994 | no |
+| T4:encoded_ann | T4:ple_mlp | macro_f1_13 | 0.05 | +0.0178 | [-0.001, +0.037] | 0.409 | no |
+| T4:encoded_ann | T4:ple_mlp | macro_f1_13 | 0.01 | +0.0221 | [+0.003, +0.041] | 0.580 | no |
+| T4:encoded_ann | T4:ple_mlp | macro_f1_11 | 0.05 | +0.0181 | [+0.005, +0.031] | 0.386 | no |
+| T4:encoded_ann | T4:ple_mlp | macro_f1_11 | 0.01 | +0.0232 | [+0.009, +0.037] | 0.662 | no |
+| T4:ple_mlp | T4:ann | macro_f1_13 | 0.05 | +0.0058 | [+0.001, +0.011] | 0.001 | yes |
+| T4:ple_mlp | T4:ann | macro_f1_13 | 0.01 | +0.0148 | [+0.004, +0.026] | 0.201 | no |
+| T4:ple_mlp | T4:ann | macro_f1_11 | 0.05 | +0.0034 | [-0.001, +0.008] | 0.000 | yes |
+| T4:ple_mlp | T4:ann | macro_f1_11 | 0.01 | +0.0140 | [+0.001, +0.027] | 0.207 | no |
 
 ## Exploratory (unadjusted Welch), tau = 5%
 

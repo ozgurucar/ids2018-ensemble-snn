@@ -158,10 +158,11 @@ def main():
         if c:
             exploratory.append(c)
 
-    # Equivalence (TOST) for the time-window claim.
+    # Equivalence (TOST) for the time-window claim and the declared model pairs.
     equivalence = []
     for (a, b), metric, tau in itertools.product([(("T4", "esnn"), (L, "esnn")), (("T8", "esnn"), (L, "esnn")),
-                                                   (("T4", "encoded_ann"), (L, "encoded_ann")), (("T8", "encoded_ann"), (L, "encoded_ann"))],
+                                                   (("T4", "encoded_ann"), (L, "encoded_ann")), (("T8", "encoded_ann"), (L, "encoded_ann"))]
+                                                  + [((L, a), (L, b)) for a, b in DECLARED + [("encoded_ann", "ann"), ("encoded_ann", "ple_mlp"), ("ple_mlp", "ann")]],
                                                   METRICS, ["0.05", "0.01"]):
         if a == b:
             continue
@@ -202,7 +203,7 @@ def main():
         a, b = r["0.05"]["macro_f1_13"], r["0.05"]["macro_f1_11"]
         lines.append(f"| {MODEL_NAMES[m]} | {', '.join(f'{x:.3f}' for x in a['values'])} | {a['mean']:.3f} [{a['ci95'][0]:.3f}, {a['ci95'][1]:.3f}] | "
                      f"{', '.join(f'{x:.3f}' for x in b['values'])} | {b['mean']:.3f} [{b['ci95'][0]:.3f}, {b['ci95'][1]:.3f}] |")
-    lines += ["", "## Time-window equivalence (Welch TOST, margin 0.02)", "", "| a | b | metric | tau | diff | 90% CI | p TOST | equivalent? |", "|---|---|---|---|---|---|---|---|"]
+    lines += ["", "## Equivalence: time windows and model pairs (Welch TOST, margin 0.02)", "", "| a | b | metric | tau | diff | 90% CI | p TOST | equivalent? |", "|---|---|---|---|---|---|---|---|"]
     for e in equivalence:
         lines.append(f"| {e['a']} | {e['b']} | {e['metric']} | {e['tau']} | {e['diff']:+.4f} | [{e['ci90'][0]:+.3f}, {e['ci90'][1]:+.3f}] | {e['p']:.3f} | {'yes' if e['equivalent_at_0.05'] else 'no'} |")
     lines += ["", "## Exploratory (unadjusted Welch), tau = 5%", "", "| a | b | metric | diff | 95% CI | p |", "|---|---|---|---|---|---|"]

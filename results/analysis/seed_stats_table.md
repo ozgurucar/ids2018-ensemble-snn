@@ -33,7 +33,7 @@ Differences are first model minus second model, in macro-F1 points x 100 would b
 | CatBoost | 0.793, 0.795, 0.785 | 0.791 [0.778, 0.804] | 0.844, 0.846, 0.838 | 0.843 [0.832, 0.853] |
 | XGBoost | 0.814, 0.803, 0.809 | 0.808 [0.795, 0.822] | 0.859, 0.858, 0.857 | 0.858 [0.855, 0.861] |
 
-## Time-window equivalence (Welch TOST, margin 0.02)
+## Equivalence: time windows and model pairs (Welch TOST, margin 0.02)
 
 | a | b | metric | tau | diff | 90% CI | p TOST | equivalent? |
 |---|---|---|---|---|---|---|---|
@@ -53,6 +53,22 @@ Differences are first model minus second model, in macro-F1 points x 100 would b
 | T8:encoded_ann | T12:encoded_ann | macro_f1_13 | 0.01 | +0.0036 | [-0.021, +0.028] | 0.113 | no |
 | T8:encoded_ann | T12:encoded_ann | macro_f1_11 | 0.05 | +0.0148 | [-0.012, +0.041] | 0.347 | no |
 | T8:encoded_ann | T12:encoded_ann | macro_f1_11 | 0.01 | +0.0037 | [-0.011, +0.019] | 0.040 | yes |
+| T12:esnn | T12:ann | macro_f1_13 | 0.05 | +0.0135 | [-0.023, +0.050] | 0.331 | no |
+| T12:esnn | T12:ann | macro_f1_13 | 0.01 | +0.0177 | [-0.004, +0.039] | 0.409 | no |
+| T12:esnn | T12:ann | macro_f1_11 | 0.05 | +0.0156 | [-0.015, +0.046] | 0.365 | no |
+| T12:esnn | T12:ann | macro_f1_11 | 0.01 | +0.0206 | [+0.005, +0.037] | 0.530 | no |
+| T12:esnn | T12:encoded_ann | macro_f1_13 | 0.05 | -0.0178 | [-0.053, +0.017] | 0.448 | no |
+| T12:esnn | T12:encoded_ann | macro_f1_13 | 0.01 | -0.0268 | [-0.050, -0.003] | 0.716 | no |
+| T12:esnn | T12:encoded_ann | macro_f1_11 | 0.05 | -0.0115 | [-0.043, +0.020] | 0.296 | no |
+| T12:esnn | T12:encoded_ann | macro_f1_11 | 0.01 | -0.0222 | [-0.038, -0.006] | 0.605 | no |
+| T12:esnn | T12:xgb | macro_f1_13 | 0.05 | -0.0393 | [-0.075, -0.004] | 0.867 | no |
+| T12:esnn | T12:xgb | macro_f1_13 | 0.01 | -0.0585 | [-0.081, -0.036] | 0.985 | no |
+| T12:esnn | T12:xgb | macro_f1_11 | 0.05 | -0.0212 | [-0.053, +0.011] | 0.540 | no |
+| T12:esnn | T12:xgb | macro_f1_11 | 0.01 | -0.0440 | [-0.061, -0.027] | 0.974 | no |
+| T12:encoded_ann | T12:ann | macro_f1_13 | 0.05 | +0.0312 | [+0.004, +0.058] | 0.818 | no |
+| T12:encoded_ann | T12:ann | macro_f1_13 | 0.01 | +0.0446 | [+0.025, +0.064] | 0.970 | no |
+| T12:encoded_ann | T12:ann | macro_f1_11 | 0.05 | +0.0270 | [+0.000, +0.054] | 0.725 | no |
+| T12:encoded_ann | T12:ann | macro_f1_11 | 0.01 | +0.0428 | [+0.028, +0.057] | 0.986 | no |
 
 ## Exploratory (unadjusted Welch), tau = 5%
 
