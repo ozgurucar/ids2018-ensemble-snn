@@ -36,3 +36,33 @@ def test_derive_rejects_modified_parent(smoke_experiment, tmp_path):
     np.save(smoke_experiment/name, np.zeros(3), allow_pickle=False)
     with pytest.raises(ValueError):
         derive(smoke_experiment, tmp_path/"t2", {"steps": 2})
+
+
+def test_dropped_feature_is_removed_after_preprocessing(smoke_experiment, tmp_path):
+    from idsresearch.pipeline import arrays
+    columns = read_json(smoke_experiment/"manifest.json")["preprocessing"]["selected_columns"]
+    derive(smoke_experiment, tmp_path/"noport", {"drop_features": [columns[0]], "seeds": [7]})
+    X, _ = arrays(tmp_path/"noport", "train")
+    full, _ = arrays(smoke_experiment, "train")
+    assert X.shape[1] == full.shape[1]-1
+    np.testing.assert_array_equal(X, np.asarray(full)[:, 1:])
+    train(tmp_path/"noport")
+    assert (tmp_path/"noport"/"runs"/"esnn-7"/"trained.json").exists()
+    with pytest.raises(ValueError):
+        derive(smoke_experiment, tmp_path/"bad", {"drop_features": ["no such column"]})
+        arrays(tmp_path/"bad", "train")
+
+
+def test_ple_mlp_is_parameter_matched_and_trains(smoke_experiment, tmp_path):
+    import torch
+    from idsresearch.data import CLASSES
+    from idsresearch.models import build
+    config = Config(hidden=(128, 64))
+    esnn = sum(p.numel() for p in build("esnn", 70, len(CLASSES), config).parameters())
+    ple = build("ple_mlp", 70, len(CLASSES), config)
+    assert abs(sum(p.numel() for p in ple.parameters())-esnn)/esnn < 0.05
+    assert ple(torch.rand(5, 70)).shape == (5, len(CLASSES))
+    derive(smoke_experiment, tmp_path/"ple", {"models": ["ple_mlp"]})
+    train(tmp_path/"ple")
+    score(tmp_path/"ple")
+    assert (tmp_path/"ple"/"runs"/"ple_mlp-42"/"evaluated.json").exists()

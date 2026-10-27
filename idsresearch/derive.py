@@ -11,7 +11,10 @@ from .config import Config
 from .provenance import digest, environment, file_hash, read_json, source_manifest, write_json
 
 # Fields that do not touch partitioning, preprocessing or calibration rules.
-MODEL_ONLY = {"steps", "populations", "hidden", "models", "epochs", "patience", "dropout", "lr", "alpha", "branches"}
+# Seeds never touch the partition (tests/test_contracts.py); dropped features are removed
+# from the prepared arrays at load time, after preprocessing.
+MODEL_ONLY = {"steps", "populations", "hidden", "models", "epochs", "patience", "dropout", "lr", "alpha", "branches",
+              "seeds", "drop_features", "ple_bins"}
 
 
 def derive(parent, out, changes, link=True):

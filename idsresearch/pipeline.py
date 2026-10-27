@@ -88,7 +88,15 @@ def prepare(data_path, config, out, timestamp_format, time_review=None):
 
 
 def arrays(out, part):
-    return np.load(Path(out)/f"{part}_X.npy", mmap_mode="r"), np.load(Path(out)/f"{part}_y.npy", allow_pickle=False)
+    X = np.load(Path(out)/f"{part}_X.npy", mmap_mode="r")
+    manifest = read_json(Path(out)/"manifest.json")
+    drop = manifest["config"].get("drop_features") or ()
+    if drop:
+        columns = manifest["preprocessing"]["selected_columns"]
+        if set(drop) - set(columns):
+            raise ValueError(f"Cannot drop unknown features: {sorted(set(drop) - set(columns))}")
+        X = np.ascontiguousarray(X[:, [i for i, c in enumerate(columns) if c not in drop]])
+    return X, np.load(Path(out)/f"{part}_y.npy", allow_pickle=False)
 
 
 def validated(out):

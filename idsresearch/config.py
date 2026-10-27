@@ -48,6 +48,8 @@ class Config:
     xgb_trees: int = 400
     min_calibration_benign: int = 1000
     max_files: int | None = None
+    drop_features: tuple = ()
+    ple_bins: int = 16
     selection_note: str = "Pre-specified configuration; alpha is not claimed validation-optimal."
 
     def validate(self):
@@ -77,7 +79,7 @@ class Config:
             raise ValueError("Branches must be unique")
         if set(self.branches) - {"rate", "temporal", "population"}:
             raise ValueError("Unsupported branch")
-        if set(self.models) - {"esnn", "ann", "encoded_ann", "ann_ensemble", "cnn", "rf", "xgb", "catboost"}:
+        if set(self.models) - {"esnn", "ann", "encoded_ann", "ple_mlp", "ann_ensemble", "cnn", "rf", "xgb", "catboost"}:
             raise ValueError("Unsupported model")
         if self.scaler not in ("quantile", "robust") or self.loss not in ("ce", "weighted_ce", "focal"):
             raise ValueError("Unsupported preprocessing/loss")

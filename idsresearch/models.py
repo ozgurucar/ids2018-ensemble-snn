@@ -95,6 +95,23 @@ class ANN(nn.Module):
         return self.layers(x)
 
 
+class PLEMLP(nn.Module):
+    """Piecewise-linear encoding of each [0, 1] feature into fixed bins, then an MLP.
+
+    A spike-free control for the encoders (Gorishniy et al., 2022): it expands every
+    feature like the population code does, without spikes or time steps.
+    """
+    def __init__(self, features, classes, bins, widths, dropout):
+        super().__init__()
+        self.register_buffer("edges", torch.linspace(0, 1, bins+1))
+        self.mlp = ANN(features*bins, classes, widths, dropout)
+
+    def forward(self, x):
+        lo, hi = self.edges[:-1], self.edges[1:]
+        code = ((x.clamp(0, 1)[..., None]-lo)/(hi-lo)).clamp(0, 1)
+        return self.mlp(code.flatten(1))
+
+
 class CNN(nn.Module):
     def __init__(self, features, classes, config):
         super().__init__()
@@ -135,6 +152,13 @@ def build(name, features, classes, config):
         return Fusion({k: SpikeBranch(features, classes, k, config) for k in config.branches}, classes, config.alpha)
     if name == "ann_ensemble":
         return Fusion({k: ANN(features, classes, config.hidden, config.dropout) for k in config.branches}, classes, config.alpha)
+    if name == "ple_mlp":
+        target = sum(p.numel() for p in build("esnn", features, classes, config).parameters())
+        d = features*config.ple_bins
+        def size(width):
+            return (d+1)*width + 2*width + (width+1)*width + 2*width + (width+1)*classes
+        width = min(range(8, 1025), key=lambda w: abs(size(w)-target))
+        return PLEMLP(features, classes, config.ple_bins, (width, width), config.dropout)
     if name == "ann":
         # Select width from parameter counts, not validation/test performance.
         target = sum(p.numel() for p in build("esnn", features, classes, config).parameters())
