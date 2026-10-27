@@ -1,0 +1,222 @@
+{
+ "fig_steps": {
+  "budget": "0.05",
+  "T": [
+   4,
+   8,
+   12
+  ],
+  "macro_f1": {
+   "esnn": [
+    {
+     "mean": 0.7658959661189072,
+     "sd": 0.014926821278166667,
+     "n": 3
+    },
+    {
+     "mean": 0.765800256134621,
+     "sd": 0.013901222993958308,
+     "n": 3
+    },
+    {
+     "mean": 0.7691857373328972,
+     "sd": 0.02203845512148479,
+     "n": 3
+    }
+   ],
+   "encoded_ann": [
+    {
+     "mean": 0.7872847634984631,
+     "sd": 0.022365046261415725,
+     "n": 3
+    },
+    {
+     "mean": 0.7999214162526305,
+     "sd": 0.015449116810211102,
+     "n": 3
+    },
+    {
+     "mean": 0.7869512995064779,
+     "sd": 0.016655600630204253,
+     "n": 3
+    }
+   ]
+  },
+  "reference_macro_f1": {
+   "ann": {
+    "mean": 0.7557151494354294,
+    "sd": 0.004355344482899099,
+    "n": 3
+   },
+   "xgb": {
+    "mean": 0.8084566855299443,
+    "sd": 0.005338743161979603,
+    "n": 3
+   }
+  },
+  "energy_uJ": {
+   "esnn_45nm": [
+    0.12048679231818184,
+    0.22005973804545453,
+    0.32112942386363635
+   ],
+   "encoded_ann_45nm": [
+    0.08406376027272726,
+    0.05710573681818182,
+    0.04949296138636363
+   ],
+   "ann_45nm": 0.38833199999999995,
+   "esnn_loihi": [
+    3.017352565113637,
+    5.87224351315909,
+    8.766437120477272
+   ],
+   "ann_45nm_sram": 1.2418056
+  },
+  "sources": [
+   "results/v3/experiments/group_ce/summary.json",
+   "results/v4/efficiency_cpu_v4.json",
+   "results/v4/energy_loihi.json",
+   "results/v4/steps/summary_T4.json",
+   "results/v4/steps/summary_T8.json"
+  ]
+ },
+ "fig_transfer": {
+  "labels": [
+   "DoS Hulk",
+   "DDoS",
+   "DoS GoldenEye",
+   "DoS slowloris",
+   "DoS Slowhttptest",
+   "Bot",
+   "Infiltration",
+   "PortScan",
+   "Heartbleed"
+  ],
+  "flows": {
+   "DoS Hulk": 231073,
+   "DDoS": 128027,
+   "DoS GoldenEye": 10293,
+   "DoS slowloris": 5796,
+   "DoS Slowhttptest": 5499,
+   "Bot": 1966,
+   "Infiltration": 36,
+   "PortScan": 158930,
+   "Heartbleed": 11
+  },
+  "alarm_rate": {
+   "esnn": {
+    "DoS Hulk": 0.3628204074037209,
+    "DDoS": 0.19165488529763253,
+    "DoS GoldenEye": 0.8547556591858545,
+    "DoS slowloris": 0.8687025534851622,
+    "DoS Slowhttptest": 0.44880887434078925,
+    "Bot": 0.0,
+    "Infiltration": 0.0,
+    "PortScan": 0.0006732523752595482,
+    "Heartbleed": 0.0
+   },
+   "esnn_t4": {
+    "DoS Hulk": 0.3299996105126951,
+    "DDoS": 0.0004061643247127559,
+    "DoS GoldenEye": 0.998056931895463,
+    "DoS slowloris": 0.9956866804692892,
+    "DoS Slowhttptest": 0.3947990543735225,
+    "Bot": 0.0,
+    "Infiltration": 0.0,
+    "PortScan": 0.22046813062354495,
+    "Heartbleed": 0.0
+   },
+   "xgb": {
+    "DoS Hulk": 0.2589830919233316,
+    "DDoS": 0.17437727979254375,
+    "DoS GoldenEye": 0.28796269309239286,
+    "DoS slowloris": 0.9637681159420289,
+    "DoS Slowhttptest": 0.16312056737588654,
+    "Bot": 0.6078331637843337,
+    "Infiltration": 0.0,
+    "PortScan": 0.49686025294154657,
+    "Heartbleed": 0.0
+   }
+  },
+  "benign_far": {
+   "esnn": 0.04974181600370149,
+   "esnn_t4": 0.049945063419171494,
+   "xgb": 0.05027623714908437
+  },
+  "source": "results/cross_dataset/cic2017.json"
+ },
+ "fig_finetune": {
+  "curves": {
+   "esnn_t4_finetune": [
+    {
+     "budget": 0.001,
+     "detection_rate": 0.9853499490413258,
+     "sd": 0.0033268563214027317,
+     "n_seeds": 3
+    },
+    {
+     "budget": 0.01,
+     "detection_rate": 0.9938168122736958,
+     "sd": 0.0004779570613217222,
+     "n_seeds": 3
+    },
+    {
+     "budget": 0.05,
+     "detection_rate": 0.9957900411758204,
+     "sd": 0.00023193659986148023,
+     "n_seeds": 3
+    }
+   ],
+   "xgb_scratch": [
+    {
+     "budget": 0.001,
+     "detection_rate": 0.9963049282262596,
+     "sd": 0.00044295624224600103,
+     "n_seeds": 3
+    },
+    {
+     "budget": 0.01,
+     "detection_rate": 0.9997910164324688,
+     "sd": 7.052820458700996e-05,
+     "n_seeds": 3
+    },
+    {
+     "budget": 0.05,
+     "detection_rate": 0.9999303388108229,
+     "sd": 1.4604090869964947e-05,
+     "n_seeds": 3
+    }
+   ],
+   "xgb_continue": [
+    {
+     "budget": 0.001,
+     "detection_rate": 0.723263354125684,
+     "sd": 0.014994905512219617,
+     "n_seeds": 3
+    },
+    {
+     "budget": 0.01,
+     "detection_rate": 0.7235798582243363,
+     "sd": 0.009700074449390446,
+     "n_seeds": 3
+    },
+    {
+     "budget": 0.05,
+     "detection_rate": 0.7487911512117261,
+     "sd": 0.03297030306029398,
+     "n_seeds": 3
+    }
+   ]
+  },
+  "frozen": {
+   "frozen_recal_esnn_t4": [
+    0.2680486840849927
+   ],
+   "frozen_recal_xgb": [
+    0.3141341038466606
+   ]
+  },
+  "source": "results/cross_dataset/finetune_cic2017.json"
+ }
+}

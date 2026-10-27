@@ -18,7 +18,7 @@ A Leakage-Controlled Study of an Ensemble Spiking Network on CSE-CIC-IDS2018}
 \maketitle
 
 \begin{abstract}
-Spiking neural networks (SNNs) are often proposed for network intrusion detection because event-driven hardware could run them cheaply at the network edge. Most reported results, however, come from random row splits of benchmark datasets that contain many exact duplicates, and from comparisons that leave out strong tree ensembles. We revisit the question on CSE-CIC-IDS2018 (16.2 million flows, 13 classes) with a protocol built to avoid those problems. Rows that share an identical cleaned feature vector are kept in the same partition. Model fitting, probability calibration, alarm-threshold selection and testing use four disjoint partitions, and every model is judged at the same benign false-alarm budget. We compare an ensemble of three SNN branches (rate, latency and population coding, 86k parameters) against a parameter-matched multilayer perceptron, a control network that receives the same spike-encoded input without spiking dynamics, and three tree ensembles. At a 5\% false-alarm budget the SNN reaches a macro-F1 of $0.769 \pm 0.022$ over three seeds. This is above the matched perceptron ($0.756$) but below the spike-input control ($0.787$), random forest ($0.788$), CatBoost ($0.791$) and XGBoost ($0.808$). Attack detection rates differ by less than one point across all models. A feature-group audit shows that most of the remaining error is not a modelling problem: 99.99\% of FTP-BruteForce flows and nearly all DoS-SlowHTTPTest flows have feature vectors that also occur under another label. Shortening the SNN's time window from 12 to 4 steps leaves macro-F1 unchanged ($0.766 \pm 0.015$) while cutting synaptic events per flow by a factor of 2.9; under a standard 45\,nm energy model the 4-step SNN then needs 69\% less synaptic energy than the matched perceptron. A screen of five architectural variants, ranked on the tuning partition only, found no variant that clearly beats the original. The spike-input control remains both more accurate and cheaper at every window length, so our reading is that the input encoders, not the spiking dynamics, carry most of the benefit in this setting. Finally, the frozen models do not transfer to CIC-IDS2017: at a recalibrated 5\% false-alarm rate they detect only 23\%--32\% of attack flows, with slow application-layer DoS as the main exception. We release code, frozen checkpoints and a containerised detector.
+Spiking neural networks (SNNs) are often proposed for network intrusion detection because event-driven hardware could run them cheaply at the network edge. Most reported results, however, come from random row splits of benchmark datasets that contain many exact duplicates, and from comparisons that leave out strong tree ensembles. We revisit the question on CSE-CIC-IDS2018 (16.2 million flows, 13 classes) with a protocol built to avoid those problems. Rows that share an identical cleaned feature vector are kept in the same partition. Model fitting, probability calibration, alarm-threshold selection and testing use four disjoint partitions, and every model is judged at the same benign false-alarm budget. We compare an ensemble of three SNN branches (rate, latency and population coding, 86k parameters) against a parameter-matched multilayer perceptron, a control network that receives the same spike-encoded input without spiking dynamics, and three tree ensembles. At a 5\% false-alarm budget the SNN reaches a macro-F1 of $0.769 \pm 0.022$ over three seeds. This is above the matched perceptron ($0.756$) but below the spike-input control ($0.787$), random forest ($0.788$), CatBoost ($0.791$) and XGBoost ($0.808$). Attack detection rates differ by less than one point across all models. A feature-group audit shows that most of the remaining error is not a modelling problem: 99.99\% of FTP-BruteForce flows and nearly all DoS-SlowHTTPTest flows have feature vectors that also occur under another label. Shortening the SNN's time window from 12 to 4 steps leaves macro-F1 unchanged ($0.766 \pm 0.015$) while cutting synaptic events per flow by a factor of 2.9. Whether that makes the SNN cheaper than a conventional network depends on the cost model. With optimistic 45\,nm accumulate costs the 4-step SNN needs 69\% less synaptic energy than the matched perceptron, but with published Intel Loihi per-operation costs it needs about 3.0\,$\mu$J per flow against 0.4\,$\mu$J for the perceptron on a digital accelerator. A screen of five architectural variants, ranked on the tuning partition only, found no variant that clearly beats the original. The spike-input control remains both more accurate and cheaper at every window length, so our reading is that the input encoders, not the spiking dynamics, carry most of the benefit in this setting. Finally, the frozen models do not transfer to CIC-IDS2017: at a recalibrated 5\% false-alarm rate they detect only 23\%--32\% of attack flows. About 1{,}100 labelled local flows are enough to bring both the SNN and XGBoost back above 98\% detection, although the SNN still misses botnet traffic. We release code, frozen checkpoints and a containerised detector.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -48,6 +48,8 @@ The headline result is mixed and, we think, useful. The SNN is a competent detec
 \textbf{Dataset quality.} Engelen et al.~\cite{engelen2021} documented flow-construction and labelling errors in CICIDS2017, and Liu et al.~\cite{liu2022} extended the analysis to CSE-CIC-IDS2018. Arp et al.~\cite{arp2022} list sampling bias and data snooping among the most common pitfalls of learning-based security research, and Sommer and Paxson~\cite{sommer2010} warned early that closed-world benchmark success rarely transfers to operational networks. We follow these recommendations in the split design and in how we report the remaining errors.
 
 \textbf{Spiking networks.} Surrogate-gradient training~\cite{neftci2019} made it practical to train SNNs with backpropagation through time, and libraries such as snnTorch~\cite{eshraghian2023} brought this into standard deep-learning tooling. Tabular inputs must first be turned into spike trains. Rate, latency and population codes are the usual choices, and the choice of code can matter as much as the neuron model. Energy claims for SNNs normally rest on the fact that an accumulate costs less than a multiply-accumulate~\cite{horowitz2014}, which only pays off when spikes are sparse and time windows are short.
+
+\textbf{SNN-based intrusion detection.} Zhou and Li~\cite{zhou2021singlespike} trained non-leaky, single-spike temporal-coded networks on NSL-KDD and AWID and reported higher accuracy than a range of deep and classical learners, although their tree-ensemble figures were taken from earlier work rather than rerun. Most later studies train leaky integrate-and-fire networks with surrogate gradients. Wang et al.~\cite{wang2024convsnn} combined convolutional and spiking layers on CSE-CIC-IDS2018 and CIC-DDoS2019, matching an optimised CNN with far fewer parameters, and compared only against neural models. \v{Z}ivadinovi\'c and Simi\'c~\cite{zivadinovic2024resource} trained a small spiking classifier on BoT-IoT samples, and Fesu et al.~\cite{fesu2025comparative} set an SNN against a CNN on NSL-KDD. Karthik et al.~\cite{karthik2026hybrid} reported detection at a 1\% false-alarm rate and cross-dataset scores for a transformer--spiking hybrid, but on random percentage splits. Closest to our concerns, Patel et al.~\cite{patel2026spiketiming} benchmarked 27 neuron and encoding configurations under capture- and scenario-aware splits and found latency coding to matter more than the neuron model; their comparison stays within spiking models. Hardware evidence is thin. Alom and Taha~\cite{alom2017truenorth} ran a detector on a physical TrueNorth chip, and Mehrabi and van Schaik~\cite{mehrabi2024industrial} built a packet-level SNN on an FPGA. What we add is a combination. We control duplicate leakage on CSE-CIC-IDS2018 and judge every model, tree ensembles and a spike-input control included, at fixed false-alarm budgets. The frozen detectors are then tested on CIC-IDS2017.
 
 \textbf{Calibration and operating points.} Class-prior correction~\cite{saerens2002} and temperature scaling~\cite{guo2017} are standard ways to fix probability estimates after training on a resampled set. Neyman--Pearson classification~\cite{tong2018} frames detection as maximising power under a constraint on the false-positive rate. That is the framing we use for alarm thresholds.
 
@@ -107,6 +109,13 @@ For a false-alarm budget $\tau$, the threshold $t_\tau$ is the empirical $(1-\ta
 
 \textbf{Ensemble SNN (E-SNN).} Three branches share the same architecture and differ only in how the 70 features become spikes over $T = 12$ time steps. The \emph{rate} branch uses a deterministic phase-accumulator code. The \emph{temporal} branch emits a single spike whose latency decreases with feature value. The \emph{population} branch expands each feature into four Gaussian receptive fields and rate-codes their activations. The three codes suit different features. Rate coding preserves magnitude for smooth, wide-range statistics such as byte rates, latency coding gives the largest values the earliest spikes, and population coding separates the narrow bands that many protocol-specific features such as flag counts and window sizes take. Each branch has two hidden layers of 128 and 64 leaky integrate-and-fire neurons with learnable decay, layer normalisation and dropout of 0.2, followed by a linear readout averaged over time. The three branch outputs are combined as $0.6$ times a softmax-weighted average plus $0.4$ times a small meta-network. This mixture was fixed in an earlier version of the study and not tuned here; the architecture screen below includes the pure weighted average ($1.0/0$) as one variant. The model has 86{,}013 parameters and is trained with surrogate gradients (fast sigmoid, slope 25) using snnTorch~\cite{eshraghian2023}, for at most 35 epochs with early stopping on tuning macro-F1.
 
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig_architecture}
+\caption{Ensemble SNN. Three fixed encoders turn the 70 scaled flow features into spike trains over $T$ steps, each branch passes them through two LIF layers and a time-averaged readout, and the branch logits are fused before the prior offset, temperature and alarm threshold $t_\tau$ are applied. The dashed path is the spike-input control (Enc-ANN), which replaces the spiking layers with a feed-forward network on the flattened spike train.}
+\label{fig:arch}
+\end{figure*}
+
 \textbf{Matched ANN.} A two-hidden-layer perceptron whose width is chosen by parameter count alone to match the E-SNN (85{,}945 parameters). It sees the quantile-scaled features directly.
 
 \textbf{Spike-input control (Enc-ANN).} The same three fixed encoders and fusion head as the E-SNN, but each branch flattens the whole spike train and passes it through an ordinary feed-forward network of matched size (84{,}503 parameters). Comparing E-SNN with Enc-ANN separates the effect of the encoding from the effect of membrane dynamics.
@@ -118,6 +127,7 @@ Every neural and tree model is trained with plain cross-entropy for three seeds 
 Two follow-up experiments reuse the prepared partitions, preprocessor and decision rule byte for byte; a derived experiment may change only fields that act after preprocessing, and the code refuses to run if the parent's data hashes or package versions differ. The first retrains the E-SNN and Enc-ANN with $T = 4$ and $T = 8$ for all three seeds. The second trains five E-SNN variants at $T = 8$ with seed 42 and ranks them by tuning-partition macro-F1; the winner is then retrained with all three seeds.
 
 \section{Results}
+\label{sec:results}
 
 \subsection{Detection at a fixed false-alarm budget}
 
@@ -148,9 +158,16 @@ All six models catch about 96\% of attack flows. Most of the separation shows up
 
 The neural comparison is repeated in Table~\ref{tab:steps} with 4 and 8 time steps on the same partitions. For the E-SNN, macro-F1 at the 5\% budget is $0.766 \pm 0.015$ at $T = 4$, $0.766 \pm 0.014$ at $T = 8$ and $0.769 \pm 0.022$ at $T = 12$. The three are indistinguishable given the seed spread. At the stricter 1\% budget the shorter windows are, if anything, slightly better (0.791 and 0.800 against 0.789). The cost, however, falls almost in proportion to $T$: hidden-layer sparsity stays between 72\% and 75\%, so synaptic events drop from 339{,}801 to 116{,}864 per flow. The spike-input control is again the strongest neural model at every window, reaching $0.800 \pm 0.015$ at $T = 8$.
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig_steps}
+\caption{Effect of the time window $T$. (a) Test macro-F1 at the 5\% false-alarm budget (mean and s.d. over three seeds), with the matched ANN and XGBoost as references. (b) Estimated energy per flow on a log scale under two cost models: optimistic 45\,nm accumulate and multiply-accumulate costs, and published Loihi per-operation costs for the E-SNN. The matched ANN is shown with and without SRAM weight reads.}
+\label{fig:steps}
+\end{figure}
+
 \begin{table}[t]
 \centering
-\caption{Effect of the time window. Macro-F1 on test (mean $\pm$ s.d., three seeds); operations per flow for the seed-42 checkpoint; energy as in Table~\ref{tab:eff}.}
+\caption{Effect of the time window. Macro-F1 on test (mean $\pm$ s.d., three seeds); operations per flow for the seed-42 checkpoint; energy with the optimistic 45\,nm model of Table~\ref{tab:eff} (see Table~\ref{tab:loihi} for Loihi costs).}
 \label{tab:steps}
 \small
 \setlength{\tabcolsep}{2.5pt}
@@ -238,11 +255,38 @@ Enc-ANN & 28{,}956 & 5{,}094 & 0.05\,$\mu$J & 16.3\,$\mu$s \\
 
 At $T = 12$ the E-SNN's hidden neurons are silent 72\% of the time, yet with 12 time steps and three branches it still performs four times as many synaptic events as the matched ANN performs MACs. The cheaper accumulate makes up for this, and the estimate ends about 17\% below the ANN. The spike-input control is far cheaper than both, because it sees each binary input once instead of propagating it through recurrent membrane state at every time step. On a general-purpose CPU, where sparsity brings no saving, the E-SNN is about 40 times slower than the ANN. Even so, the service scores more than 15{,}000 flows per second on a single laptop CPU, which is enough for a small network segment.
 
+\begin{table}[t]
+\centering
+\caption{Energy per flow with published Loihi per-operation costs~\cite{davies2018} for the E-SNN (synaptic events at 23.6\,pJ, neuron updates at 81\,pJ, layer normalisation and fusion on a 45\,nm host) and a 45\,nm digital accelerator for the matched ANN~\cite{horowitz2014}. Estimates, not measurements.}
+\label{tab:loihi}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lrrr}
+\toprule
+Model & Syn.\ events & Neuron upd. & Energy \\
+\midrule
+E-SNN, $T = 4$ & 116{,}864 & 2{,}304 & 3.0\,$\mu$J \\
+E-SNN, $T = 8$ & 227{,}501 & 4{,}608 & 5.9\,$\mu$J \\
+E-SNN, $T = 12$ & 339{,}801 & 6{,}912 & 8.8\,$\mu$J \\
+ANN (FP32) & -- & -- & 0.40\,$\mu$J \\
+ANN (FP32 + SRAM) & -- & -- & 1.24\,$\mu$J \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:loihi} replaces the arithmetic-only figures with an estimate for neuromorphic hardware. We charge each synaptic event (a presynaptic spike times its fan-out) 23.6\,pJ and each neuron update 81\,pJ, the minimum synaptic-operation and active neuron-update energies reported for Intel's Loihi chip~\cite{davies2018}. Layer normalisation and the fusion network have no native Loihi counterpart and are charged to a 45\,nm host at 4.6\,pJ per MAC~\cite{horowitz2014}. Under these assumptions the E-SNN needs about 3.0, 5.9 and 8.8\,$\mu$J per flow at $T = 4$, 8 and 12, against 0.40\,$\mu$J for the matched ANN on a 45\,nm accelerator, or 1.2\,$\mu$J if every weight is also read from on-chip SRAM. Synaptic events make up more than 90\% of the E-SNN total, and about three quarters of them come from the binary input encoding. The ANN is therefore cheaper by a factor of 2.4 to 22. This is an estimate built from published per-operation figures, not a measurement, and it ignores static power, routing between cores and the cost of generating the input spikes. The 45\,nm accumulate figure used above is thus about 26 times more favourable to the SNN than the published cost of a synaptic operation on neuromorphic silicon, and the sign of the comparison depends on which one is used.
+
 \subsection{Transfer to a different network}
 
-A detector is only useful if it works outside the capture it was trained on. We therefore ran the frozen seed-42 models, unchanged, on the CIC-IDS2017 MachineLearningCVE export (2{,}214{,}468 labelled flows). That dataset was recorded a year earlier on a different testbed with an older version of the same flow extractor. Its features match ours one to one, except that the protocol field is missing; we impute it from the destination port (UDP for common UDP services, TCP otherwise). Attack labels are mapped to the 2018 families; PortScan and Heartbleed have no 2018 counterpart.
+A detector is only useful if it works outside the capture it was trained on. We therefore ran the frozen seed-42 models, unchanged, on the CIC-IDS2017 MachineLearningCVE export (2{,}214{,}468 labelled flows). That dataset was recorded a year earlier on a different testbed with an older version of the same flow extractor. The export we used lacks two of the original files (Tuesday, with the FTP and SSH brute-force attacks, and Thursday morning, with the web attacks), so those classes are absent. Its features match ours one to one, except that the protocol field is missing; we impute it from the destination port (UDP for common UDP services, TCP otherwise). Attack labels are mapped to the 2018 families; PortScan and Heartbleed have no 2018 counterpart.
 
-The result is a clear negative, shown in Table~\ref{tab:transfer}. With the 2018 threshold, the false-alarm rate rises from the calibrated 5\% to between 23\% and 26\% for all three models, so the score distribution of normal traffic has shifted. We then gave each model the one adjustment an operator could make without attack labels: refitting the alarm threshold on half of the 2017 benign flows to a 5\% budget, and evaluating on the other half and on all attacks. Detection then falls to 23\%--32\%. Only the slow application-layer DoS attacks transfer well. The 12-step E-SNN still flags 86\% of GoldenEye and 87\% of Slowloris flows, and the 4-step E-SNN flags 99.8\% and 99.6\%. Volumetric DDoS, DoS-Hulk and Bot traffic is largely missed by the SNNs, while XGBoost keeps 61\% of Bot flows. No model detects the 36 Infiltration or 11 Heartbleed flows.
+The result is a clear negative, shown in Table~\ref{tab:transfer}. With the 2018 threshold, the false-alarm rate rises from the calibrated 5\% to between 23\% and 26\% for all three models, so the score distribution of normal traffic has shifted. We then gave each model the one adjustment an operator could make without attack labels: refitting the alarm threshold on half of the 2017 benign flows to a 5\% budget, and evaluating on the other half and on all attacks. Detection then falls to 23\%--32\%. Only the slow application-layer DoS attacks transfer well. The 12-step E-SNN still flags 86\% of GoldenEye and 87\% of Slowloris flows, and the 4-step E-SNN flags 99.8\% and 99.6\%. Volumetric DDoS, DoS-Hulk and Bot traffic is largely missed by the SNNs, while XGBoost keeps 61\% of Bot flows. No model detects the 36 Infiltration or 11 Heartbleed flows. Figure~\ref{fig:transfer} breaks the recalibrated detection rate down by attack type.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig_transfer}
+\caption{Share of CIC-IDS2017 attack flows that raise an alarm after the threshold of each frozen 2018 model is refitted to a 5\% benign false-alarm rate (dashed line). Flow counts are in parentheses; an asterisk marks attack types with no CSE-CIC-IDS2018 counterpart.}
+\label{fig:transfer}
+\end{figure}
 
 \begin{table}[t]
 \centering
@@ -261,7 +305,31 @@ XGBoost & 0.252 & 0.494 & 0.050 & 0.317 \\
 \end{tabular}
 \end{table}
 
-We see this as the most practically relevant finding of the study. High in-distribution scores on CSE-CIC-IDS2018, ours included, say little about how a flow-feature detector will behave on another network. Any deployment would need training or at least fine-tuning on local traffic, and claims of generalisation should be backed by a cross-dataset test of this kind.
+To ask how much local labelled data an operator would need, we split the CIC-IDS2017 flows by feature-vector fingerprint into an adaptation pool, a calibration partition and a test partition (50/10/40), drew class-stratified labelled samples of 0.1\%, 1\% and 5\% of the pool (1{,}101, 11{,}026 and 55{,}153 flows), and refitted the temperature and the 5\% alarm threshold on the 2017 calibration partition. PortScan was added as a new class. Table~\ref{tab:adapt} gives means over three seeds. Labels recover detection quickly. With only 1{,}101 labelled flows, fine-tuning the 4-step E-SNN from its 2018 checkpoint raises detection from 27\% to 98.5\% at a 5.3\% false-alarm rate, and XGBoost trained from scratch on the same flows reaches 99.6\% at 5.0\%. The fine-tuned E-SNN matches XGBoost on the DoS, DDoS and PortScan traffic but not on Bot flows, which it misses with 0.1\% and 1\% of the pool and detects at 32\% with 5\%, while XGBoost detects 97\% to 99.5\% with 1\% or more. Continuing the 2018 XGBoost model cannot learn PortScan and stays at 72\% to 75\% detection. Because pool and test come from the same capture days, these figures are an optimistic bound for a real deployment. Macro-F1 stays low for every method because a 5\% false-alarm rate on 671{,}643 benign test flows produces about 33{,}000 false alarms, which swamp the precision of the small classes.
+
+\begin{table}[t]
+\centering
+\caption{Local adaptation on CIC-IDS2017 (test partition, mean over three seeds). Budget: share of the 2017 adaptation pool with labels. All rows use a 5\% benign alarm threshold refitted on 2017 calibration data.}
+\label{tab:adapt}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{llccc}
+\toprule
+Method & Budget & FAR & DR & Macro-F1 \\
+\midrule
+E-SNN $T{=}4$, frozen & 0 & 0.062 & 0.268 & 0.188 \\
+XGBoost, frozen & 0 & 0.050 & 0.314 & 0.291 \\
+E-SNN $T{=}4$, fine-tuned & 0.1\% & 0.053 & 0.985 & 0.564 \\
+XGBoost, from scratch & 0.1\% & 0.050 & 0.996 & 0.526 \\
+E-SNN $T{=}4$, fine-tuned & 1\% & 0.059 & 0.994 & 0.592 \\
+XGBoost, from scratch & 1\% & 0.050 & 1.000 & 0.665 \\
+E-SNN $T{=}4$, fine-tuned & 5\% & 0.053 & 0.996 & 0.707 \\
+XGBoost, from scratch & 5\% & 0.051 & 1.000 & 0.686 \\
+XGBoost, continued & 5\% & 0.057 & 0.749 & 0.483 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+We see this as the most practically relevant finding of the study. High in-distribution scores on CSE-CIC-IDS2018, ours included, say little about how a flow-feature detector will behave on another network. Any deployment would need training or at least fine-tuning on local traffic, which, as Table~\ref{tab:adapt} shows, can be cheap in labels. Claims of generalisation should be backed by a cross-dataset test of this kind.
 
 \section{A Containerised Detector}
 
@@ -271,13 +339,15 @@ To let others test the frozen models on their own captures, we package the seed-
 
 \textbf{What the spikes buy.} Within this protocol the useful part of the SNN appears to be its input encoding. The population and latency codes give a plain feed-forward network a better view of skewed flow features, and that network then beats the spiking version on both accuracy and estimated energy. Short windows help the SNN's cost a great deal but do not close the accuracy gap, and the control profits from the same encoders at every window length. This does not rule out SNN advantages on neuromorphic hardware with on-chip encoding or on temporal inputs such as packet sequences. It does suggest that SNN papers on flow features should include a spike-input control before crediting membrane dynamics.
 
+\textbf{Energy needs a hardware model.} The two cost models in Section~\ref{sec:results} disagree about which network is cheaper. Counting accumulates at the price of a 45\,nm adder favours the SNN; charging the published Loihi cost of a synaptic event, which includes the synapse memory access, favours the dense perceptron by a wide margin, mainly because three quarters of the SNN's events come from the binary input encoding with a fan-out of 128. An SNN for flow features would need a much sparser input code, or hardware with cheaper synaptic events, before an energy advantage is plausible. We think energy claims in this area should state their cost model and, ideally, report both.
+
 \textbf{Trees remain strong.} Untuned XGBoost was the best model at every budget, in line with broader evidence on tabular data~\cite{grinsztajn2022}. A neuromorphic detector would need to be judged against it, not only against other neural networks.
 
 \textbf{Limitations.} This protocol (v3) was designed after we had seen test results of an earlier version, and the time-window and architecture experiments were run after the v3 test results were known. All of these are development results and not an independent confirmation, and the more configurations one tries on a single test partition, the more the best of them will flatter itself; we therefore report every configuration we ran. A fresh held-out dataset is still needed. Feature groups prevent verbatim duplication but not near-duplicates or temporal leakage within an attack episode, and the timestamps of the dataset are unverified. We used three seeds and fixed tree hyperparameters, and screened only five SNN variants. Finally, all energy numbers are estimates from operation counts; we made no hardware measurements.
 
 \section{Conclusion}
 
-On CSE-CIC-IDS2018 under a leakage-controlled, budget-matched protocol, an ensemble spiking network detects 96\% of attack flows at a 5\% false-alarm rate. It beats a parameter-matched perceptron, and it keeps the same accuracy with 4 time steps instead of 12, which cuts its estimated synaptic energy to under a third of the perceptron's. It still loses to gradient-boosted trees, and also to a plain network that is fed the same spike encodings. Much of the remaining error comes from flows that the feature extractor maps to identical vectors under different labels. None of the models, the SNN included, carries its accuracy over to a different network without retraining. We hope the protocol, the audit and the released detector make future SNN results on this benchmark easier to compare and harder to overstate.
+On CSE-CIC-IDS2018 under a leakage-controlled, budget-matched protocol, an ensemble spiking network detects 96\% of attack flows at a 5\% false-alarm rate. It beats a parameter-matched perceptron, and it keeps the same accuracy with 4 time steps instead of 12, which cuts its operation count by a factor of three. Whether that makes it cheaper than a conventional network depends on the hardware cost model, and with published Loihi figures it does not. It still loses to gradient-boosted trees, and also to a plain network that is fed the same spike encodings. Much of the remaining error comes from flows that the feature extractor maps to identical vectors under different labels. None of the models, the SNN included, carries its accuracy over to a different network without retraining. We hope the protocol, the audit and the released detector make future SNN results on this benchmark easier to compare and harder to overstate.
 
 \section*{Reproducibility}
 

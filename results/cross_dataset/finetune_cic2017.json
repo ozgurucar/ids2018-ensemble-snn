@@ -1,0 +1,3028 @@
+{
+ "protocol": {
+  "data": "/Users/ozgur/.cache/ids-x17/combine.csv (CIC-IDS2017 MachineLearningCVE, 2214468 rows); Protocol imputed from port",
+  "split": "feature-fingerprint groups (idsresearch.groups), label-blind, ratios pool/calibration/test=[0.5, 0.1, 0.4], seed 2017",
+  "calibration": "calibration partition split by groups 50/50: probability half (temperature, <=100k rows, classes represented in the model's training data only) and alarm half (threshold at 5% benign FPR, empirical order statistic, idsresearch.decision.threshold_fit)",
+  "prior_offset": "adapted models: idsresearch.decision.prior_offset(budget, budget) -> 0 for classes in the budget, masked (-1e9) for classes absent from it; budget is a proportional stratified sample so no prior shift. frozen_recal keeps the 2018 offset and temperature.",
+  "label_space": "13 CSE-CIC-IDS2018 classes + PortScan; Heartbleed unclassed (attack in binary metrics, excluded from macro-F1)",
+  "budget_sampling": "proportional class-stratified sample of the pool, >=1 row per class present in the pool, seed-dependent",
+  "esnn_t4_finetune": "from app/models/esnn_t4.pt, all layers, extra PortScan output (zero-initialised), AdamW lr=0.0001, wd=1e-3, batch=256, max(5 epochs, 300 steps), unweighted CE, no early stopping or selection",
+  "xgb_scratch": "XGBClassifier 400 trees, depth 8, lr 0.1, subsample/colsample 0.8 (2018 settings), on 2018-preprocessed features",
+  "xgb_continue": "2018 booster + 100 rounds on the budget (PortScan rows dropped: 13-class model)",
+  "test": "all test rows",
+  "macro_f1": "over classes present in the test partition (14-class space incl. PortScan); prediction = argmax attack class if alarm else Benign",
+  "no_test_use": "no choice (epochs, lr, rounds, thresholds) uses test rows"
+ },
+ "group_audit": {
+  "rows": 2214468,
+  "groups": 1941979,
+  "rows_in_repeated_groups": 354386,
+  "conflicting_groups": 691,
+  "rows_in_conflicting_groups": 6773,
+  "empirical_representation_error_floor": 0.0003215219185827025
+ },
+ "partitions": {
+  "pool": {
+   "Heartbleed(unclassed)": 5,
+   "Benign": 835764,
+   "Bot": 968,
+   "DDoS-LOIC-HTTP": 64093,
+   "DoS-GoldenEye": 5190,
+   "DoS-Hulk": 112400,
+   "DoS-SlowHTTPTest": 2794,
+   "DoS-Slowloris": 2882,
+   "Infiltration": 17,
+   "PortScan": 79035
+  },
+  "calibration": {
+   "Heartbleed(unclassed)": 1,
+   "Benign": 165430,
+   "Bot": 199,
+   "DDoS-LOIC-HTTP": 12698,
+   "DoS-GoldenEye": 1047,
+   "DoS-Hulk": 23101,
+   "DoS-SlowHTTPTest": 493,
+   "DoS-Slowloris": 549,
+   "Infiltration": 3,
+   "PortScan": 16043
+  },
+  "calibration_probability_rows": 100000,
+  "calibration_alarm_rows": 107548,
+  "test": {
+   "Heartbleed(unclassed)": 5,
+   "Benign": 671643,
+   "Bot": 799,
+   "DDoS-LOIC-HTTP": 51236,
+   "DoS-GoldenEye": 4056,
+   "DoS-Hulk": 95572,
+   "DoS-SlowHTTPTest": 2212,
+   "DoS-Slowloris": 2365,
+   "Infiltration": 16,
+   "PortScan": 63852
+  }
+ },
+ "summary": [
+  {
+   "method": "frozen_recal_esnn_t4",
+   "budget": 0.0,
+   "seed": null,
+   "far": 0.062150577017850255,
+   "detection_rate": 0.2680486840849927,
+   "detection_rate_excl_portscan": 0.2777788443693564,
+   "macro_f1": 0.18819203392551256
+  },
+  {
+   "method": "frozen_recal_xgb",
+   "budget": 0.0,
+   "seed": null,
+   "far": 0.04974071046672116,
+   "detection_rate": 0.3141341038466606,
+   "detection_rate_excl_portscan": 0.23726329666391485,
+   "macro_f1": 0.2907090753614902
+  },
+  {
+   "method": "esnn_t4_finetune",
+   "budget": 0.001,
+   "seed": 42,
+   "far": 0.05310261552640316,
+   "detection_rate": 0.9849350106536188,
+   "detection_rate_excl_portscan": 0.9819468709402858,
+   "macro_f1": 0.556072528627652
+  },
+  {
+   "method": "xgb_scratch",
+   "budget": 0.001,
+   "seed": 42,
+   "far": 0.04886077871726498,
+   "detection_rate": 0.9966789785246669,
+   "detection_rate_excl_portscan": 0.9962370649106302,
+   "macro_f1": 0.5359417711189842
+  },
+  {
+   "method": "xgb_continue",
+   "budget": 0.001,
+   "seed": 42,
+   "far": 0.051528862803602506,
+   "detection_rate": 0.7199211314188622,
+   "detection_rate_excl_portscan": 0.9901958902093293,
+   "macro_f1": 0.5168811401590475
+  },
+  {
+   "method": "esnn_t4_finetune",
+   "budget": 0.001,
+   "seed": 43,
+   "far": 0.05080824187849795,
+   "detection_rate": 0.982250026122946,
+   "detection_rate_excl_portscan": 0.9779471525204626,
+   "macro_f1": 0.5659299484895719
+  },
+  {
+   "method": "xgb_scratch",
+   "budget": 0.001,
+   "seed": 43,
+   "far": 0.050364553788247626,
+   "detection_rate": 0.9964200206257695,
+   "detection_rate_excl_portscan": 0.9958530919423273,
+   "macro_f1": 0.5290554972111243
+  },
+  {
+   "method": "xgb_continue",
+   "budget": 0.001,
+   "seed": 43,
+   "far": 0.05190257324203483,
+   "detection_rate": 0.7396473629453962,
+   "detection_rate_excl_portscan": 0.9916677865878242,
+   "macro_f1": 0.5127947609516317
+  },
+  {
+   "method": "esnn_t4_finetune",
+   "budget": 0.001,
+   "seed": 44,
+   "far": 0.05357310356841358,
+   "detection_rate": 0.9888648103474125,
+   "detection_rate_excl_portscan": 0.9865289483620353,
+   "macro_f1": 0.5695065059865889
+  },
+  {
+   "method": "xgb_scratch",
+   "budget": 0.001,
+   "seed": 44,
+   "far": 0.05057150897128385,
+   "detection_rate": 0.9958157855283423,
+   "detection_rate_excl_portscan": 0.994886759972098,
+   "macro_f1": 0.5140136770461403
+  },
+  {
+   "method": "xgb_continue",
+   "budget": 0.001,
+   "seed": 44,
+   "far": 0.05068317543695088,
+   "detection_rate": 0.7102215680127935,
+   "detection_rate_excl_portscan": 0.9970498076935383,
+   "macro_f1": 0.5014668773190132
+  },
+  {
+   "method": "esnn_t4_finetune",
+   "budget": 0.01,
+   "seed": 42,
+   "far": 0.06334019709875634,
+   "detection_rate": 0.993662346158564,
+   "detection_rate_excl_portscan": 0.9928901005369222,
+   "macro_f1": 0.5887032290029524
+  },
+  {
+   "method": "xgb_scratch",
+   "budget": 0.01,
+   "seed": 42,
+   "far": 0.050754641974977775,
+   "detection_rate": 0.9997955595535021,
+   "detection_rate_excl_portscan": 0.9997120202737727,
+   "macro_f1": 0.6705439916028588
+  },
+  {
+   "method": "xgb_continue",
+   "budget": 0.01,
+   "seed": 42,
+   "far": 0.050714442047337646,
+   "detection_rate": 0.7156505976475719,
+   "detection_rate_excl_portscan": 0.9996480247790556,
+   "macro_f1": 0.4923461909598138
+  },
+  {
+   "method": "esnn_t4_finetune",
+   "budget": 0.01,
+   "seed": 43,
+   "far": 0.06231435450082857,
+   "detection_rate": 0.9934351901068996,
+   "detection_rate_excl_portscan": 0.9925893217117515,
+   "macro_f1": 0.589034580130279
+  },
+  {
+   "method": "xgb_scratch",
+   "budget": 0.01,
+   "seed": 43,
+   "far": 0.04935508893861769,
+   "detection_rate": 0.9997183264959362,
+   "detection_rate_excl_portscan": 0.9996096274822253,
+   "macro_f1": 0.6624982813196157
+  },
+  {
+   "method": "xgb_continue",
+   "budget": 0.01,
+   "seed": 43,
+   "far": 0.04997446560151747,
+   "detection_rate": 0.720693461994521,
+   "detection_rate_excl_portscan": 0.999321647755998,
+   "macro_f1": 0.5013892102616307
+  },
+  {
+   "method": "esnn_t4_finetune",
+   "budget": 0.01,
+   "seed": 44,
+   "far": 0.05260681641884156,
+   "detection_rate": 0.9943529005556238,
+   "detection_rate_excl_portscan": 0.9936708455724717,
+   "macro_f1": 0.5979507853619908
+  },
+  {
+   "method": "xgb_scratch",
+   "budget": 0.01,
+   "seed": 44,
+   "far": 0.04977644373573461,
+   "detection_rate": 0.9998591632479681,
+   "detection_rate_excl_portscan": 0.9998016139663768,
+   "macro_f1": 0.6613816565910479
+  },
+  {
+   "method": "xgb_continue",
+   "budget": 0.01,
+   "seed": 44,
+   "far": 0.04872380118604675,
+   "detection_rate": 0.7343955150309159,
+   "detection_rate_excl_portscan": 0.9971586000345576,
+   "macro_f1": 0.4875984680881098
+  },
+  {
+   "method": "esnn_t4_finetune",
+   "budget": 0.05,
+   "seed": 42,
+   "far": 0.0526678607534062,
+   "detection_rate": 0.9955522845084116,
+   "detection_rate_excl_portscan": 0.9949955523131172,
+   "macro_f1": 0.7046575124470239
+  },
+  {
+   "method": "xgb_scratch",
+   "budget": 0.05,
+   "seed": 42,
+   "far": 0.051259374399792744,
+   "detection_rate": 0.9999409394265673,
+   "detection_rate_excl_portscan": 0.9999168058568677,
+   "macro_f1": 0.6693666003650673
+  },
+  {
+   "method": "xgb_continue",
+   "budget": 0.05,
+   "seed": 42,
+   "far": 0.060228424922168476,
+   "detection_rate": 0.7846606061432082,
+   "detection_rate_excl_portscan": 0.9876360704206424,
+   "macro_f1": 0.4234491141394272
+  },
+  {
+   "method": "esnn_t4_finetune",
+   "budget": 0.05,
+   "seed": 43,
+   "far": 0.05323959305762139,
+   "detection_rate": 0.9958021561652424,
+   "detection_rate_excl_portscan": 0.9955331144687414,
+   "macro_f1": 0.7070968043832546
+  },
+  {
+   "method": "xgb_scratch",
+   "budget": 0.05,
+   "seed": 43,
+   "far": 0.05097648602010294,
+   "detection_rate": 0.999936396305534,
+   "detection_rate_excl_portscan": 0.9999104063073959,
+   "macro_f1": 0.700908619880416
+  },
+  {
+   "method": "xgb_continue",
+   "budget": 0.05,
+   "seed": 43,
+   "far": 0.06071082405385004,
+   "detection_rate": 0.7419052940989401,
+   "detection_rate_excl_portscan": 0.9957954959970818,
+   "macro_f1": 0.5299156608919227
+  },
+  {
+   "method": "esnn_t4_finetune",
+   "budget": 0.05,
+   "seed": 44,
+   "far": 0.05181770672812789,
+   "detection_rate": 0.9960156828538069,
+   "detection_rate_excl_portscan": 0.9957379000518364,
+   "macro_f1": 0.7078195053554673
+  },
+  {
+   "method": "xgb_scratch",
+   "budget": 0.05,
+   "seed": 44,
+   "far": 0.050474731367705764,
+   "detection_rate": 0.9999136807003676,
+   "detection_rate_excl_portscan": 0.9998784085600374,
+   "macro_f1": 0.6867762628071139
+  },
+  {
+   "method": "xgb_continue",
+   "budget": 0.05,
+   "seed": 44,
+   "far": 0.050334776064069754,
+   "detection_rate": 0.7198075533930299,
+   "detection_rate_excl_portscan": 0.9897735199441959,
+   "macro_f1": 0.49511330876461934
+  }
+ ],
+ "runs": [
+  {
+   "method": "frozen_recal_esnn_t4",
+   "budget": 0.0,
+   "seed": null,
+   "budget_counts": null,
+   "info": {
+    "note": "2018 offset/temperature, 2017 threshold"
+   },
+   "temperature": 1.006001677715005,
+   "threshold": -2.2564211846959488,
+   "calibration_fpr": 0.04999093710349828,
+   "train_seconds": null,
+   "score_seconds": 11.365084874996683,
+   "far": 0.062150577017850255,
+   "detection_rate": 0.2680486840849927,
+   "detection_rate_excl_portscan": 0.2777788443693564,
+   "macro_f1": 0.18819203392551256,
+   "macro_f1_2018_families": 0.21171603816620163,
+   "per_label": {
+    "BENIGN": {
+     "n": 671643,
+     "alarm_rate": 0.062150577017850255,
+     "correct_family": null
+    },
+    "Bot": {
+     "n": 799,
+     "alarm_rate": 0.0,
+     "correct_family": 0.0
+    },
+    "DDoS": {
+     "n": 51236,
+     "alarm_rate": 0.004001092981497385,
+     "correct_family": 0.00019517526739011633
+    },
+    "DoS GoldenEye": {
+     "n": 4056,
+     "alarm_rate": 0.9990138067061144,
+     "correct_family": 0.991370808678501
+    },
+    "DoS Hulk": {
+     "n": 95572,
+     "alarm_rate": 0.37541330096681036,
+     "correct_family": 0.30231657807726114
+    },
+    "DoS Slowhttptest": {
+     "n": 2212,
+     "alarm_rate": 0.41455696202531644,
+     "correct_family": 0.0
+    },
+    "DoS slowloris": {
+     "n": 2365,
+     "alarm_rate": 0.9949260042283298,
+     "correct_family": 0.8490486257928118
+    },
+    "Heartbleed": {
+     "n": 5,
+     "alarm_rate": 0.0,
+     "correct_family": null
+    },
+    "Infiltration": {
+     "n": 16,
+     "alarm_rate": 0.0,
+     "correct_family": 0.0
+    },
+    "PortScan": {
+     "n": 63852,
+     "alarm_rate": 0.24423667230470464,
+     "correct_family": 0.0
+    }
+   }
+  },
+  {
+   "method": "frozen_recal_xgb",
+   "budget": 0.0,
+   "seed": null,
+   "budget_counts": null,
+   "info": {
+    "note": "2018 offset/temperature, 2017 threshold"
+   },
+   "temperature": 1.0102080789710886,
+   "threshold": -2.060271308619418,
+   "calibration_fpr": 0.04999093710349828,
+   "train_seconds": null,
+   "score_seconds": 15.368141417005972,
+   "far": 0.04974071046672116,
+   "detection_rate": 0.3141341038466606,
+   "detection_rate_excl_portscan": 0.23726329666391485,
+   "macro_f1": 0.2907090753614902,
+   "macro_f1_2018_families": 0.32704770978167647,
+   "per_label": {
+    "BENIGN": {
+     "n": 671643,
+     "alarm_rate": 0.04974071046672116,
+     "correct_family": null
+    },
+    "Bot": {
+     "n": 799,
+     "alarm_rate": 0.5957446808510638,
+     "correct_family": 0.5657071339173968
+    },
+    "DDoS": {
+     "n": 51236,
+     "alarm_rate": 0.17372550550394253,
+     "correct_family": 0.17370598797720352
+    },
+    "DoS GoldenEye": {
+     "n": 4056,
+     "alarm_rate": 0.28821499013806706,
+     "correct_family": 0.28007889546351084
+    },
+    "DoS Hulk": {
+     "n": 95572,
+     "alarm_rate": 0.24989536684384547,
+     "correct_family": 0.2493408111162265
+    },
+    "DoS Slowhttptest": {
+     "n": 2212,
+     "alarm_rate": 0.16455696202531644,
+     "correct_family": 0.0
+    },
+    "DoS slowloris": {
+     "n": 2365,
+     "alarm_rate": 0.9649048625792812,
+     "correct_family": 0.9627906976744186
+    },
+    "Heartbleed": {
+     "n": 5,
+     "alarm_rate": 0.0,
+     "correct_family": null
+    },
+    "Infiltration": {
+     "n": 16,
+     "alarm_rate": 0.0,
+     "correct_family": 0.0
+    },
+    "PortScan": {
+     "n": 63852,
+     "alarm_rate": 0.5022552151851156,
+     "correct_family": 0.0
+    }
+   }
+  },
+  {
+   "method": "esnn_t4_finetune",
+   "budget": 0.001,
+   "seed": 42,
+   "budget_counts": {
+    "Benign": 835,
+    "Bot": 1,
+    "DDoS-LOIC-HTTP": 64,
+    "DoS-GoldenEye": 5,
+    "DoS-Hulk": 112,
+    "DoS-SlowHTTPTest": 2,
+    "DoS-Slowloris": 2,
+    "Infiltration": 1,
+    "PortScan": 79
+   },
+   "info": {
+    "epochs": 60,
+    "steps": 300,
+    "lr": 0.0001,
+    "batch": 256,
+    "train_loss_per_epoch": [
+     2.39757,
+     2.05115,
+     1.74515,
+     1.4866,
+     1.26245,
+     1.12295,
+     0.96301,
+     0.86604,
+     0.75551,
+     0.76909,
+     0.70475,
+     0.66124,
+     0.60992,
+     0.552,
+     0.51303,
+     0.4743,
+     0.43447,
+     0.44755,
+     0.396,
+     0.37944,
+     0.31903,
+     0.324,
+     0.27671,
+     0.27658,
+     0.28827,
+     0.24712,
+     0.23749,
+     0.21684,
+     0.21173,
+     0.18286,
+     0.17049,
+     0.1679,
+     0.17089,
+     0.17238,
+     0.1715,
+     0.16867,
+     0.15924,
+     0.15402,
+     0.14371,
+     0.13693,
+     0.15075,
+     0.12399,
+     0.13006,
+     0.11909,
+     0.11158,
+     0.10775,
+     0.12066,
+     0.11484,
+     0.11911,
+     0.10638,
+     0.12657,
+     0.10683,
+     0.09951,
+     0.1108,
+     0.09657,
+     0.10508,
+     0.10143,
+     0.09736,
+     0.10193,
+     0.08985
+    ]
+   },
+   "temperature": 1.1389469301683053,
+   "threshold": -2.583835705420147,
+   "calibration_fpr": 0.04997885324149598,
+   "train_seconds": 4.728604167001322,
+   "score_seconds": 12.443637707998278,
+   "far": 0.05310261552640316,
+   "detection_rate": 0.9849350106536188,
+   "detection_rate_excl_portscan": 0.9819468709402858,
+   "macro_f1": 0.556072528627652,
+   "macro_f1_2018_families": 0.5220985846004735,
+   "per_label": {
+    "BENIGN": {
+     "n": 671643,
+     "alarm_rate": 0.05310261552640316,
+     "correct_family": null
+    },
+    "Bot": {
+     "n": 799,
+     "alarm_rate": 0.0,
+     "correct_family": 0.0
+    },
+    "DDoS": {
+     "n": 51236,
+     "alarm_rate": 0.9981848700132719,
+     "correct_family": 0.9908267624326645
+    },
+    "DoS GoldenEye": {
+     "n": 4056,
+     "alarm_rate": 0.9916173570019724,
+     "correct_family": 0.5872781065088757
+    },
+    "DoS Hulk": {
+     "n": 95572,
+     "alarm_rate": 0.9927803122253379,
+     "correct_family": 0.9571631858703386
+    },
+    "DoS Slowhttptest": {
+     "n": 2212,
+     "alarm_rate": 0.4864376130198915,
+     "correct_family": 0.0
+    },
+    "DoS slowloris": {
+     "n": 2365,
+     "alarm_rate": 0.9788583509513742,
+     "correct_family": 0.6549682875264271
+    },
+    "Heartbleed": {
+     "n": 5,
+     "alarm_rate": 0.2,
+     "correct_family": null
+    },
+    "Infiltration": {
+     "n": 16,
+     "alarm_rate": 0.0625,
+     "correct_family": 0.0
+    },
+    "PortScan": {
+     "n": 63852,
+     "alarm_rate": 0.9922476978011652,
+     "correct_family": 0.9911044289920441
+    }
+   }
+  },
+  {
+   "method": "xgb_scratch",
+   "budget": 0.001,
+   "seed": 42,
+   "budget_counts": {
+    "Benign": 835,
+    "Bot": 1,
+    "DDoS-LOIC-HTTP": 64,
+    "DoS-GoldenEye": 5,
+    "DoS-Hulk": 112,
+    "DoS-SlowHTTPTest": 2,
+    "DoS-Slowloris": 2,
+    "Infiltration": 1,
+    "PortScan": 79
+   },
+   "info": {
+    "trees": 400,
+    "classes": [
+     "Benign",
+     "Bot",
+     "DDoS-LOIC-HTTP",
+     "DoS-GoldenEye",
+     "DoS-Hulk",
+     "DoS-SlowHTTPTest",
+     "DoS-Slowloris",
+     "Infiltration",
+     "PortScan"
+    ]
+   },
+   "temperature": 1.0493498443228104,
+   "threshold": -4.596009921741592,
+   "calibration_fpr": 0.04999093710349828,
+   "train_seconds": 1.1498592920033843,
+   "score_seconds": 2.677868208003929,
+   "far": 0.04886077871726498,
+   "detection_rate": 0.9966789785246669,
+   "detection_rate_excl_portscan": 0.9962370649106302,
+   "macro_f1": 0.5359417711189842,
+   "macro_f1_2018_families": 0.48229791492003243,
+   "per_label": {
+    "BENIGN": {
+     "n": 671643,
+     "alarm_rate": 0.04886077871726498,
+     "correct_family": null
+    },
+    "Bot": {
+     "n": 799,
+     "alarm_rate": 0.5844806007509387,
+     "correct_family": 0.311639549436796
+    },
+    "DDoS": {
+     "n": 51236,
+     "alarm_rate": 0.9994535092513077,
+     "correct_family": 0.9987313607619642
+    },
+    "DoS GoldenEye": {
+     "n": 4056,
+     "alarm_rate": 1.0,
+     "correct_family": 0.4953155818540434
+    },
+    "DoS Hulk": {
+     "n": 95572,
+     "alarm_rate": 0.9997488804252291,
+     "correct_family": 0.9991838613819948
+    },
+    "DoS Slowhttptest": {
+     "n": 2212,
+     "alarm_rate": 0.9154611211573237,
+     "correct_family": 0.22377938517179025
+    },
+    "DoS slowloris": {
+     "n": 2365,
+     "alarm_rate": 0.9978858350951374,
+     "correct_family": 0.4080338266384778
+    },
+    "Heartbleed": {
+     "n": 5,
+     "alarm_rate": 1.0,
+     "correct_family": null
+    },
+    "Infiltration": {
+     "n": 16,
+     "alarm_rate": 0.25,
+     "correct_family": 0.0
+    },
+    "PortScan": {
+     "n": 63852,
+     "alarm_rate": 0.9977604460314478,
+     "correct_family": 0.995442585980079
+    }
+   }
+  },
+  {
+   "method": "xgb_continue",
+   "budget": 0.001,
+   "seed": 42,
+   "budget_counts": {
+    "Benign": 835,
+    "Bot": 1,
+    "DDoS-LOIC-HTTP": 64,
+    "DoS-GoldenEye": 5,
+    "DoS-Hulk": 112,
+    "DoS-SlowHTTPTest": 2,
+    "DoS-Slowloris": 2,
+    "Infiltration": 1,
+    "PortScan": 79
+   },
+   "info": {
+    "extra_rounds": 100,
+    "dropped_portscan_rows": 79
+   },
+   "temperature": 1.210915599679244,
+   "threshold": -4.008389225201488,
+   "calibration_fpr": 0.04997885324149598,
+   "train_seconds": 0.5274281249949127,
+   "score_seconds": 8.165602708999359,
+   "far": 0.051528862803602506,
+   "detection_rate": 0.7199211314188622,
+   "detection_rate_excl_portscan": 0.9901958902093293,
+   "macro_f1": 0.5168811401590475,
+   "macro_f1_2018_families": 0.5814912826789285,
+   "per_label": {
+    "BENIGN": {
+     "n": 671643,
+     "alarm_rate": 0.051528862803602506,
+     "correct_family": null
+    },
+    "Bot": {
+     "n": 799,
+     "alarm_rate": 0.6270337922403004,
+     "correct_family": 0.6195244055068836
+    },
+    "DDoS": {
+     "n": 51236,
+     "alarm_rate": 0.9989850886095714,
+     "correct_family": 0.9986728081817472
+    },
+    "DoS GoldenEye": {
+     "n": 4056,
+     "alarm_rate": 0.9995069033530573,
+     "correct_family": 0.6156311637080868
+    },
+    "DoS Hulk": {
+     "n": 95572,
+     "alarm_rate": 0.9999267567906919,
+     "correct_family": 0.9981270665048341
+    },
+    "DoS Slowhttptest": {
+     "n": 2212,
+     "alarm_rate": 0.4805605786618445,
+     "correct_family": 0.0
+    },
+    "DoS slowloris": {
+     "n": 2365,
+     "alarm_rate": 0.9957716701902748,
+     "correct_family": 0.9898520084566597
+    },
+    "Heartbleed": {
+     "n": 5,
+     "alarm_rate": 1.0,
+     "correct_family": null
+    },
+    "Infiltration": {
+     "n": 16,
+     "alarm_rate": 0.125,
+     "correct_family": 0.0625
+    },
+    "PortScan": {
+     "n": 63852,
+     "alarm_rate": 0.05849464386393535,
+     "correct_family": 0.0
+    }
+   }
+  },
+  {
+   "method": "esnn_t4_finetune",
+   "budget": 0.001,
+   "seed": 43,
+   "budget_counts": {
+    "Benign": 835,
+    "Bot": 1,
+    "DDoS-LOIC-HTTP": 64,
+    "DoS-GoldenEye": 5,
+    "DoS-Hulk": 112,
+    "DoS-SlowHTTPTest": 2,
+    "DoS-Slowloris": 2,
+    "Infiltration": 1,
+    "PortScan": 79
+   },
+   "info": {
+    "epochs": 60,
+    "steps": 300,
+    "lr": 0.0001,
+    "batch": 256,
+    "train_loss_per_epoch": [
+     2.33709,
+     2.00378,
+     1.68153,
+     1.45724,
+     1.21187,
+     0.99019,
+     0.89478,
+     0.83929,
+     0.76147,
+     0.73705,
+     0.62258,
+     0.60515,
+     0.58369,
+     0.51848,
+     0.48907,
+     0.4496,
+     0.42008,
+     0.38551,
+     0.36362,
+     0.35493,
+     0.36245,
+     0.306,
+     0.28497,
+     0.27405,
+     0.2771,
+     0.24633,
+     0.22829,
+     0.2364,
+     0.2185,
+     0.20986,
+     0.17918,
+     0.1776,
+     0.16808,
+     0.17,
+     0.16551,
+     0.16196,
+     0.14373,
+     0.14263,
+     0.14403,
+     0.12977,
+     0.12622,
+     0.13849,
+     0.1247,
+     0.12492,
+     0.12407,
+     0.11323,
+     0.10731,
+     0.11519,
+     0.0965,
+     0.09958,
+     0.10187,
+     0.09217,
+     0.10594,
+     0.10333,
+     0.08797,
+     0.09623,
+     0.08431,
+     0.07503,
+     0.07748,
+     0.07586
+    ]
+   },
+   "temperature": 1.1011399540409132,
+   "threshold": -2.525649787420455,
+   "calibration_fpr": 0.04995468551749139,
+   "train_seconds": 3.1519854580037645,
+   "score_seconds": 11.671654166995722,
+   "far": 0.05080824187849795,
+   "detection_rate": 0.982250026122946,
+   "detection_rate_excl_portscan": 0.9779471525204626,
+   "macro_f1": 0.5659299484895719,
+   "macro_f1_2018_families": 0.5310613741188321,
+   "per_label": {
+    "BENIGN": {
+     "n": 671643,
+     "alarm_rate": 0.05080824187849795,
+     "correct_family": null
+    },
+    "Bot": {
+     "n": 799,
+     "alarm_rate": 0.0,
+     "correct_family": 0.0
+    },
+    "DDoS": {
+     "n": 51236,
+     "alarm_rate": 0.988367554063549,
+     "correct_family": 0.9809118588492466
+    },
+    "DoS GoldenEye": {
+     "n": 4056,
+     "alarm_rate": 0.9918639053254438,
+     "correct_family": 0.6757889546351085
+    },
+    "DoS Hulk": {
+     "n": 95572,
+     "alarm_rate": 0.9915561042983301,
+     "correct_family": 0.9772946051144686
+    },
+    "DoS Slowhttptest": {
+     "n": 2212,
+     "alarm_rate": 0.48553345388788427,
+     "correct_family": 0.0
+    },
+    "DoS slowloris": {
+     "n": 2365,
+     "alarm_rate": 0.9775898520084566,
+     "correct_family": 0.8604651162790697
+    },
+    "Heartbleed": {
+     "n": 5,
+     "alarm_rate": 0.0,
+     "correct_family": null
+    },
+    "Infiltration": {
+     "n": 16,
+     "alarm_rate": 0.0625,
+     "correct_family": 0.0
+    },
+    "PortScan": {
+     "n": 63852,
+     "alarm_rate": 0.9927801791643175,
+     "correct_family": 0.9916525715717597
+    }
+   }
+  },
+  {
+   "method": "xgb_scratch",
+   "budget": 0.001,
+   "seed": 43,
+   "budget_counts": {
+    "Benign": 835,
+    "Bot": 1,
+    "DDoS-LOIC-HTTP": 64,
+    "DoS-GoldenEye": 5,
+    "DoS-Hulk": 112,
+    "DoS-SlowHTTPTest": 2,
+    "DoS-Slowloris": 2,
+    "Infiltration": 1,
+    "PortScan": 79
+   },
+   "info": {
+    "trees": 400,
+    "classes": [
+     "Benign",
+     "Bot",
+     "DDoS-LOIC-HTTP",
+     "DoS-GoldenEye",
+     "DoS-Hulk",
+     "DoS-SlowHTTPTest",
+     "DoS-Slowloris",
+     "Infiltration",
+     "PortScan"
+    ]
+   },
+   "temperature": 1.0626446849799072,
+   "threshold": -4.564329692929129,
+   "calibration_fpr": 0.04999093710349828,
+   "train_seconds": 1.0843841250025434,
+   "score_seconds": 2.7181390420009848,
+   "far": 0.050364553788247626,
+   "detection_rate": 0.9964200206257695,
+   "detection_rate_excl_portscan": 0.9958530919423273,
+   "macro_f1": 0.5290554972111243,
+   "macro_f1_2018_families": 0.4788664508688558,
+   "per_label": {
+    "BENIGN": {
+     "n": 671643,
+     "alarm_rate": 0.050364553788247626,
+     "correct_family": null
+    },
+    "Bot": {
+     "n": 799,
+     "alarm_rate": 0.3667083854818523,
+     "correct_family": 0.0
+    },
+    "DDoS": {
+     "n": 51236,
+     "alarm_rate": 0.9995706144117418,
+     "correct_family": 0.9990241236630494
+    },
+    "DoS GoldenEye": {
+     "n": 4056,
+     "alarm_rate": 1.0,
+     "correct_family": 0.7140039447731755
+    },
+    "DoS Hulk": {
+     "n": 95572,
+     "alarm_rate": 0.9998011970033064,
+     "correct_family": 0.9990687649102248
+    },
+    "DoS Slowhttptest": {
+     "n": 2212,
+     "alarm_rate": 0.9837251356238698,
+     "correct_family": 0.2590415913200723
+    },
+    "DoS slowloris": {
+     "n": 2365,
+     "alarm_rate": 0.9742071881606765,
+     "correct_family": 0.6105708245243129
+    },
+    "Heartbleed": {
+     "n": 5,
+     "alarm_rate": 1.0,
+     "correct_family": null
+    },
+    "Infiltration": {
+     "n": 16,
+     "alarm_rate": 0.75,
+     "correct_family": 0.0
+    },
+    "PortScan": {
+     "n": 63852,
+     "alarm_rate": 0.9978074296811377,
+     "correct_family": 0.9946125415022239
+    }
+   }
+  },
+  {
+   "method": "xgb_continue",
+   "budget": 0.001,
+   "seed": 43,
+   "budget_counts": {
+    "Benign": 835,
+    "Bot": 1,
+    "DDoS-LOIC-HTTP": 64,
+    "DoS-GoldenEye": 5,
+    "DoS-Hulk": 112,
+    "DoS-SlowHTTPTest": 2,
+    "DoS-Slowloris": 2,
+    "Infiltration": 1,
+    "PortScan": 79
+   },
+   "info": {
+    "extra_rounds": 100,
+    "dropped_portscan_rows": 79
+   },
+   "temperature": 1.1038263175604468,
+   "threshold": -4.057098311093762,
+   "calibration_fpr": 0.04999093710349828,
+   "train_seconds": 0.5359092500002589,
+   "score_seconds": 8.689739207999082,
+   "far": 0.05190257324203483,
+   "detection_rate": 0.7396473629453962,
+   "detection_rate_excl_portscan": 0.9916677865878242,
+   "macro_f1": 0.5127947609516317,
+   "macro_f1_2018_families": 0.5768941060705857,
+   "per_label": {
+    "BENIGN": {
+     "n": 671643,
+     "alarm_rate": 0.05190257324203483,
+     "correct_family": null
+    },
+    "Bot": {
+     "n": 799,
+     "alarm_rate": 0.8811013767209012,
+     "correct_family": 0.6195244055068836
+    },
+    "DDoS": {
+     "n": 51236,
+     "alarm_rate": 0.9995901319384808,
+     "correct_family": 0.9985557030213131
+    },
+    "DoS GoldenEye": {
+     "n": 4056,
+     "alarm_rate": 0.9995069033530573,
+     "correct_family": 0.9265285996055227
+    },
+    "DoS Hulk": {
+     "n": 95572,
+     "alarm_rate": 0.999790733687691,
+     "correct_family": 0.9961076465910518
+    },
+    "DoS Slowhttptest": {
+     "n": 2212,
+     "alarm_rate": 0.48146473779385174,
+     "correct_family": 0.0
+    },
+    "DoS slowloris": {
+     "n": 2365,
+     "alarm_rate": 0.9966173361522199,
+     "correct_family": 0.9733615221987315
+    },
+    "Heartbleed": {
+     "n": 5,
+     "alarm_rate": 1.0,
+     "correct_family": null
+    },
+    "Infiltration": {
+     "n": 16,
+     "alarm_rate": 0.4375,
+     "correct_family": 0.3125
+    },
+    "PortScan": {
+     "n": 63852,
+     "alarm_rate": 0.1228935663722358,
+     "correct_family": 0.0
+    }
+   }
+  },
+  {
+   "method": "esnn_t4_finetune",
+   "budget": 0.001,
+   "seed": 44,
+   "budget_counts": {
+    "Benign": 835,
+    "Bot": 1,
+    "DDoS-LOIC-HTTP": 64,
+    "DoS-GoldenEye": 5,
+    "DoS-Hulk": 112,
+    "DoS-SlowHTTPTest": 2,
+    "DoS-Slowloris": 2,
+    "Infiltration": 1,
+    "PortScan": 79
+   },
+   "info": {
+    "epochs": 60,
+    "steps": 300,
+    "lr": 0.0001,
+    "batch": 256,
+    "train_loss_per_epoch": [
+     2.21752,
+     1.88449,
+     1.60009,
+     1.31822,
+     1.18725,
+     1.00581,
+     0.94116,
+     0.82112,
+     0.71172,
+     0.69184,
+     0.6214,
+     0.59868,
+     0.54314,
+     0.50124,
+     0.50308,
+     0.44056,
+     0.40225,
+     0.40128,
+     0.33441,
+     0.31478,
+     0.28037,
+     0.26328,
+     0.2459,
+     0.25588,
+     0.23385,
+     0.20608,
+     0.2115,
+     0.21606,
+     0.17652,
+     0.20294,
+     0.16462,
+     0.16316,
+     0.14968,
+     0.15896,
+     0.14041,
+     0.14107,
+     0.14046,
+     0.13945,
+     0.13943,
+     0.12694,
+     0.13377,
+     0.10901,
+     0.12767,
+     0.11414,
+     0.12321,
+     0.11129,
+     0.1017,
+     0.1028,
+     0.1007,
+     0.09379,
+     0.08727,
+     0.10304,
+     0.09286,
+     0.08989,
+     0.07727,
+     0.09389,
+     0.08105,
+     0.08393,
+     0.07861,
+     0.08215
+    ]
+   },
+   "temperature": 1.2320431514554144,
+   "threshold": -2.436767864080098,
+   "calibration_fpr": 0.04930215696936741,
+   "train_seconds": 2.826478290997329,
+   "score_seconds": 11.193757458000618,
+   "far": 0.05357310356841358,
+   "detection_rate": 0.9888648103474125,
+   "detection_rate_excl_portscan": 0.9865289483620353,
+   "macro_f1": 0.5695065059865889,
+   "macro_f1_2018_families": 0.5331085561919947,
+   "per_label": {
+    "BENIGN": {
+     "n": 671643,
+     "alarm_rate": 0.05357310356841358,
+     "correct_family": null
+    },
+    "Bot": {
+     "n": 799,
+     "alarm_rate": 0.0,
+     "correct_family": 0.0
+    },
+    "DDoS": {
+     "n": 51236,
+     "alarm_rate": 0.9968576781950191,
+     "correct_family": 0.994983995628074
+    },
+    "DoS GoldenEye": {
+     "n": 4056,
+     "alarm_rate": 0.992603550295858,
+     "correct_family": 0.6462031558185405
+    },
+    "DoS Hulk": {
+     "n": 95572,
+     "alarm_rate": 0.9892751014941614,
+     "correct_family": 0.9556878583685599
+    },
+    "DoS Slowhttptest": {
+     "n": 2212,
+     "alarm_rate": 0.9886980108499096,
+     "correct_family": 0.0
+    },
+    "DoS slowloris": {
+     "n": 2365,
+     "alarm_rate": 0.9809725158562368,
+     "correct_family": 0.960676532769556
+    },
+    "Heartbleed": {
+     "n": 5,
+     "alarm_rate": 0.0,
+     "correct_family": null
+    },
+    "Infiltration": {
+     "n": 16,
+     "alarm_rate": 0.0625,
+     "correct_family": 0.0
+    },
+    "PortScan": {
+     "n": 63852,
+     "alarm_rate": 0.9945812190690972,
+     "correct_family": 0.9934222890434129
+    }
+   }
+  },
+  {
+   "method": "xgb_scratch",
+   "budget": 0.001,
+   "seed": 44,
+   "budget_counts": {
+    "Benign": 835,
+    "Bot": 1,
+    "DDoS-LOIC-HTTP": 64,
+    "DoS-GoldenEye": 5,
+    "DoS-Hulk": 112,
+    "DoS-SlowHTTPTest": 2,
+    "DoS-Slowloris": 2,
+    "Infiltration": 1,
+    "PortScan": 79
+   },
+   "info": {
+    "trees": 400,
+    "classes": [
+     "Benign",
+     "Bot",
+     "DDoS-LOIC-HTTP",
+     "DoS-GoldenEye",
+     "DoS-Hulk",
+     "DoS-SlowHTTPTest",
+     "DoS-Slowloris",
+     "Infiltration",
+     "PortScan"
+    ]
+   },
+   "temperature": 1.1147933913794281,
+   "threshold": -4.12837667352639,
+   "calibration_fpr": 0.04999093710349828,
+   "train_seconds": 1.2045271660026629,
+   "score_seconds": 2.6684207919970504,
+   "far": 0.05057150897128385,
+   "detection_rate": 0.9958157855283423,
+   "detection_rate_excl_portscan": 0.994886759972098,
+   "macro_f1": 0.5140136770461403,
+   "macro_f1_2018_families": 0.45712662717703045,
+   "per_label": {
+    "BENIGN": {
+     "n": 671643,
+     "alarm_rate": 0.05057150897128385,
+     "correct_family": null
+    },
+    "Bot": {
+     "n": 799,
+     "alarm_rate": 0.35294117647058826,
+     "correct_family": 0.0
+    },
+    "DDoS": {
+     "n": 51236,
+     "alarm_rate": 0.9989265360293543,
+     "correct_family": 0.9987313607619642
+    },
+    "DoS GoldenEye": {
+     "n": 4056,
+     "alarm_rate": 1.0,
+     "correct_family": 0.24211045364891517
+    },
+    "DoS Hulk": {
+     "n": 95572,
+     "alarm_rate": 0.9996128573222283,
+     "correct_family": 0.996505252584439
+    },
+    "DoS Slowhttptest": {
+     "n": 2212,
+     "alarm_rate": 0.924502712477396,
+     "correct_family": 0.5117540687160941
+    },
+    "DoS slowloris": {
+     "n": 2365,
+     "alarm_rate": 0.9928118393234673,
+     "correct_family": 0.5479915433403806
+    },
+    "Heartbleed": {
+     "n": 5,
+     "alarm_rate": 1.0,
+     "correct_family": null
+    },
+    "Infiltration": {
+     "n": 16,
+     "alarm_rate": 0.625,
+     "correct_family": 0.0
+    },
+    "PortScan": {
+     "n": 63852,
+     "alarm_rate": 0.998089331579277,
+     "correct_family": 0.9905406251957652
+    }
+   }
+  },
+  {
+   "method": "xgb_continue",
+   "budget": 0.001,
+   "seed": 44,
+   "budget_counts": {
+    "Benign": 835,
+    "Bot": 1,
+    "DDoS-LOIC-HTTP": 64,
+    "DoS-GoldenEye": 5,
+    "DoS-Hulk": 112,
+    "DoS-SlowHTTPTest": 2,
+    "DoS-Slowloris": 2,
+    "Infiltration": 1,
+    "PortScan": 79
+   },
+   "info": {
+    "extra_rounds": 100,
+    "dropped_portscan_rows": 79
+   },
+   "temperature": 1.2431169367379633,
+   "threshold": -3.8588739309091484,
+   "calibration_fpr": 0.04999093710349828,
+   "train_seconds": 0.519969624998339,
+   "score_seconds": 8.568392417000723,
+   "far": 0.05068317543695088,
+   "detection_rate": 0.7102215680127935,
+   "detection_rate_excl_portscan": 0.9970498076935383,
+   "macro_f1": 0.5014668773190132,
+   "macro_f1_2018_families": 0.5641502369838898,
+   "per_label": {
+    "BENIGN": {
+     "n": 671643,
+     "alarm_rate": 0.05068317543695088,
+     "correct_family": null
+    },
+    "Bot": {
+     "n": 799,
+     "alarm_rate": 0.6257822277847309,
+     "correct_family": 0.6195244055068836
+    },
+    "DDoS": {
+     "n": 51236,
+     "alarm_rate": 0.9991021937700054,
+     "correct_family": 0.9988484659223983
+    },
+    "DoS GoldenEye": {
+     "n": 4056,
+     "alarm_rate": 1.0,
+     "correct_family": 0.7502465483234714
+    },
+    "DoS Hulk": {
+     "n": 95572,
+     "alarm_rate": 0.9997488804252291,
+     "correct_family": 0.9788641024567865
+    },
+    "DoS Slowhttptest": {
+     "n": 2212,
+     "alarm_rate": 0.9642857142857143,
+     "correct_family": 0.0
+    },
+    "DoS slowloris": {
+     "n": 2365,
+     "alarm_rate": 0.9966173361522199,
+     "correct_family": 0.9898520084566597
+    },
+    "Heartbleed": {
+     "n": 5,
+     "alarm_rate": 1.0,
+     "correct_family": null
+    },
+    "Infiltration": {
+     "n": 16,
+     "alarm_rate": 0.6875,
+     "correct_family": 0.625
+    },
+    "PortScan": {
+     "n": 63852,
+     "alarm_rate": 0.008284783561987094,
+     "correct_family": 0.0
+    }
+   }
+  },
+  {
+   "method": "esnn_t4_finetune",
+   "budget": 0.01,
+   "seed": 42,
+   "budget_counts": {
+    "Benign": 8357,
+    "Bot": 9,
+    "DDoS-LOIC-HTTP": 640,
+    "DoS-GoldenEye": 51,
+    "DoS-Hulk": 1123,
+    "DoS-SlowHTTPTest": 27,
+    "DoS-Slowloris": 28,
+    "Infiltration": 1,
+    "PortScan": 790
+   },
+   "info": {
+    "epochs": 7,
+    "steps": 308,
+    "lr": 0.0001,
+    "batch": 256,
+    "train_loss_per_epoch": [
+     1.43819,
+     0.58649,
+     0.32843,
+     0.22509,
+     0.17483,
+     0.14693,
+     0.12299
+    ]
+   },
+   "temperature": 0.9876067847150191,
+   "threshold": -3.4785008297529423,
+   "calibration_fpr": 0.04999093710349828,
+   "train_seconds": 3.1225004580046516,
+   "score_seconds": 11.304306457997882,
+   "far": 0.06334019709875634,
+   "detection_rate": 0.993662346158564,
+   "detection_rate_excl_portscan": 0.9928901005369222,
+   "macro_f1": 0.5887032290029524,
+   "macro_f1_2018_families": 0.5628894681846701,
+   "per_label": {
+    "BENIGN": {
+     "n": 671643,
+     "alarm_rate": 0.06334019709875634,
+     "correct_family": null
+    },
+    "Bot": {
+     "n": 799,
+     "alarm_rate": 0.0,
+     "correct_family": 0.0
+    },
+    "DDoS": {
+     "n": 51236,
+     "alarm_rate": 0.9987508782887032,
+     "correct_family": 0.9969162307752362
+    },
+    "DoS GoldenEye": {
+     "n": 4056,
+     "alarm_rate": 0.9930966469428008,
+     "correct_family": 0.8757396449704142
+    },
+    "DoS Hulk": {
+     "n": 95572,
+     "alarm_rate": 0.9987444021261457,
+     "correct_family": 0.9813334449420332
+    },
+    "DoS Slowhttptest": {
+     "n": 2212,
+     "alarm_rate": 0.9918625678119349,
+     "correct_family": 0.0
+    },
+    "DoS slowloris": {
+     "n": 2365,
+     "alarm_rate": 0.973784355179704,
+     "correct_family": 0.9454545454545454
+    },
+    "Heartbleed": {
+     "n": 5,
+     "alarm_rate": 0.0,
+     "correct_family": null
+    },
+    "Infiltration": {
+     "n": 16,
+     "alarm_rate": 0.0625,
+     "correct_family": 0.0
+    },
+    "PortScan": {
+     "n": 63852,
+     "alarm_rate": 0.995552214496022,
+     "correct_family": 0.994408945686901
+    }
+   }
+  },
+  {
+   "method": "xgb_scratch",
+   "budget": 0.01,
+   "seed": 42,
+   "budget_counts": {
+    "Benign": 8357,
+    "Bot": 9,
+    "DDoS-LOIC-HTTP": 640,
+    "DoS-GoldenEye": 51,
+    "DoS-Hulk": 1123,
+    "DoS-SlowHTTPTest": 27,
+    "DoS-Slowloris": 28,
+    "Infiltration": 1,
+    "PortScan": 790
+   },
+   "info": {
+    "trees": 400,
+    "classes": [
+     "Benign",
+     "Bot",
+     "DDoS-LOIC-HTTP",
+     "DoS-GoldenEye",
+     "DoS-Hulk",
+     "DoS-SlowHTTPTest",
+     "DoS-Slowloris",
+     "Infiltration",
+     "PortScan"
+    ]
+   },
+   "temperature": 1.1729052714207004,
+   "threshold": -6.183134081165863,
+   "calibration_fpr": 0.04999093710349828,
+   "train_seconds": 2.369369332998758,
+   "score_seconds": 3.54206337499636,
+   "far": 0.050754641974977775,
+   "detection_rate": 0.9997955595535021,
+   "detection_rate_excl_portscan": 0.9997120202737727,
+   "macro_f1": 0.6705439916028588,
+   "macro_f1_2018_families": 0.6345193055895544,
+   "per_label": {
+    "BENIGN": {
+     "n": 671643,
+     "alarm_rate": 0.050754641974977775,
+     "correct_family": null
+    },
+    "Bot": {
+     "n": 799,
+     "alarm_rate": 0.9574468085106383,
+     "correct_family": 0.8685857321652065
+    },
+    "DDoS": {
+     "n": 51236,
+     "alarm_rate": 0.999960964946522,
+     "correct_family": 0.9997657896791319
+    },
+    "DoS GoldenEye": {
+     "n": 4056,
+     "alarm_rate": 1.0,
+     "correct_family": 0.9817554240631163
+    },
+    "DoS Hulk": {
+     "n": 95572,
+     "alarm_rate": 0.9999790733687691,
+     "correct_family": 0.998890888544762
+    },
+    "DoS Slowhttptest": {
+     "n": 2212,
+     "alarm_rate": 1.0,
+     "correct_family": 0.9276672694394213
+    },
+    "DoS slowloris": {
+     "n": 2365,
+     "alarm_rate": 1.0,
+     "correct_family": 0.9780126849894292
+    },
+    "Heartbleed": {
+     "n": 5,
+     "alarm_rate": 1.0,
+     "correct_family": null
+    },
+    "Infiltration": {
+     "n": 16,
+     "alarm_rate": 0.5625,
+     "correct_family": 0.0
+    },
+    "PortScan": {
+     "n": 63852,
+     "alarm_rate": 1.0,
+     "correct_family": 0.9978857357639541
+    }
+   }
+  },
+  {
+   "method": "xgb_continue",
+   "budget": 0.01,
+   "seed": 42,
+   "budget_counts": {
+    "Benign": 8357,
+    "Bot": 9,
+    "DDoS-LOIC-HTTP": 640,
+    "DoS-GoldenEye": 51,
+    "DoS-Hulk": 1123,
+    "DoS-SlowHTTPTest": 27,
+    "DoS-Slowloris": 28,
+    "Infiltration": 1,
+    "PortScan": 790
+   },
+   "info": {
+    "extra_rounds": 100,
+    "dropped_portscan_rows": 790
+   },
+   "temperature": 1.3616253285243225,
+   "threshold": -4.724100519166937,
+   "calibration_fpr": 0.04999093710349828,
+   "train_seconds": 1.047779166001419,
+   "score_seconds": 9.055991791996348,
+   "far": 0.050714442047337646,
+   "detection_rate": 0.7156505976475719,
+   "detection_rate_excl_portscan": 0.9996480247790556,
+   "macro_f1": 0.4923461909598138,
+   "macro_f1_2018_families": 0.5538894648297905,
+   "per_label": {
+    "BENIGN": {
+     "n": 671643,
+     "alarm_rate": 0.050714442047337646,
+     "correct_family": null
+    },
+    "Bot": {
+     "n": 799,
+     "alarm_rate": 0.9662077596996246,
+     "correct_family": 0.886107634543179
+    },
+    "DDoS": {
+     "n": 51236,
+     "alarm_rate": 0.999941447419783,
+     "correct_family": 0.9993364040908737
+    },
+    "DoS GoldenEye": {
+     "n": 4056,
+     "alarm_rate": 0.9992603550295858,
+     "correct_family": 0.9881656804733728
+    },
+    "DoS Hulk": {
+     "n": 95572,
+     "alarm_rate": 0.9999581467375382,
+     "correct_family": 0.997917800192525
+    },
+    "DoS Slowhttptest": {
+     "n": 2212,
+     "alarm_rate": 0.9981916817359855,
+     "correct_family": 0.0
+    },
+    "DoS slowloris": {
+     "n": 2365,
+     "alarm_rate": 0.9970401691331924,
+     "correct_family": 0.9885835095137421
+    },
+    "Heartbleed": {
+     "n": 5,
+     "alarm_rate": 1.0,
+     "correct_family": null
+    },
+    "Infiltration": {
+     "n": 16,
+     "alarm_rate": 0.5625,
+     "correct_family": 0.1875
+    },
+    "PortScan": {
+     "n": 63852,
+     "alarm_rate": 0.020641483430432876,
+     "correct_family": 0.0
+    }
+   }
+  },
+  {
+   "method": "esnn_t4_finetune",
+   "budget": 0.01,
+   "seed": 43,
+   "budget_counts": {
+    "Benign": 8357,
+    "Bot": 9,
+    "DDoS-LOIC-HTTP": 640,
+    "DoS-GoldenEye": 51,
+    "DoS-Hulk": 1123,
+    "DoS-SlowHTTPTest": 27,
+    "DoS-Slowloris": 28,
+    "Infiltration": 1,
+    "PortScan": 790
+   },
+   "info": {
+    "epochs": 7,
+    "steps": 308,
+    "lr": 0.0001,
+    "batch": 256,
+    "train_loss_per_epoch": [
+     1.42814,
+     0.57305,
+     0.31407,
+     0.21033,
+     0.16334,
+     0.1391,
+     0.11846
+    ]
+   },
+   "temperature": 0.9913583189186677,
+   "threshold": -3.2745111913846143,
+   "calibration_fpr": 0.04996676937949369,
+   "train_seconds": 3.06755683299707,
+   "score_seconds": 11.145816250005737,
+   "far": 0.06231435450082857,
+   "detection_rate": 0.9934351901068996,
+   "detection_rate_excl_portscan": 0.9925893217117515,
+   "macro_f1": 0.589034580130279,
+   "macro_f1_2018_families": 0.5636854308227806,
+   "per_label": {
+    "BENIGN": {
+     "n": 671643,
+     "alarm_rate": 0.06231435450082857,
+     "correct_family": null
+    },
+    "Bot": {
+     "n": 799,
+     "alarm_rate": 0.0,
+     "correct_family": 0.0
+    },
+    "DDoS": {
+     "n": 51236,
+     "alarm_rate": 0.9986142556015302,
+     "correct_family": 0.998262940120228
+    },
+    "DoS GoldenEye": {
+     "n": 4056,
+     "alarm_rate": 0.992603550295858,
+     "correct_family": 0.878698224852071
+    },
+    "DoS Hulk": {
+     "n": 95572,
+     "alarm_rate": 0.9981375298204495,
+     "correct_family": 0.9855396978194451
+    },
+    "DoS Slowhttptest": {
+     "n": 2212,
+     "alarm_rate": 0.9927667269439421,
+     "correct_family": 0.0
+    },
+    "DoS slowloris": {
+     "n": 2365,
+     "alarm_rate": 0.9797040169133192,
+     "correct_family": 0.9386892177589852
+    },
+    "Heartbleed": {
+     "n": 5,
+     "alarm_rate": 0.8,
+     "correct_family": null
+    },
+    "Infiltration": {
+     "n": 16,
+     "alarm_rate": 0.0625,
+     "correct_family": 0.0
+    },
+    "PortScan": {
+     "n": 63852,
+     "alarm_rate": 0.9955052308463321,
+     "correct_family": 0.9942366723047046
+    }
+   }
+  },
+  {
+   "method": "xgb_scratch",
+   "budget": 0.01,
+   "seed": 43,
+   "budget_counts": {
+    "Benign": 8357,
+    "Bot": 9,
+    "DDoS-LOIC-HTTP": 640,
+    "DoS-GoldenEye": 51,
+    "DoS-Hulk": 1123,
+    "DoS-SlowHTTPTest": 27,
+    "DoS-Slowloris": 28,
+    "Infiltration": 1,
+    "PortScan": 790
+   },
+   "info": {
+    "trees": 400,
+    "classes": [
+     "Benign",
+     "Bot",
+     "DDoS-LOIC-HTTP",
+     "DoS-GoldenEye",
+     "DoS-Hulk",
+     "DoS-SlowHTTPTest",
+     "DoS-Slowloris",
+     "Infiltration",
+     "PortScan"
+    ]
+   },
+   "temperature": 1.1454426875816754,
+   "threshold": -6.167157839036036,
+   "calibration_fpr": 0.04999093710349828,
+   "train_seconds": 2.454383874995983,
+   "score_seconds": 3.722442874997796,
+   "far": 0.04935508893861769,
+   "detection_rate": 0.9997183264959362,
+   "detection_rate_excl_portscan": 0.9996096274822253,
+   "macro_f1": 0.6624982813196157,
+   "macro_f1_2018_families": 0.6269669092048842,
+   "per_label": {
+    "BENIGN": {
+     "n": 671643,
+     "alarm_rate": 0.04935508893861769,
+     "correct_family": null
+    },
+    "Bot": {
+     "n": 799,
+     "alarm_rate": 0.981226533166458,
+     "correct_family": 0.9724655819774718
+    },
+    "DDoS": {
+     "n": 51236,
+     "alarm_rate": 0.9998048247326099,
+     "correct_family": 0.9988679834491373
+    },
+    "DoS GoldenEye": {
+     "n": 4056,
+     "alarm_rate": 0.9960552268244576,
+     "correct_family": 0.9908777120315582
+    },
+    "DoS Hulk": {
+     "n": 95572,
+     "alarm_rate": 0.9998535135813836,
+     "correct_family": 0.9997593437408446
+    },
+    "DoS Slowhttptest": {
+     "n": 2212,
+     "alarm_rate": 0.9995479204339964,
+     "correct_family": 0.9217902350813744
+    },
+    "DoS slowloris": {
+     "n": 2365,
+     "alarm_rate": 0.999154334038055,
+     "correct_family": 0.8959830866807611
+    },
+    "Heartbleed": {
+     "n": 5,
+     "alarm_rate": 1.0,
+     "correct_family": null
+    },
+    "Infiltration": {
+     "n": 16,
+     "alarm_rate": 0.8125,
+     "correct_family": 0.0
+    },
+    "PortScan": {
+     "n": 63852,
+     "alarm_rate": 0.9999843387834367,
+     "correct_family": 0.9969617239867193
+    }
+   }
+  },
+  {
+   "method": "xgb_continue",
+   "budget": 0.01,
+   "seed": 43,
+   "budget_counts": {
+    "Benign": 8357,
+    "Bot": 9,
+    "DDoS-LOIC-HTTP": 640,
+    "DoS-GoldenEye": 51,
+    "DoS-Hulk": 1123,
+    "DoS-SlowHTTPTest": 27,
+    "DoS-Slowloris": 28,
+    "Infiltration": 1,
+    "PortScan": 790
+   },
+   "info": {
+    "extra_rounds": 100,
+    "dropped_portscan_rows": 790
+   },
+   "temperature": 1.3429028309095994,
+   "threshold": -4.87110516647038,
+   "calibration_fpr": 0.049882182345477616,
+   "train_seconds": 1.1105489170004148,
+   "score_seconds": 14.28950595799688,
+   "far": 0.04997446560151747,
+   "detection_rate": 0.720693461994521,
+   "detection_rate_excl_portscan": 0.999321647755998,
+   "macro_f1": 0.5013892102616307,
+   "macro_f1_2018_families": 0.5640628615443346,
+   "per_label": {
+    "BENIGN": {
+     "n": 671643,
+     "alarm_rate": 0.04997446560151747,
+     "correct_family": null
+    },
+    "Bot": {
+     "n": 799,
+     "alarm_rate": 0.9787234042553191,
+     "correct_family": 0.9774718397997497
+    },
+    "DDoS": {
+     "n": 51236,
+     "alarm_rate": 0.9990631587165274,
+     "correct_family": 0.9985947380747912
+    },
+    "DoS GoldenEye": {
+     "n": 4056,
+     "alarm_rate": 0.9990138067061144,
+     "correct_family": 0.9891518737672583
+    },
+    "DoS Hulk": {
+     "n": 95572,
+     "alarm_rate": 0.9997174904783828,
+     "correct_family": 0.9985455991294522
+    },
+    "DoS Slowhttptest": {
+     "n": 2212,
+     "alarm_rate": 0.9990958408679927,
+     "correct_family": 0.0
+    },
+    "DoS slowloris": {
+     "n": 2365,
+     "alarm_rate": 0.9987315010570824,
+     "correct_family": 0.9784355179704017
+    },
+    "Heartbleed": {
+     "n": 5,
+     "alarm_rate": 1.0,
+     "correct_family": null
+    },
+    "Infiltration": {
+     "n": 16,
+     "alarm_rate": 0.6875,
+     "correct_family": 0.1875
+    },
+    "PortScan": {
+     "n": 63852,
+     "alarm_rate": 0.038824155860427235,
+     "correct_family": 0.0
+    }
+   }
+  },
+  {
+   "method": "esnn_t4_finetune",
+   "budget": 0.01,
+   "seed": 44,
+   "budget_counts": {
+    "Benign": 8357,
+    "Bot": 9,
+    "DDoS-LOIC-HTTP": 640,
+    "DoS-GoldenEye": 51,
+    "DoS-Hulk": 1123,
+    "DoS-SlowHTTPTest": 27,
+    "DoS-Slowloris": 28,
+    "Infiltration": 1,
+    "PortScan": 790
+   },
+   "info": {
+    "epochs": 7,
+    "steps": 308,
+    "lr": 0.0001,
+    "batch": 256,
+    "train_loss_per_epoch": [
+     1.42835,
+     0.59188,
+     0.3289,
+     0.21688,
+     0.16419,
+     0.13988,
+     0.11173
+    ]
+   },
+   "temperature": 0.9971907625665841,
+   "threshold": -3.4495332148369044,
+   "calibration_fpr": 0.049918433931484506,
+   "train_seconds": 4.354569458002516,
+   "score_seconds": 22.598498583000037,
+   "far": 0.05260681641884156,
+   "detection_rate": 0.9943529005556238,
+   "detection_rate_excl_portscan": 0.9936708455724717,
+   "macro_f1": 0.5979507853619908,
+   "macro_f1_2018_families": 0.5672116152156643,
+   "per_label": {
+    "BENIGN": {
+     "n": 671643,
+     "alarm_rate": 0.05260681641884156,
+     "correct_family": null
+    },
+    "Bot": {
+     "n": 799,
+     "alarm_rate": 0.0,
+     "correct_family": 0.0
+    },
+    "DDoS": {
+     "n": 51236,
+     "alarm_rate": 0.9987508782887032,
+     "correct_family": 0.99822390506675
+    },
+    "DoS GoldenEye": {
+     "n": 4056,
+     "alarm_rate": 0.9997534516765286,
+     "correct_family": 0.9341715976331361
+    },
+    "DoS Hulk": {
+     "n": 95572,
+     "alarm_rate": 0.9994245176411501,
+     "correct_family": 0.9873393881053029
+    },
+    "DoS Slowhttptest": {
+     "n": 2212,
+     "alarm_rate": 0.994122965641953,
+     "correct_family": 0.0
+    },
+    "DoS slowloris": {
+     "n": 2365,
+     "alarm_rate": 0.9843551797040169,
+     "correct_family": 0.946723044397463
+    },
+    "Heartbleed": {
+     "n": 5,
+     "alarm_rate": 0.0,
+     "correct_family": null
+    },
+    "Infiltration": {
+     "n": 16,
+     "alarm_rate": 0.0625,
+     "correct_family": 0.0
+    },
+    "PortScan": {
+     "n": 63852,
+     "alarm_rate": 0.9960220509929212,
+     "correct_family": 0.9949884106997432
+    }
+   }
+  },
+  {
+   "method": "xgb_scratch",
+   "budget": 0.01,
+   "seed": 44,
+   "budget_counts": {
+    "Benign": 8357,
+    "Bot": 9,
+    "DDoS-LOIC-HTTP": 640,
+    "DoS-GoldenEye": 51,
+    "DoS-Hulk": 1123,
+    "DoS-SlowHTTPTest": 27,
+    "DoS-Slowloris": 28,
+    "Infiltration": 1,
+    "PortScan": 790
+   },
+   "info": {
+    "trees": 400,
+    "classes": [
+     "Benign",
+     "Bot",
+     "DDoS-LOIC-HTTP",
+     "DoS-GoldenEye",
+     "DoS-Hulk",
+     "DoS-SlowHTTPTest",
+     "DoS-Slowloris",
+     "Infiltration",
+     "PortScan"
+    ]
+   },
+   "temperature": 1.2195622255601863,
+   "threshold": -5.838662869060491,
+   "calibration_fpr": 0.04999093710349828,
+   "train_seconds": 3.2874364580056863,
+   "score_seconds": 4.560934333996556,
+   "far": 0.04977644373573461,
+   "detection_rate": 0.9998591632479681,
+   "detection_rate_excl_portscan": 0.9998016139663768,
+   "macro_f1": 0.6613816565910479,
+   "macro_f1_2018_families": 0.6258001187073228,
+   "per_label": {
+    "BENIGN": {
+     "n": 671643,
+     "alarm_rate": 0.04977644373573461,
+     "correct_family": null
+    },
+    "Bot": {
+     "n": 799,
+     "alarm_rate": 0.9749687108886108,
+     "correct_family": 0.8485607008760951
+    },
+    "DDoS": {
+     "n": 51236,
+     "alarm_rate": 0.999960964946522,
+     "correct_family": 0.9993364040908737
+    },
+    "DoS GoldenEye": {
+     "n": 4056,
+     "alarm_rate": 1.0,
+     "correct_family": 0.993836291913215
+    },
+    "DoS Hulk": {
+     "n": 95572,
+     "alarm_rate": 1.0,
+     "correct_family": 0.9990896915414557
+    },
+    "DoS Slowhttptest": {
+     "n": 2212,
+     "alarm_rate": 0.9990958408679927,
+     "correct_family": 0.7802893309222423
+    },
+    "DoS slowloris": {
+     "n": 2365,
+     "alarm_rate": 0.9995771670190274,
+     "correct_family": 0.947568710359408
+    },
+    "Heartbleed": {
+     "n": 5,
+     "alarm_rate": 1.0,
+     "correct_family": null
+    },
+    "Infiltration": {
+     "n": 16,
+     "alarm_rate": 0.625,
+     "correct_family": 0.0
+    },
+    "PortScan": {
+     "n": 63852,
+     "alarm_rate": 1.0,
+     "correct_family": 0.998653135375556
+    }
+   }
+  },
+  {
+   "method": "xgb_continue",
+   "budget": 0.01,
+   "seed": 44,
+   "budget_counts": {
+    "Benign": 8357,
+    "Bot": 9,
+    "DDoS-LOIC-HTTP": 640,
+    "DoS-GoldenEye": 51,
+    "DoS-Hulk": 1123,
+    "DoS-SlowHTTPTest": 27,
+    "DoS-Slowloris": 28,
+    "Infiltration": 1,
+    "PortScan": 790
+   },
+   "info": {
+    "extra_rounds": 100,
+    "dropped_portscan_rows": 790
+   },
+   "temperature": 1.537008550388085,
+   "threshold": -3.989136951681,
+   "calibration_fpr": 0.04999093710349828,
+   "train_seconds": 1.3925900840040413,
+   "score_seconds": 11.048108250004589,
+   "far": 0.04872380118604675,
+   "detection_rate": 0.7343955150309159,
+   "detection_rate_excl_portscan": 0.9971586000345576,
+   "macro_f1": 0.4875984680881098,
+   "macro_f1_2018_families": 0.5485482765991235,
+   "per_label": {
+    "BENIGN": {
+     "n": 671643,
+     "alarm_rate": 0.04872380118604675,
+     "correct_family": null
+    },
+    "Bot": {
+     "n": 799,
+     "alarm_rate": 0.9136420525657072,
+     "correct_family": 0.8060075093867334
+    },
+    "DDoS": {
+     "n": 51236,
+     "alarm_rate": 0.9997267546256539,
+     "correct_family": 0.9990436411897884
+    },
+    "DoS GoldenEye": {
+     "n": 4056,
+     "alarm_rate": 0.9595660749506904,
+     "correct_family": 0.9506903353057199
+    },
+    "DoS Hulk": {
+     "n": 95572,
+     "alarm_rate": 0.9995919306909974,
+     "correct_family": 0.9979596534549868
+    },
+    "DoS Slowhttptest": {
+     "n": 2212,
+     "alarm_rate": 0.9674502712477396,
+     "correct_family": 0.0
+    },
+    "DoS slowloris": {
+     "n": 2365,
+     "alarm_rate": 0.9704016913319239,
+     "correct_family": 0.9678646934460888
+    },
+    "Heartbleed": {
+     "n": 5,
+     "alarm_rate": 1.0,
+     "correct_family": null
+    },
+    "Infiltration": {
+     "n": 16,
+     "alarm_rate": 0.0,
+     "correct_family": 0.0
+    },
+    "PortScan": {
+     "n": 63852,
+     "alarm_rate": 0.09135187621374428,
+     "correct_family": 0.0
+    }
+   }
+  },
+  {
+   "method": "esnn_t4_finetune",
+   "budget": 0.05,
+   "seed": 42,
+   "budget_counts": {
+    "Benign": 41788,
+    "Bot": 48,
+    "DDoS-LOIC-HTTP": 3204,
+    "DoS-GoldenEye": 259,
+    "DoS-Hulk": 5619,
+    "DoS-SlowHTTPTest": 139,
+    "DoS-Slowloris": 144,
+    "Infiltration": 1,
+    "PortScan": 3951
+   },
+   "info": {
+    "epochs": 5,
+    "steps": 1080,
+    "lr": 0.0001,
+    "batch": 256,
+    "train_loss_per_epoch": [
+     0.55349,
+     0.11993,
+     0.07572,
+     0.05781,
+     0.04965
+    ]
+   },
+   "temperature": 1.0352414929908786,
+   "threshold": -4.96393116655404,
+   "calibration_fpr": 0.04997885324149598,
+   "train_seconds": 13.376247583000804,
+   "score_seconds": 13.794281374997809,
+   "far": 0.0526678607534062,
+   "detection_rate": 0.9955522845084116,
+   "detection_rate_excl_portscan": 0.9949955523131172,
+   "macro_f1": 0.7046575124470239,
+   "macro_f1_2018_families": 0.6837179959170567,
+   "per_label": {
+    "BENIGN": {
+     "n": 671643,
+     "alarm_rate": 0.0526678607534062,
+     "correct_family": null
+    },
+    "Bot": {
+     "n": 799,
+     "alarm_rate": 0.2528160200250313,
+     "correct_family": 0.2528160200250313
+    },
+    "DDoS": {
+     "n": 51236,
+     "alarm_rate": 0.9990436411897884,
+     "correct_family": 0.9988094308689203
+    },
+    "DoS GoldenEye": {
+     "n": 4056,
+     "alarm_rate": 0.995069033530572,
+     "correct_family": 0.9738658777120316
+    },
+    "DoS Hulk": {
+     "n": 95572,
+     "alarm_rate": 0.9991943246976102,
+     "correct_family": 0.9955530908634328
+    },
+    "DoS Slowhttptest": {
+     "n": 2212,
+     "alarm_rate": 0.994122965641953,
+     "correct_family": 0.5393309222423146
+    },
+    "DoS slowloris": {
+     "n": 2365,
+     "alarm_rate": 0.9974630021141649,
+     "correct_family": 0.9272727272727272
+    },
+    "Heartbleed": {
+     "n": 5,
+     "alarm_rate": 0.0,
+     "correct_family": null
+    },
+    "Infiltration": {
+     "n": 16,
+     "alarm_rate": 0.0625,
+     "correct_family": 0.0
+    },
+    "PortScan": {
+     "n": 63852,
+     "alarm_rate": 0.9969147403370294,
+     "correct_family": 0.9958654388272881
+    }
+   }
+  },
+  {
+   "method": "xgb_scratch",
+   "budget": 0.05,
+   "seed": 42,
+   "budget_counts": {
+    "Benign": 41788,
+    "Bot": 48,
+    "DDoS-LOIC-HTTP": 3204,
+    "DoS-GoldenEye": 259,
+    "DoS-Hulk": 5619,
+    "DoS-SlowHTTPTest": 139,
+    "DoS-Slowloris": 144,
+    "Infiltration": 1,
+    "PortScan": 3951
+   },
+   "info": {
+    "trees": 400,
+    "classes": [
+     "Benign",
+     "Bot",
+     "DDoS-LOIC-HTTP",
+     "DoS-GoldenEye",
+     "DoS-Hulk",
+     "DoS-SlowHTTPTest",
+     "DoS-Slowloris",
+     "Infiltration",
+     "PortScan"
+    ]
+   },
+   "temperature": 1.2519559561074085,
+   "threshold": -6.647584461483117,
+   "calibration_fpr": 0.04999093710349828,
+   "train_seconds": 7.772763540997403,
+   "score_seconds": 5.589022957996349,
+   "far": 0.051259374399792744,
+   "detection_rate": 0.9999409394265673,
+   "detection_rate_excl_portscan": 0.9999168058568677,
+   "macro_f1": 0.6693666003650673,
+   "macro_f1_2018_families": 0.6350931912857118,
+   "per_label": {
+    "BENIGN": {
+     "n": 671643,
+     "alarm_rate": 0.051259374399792744,
+     "correct_family": null
+    },
+    "Bot": {
+     "n": 799,
+     "alarm_rate": 0.9937421777221527,
+     "correct_family": 0.986232790988736
+    },
+    "DDoS": {
+     "n": 51236,
+     "alarm_rate": 0.999960964946522,
+     "correct_family": 0.9996877195721758
+    },
+    "DoS GoldenEye": {
+     "n": 4056,
+     "alarm_rate": 1.0,
+     "correct_family": 0.9953155818540433
+    },
+    "DoS Hulk": {
+     "n": 95572,
+     "alarm_rate": 0.9999895366843845,
+     "correct_family": 0.9997279537939983
+    },
+    "DoS Slowhttptest": {
+     "n": 2212,
+     "alarm_rate": 1.0,
+     "correct_family": 0.9886980108499096
+    },
+    "DoS slowloris": {
+     "n": 2365,
+     "alarm_rate": 0.9995771670190274,
+     "correct_family": 0.9797040169133192
+    },
+    "Heartbleed": {
+     "n": 5,
+     "alarm_rate": 1.0,
+     "correct_family": null
+    },
+    "Infiltration": {
+     "n": 16,
+     "alarm_rate": 0.75,
+     "correct_family": 0.0
+    },
+    "PortScan": {
+     "n": 63852,
+     "alarm_rate": 1.0,
+     "correct_family": 0.9992639228215248
+    }
+   }
+  },
+  {
+   "method": "xgb_continue",
+   "budget": 0.05,
+   "seed": 42,
+   "budget_counts": {
+    "Benign": 41788,
+    "Bot": 48,
+    "DDoS-LOIC-HTTP": 3204,
+    "DoS-GoldenEye": 259,
+    "DoS-Hulk": 5619,
+    "DoS-SlowHTTPTest": 139,
+    "DoS-Slowloris": 144,
+    "Infiltration": 1,
+    "PortScan": 3951
+   },
+   "info": {
+    "extra_rounds": 100,
+    "dropped_portscan_rows": 3951
+   },
+   "temperature": 2.4404175198628515,
+   "threshold": -2.6971314775882074,
+   "calibration_fpr": 0.04999093710349828,
+   "train_seconds": 3.3068337910008267,
+   "score_seconds": 11.43165391599905,
+   "far": 0.060228424922168476,
+   "detection_rate": 0.7846606061432082,
+   "detection_rate_excl_portscan": 0.9876360704206424,
+   "macro_f1": 0.4234491141394272,
+   "macro_f1_2018_families": 0.47638025340685564,
+   "per_label": {
+    "BENIGN": {
+     "n": 671643,
+     "alarm_rate": 0.060228424922168476,
+     "correct_family": null
+    },
+    "Bot": {
+     "n": 799,
+     "alarm_rate": 0.8310387984981227,
+     "correct_family": 0.6057571964956195
+    },
+    "DDoS": {
+     "n": 51236,
+     "alarm_rate": 0.9953353111093762,
+     "correct_family": 0.9928175501600437
+    },
+    "DoS GoldenEye": {
+     "n": 4056,
+     "alarm_rate": 0.9795364891518737,
+     "correct_family": 0.9324457593688363
+    },
+    "DoS Hulk": {
+     "n": 95572,
+     "alarm_rate": 0.9958983802787428,
+     "correct_family": 0.9923931695475662
+    },
+    "DoS Slowhttptest": {
+     "n": 2212,
+     "alarm_rate": 0.895117540687161,
+     "correct_family": 0.0
+    },
+    "DoS slowloris": {
+     "n": 2365,
+     "alarm_rate": 0.6486257928118393,
+     "correct_family": 0.641014799154334
+    },
+    "Heartbleed": {
+     "n": 5,
+     "alarm_rate": 0.0,
+     "correct_family": null
+    },
+    "Infiltration": {
+     "n": 16,
+     "alarm_rate": 0.0625,
+     "correct_family": 0.0625
+    },
+    "PortScan": {
+     "n": 63852,
+     "alarm_rate": 0.287931466516319,
+     "correct_family": 0.0
+    }
+   }
+  },
+  {
+   "method": "esnn_t4_finetune",
+   "budget": 0.05,
+   "seed": 43,
+   "budget_counts": {
+    "Benign": 41788,
+    "Bot": 48,
+    "DDoS-LOIC-HTTP": 3204,
+    "DoS-GoldenEye": 259,
+    "DoS-Hulk": 5619,
+    "DoS-SlowHTTPTest": 139,
+    "DoS-Slowloris": 144,
+    "Infiltration": 1,
+    "PortScan": 3951
+   },
+   "info": {
+    "epochs": 5,
+    "steps": 1080,
+    "lr": 0.0001,
+    "batch": 256,
+    "train_loss_per_epoch": [
+     0.5484,
+     0.11169,
+     0.0711,
+     0.05399,
+     0.04569
+    ]
+   },
+   "temperature": 1.0559128922950014,
+   "threshold": -4.406444519662142,
+   "calibration_fpr": 0.049845930759470726,
+   "train_seconds": 12.720831792001263,
+   "score_seconds": 14.869362958001147,
+   "far": 0.05323959305762139,
+   "detection_rate": 0.9958021561652424,
+   "detection_rate_excl_portscan": 0.9955331144687414,
+   "macro_f1": 0.7070968043832546,
+   "macro_f1_2018_families": 0.6866777968063968,
+   "per_label": {
+    "BENIGN": {
+     "n": 671643,
+     "alarm_rate": 0.05323959305762139,
+     "correct_family": null
+    },
+    "Bot": {
+     "n": 799,
+     "alarm_rate": 0.29411764705882354,
+     "correct_family": 0.29411764705882354
+    },
+    "DDoS": {
+     "n": 51236,
+     "alarm_rate": 0.9988875009758763,
+     "correct_family": 0.9987508782887032
+    },
+    "DoS GoldenEye": {
+     "n": 4056,
+     "alarm_rate": 0.9995069033530573,
+     "correct_family": 0.9595660749506904
+    },
+    "DoS Hulk": {
+     "n": 95572,
+     "alarm_rate": 0.9995186874816891,
+     "correct_family": 0.9967040555811325
+    },
+    "DoS Slowhttptest": {
+     "n": 2212,
+     "alarm_rate": 0.9977396021699819,
+     "correct_family": 0.6075949367088608
+    },
+    "DoS slowloris": {
+     "n": 2365,
+     "alarm_rate": 0.99830866807611,
+     "correct_family": 0.9492600422832981
+    },
+    "Heartbleed": {
+     "n": 5,
+     "alarm_rate": 0.0,
+     "correct_family": null
+    },
+    "Infiltration": {
+     "n": 16,
+     "alarm_rate": 0.0625,
+     "correct_family": 0.0
+    },
+    "PortScan": {
+     "n": 63852,
+     "alarm_rate": 0.9964605650566936,
+     "correct_family": 0.995395602330389
+    }
+   }
+  },
+  {
+   "method": "xgb_scratch",
+   "budget": 0.05,
+   "seed": 43,
+   "budget_counts": {
+    "Benign": 41788,
+    "Bot": 48,
+    "DDoS-LOIC-HTTP": 3204,
+    "DoS-GoldenEye": 259,
+    "DoS-Hulk": 5619,
+    "DoS-SlowHTTPTest": 139,
+    "DoS-Slowloris": 144,
+    "Infiltration": 1,
+    "PortScan": 3951
+   },
+   "info": {
+    "trees": 400,
+    "classes": [
+     "Benign",
+     "Bot",
+     "DDoS-LOIC-HTTP",
+     "DoS-GoldenEye",
+     "DoS-Hulk",
+     "DoS-SlowHTTPTest",
+     "DoS-Slowloris",
+     "Infiltration",
+     "PortScan"
+    ]
+   },
+   "temperature": 1.2856626232358361,
+   "threshold": -6.623586365484192,
+   "calibration_fpr": 0.04999093710349828,
+   "train_seconds": 8.779910042001575,
+   "score_seconds": 6.142870791998575,
+   "far": 0.05097648602010294,
+   "detection_rate": 0.999936396305534,
+   "detection_rate_excl_portscan": 0.9999104063073959,
+   "macro_f1": 0.700908619880416,
+   "macro_f1_2018_families": 0.6732216726397564,
+   "per_label": {
+    "BENIGN": {
+     "n": 671643,
+     "alarm_rate": 0.05097648602010294,
+     "correct_family": null
+    },
+    "Bot": {
+     "n": 799,
+     "alarm_rate": 0.9924906132665833,
+     "correct_family": 0.9799749687108886
+    },
+    "DDoS": {
+     "n": 51236,
+     "alarm_rate": 0.999941447419783,
+     "correct_family": 0.9991997814037005
+    },
+    "DoS GoldenEye": {
+     "n": 4056,
+     "alarm_rate": 1.0,
+     "correct_family": 0.9948224852071006
+    },
+    "DoS Hulk": {
+     "n": 95572,
+     "alarm_rate": 1.0,
+     "correct_family": 0.9995919306909974
+    },
+    "DoS Slowhttptest": {
+     "n": 2212,
+     "alarm_rate": 1.0,
+     "correct_family": 0.9805605786618445
+    },
+    "DoS slowloris": {
+     "n": 2365,
+     "alarm_rate": 1.0,
+     "correct_family": 0.9746300211416491
+    },
+    "Heartbleed": {
+     "n": 5,
+     "alarm_rate": 1.0,
+     "correct_family": null
+    },
+    "Infiltration": {
+     "n": 16,
+     "alarm_rate": 0.6875,
+     "correct_family": 0.0
+    },
+    "PortScan": {
+     "n": 63852,
+     "alarm_rate": 1.0,
+     "correct_family": 0.9993578901209046
+    }
+   }
+  },
+  {
+   "method": "xgb_continue",
+   "budget": 0.05,
+   "seed": 43,
+   "budget_counts": {
+    "Benign": 41788,
+    "Bot": 48,
+    "DDoS-LOIC-HTTP": 3204,
+    "DoS-GoldenEye": 259,
+    "DoS-Hulk": 5619,
+    "DoS-SlowHTTPTest": 139,
+    "DoS-Slowloris": 144,
+    "Infiltration": 1,
+    "PortScan": 3951
+   },
+   "info": {
+    "extra_rounds": 100,
+    "dropped_portscan_rows": 3951
+   },
+   "temperature": 2.2167301630272633,
+   "threshold": -3.3245515303881894,
+   "calibration_fpr": 0.04999093710349828,
+   "train_seconds": 3.773038457999064,
+   "score_seconds": 14.28256937500555,
+   "far": 0.06071082405385004,
+   "detection_rate": 0.7419052940989401,
+   "detection_rate_excl_portscan": 0.9957954959970818,
+   "macro_f1": 0.5299156608919227,
+   "macro_f1_2018_families": 0.596155118503413,
+   "per_label": {
+    "BENIGN": {
+     "n": 671643,
+     "alarm_rate": 0.06071082405385004,
+     "correct_family": null
+    },
+    "Bot": {
+     "n": 799,
+     "alarm_rate": 0.704630788485607,
+     "correct_family": 0.688360450563204
+    },
+    "DDoS": {
+     "n": 51236,
+     "alarm_rate": 0.9962526348661098,
+     "correct_family": 0.9898508860957139
+    },
+    "DoS GoldenEye": {
+     "n": 4056,
+     "alarm_rate": 0.9965483234714004,
+     "correct_family": 0.8991617357001972
+    },
+    "DoS Hulk": {
+     "n": 95572,
+     "alarm_rate": 0.9991106181726865,
+     "correct_family": 0.9957728204913573
+    },
+    "DoS Slowhttptest": {
+     "n": 2212,
+     "alarm_rate": 0.9642857142857143,
+     "correct_family": 0.7825497287522604
+    },
+    "DoS slowloris": {
+     "n": 2365,
+     "alarm_rate": 0.9864693446088795,
+     "correct_family": 0.9437632135306554
+    },
+    "Heartbleed": {
+     "n": 5,
+     "alarm_rate": 0.0,
+     "correct_family": null
+    },
+    "Infiltration": {
+     "n": 16,
+     "alarm_rate": 0.125,
+     "correct_family": 0.0
+    },
+    "PortScan": {
+     "n": 63852,
+     "alarm_rate": 0.120575706320867,
+     "correct_family": 0.0
+    }
+   }
+  },
+  {
+   "method": "esnn_t4_finetune",
+   "budget": 0.05,
+   "seed": 44,
+   "budget_counts": {
+    "Benign": 41788,
+    "Bot": 48,
+    "DDoS-LOIC-HTTP": 3204,
+    "DoS-GoldenEye": 259,
+    "DoS-Hulk": 5619,
+    "DoS-SlowHTTPTest": 139,
+    "DoS-Slowloris": 144,
+    "Infiltration": 1,
+    "PortScan": 3951
+   },
+   "info": {
+    "epochs": 5,
+    "steps": 1080,
+    "lr": 0.0001,
+    "batch": 256,
+    "train_loss_per_epoch": [
+     0.5531,
+     0.1145,
+     0.07262,
+     0.05721,
+     0.04729
+    ]
+   },
+   "temperature": 1.0121251038429386,
+   "threshold": -4.477467447950646,
+   "calibration_fpr": 0.04999093710349828,
+   "train_seconds": 13.208202583999082,
+   "score_seconds": 20.857865333993686,
+   "far": 0.05181770672812789,
+   "detection_rate": 0.9960156828538069,
+   "detection_rate_excl_portscan": 0.9957379000518364,
+   "macro_f1": 0.7078195053554673,
+   "macro_f1_2018_families": 0.6865852099228134,
+   "per_label": {
+    "BENIGN": {
+     "n": 671643,
+     "alarm_rate": 0.05181770672812789,
+     "correct_family": null
+    },
+    "Bot": {
+     "n": 799,
+     "alarm_rate": 0.409261576971214,
+     "correct_family": 0.409261576971214
+    },
+    "DDoS": {
+     "n": 51236,
+     "alarm_rate": 0.9994339917245687,
+     "correct_family": 0.9992192989304395
+    },
+    "DoS GoldenEye": {
+     "n": 4056,
+     "alarm_rate": 0.9930966469428008,
+     "correct_family": 0.9590729783037475
+    },
+    "DoS Hulk": {
+     "n": 95572,
+     "alarm_rate": 0.9988071820198384,
+     "correct_family": 0.9953542878667392
+    },
+    "DoS Slowhttptest": {
+     "n": 2212,
+     "alarm_rate": 0.9981916817359855,
+     "correct_family": 0.6772151898734177
+    },
+    "DoS slowloris": {
+     "n": 2365,
+     "alarm_rate": 0.99830866807611,
+     "correct_family": 0.9226215644820296
+    },
+    "Heartbleed": {
+     "n": 5,
+     "alarm_rate": 1.0,
+     "correct_family": null
+    },
+    "Infiltration": {
+     "n": 16,
+     "alarm_rate": 0.0625,
+     "correct_family": 0.0
+    },
+    "PortScan": {
+     "n": 63852,
+     "alarm_rate": 0.9966954833051431,
+     "correct_family": 0.9956461817954019
+    }
+   }
+  },
+  {
+   "method": "xgb_scratch",
+   "budget": 0.05,
+   "seed": 44,
+   "budget_counts": {
+    "Benign": 41788,
+    "Bot": 48,
+    "DDoS-LOIC-HTTP": 3204,
+    "DoS-GoldenEye": 259,
+    "DoS-Hulk": 5619,
+    "DoS-SlowHTTPTest": 139,
+    "DoS-Slowloris": 144,
+    "Infiltration": 1,
+    "PortScan": 3951
+   },
+   "info": {
+    "trees": 400,
+    "classes": [
+     "Benign",
+     "Bot",
+     "DDoS-LOIC-HTTP",
+     "DoS-GoldenEye",
+     "DoS-Hulk",
+     "DoS-SlowHTTPTest",
+     "DoS-Slowloris",
+     "Infiltration",
+     "PortScan"
+    ]
+   },
+   "temperature": 1.2673100990248696,
+   "threshold": -6.711164484803032,
+   "calibration_fpr": 0.04999093710349828,
+   "train_seconds": 9.539753666998877,
+   "score_seconds": 6.8531357500032755,
+   "far": 0.050474731367705764,
+   "detection_rate": 0.9999136807003676,
+   "detection_rate_excl_portscan": 0.9998784085600374,
+   "macro_f1": 0.6867762628071139,
+   "macro_f1_2018_families": 0.6546335744422965,
+   "per_label": {
+    "BENIGN": {
+     "n": 671643,
+     "alarm_rate": 0.050474731367705764,
+     "correct_family": null
+    },
+    "Bot": {
+     "n": 799,
+     "alarm_rate": 0.9974968710888611,
+     "correct_family": 0.9874843554443054
+    },
+    "DDoS": {
+     "n": 51236,
+     "alarm_rate": 0.9998048247326099,
+     "correct_family": 0.9994144741978297
+    },
+    "DoS GoldenEye": {
+     "n": 4056,
+     "alarm_rate": 1.0,
+     "correct_family": 0.9866863905325444
+    },
+    "DoS Hulk": {
+     "n": 95572,
+     "alarm_rate": 0.9999895366843845,
+     "correct_family": 0.9999476834219228
+    },
+    "DoS Slowhttptest": {
+     "n": 2212,
+     "alarm_rate": 1.0,
+     "correct_family": 0.9760397830018083
+    },
+    "DoS slowloris": {
+     "n": 2365,
+     "alarm_rate": 0.9995771670190274,
+     "correct_family": 0.9818181818181818
+    },
+    "Heartbleed": {
+     "n": 5,
+     "alarm_rate": 1.0,
+     "correct_family": null
+    },
+    "Infiltration": {
+     "n": 16,
+     "alarm_rate": 0.6875,
+     "correct_family": 0.0
+    },
+    "PortScan": {
+     "n": 63852,
+     "alarm_rate": 1.0,
+     "correct_family": 0.9995458247196642
+    }
+   }
+  },
+  {
+   "method": "xgb_continue",
+   "budget": 0.05,
+   "seed": 44,
+   "budget_counts": {
+    "Benign": 41788,
+    "Bot": 48,
+    "DDoS-LOIC-HTTP": 3204,
+    "DoS-GoldenEye": 259,
+    "DoS-Hulk": 5619,
+    "DoS-SlowHTTPTest": 139,
+    "DoS-Slowloris": 144,
+    "Infiltration": 1,
+    "PortScan": 3951
+   },
+   "info": {
+    "extra_rounds": 100,
+    "dropped_portscan_rows": 3951
+   },
+   "temperature": 3.1423999052927334,
+   "threshold": -2.672658446959574,
+   "calibration_fpr": 0.04999093710349828,
+   "train_seconds": 4.36228137499711,
+   "score_seconds": 15.560264457999438,
+   "far": 0.050334776064069754,
+   "detection_rate": 0.7198075533930299,
+   "detection_rate_excl_portscan": 0.9897735199441959,
+   "macro_f1": 0.49511330876461934,
+   "macro_f1_2018_families": 0.5570024723601967,
+   "per_label": {
+    "BENIGN": {
+     "n": 671643,
+     "alarm_rate": 0.050334776064069754,
+     "correct_family": null
+    },
+    "Bot": {
+     "n": 799,
+     "alarm_rate": 0.35544430538172717,
+     "correct_family": 0.3541927409261577
+    },
+    "DDoS": {
+     "n": 51236,
+     "alarm_rate": 0.9894800530876727,
+     "correct_family": 0.9875087828870326
+    },
+    "DoS GoldenEye": {
+     "n": 4056,
+     "alarm_rate": 0.9933431952662722,
+     "correct_family": 0.8939842209072978
+    },
+    "DoS Hulk": {
+     "n": 95572,
+     "alarm_rate": 0.9969656384715189,
+     "correct_family": 0.9928326288034153
+    },
+    "DoS Slowhttptest": {
+     "n": 2212,
+     "alarm_rate": 0.9507233273056058,
+     "correct_family": 0.8214285714285714
+    },
+    "DoS slowloris": {
+     "n": 2365,
+     "alarm_rate": 0.958985200845666,
+     "correct_family": 0.7154334038054968
+    },
+    "Heartbleed": {
+     "n": 5,
+     "alarm_rate": 0.0,
+     "correct_family": null
+    },
+    "Infiltration": {
+     "n": 16,
+     "alarm_rate": 0.0,
+     "correct_family": 0.0
+    },
+    "PortScan": {
+     "n": 63852,
+     "alarm_rate": 0.059136753743030755,
+     "correct_family": 0.0
+    }
+   }
+  }
+ ],
+ "seconds_total": 438.0148650830015
+}

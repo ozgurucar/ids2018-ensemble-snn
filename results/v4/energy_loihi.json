@@ -1,0 +1,561 @@
+{
+  "models": {
+    "esnn_T4": {
+      "loihi_uJ": 2.959470765113637,
+      "host_dense_uJ": 0.05788180000000001,
+      "total_uJ": 3.017352565113637,
+      "total_ln_folded_uJ": 2.974958965113637,
+      "counts": {
+        "synaptic_events": 116864.43590909091,
+        "lif_neuron_updates": 2304.0,
+        "readout_compartment_updates": 156,
+        "input_spikes": 716.7804545454546,
+        "hidden_spikes": 583.2652272727273,
+        "hidden_sparsity": 0.7468466895517676,
+        "layernorm_elements": 2304.0,
+        "host_dense_macs": 3367.0
+      },
+      "breakdown_uJ": {
+        "loihi_synaptic": 2.7580006874545457,
+        "loihi_neuron": 0.19926,
+        "loihi_spike_routing": 0.002210077659090909,
+        "host_layernorm": 0.042393600000000004,
+        "host_fusion": 0.015488200000000002
+      },
+      "sensitivity_uJ": {
+        "loihi_all_neuron_updates_at_52pJ_on_chip": 2.8859206874545458,
+        "spinnaker2_PL2_on_chip": 27.062887181818184
+      },
+      "per_layer": [
+        {
+          "branch": "rate",
+          "layer": "linears.0",
+          "presynaptic": "encoder",
+          "presynaptic_spikes": 95.52113636363636,
+          "fan_out": 128,
+          "synaptic_events": 12226.705454545454
+        },
+        {
+          "branch": "rate",
+          "layer": "linears.1",
+          "presynaptic": "lif0",
+          "presynaptic_spikes": 113.76727272727273,
+          "fan_out": 64,
+          "synaptic_events": 7281.105454545454
+        },
+        {
+          "branch": "rate",
+          "layer": "readout",
+          "presynaptic": "lif1",
+          "presynaptic_spikes": 76.97568181818181,
+          "fan_out": 13,
+          "synaptic_events": 1000.6838636363636
+        },
+        {
+          "branch": "rate",
+          "layer": "lifs.0",
+          "neurons": 128,
+          "neuron_updates": 512.0,
+          "spikes": 113.76727272727273,
+          "sparsity": 0.7777982954545455
+        },
+        {
+          "branch": "rate",
+          "layer": "lifs.1",
+          "neurons": 64,
+          "neuron_updates": 256.0,
+          "spikes": 76.97568181818181,
+          "sparsity": 0.6993137428977273
+        },
+        {
+          "branch": "temporal",
+          "layer": "linears.0",
+          "presynaptic": "encoder",
+          "presynaptic_spikes": 70.0,
+          "fan_out": 128,
+          "synaptic_events": 8960.0
+        },
+        {
+          "branch": "temporal",
+          "layer": "linears.1",
+          "presynaptic": "lif0",
+          "presynaptic_spikes": 99.64772727272727,
+          "fan_out": 64,
+          "synaptic_events": 6377.454545454545
+        },
+        {
+          "branch": "temporal",
+          "layer": "readout",
+          "presynaptic": "lif1",
+          "presynaptic_spikes": 87.10136363636363,
+          "fan_out": 13,
+          "synaptic_events": 1132.3177272727273
+        },
+        {
+          "branch": "temporal",
+          "layer": "lifs.0",
+          "neurons": 128,
+          "neuron_updates": 512.0,
+          "spikes": 99.64772727272727,
+          "sparsity": 0.8053755326704546
+        },
+        {
+          "branch": "temporal",
+          "layer": "lifs.1",
+          "neurons": 64,
+          "neuron_updates": 256.0,
+          "spikes": 87.10136363636363,
+          "sparsity": 0.6597602982954546
+        },
+        {
+          "branch": "population",
+          "layer": "linears.0",
+          "presynaptic": "encoder",
+          "presynaptic_spikes": 551.2593181818182,
+          "fan_out": 128,
+          "synaptic_events": 70561.19272727273
+        },
+        {
+          "branch": "population",
+          "layer": "linears.1",
+          "presynaptic": "lif0",
+          "presynaptic_spikes": 130.39068181818183,
+          "fan_out": 64,
+          "synaptic_events": 8345.003636363637
+        },
+        {
+          "branch": "population",
+          "layer": "readout",
+          "presynaptic": "lif1",
+          "presynaptic_spikes": 75.3825,
+          "fan_out": 13,
+          "synaptic_events": 979.9725
+        },
+        {
+          "branch": "population",
+          "layer": "lifs.0",
+          "neurons": 128,
+          "neuron_updates": 512.0,
+          "spikes": 130.39068181818183,
+          "sparsity": 0.7453306995738636
+        },
+        {
+          "branch": "population",
+          "layer": "lifs.1",
+          "neurons": 64,
+          "neuron_updates": 256.0,
+          "spikes": 75.3825,
+          "sparsity": 0.705537109375
+        }
+      ],
+      "checkpoint": "~/repository/ids2018-ensemble-snn/app/models/esnn_t4.pt"
+    },
+    "esnn_T8": {
+      "loihi_uJ": 5.77196811315909,
+      "host_dense_uJ": 0.1002754,
+      "total_uJ": 5.87224351315909,
+      "total_ln_folded_uJ": 5.78745631315909,
+      "counts": {
+        "synaptic_events": 227501.04227272727,
+        "lif_neuron_updates": 4608.0,
+        "readout_compartment_updates": 312,
+        "input_spikes": 1364.2902272727272,
+        "hidden_spikes": 1237.7777272727274,
+        "hidden_sparsity": 0.7313850418244949,
+        "layernorm_elements": 4608.0,
+        "host_dense_macs": 3367.0
+      },
+      "breakdown_uJ": {
+        "loihi_synaptic": 5.369024597636363,
+        "loihi_neuron": 0.39852,
+        "loihi_spike_routing": 0.004423515522727272,
+        "host_layernorm": 0.08478720000000001,
+        "host_fusion": 0.015488200000000002
+      },
+      "sensitivity_uJ": {
+        "loihi_all_neuron_updates_at_52pJ_on_chip": 5.624864597636363,
+        "spinnaker2_PL2_on_chip": 52.88020845454545
+      },
+      "per_layer": [
+        {
+          "branch": "rate",
+          "layer": "linears.0",
+          "presynaptic": "encoder",
+          "presynaptic_spikes": 189.52363636363637,
+          "fan_out": 128,
+          "synaptic_events": 24259.025454545455
+        },
+        {
+          "branch": "rate",
+          "layer": "linears.1",
+          "presynaptic": "lif0",
+          "presynaptic_spikes": 241.49704545454546,
+          "fan_out": 64,
+          "synaptic_events": 15455.81090909091
+        },
+        {
+          "branch": "rate",
+          "layer": "readout",
+          "presynaptic": "lif1",
+          "presynaptic_spikes": 159.2425,
+          "fan_out": 13,
+          "synaptic_events": 2070.1525
+        },
+        {
+          "branch": "rate",
+          "layer": "lifs.0",
+          "neurons": 128,
+          "neuron_updates": 1024.0,
+          "spikes": 241.49704545454546,
+          "sparsity": 0.7641630415482954
+        },
+        {
+          "branch": "rate",
+          "layer": "lifs.1",
+          "neurons": 64,
+          "neuron_updates": 512.0,
+          "spikes": 159.2425,
+          "sparsity": 0.6889794921875
+        },
+        {
+          "branch": "temporal",
+          "layer": "linears.0",
+          "presynaptic": "encoder",
+          "presynaptic_spikes": 70.0,
+          "fan_out": 128,
+          "synaptic_events": 8960.0
+        },
+        {
+          "branch": "temporal",
+          "layer": "linears.1",
+          "presynaptic": "lif0",
+          "presynaptic_spikes": 204.06681818181818,
+          "fan_out": 64,
+          "synaptic_events": 13060.276363636363
+        },
+        {
+          "branch": "temporal",
+          "layer": "readout",
+          "presynaptic": "lif1",
+          "presynaptic_spikes": 180.6690909090909,
+          "fan_out": 13,
+          "synaptic_events": 2348.6981818181816
+        },
+        {
+          "branch": "temporal",
+          "layer": "lifs.0",
+          "neurons": 128,
+          "neuron_updates": 1024.0,
+          "spikes": 204.06681818181818,
+          "sparsity": 0.8007159978693181
+        },
+        {
+          "branch": "temporal",
+          "layer": "lifs.1",
+          "neurons": 64,
+          "neuron_updates": 512.0,
+          "spikes": 180.6690909090909,
+          "sparsity": 0.6471306818181819
+        },
+        {
+          "branch": "population",
+          "layer": "linears.0",
+          "presynaptic": "encoder",
+          "presynaptic_spikes": 1104.7665909090908,
+          "fan_out": 128,
+          "synaptic_events": 141410.12363636363
+        },
+        {
+          "branch": "population",
+          "layer": "linears.1",
+          "presynaptic": "lif0",
+          "presynaptic_spikes": 275.62795454545454,
+          "fan_out": 64,
+          "synaptic_events": 17640.18909090909
+        },
+        {
+          "branch": "population",
+          "layer": "readout",
+          "presynaptic": "lif1",
+          "presynaptic_spikes": 176.6743181818182,
+          "fan_out": 13,
+          "synaptic_events": 2296.766136363636
+        },
+        {
+          "branch": "population",
+          "layer": "lifs.0",
+          "neurons": 128,
+          "neuron_updates": 1024.0,
+          "spikes": 275.62795454545454,
+          "sparsity": 0.7308320756392046
+        },
+        {
+          "branch": "population",
+          "layer": "lifs.1",
+          "neurons": 64,
+          "neuron_updates": 512.0,
+          "spikes": 176.6743181818182,
+          "sparsity": 0.6549329723011363
+        }
+      ],
+      "checkpoint": "~/.cache/ids-v4/steps/v4/group_ce_T8/runs/esnn-42/model.pt"
+    },
+    "esnn_T12": {
+      "loihi_uJ": 8.623768120477271,
+      "host_dense_uJ": 0.14266900000000002,
+      "total_uJ": 8.766437120477272,
+      "total_ln_folded_uJ": 8.639256320477271,
+      "counts": {
+        "synaptic_events": 339800.6931818182,
+        "lif_neuron_updates": 6912.0,
+        "readout_compartment_updates": 468,
+        "input_spikes": 2008.6347727272728,
+        "hidden_spikes": 1927.6954545454546,
+        "hidden_sparsity": 0.7211088752104378,
+        "layernorm_elements": 6912.0,
+        "host_dense_macs": 3367.0
+      },
+      "breakdown_uJ": {
+        "loihi_synaptic": 8.019296359090909,
+        "loihi_neuron": 0.59778,
+        "loihi_spike_routing": 0.006691761386363636,
+        "host_layernorm": 0.1271808,
+        "host_fusion": 0.015488200000000002
+      },
+      "sensitivity_uJ": {
+        "loihi_all_neuron_updates_at_52pJ_on_chip": 8.40305635909091,
+        "spinnaker2_PL2_on_chip": 79.03013863636363
+      },
+      "per_layer": [
+        {
+          "branch": "rate",
+          "layer": "linears.0",
+          "presynaptic": "encoder",
+          "presynaptic_spikes": 285.4909090909091,
+          "fan_out": 128,
+          "synaptic_events": 36542.836363636365
+        },
+        {
+          "branch": "rate",
+          "layer": "linears.1",
+          "presynaptic": "lif0",
+          "presynaptic_spikes": 376.6479545454545,
+          "fan_out": 64,
+          "synaptic_events": 24105.46909090909
+        },
+        {
+          "branch": "rate",
+          "layer": "readout",
+          "presynaptic": "lif1",
+          "presynaptic_spikes": 253.8540909090909,
+          "fan_out": 13,
+          "synaptic_events": 3300.103181818182
+        },
+        {
+          "branch": "rate",
+          "layer": "lifs.0",
+          "neurons": 128,
+          "neuron_updates": 1536.0,
+          "spikes": 376.6479545454545,
+          "sparsity": 0.7547864879261363
+        },
+        {
+          "branch": "rate",
+          "layer": "lifs.1",
+          "neurons": 64,
+          "neuron_updates": 768.0,
+          "spikes": 253.8540909090909,
+          "sparsity": 0.6694608191287879
+        },
+        {
+          "branch": "temporal",
+          "layer": "linears.0",
+          "presynaptic": "encoder",
+          "presynaptic_spikes": 70.0,
+          "fan_out": 128,
+          "synaptic_events": 8960.0
+        },
+        {
+          "branch": "temporal",
+          "layer": "linears.1",
+          "presynaptic": "lif0",
+          "presynaptic_spikes": 326.44954545454544,
+          "fan_out": 64,
+          "synaptic_events": 20892.77090909091
+        },
+        {
+          "branch": "temporal",
+          "layer": "readout",
+          "presynaptic": "lif1",
+          "presynaptic_spikes": 276.73204545454547,
+          "fan_out": 13,
+          "synaptic_events": 3597.516590909091
+        },
+        {
+          "branch": "temporal",
+          "layer": "lifs.0",
+          "neurons": 128,
+          "neuron_updates": 1536.0,
+          "spikes": 326.44954545454544,
+          "sparsity": 0.787467743844697
+        },
+        {
+          "branch": "temporal",
+          "layer": "lifs.1",
+          "neurons": 64,
+          "neuron_updates": 768.0,
+          "spikes": 276.73204545454547,
+          "sparsity": 0.6396718158143939
+        },
+        {
+          "branch": "population",
+          "layer": "linears.0",
+          "presynaptic": "encoder",
+          "presynaptic_spikes": 1653.1438636363637,
+          "fan_out": 128,
+          "synaptic_events": 211602.41454545455
+        },
+        {
+          "branch": "population",
+          "layer": "linears.1",
+          "presynaptic": "lif0",
+          "presynaptic_spikes": 427.0084090909091,
+          "fan_out": 64,
+          "synaptic_events": 27328.53818181818
+        },
+        {
+          "branch": "population",
+          "layer": "readout",
+          "presynaptic": "lif1",
+          "presynaptic_spikes": 267.0034090909091,
+          "fan_out": 13,
+          "synaptic_events": 3471.044318181818
+        },
+        {
+          "branch": "population",
+          "layer": "lifs.0",
+          "neurons": 128,
+          "neuron_updates": 1536.0,
+          "spikes": 427.0084090909091,
+          "sparsity": 0.7219997336647728
+        },
+        {
+          "branch": "population",
+          "layer": "lifs.1",
+          "neurons": 64,
+          "neuron_updates": 768.0,
+          "spikes": 267.0034090909091,
+          "sparsity": 0.6523393110795455
+        }
+      ],
+      "checkpoint": "~/repository/ids2018-ensemble-snn/app/models/esnn.pt"
+    },
+    "encoded_ann_T4": {
+      "accel_45nm_uJ": 0.08939976027272727,
+      "accel_45nm_linear_only_uJ": 0.08406376027272727,
+      "accel_45nm_int8_uJ": 0.0040159120090909085,
+      "accel_45nm_with_sram_weights_uJ": 0.5156370966363637,
+      "total_uJ": 0.08939976027272727,
+      "counts": {
+        "accumulates": 30271.73363636364,
+        "macs": 12352.0,
+        "layernorm_elements": 290.0
+      },
+      "loihi_uJ": null,
+      "checkpoint": "~/.cache/ids-v4/steps/v4/group_ce_T4/runs/encoded_ann-42/model.pt"
+    },
+    "encoded_ann_T8": {
+      "accel_45nm_uJ": 0.06004973681818181,
+      "accel_45nm_linear_only_uJ": 0.05710573681818181,
+      "accel_45nm_int8_uJ": 0.0025542712272727274,
+      "accel_45nm_with_sram_weights_uJ": 0.42454014590909084,
+      "total_uJ": 0.06004973681818181,
+      "counts": {
+        "accumulates": 29881.04090909091,
+        "macs": 6568.0,
+        "layernorm_elements": 160.0
+      },
+      "loihi_uJ": null,
+      "checkpoint": "~/.cache/ids-v4/steps/v4/group_ce_T8/runs/encoded_ann-42/model.pt"
+    },
+    "encoded_ann_T12": {
+      "accel_45nm_uJ": 0.05151696138636363,
+      "accel_45nm_linear_only_uJ": 0.04949296138636363,
+      "accel_45nm_int8_uJ": 0.0021415053795454547,
+      "accel_45nm_with_sram_weights_uJ": 0.3920187545681818,
+      "total_uJ": 0.05151696138636363,
+      "counts": {
+        "accumulates": 28956.179318181818,
+        "macs": 5094.0,
+        "layernorm_elements": 110.0
+      },
+      "loihi_uJ": null,
+      "checkpoint": "~/.cache/ids-v4/v3/ids2018-v3/experiments/group_ce/runs/encoded_ann-42/model.pt"
+    },
+    "ann": {
+      "accel_45nm_uJ": 0.3976056,
+      "accel_45nm_linear_only_uJ": 0.38833200000000007,
+      "accel_45nm_int8_uJ": 0.01988028,
+      "accel_45nm_with_sram_weights_uJ": 1.2418056,
+      "total_uJ": 0.3976056,
+      "counts": {
+        "accumulates": 0,
+        "macs": 84420.0,
+        "layernorm_elements": 504.0
+      },
+      "checkpoint": "~/.cache/ids-v4/v3/ids2018-v3/experiments/group_ce/runs/ann-42/model.pt"
+    }
+  },
+  "constants": {
+    "loihi_pJ": {
+      "E_syn_op_min": 23.6,
+      "E_neuron_update_active": 81.0,
+      "E_neuron_update_inactive": 52.0,
+      "E_spike_within_tile": 1.7,
+      "E_tile_hop_EW": 3.0,
+      "E_tile_hop_NS": 4.0,
+      "E_syn_update_pairwise_STDP": 120.0
+    },
+    "horowitz_45nm_pJ": {
+      "fp32_add": 0.9,
+      "fp32_mult": 3.7,
+      "int8_add": 0.03,
+      "int8_mult": 0.2,
+      "int32_add": 0.1,
+      "int32_mult": 3.1
+    },
+    "mac_fp32_pJ": 4.6000000000000005,
+    "ac_fp32_pJ": 0.9,
+    "mac_int8_pJ": 0.23,
+    "sram32k_per_fp32_weight_pJ": 10.0,
+    "spinnaker2_PL2_pJ": {
+      "e_syn": 200.0,
+      "e_neur": 1500.0
+    },
+    "layernorm_mac_equivalents_per_element": 4
+  },
+  "sources": {
+    "loihi": "Davies et al., Loihi: A Neuromorphic Manycore Processor with On-Chip Learning, IEEE Micro 38(1):82-99, 2018, doi:10.1109/MM.2018.112130359, Table 2 (pre-silicon SDF/SPICE simulation at 0.75 V, stated consistent with early post-silicon characterization)",
+    "horowitz": "Horowitz, Computing's Energy Problem (and What We Can Do About It), ISSCC 2014, pp. 10-14, Fig. 1.1.9 (45 nm, 0.9 V)",
+    "spinnaker2": "Hoeppner et al., The SpiNNaker 2 Processing Element Architecture for Hybrid Digital Neuromorphic Computing, arXiv:2103.08392v2 (2022), Table I (22 nm FDSOI test chip, PL2 0.5 V 200 MHz, baseline power excluded)"
+  },
+  "assumptions": [
+    "Estimate, not a measurement; per-op constants applied to software spike counts.",
+    "E_syn = 23.6 pJ is Loihi's minimum energy per synaptic spike op; real per-op cost is higher.",
+    "Every LIF neuron is updated every time step at the active energy (81 pJ); 52 pJ (inactive) is a lower-bound sensitivity.",
+    "Readout layers receive spikes and are mapped as non-spiking integrator compartments: synaptic events counted on chip, classes x T x branches compartment updates at 81 pJ.",
+    "Every emitted spike (encoder input spikes and hidden spikes) pays one within-tile spike (1.7 pJ); tile hops, barrier sync, static power and chip I/O are ignored.",
+    "LayerNorm sits between each linear layer and its LIF neuron. It has no native Loihi equivalent; it is charged to a 45 nm FP32 host at 4 MAC-equivalents per element (host_dense_uJ). total_ln_folded_uJ assumes it is folded away, which would change the trained model.",
+    "Fusion meta-network (MLP on branch logits) and the softmax-weighted branch sum are dense host MACs at 4.6 pJ.",
+    "Input encoding (rate/temporal/population spike generation) and preprocessing are excluded for all models.",
+    "ANN and Enc-ANN: 45 nm FP32 digital accelerator, MAC 4.6 pJ, AC 0.9 pJ, LayerNorm 4 MAC-eq/element; GELU, memory traffic and control excluded (Horowitz shows memory access dominates arithmetic).",
+    "Loihi's synaptic-op energy includes reading the synapse from on-chip SRAM, while the 4.6 pJ MAC does not; accel_45nm_with_sram_weights_uJ adds one 32 KB SRAM read (10 pJ per FP32 weight) per MAC/AC as a fairer upper reference.",
+    "Loihi weights are at most 9 bit, so an INT8 accelerator (MAC 0.23 pJ) is the like-for-like digital comparison and is reported as accel_45nm_int8_uJ."
+  ],
+  "sample": {
+    "file": "app/samples/demo_flows.csv",
+    "flows": 4400,
+    "preprocessor": "app/models/preprocessor.joblib",
+    "machine": "macOS-15.7.4-arm64-arm-64bit"
+  }
+}
