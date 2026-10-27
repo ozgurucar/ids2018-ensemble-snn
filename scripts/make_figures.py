@@ -154,9 +154,16 @@ def steps(png):
     # (a) accuracy
     for k, (m_, _, _) in ref.items():
         a.axhline(m_, **refstyle[k], zorder=1)
+    # T = 4 has five seeds, T = 8 and 12 three: no line across the seed change, and the
+    # five-seed point gets a larger diamond marker.
     for k, v in series.items():
-        a.errorbar([T + shift[k] for T in Ts], [x[0] for x in v], yerr=[x[1] for x in v],
-                   capsize=2, elinewidth=0.7, capthick=0.7, mew=0.9, zorder=3, **style[k])
+        st = {kk: vv for kk, vv in style[k].items() if kk not in ("marker", "label")}
+        xs = [T + shift[k] for T in Ts]
+        a.errorbar(xs[1:], [x[0] for x in v[1:]], yerr=[x[1] for x in v[1:]], marker=style[k]["marker"],
+                   capsize=2, elinewidth=0.7, capthick=0.7, mew=0.9, zorder=3, **st)
+        a.errorbar(xs[:1], [v[0][0]], yerr=[v[0][1]], marker="D", ms=5.5, ls="none",
+                   capsize=2, elinewidth=0.7, capthick=0.7, mew=0.9, zorder=3,
+                   **{kk: vv for kk, vv in st.items() if kk != "ls"})
     a.set_xticks(Ts)
     a.set_xlim(*xlim)
     a.set_ylabel(f"Macro-F1, {float(BUDGET):.0%} FAR")
@@ -167,7 +174,8 @@ def steps(png):
     a.text(0.02, 0.95, "(a)", transform=a.transAxes, fontsize=8, va="top", fontweight="bold")
     handles = [Line2D([], [], **style["esnn"]), Line2D([], [], **style["encoded_ann"]),
                Line2D([], [], **refstyle["ann"]), Line2D([], [], **refstyle["ple_mlp"]),
-               Line2D([], [], **refstyle["xgb"])]
+               Line2D([], [], **refstyle["xgb"]),
+               Line2D([], [], color="#4D4D4D", marker="D", ls="none", mfc="white", label="5 seeds")]
     a.legend(handles=handles, loc="center left", bbox_to_anchor=(1.02, 0.5), fontsize=7,
              handlelength=2.2, handletextpad=0.4, frameon=False)
 

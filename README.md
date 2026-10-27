@@ -2,7 +2,7 @@
 
 Duplicate-controlled comparison of a three-branch ensemble spiking network (E-SNN) with a parameter-matched MLP, the same MLP on a spike-free piecewise-linear encoding (PLE-MLP), a spike-input control (Enc-ANN: the SNN's spike codes fed to a non-spiking network) and tree ensembles. Rows with identical cleaned feature vectors stay in one partition; probability calibration, alarm thresholds and test use disjoint partitions; every model is judged at the same benign false-alarm rate (FAR).
 
-Paper: `paper/main.tex` (PDF: `paper/main.pdf`). Reviews and responses: `paper/review_*`, `paper/RESPONSE_TO_REVIEWERS.md`.
+Paper: `paper/main.tex` (PDF: `paper/main.pdf`), git tag `paper-v1`. Reviews and responses: `paper/review_*`, `paper/RESPONSE_TO_REVIEWERS.md`.
 
 ## Main result (5% FAR, T = 4, five seeds 42–46, `results/v5/seeds/summary.json`)
 
@@ -14,9 +14,9 @@ Paper: `paper/main.tex` (PDF: `paper/main.pdf`). Reviews and responses: `paper/r
 | Enc-ANN | 0.779 ± 0.020 | 0.842 ± 0.013 | 0.961 |
 | XGBoost | 0.808 ± 0.004 | 0.858 ± 0.001 | 0.967 |
 
-- Only the gap to XGBoost is significant (E-SNN − XGBoost −4.2 points, 95% CI [−5.6, −2.8], Holm p = 0.002). The E-SNN is equivalent to the PLE-MLP within 2 points at 5% FAR (TOST p = 0.020); we find no evidence that spiking dynamics add accuracy. The best neural model is the non-spiking Enc-ANN (exploratory). These intervals cover seed variance; a bootstrap over test fingerprint groups shows that test-sampling variance is small (about ±0.5 points on detection rate) and that every paired detection-rate and AUC difference keeps its sign (`results/analysis/group_bootstrap_table.md`). No interval covers a redrawn split. Source: `results/analysis/seed_stats_5seed_table.md`.
+- Only the gap to XGBoost is significant (E-SNN − XGBoost −4.2 points, 95% CI [−5.6, −2.8], Holm p = 0.002). The E-SNN is equivalent to the PLE-MLP within 2 points at 5% FAR (TOST p = 0.020); we find no evidence that spiking dynamics add accuracy. The non-spiking Enc-ANN has the highest neural mean, not significantly above the E-SNN (Holm p = 0.51). These intervals cover seed variance; a bootstrap over test fingerprint groups shows that test-sampling variance is small (about ±0.5 points on detection rate) and that every paired detection-rate and AUC difference keeps its sign (`results/analysis/group_bootstrap_table.md`). No interval covers a redrawn split. Source: `results/analysis/seed_stats_5seed_table.md`.
 - The three-seed T = 12 run with random forest and CatBoost is in `results/v3/experiments/group_ce/summary.json` (Table II, bottom block, of the paper).
-- 4 time steps match 12 at 2.9× fewer synaptic events, but under published Loihi per-operation costs the E-SNN needs 3.1–9.0 µJ per flow against 0.40 µJ for the MLP on a 45 nm accelerator (`results/analysis/energy_unified_table.md`).
+- 4 time steps match 12 at 2.9× fewer synaptic events, but under published Loihi per-operation costs the E-SNN needs 3.1–9.0 µJ per flow, 2.5–7.2× the MLP with SRAM weight reads (1.24 µJ; 0.40 µJ arithmetic only) (`results/analysis/energy_unified_table.md`).
 - Destination port is an input. Removing it costs 1–3 macro-F1 points (13 / 11 classes) and does not fix transfer (`results/analysis/NOTE_7_noport.md`).
 - Transfer to CIC-IDS2017 fails for every model: after refitting the threshold on local benign flows, 23–32% of attack flows are detected (13.5–34.4% for models retrained without the destination port). The apparent good transfer of slow application-layer DoS (GoldenEye, Slowloris) depends on the destination-port input. Expect to retrain on your own traffic.
 
@@ -70,11 +70,11 @@ These need data or checkpoints that are not in git:
 | Table IV energy (test-mix rows) | `scripts/analysis/energy_unified.py` | four raw 2018 day files in `~/.cache/ids-v4/raw` (02-14, 02-15, 02-21, 03-02) | Kaggle dataset `solarmainframe/ids-intrusion-csv` |
 | Transfer (Table V), KS shift, name map | `scripts/cross_dataset_cic2017.py`, `scripts/analysis/transfer_hygiene.py` | `~/.cache/ids-x17/combine.csv` (MachineLearningCVE files concatenated), plus the raw 2018 days above | Kaggle dataset `sweety18/cicids2017-full-dataset` |
 | Adaptation (Table VI) | `scripts/finetune_cic2017.py`, `scripts/analysis/adapt_label_budget.py` | `combine.csv` above | as above |
-| Dst Port ablation, transfer half | `scripts/analysis/noport.py` | no-port checkpoints in `~/.cache/ids-v5/noport/`, T = 4 Enc-ANN checkpoint in `~/.cache/ids-v4/steps/` | Kaggle kernel outputs `ozgurucar/ids-v5-noport` and `ozgurucar/ids-v4-steps` |
-| Group bootstrap over test groups (`results/analysis/group_bootstrap_table.md`) | `scripts/analysis/group_bootstrap.py` | per-row test scores (`test_log_odds.npy`), `test_y.npy`, `test_groups.npy` | Kaggle kernel output `ozgurucar/ids-v5-seeds`; the score files are no longer in git (`.gitignore`) |
-| Operation counts from checkpoints | `scripts/profile_all_steps.py` | v3/v4 checkpoints in the Kaggle working-directory layout | Kaggle kernel outputs of the v3, `ids-v4-steps` and `ids-v4-variants` runs |
+| Dst Port ablation, transfer half | `scripts/analysis/noport.py` | no-port checkpoints in `~/.cache/ids-v5/noport/`, T = 4 Enc-ANN checkpoint in `~/.cache/ids-v4/steps/` | Kaggle kernel outputs; available from the author on request, to be released with the camera-ready version |
+| Group bootstrap over test groups (`results/analysis/group_bootstrap_table.md`) | `scripts/analysis/group_bootstrap.py` | per-row test scores (`test_log_odds.npy`), `test_y.npy`, `test_groups.npy` | Kaggle kernel output of the five-seed run; not in git (`.gitignore`); available from the author on request, to be released with the camera-ready version |
+| Operation counts from checkpoints | `scripts/profile_all_steps.py` | v3/v4 checkpoints in the Kaggle working-directory layout | Kaggle kernel outputs of the v3 and v4 runs; available on request |
 
-Only seed-42 checkpoints are in `app/models/` (E-SNN T = 12 and T = 4, XGBoost; `profile/` holds the T = 12 matched MLP and Enc-ANN). Other seeds, the PLE-MLP and the no-port models are available only as Kaggle kernel outputs.
+Only seed-42 checkpoints are in `app/models/` (E-SNN T = 12 and T = 4, XGBoost; `profile/` holds the T = 12 matched MLP and Enc-ANN). Other seeds, the PLE-MLP and the no-port models exist only as Kaggle kernel outputs; they are available from the author on request and will be released with the camera-ready version. The paper's code and records are tagged `paper-v1`.
 
 ## Run the detector
 
