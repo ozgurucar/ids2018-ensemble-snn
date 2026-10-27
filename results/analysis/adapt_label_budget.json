@@ -2007,6 +2007,2083 @@
      }
     }
    }
+  },
+  {
+   "method": "xgb_scratch",
+   "budget": 0.01,
+   "seed": 43,
+   "budget_size": 11026,
+   "info": {
+    "trees": 400,
+    "classes": [
+     "Benign",
+     "Bot",
+     "DDoS-LOIC-HTTP",
+     "DoS-GoldenEye",
+     "DoS-Hulk",
+     "DoS-SlowHTTPTest",
+     "DoS-Slowloris",
+     "Infiltration",
+     "PortScan"
+    ]
+   },
+   "variants": {
+    "orig": {
+     "temperature": 1.1454426875816754,
+     "temperature_info": {
+      "fit": "2017 calibration (labelled)",
+      "n": 99999,
+      "nll_before": 0.01300382217714482,
+      "nll_after": 0.012573724246404508
+     },
+     "threshold": -6.167157839036036,
+     "calibration_fpr": 0.04999093710349828,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 111025,
+     "benign_only_flows": 82755,
+     "far": 0.04935508893861769,
+     "detection_rate": 0.9997183264959362,
+     "detection_rate_excl_portscan": 0.9996096274822253,
+     "macro_f1": 0.6624982813196157,
+     "dr_at_test_far_5pct": 0.9997183264959362,
+     "achieved_test_far_5pct": 0.049995310008441984,
+     "dr_at_test_far_1pct": 0.9990459445830097,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.04935508893861769,
+      "Bot": 0.981226533166458,
+      "DDoS": 0.9998048247326099,
+      "DoS GoldenEye": 0.9960552268244576,
+      "DoS Hulk": 0.9998535135813836,
+      "DoS Slowhttptest": 0.9995479204339964,
+      "DoS slowloris": 0.999154334038055,
+      "Heartbleed": 1.0,
+      "Infiltration": 0.8125,
+      "PortScan": 0.9999843387834367
+     }
+    },
+    "budget_T": {
+     "temperature": 0.5813548370299029,
+     "temperature_info": {
+      "fit": "labelled budget (in-sample)",
+      "n": 11026,
+      "nll_before": 0.001564185680020492,
+      "nll_after": 0.0009178755853423283
+     },
+     "threshold": -13.210945789940107,
+     "calibration_fpr": 0.04999093710349828,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 11026,
+     "benign_only_flows": 82755,
+     "far": 0.049197267000474956,
+     "detection_rate": 0.999827361400735,
+     "detection_rate_excl_portscan": 0.9997632166695465,
+     "macro_f1": 0.668491072378364,
+     "dr_at_test_far_5pct": 0.9998319045217684,
+     "achieved_test_far_5pct": 0.04999977666706867,
+     "dr_at_test_far_1pct": 0.9990050564937101,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.049197267000474956,
+      "Bot": 0.9849812265331664,
+      "DDoS": 0.9997072370989148,
+      "DoS GoldenEye": 0.9997534516765286,
+      "DoS Hulk": 0.9999790733687691,
+      "DoS Slowhttptest": 0.9995479204339964,
+      "DoS slowloris": 0.999154334038055,
+      "Heartbleed": 1.0,
+      "Infiltration": 0.75,
+      "PortScan": 0.9999843387834367
+     }
+    },
+    "no_T": {
+     "temperature": 1.0,
+     "temperature_info": {
+      "fit": "none"
+     },
+     "threshold": -7.264218399055899,
+     "calibration_fpr": 0.04999093710349828,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 11026,
+     "benign_only_flows": 82755,
+     "far": 0.04923002249707062,
+     "detection_rate": 0.9997319558590361,
+     "detection_rate_excl_portscan": 0.9996288261306404,
+     "macro_f1": 0.6633934687058121,
+     "dr_at_test_far_5pct": 0.9997773870693689,
+     "achieved_test_far_5pct": 0.049758577101227885,
+     "dr_at_test_far_1pct": 0.9990459445830097,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.04923002249707062,
+      "Bot": 0.981226533166458,
+      "DDoS": 0.9997853072058709,
+      "DoS GoldenEye": 0.9967948717948718,
+      "DoS Hulk": 0.9998639768969991,
+      "DoS Slowhttptest": 0.9995479204339964,
+      "DoS slowloris": 0.999154334038055,
+      "Heartbleed": 1.0,
+      "Infiltration": 0.8125,
+      "PortScan": 0.9999843387834367
+     }
+    },
+    "strict": {
+     "temperature": 0.5813548370299029,
+     "temperature_info": {
+      "fit": "labelled budget (in-sample)",
+      "n": 11026,
+      "nll_before": 0.001564185680020492,
+      "nll_after": 0.0009178755853423283
+     },
+     "threshold": -13.452692819909483,
+     "calibration_fpr": 0.04989828885963862,
+     "threshold_benign_support": 8357,
+     "labelled_flows": 11026,
+     "benign_only_flows": 0,
+     "far": 0.054387524324678437,
+     "detection_rate": 0.9998455338848682,
+     "detection_rate_excl_portscan": 0.9997888148674333,
+     "macro_f1": 0.6577882517229153,
+     "dr_at_test_far_5pct": 0.9998319045217684,
+     "achieved_test_far_5pct": 0.04999977666706867,
+     "dr_at_test_far_1pct": 0.9990050564937101,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.054387524324678437,
+      "Bot": 0.986232790988736,
+      "DDoS": 0.9997657896791319,
+      "DoS GoldenEye": 0.9997534516765286,
+      "DoS Hulk": 0.9999790733687691,
+      "DoS Slowhttptest": 0.9995479204339964,
+      "DoS slowloris": 0.999154334038055,
+      "Heartbleed": 1.0,
+      "Infiltration": 0.75,
+      "PortScan": 0.9999843387834367
+     }
+    }
+   }
+  },
+  {
+   "method": "xgb_continue",
+   "budget": 0.01,
+   "seed": 43,
+   "budget_size": 11026,
+   "info": {
+    "extra_rounds": 100,
+    "dropped_portscan_rows": 790
+   },
+   "variants": {
+    "orig": {
+     "temperature": 1.3429028309095994,
+     "temperature_info": {
+      "fit": "2017 calibration (labelled)",
+      "n": 92886,
+      "nll_before": 0.03055238549847968,
+      "nll_after": 0.027224086865361496
+     },
+     "threshold": -4.87110516647038,
+     "calibration_fpr": 0.049882182345477616,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 103912,
+     "benign_only_flows": 82755,
+     "far": 0.04997446560151747,
+     "detection_rate": 0.720693461994521,
+     "detection_rate_excl_portscan": 0.999321647755998,
+     "macro_f1": 0.5013892102616307,
+     "dr_at_test_far_5pct": 0.720693461994521,
+     "achieved_test_far_5pct": 0.04997446560151747,
+     "dr_at_test_far_1pct": 0.7103760341279252,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.04997446560151747,
+      "Bot": 0.9787234042553191,
+      "DDoS": 0.9990631587165274,
+      "DoS GoldenEye": 0.9990138067061144,
+      "DoS Hulk": 0.9997174904783828,
+      "DoS Slowhttptest": 0.9990958408679927,
+      "DoS slowloris": 0.9987315010570824,
+      "Heartbleed": 1.0,
+      "Infiltration": 0.6875,
+      "PortScan": 0.038824155860427235
+     }
+    },
+    "budget_T": {
+     "temperature": 1.3034202570172004,
+     "temperature_info": {
+      "fit": "labelled budget (in-sample)",
+      "n": 10236,
+      "nll_before": 0.023761419066340723,
+      "nll_after": 0.021515563809541
+     },
+     "threshold": -5.038297991404531,
+     "calibration_fpr": 0.04999093710349828,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 11026,
+     "benign_only_flows": 82755,
+     "far": 0.05009953204306455,
+     "detection_rate": 0.7207434363258871,
+     "detection_rate_excl_portscan": 0.999321647755998,
+     "macro_f1": 0.5013436912632828,
+     "dr_at_test_far_5pct": 0.7206389445421215,
+     "achieved_test_far_5pct": 0.04999977666706867,
+     "dr_at_test_far_1pct": 0.7103669478858586,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.05009953204306455,
+      "Bot": 0.9787234042553191,
+      "DDoS": 0.9990631587165274,
+      "DoS GoldenEye": 0.9990138067061144,
+      "DoS Hulk": 0.9997174904783828,
+      "DoS Slowhttptest": 0.9990958408679927,
+      "DoS slowloris": 0.9987315010570824,
+      "Heartbleed": 1.0,
+      "Infiltration": 0.6875,
+      "PortScan": 0.038996429242623566
+     }
+    },
+    "no_T": {
+     "temperature": 1.0,
+     "temperature_info": {
+      "fit": "none"
+     },
+     "threshold": -6.710131907058453,
+     "calibration_fpr": 0.04999093710349828,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 11026,
+     "benign_only_flows": 82755,
+     "far": 0.05004146548091769,
+     "detection_rate": 0.7197212340933975,
+     "detection_rate_excl_portscan": 0.9993088486570545,
+     "macro_f1": 0.5020804698694553,
+     "dr_at_test_far_5pct": 0.7197212340933975,
+     "achieved_test_far_5pct": 0.04999977666706867,
+     "dr_at_test_far_1pct": 0.7103987497330917,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.05004146548091769,
+      "Bot": 0.9799749687108886,
+      "DDoS": 0.9990436411897884,
+      "DoS GoldenEye": 0.9990138067061144,
+      "DoS Hulk": 0.9997070271627674,
+      "DoS Slowhttptest": 0.9990958408679927,
+      "DoS slowloris": 0.99830866807611,
+      "Heartbleed": 1.0,
+      "Infiltration": 0.6875,
+      "PortScan": 0.03550397794900708
+     }
+    },
+    "strict": {
+     "temperature": 1.3034202570172004,
+     "temperature_info": {
+      "fit": "labelled budget (in-sample)",
+      "n": 10236,
+      "nll_before": 0.023761419066340723,
+      "nll_after": 0.021515563809541
+     },
+     "threshold": -5.053296016062913,
+     "calibration_fpr": 0.04989828885963862,
+     "threshold_benign_support": 8357,
+     "labelled_flows": 11026,
+     "benign_only_flows": 0,
+     "far": 0.05075910863360446,
+     "detection_rate": 0.720993307982718,
+     "detection_rate_excl_portscan": 0.999321647755998,
+     "macro_f1": 0.5004474813395576,
+     "dr_at_test_far_5pct": 0.7206389445421215,
+     "achieved_test_far_5pct": 0.04999977666706867,
+     "dr_at_test_far_1pct": 0.7103669478858586,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.05075910863360446,
+      "Bot": 0.9787234042553191,
+      "DDoS": 0.9990631587165274,
+      "DoS GoldenEye": 0.9990138067061144,
+      "DoS Hulk": 0.9997174904783828,
+      "DoS Slowhttptest": 0.9990958408679927,
+      "DoS slowloris": 0.9987315010570824,
+      "Heartbleed": 1.0,
+      "Infiltration": 0.6875,
+      "PortScan": 0.03985779615360521
+     }
+    }
+   }
+  },
+  {
+   "method": "esnn_t4_finetune",
+   "budget": 0.01,
+   "seed": 44,
+   "budget_size": 11026,
+   "info": {
+    "epochs": 7
+   },
+   "variants": {
+    "orig": {
+     "temperature": 0.9971907625665841,
+     "temperature_info": {
+      "fit": "2017 calibration (labelled)",
+      "n": 99999,
+      "nll_before": 0.0795627056349367,
+      "nll_after": 0.07956182371038936
+     },
+     "threshold": -3.4495332148369044,
+     "calibration_fpr": 0.049918433931484506,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 111025,
+     "benign_only_flows": 82755,
+     "far": 0.05260681641884156,
+     "detection_rate": 0.9943529005556238,
+     "detection_rate_excl_portscan": 0.9936708455724717,
+     "macro_f1": 0.5979507853619908,
+     "dr_at_test_far_5pct": 0.9941484601091257,
+     "achieved_test_far_5pct": 0.0499923322360242,
+     "dr_at_test_far_1pct": 0.983721997337731,
+     "achieved_test_far_1pct": 0.009994893120303494,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.05260681641884156,
+      "Bot": 0.0,
+      "DDoS": 0.9987508782887032,
+      "DoS GoldenEye": 0.9997534516765286,
+      "DoS Hulk": 0.9994245176411501,
+      "DoS Slowhttptest": 0.994122965641953,
+      "DoS slowloris": 0.9843551797040169,
+      "Heartbleed": 0.0,
+      "Infiltration": 0.0625,
+      "PortScan": 0.9960220509929212
+     }
+    },
+    "budget_T": {
+     "temperature": 0.9527974052835163,
+     "temperature_info": {
+      "fit": "labelled budget (in-sample)",
+      "n": 11026,
+      "nll_before": 0.07170206702266188,
+      "nll_after": 0.07146518084582323
+     },
+     "threshold": -3.634603519877323,
+     "calibration_fpr": 0.04999093710349828,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 11026,
+     "benign_only_flows": 82755,
+     "far": 0.05281228271566889,
+     "detection_rate": 0.9943483574345904,
+     "detection_rate_excl_portscan": 0.9936708455724717,
+     "macro_f1": 0.5978636936833507,
+     "dr_at_test_far_5pct": 0.9941439169880925,
+     "achieved_test_far_5pct": 0.04999977666706867,
+     "dr_at_test_far_1pct": 0.9836992817325646,
+     "achieved_test_far_1pct": 0.009991915347885707,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.05281228271566889,
+      "Bot": 0.0,
+      "DDoS": 0.9987508782887032,
+      "DoS GoldenEye": 0.9997534516765286,
+      "DoS Hulk": 0.9994245176411501,
+      "DoS Slowhttptest": 0.994122965641953,
+      "DoS slowloris": 0.9843551797040169,
+      "Heartbleed": 0.0,
+      "Infiltration": 0.0625,
+      "PortScan": 0.9960063897763578
+     }
+    },
+    "no_T": {
+     "temperature": 1.0,
+     "temperature_info": {
+      "fit": "none"
+     },
+     "threshold": -3.4388739307767464,
+     "calibration_fpr": 0.0499426016554891,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 11026,
+     "benign_only_flows": 82755,
+     "far": 0.05261872750851271,
+     "detection_rate": 0.9943529005556238,
+     "detection_rate_excl_portscan": 0.9936708455724717,
+     "macro_f1": 0.5979304770286835,
+     "dr_at_test_far_5pct": 0.9941484601091257,
+     "achieved_test_far_5pct": 0.049995310008441984,
+     "dr_at_test_far_1pct": 0.9837265404587644,
+     "achieved_test_far_1pct": 0.009996382006512388,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.05261872750851271,
+      "Bot": 0.0,
+      "DDoS": 0.9987508782887032,
+      "DoS GoldenEye": 0.9997534516765286,
+      "DoS Hulk": 0.9994245176411501,
+      "DoS Slowhttptest": 0.994122965641953,
+      "DoS slowloris": 0.9843551797040169,
+      "Heartbleed": 0.0,
+      "Infiltration": 0.0625,
+      "PortScan": 0.9960220509929212
+     }
+    },
+    "strict": {
+     "temperature": 0.9527974052835163,
+     "temperature_info": {
+      "fit": "labelled budget (in-sample)",
+      "n": 11026,
+      "nll_before": 0.07170206702266188,
+      "nll_after": 0.07146518084582323
+     },
+     "threshold": -3.5394439024448285,
+     "calibration_fpr": 0.04906066770372143,
+     "threshold_benign_support": 8357,
+     "labelled_flows": 11026,
+     "benign_only_flows": 0,
+     "far": 0.04938784443521335,
+     "detection_rate": 0.9940848564146597,
+     "detection_rate_excl_portscan": 0.9933060712525839,
+     "macro_f1": 0.5996691221520067,
+     "dr_at_test_far_5pct": 0.9941439169880925,
+     "achieved_test_far_5pct": 0.04999977666706867,
+     "dr_at_test_far_1pct": 0.9836992817325646,
+     "achieved_test_far_1pct": 0.009991915347885707,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.04938784443521335,
+      "Bot": 0.0,
+      "DDoS": 0.9987313607619642,
+      "DoS GoldenEye": 0.9992603550295858,
+      "DoS Hulk": 0.9989536684384548,
+      "DoS Slowhttptest": 0.9927667269439421,
+      "DoS slowloris": 0.9818181818181818,
+      "Heartbleed": 0.0,
+      "Infiltration": 0.0625,
+      "PortScan": 0.9959907285597945
+     }
+    }
+   }
+  },
+  {
+   "method": "xgb_scratch",
+   "budget": 0.01,
+   "seed": 44,
+   "budget_size": 11026,
+   "info": {
+    "trees": 400,
+    "classes": [
+     "Benign",
+     "Bot",
+     "DDoS-LOIC-HTTP",
+     "DoS-GoldenEye",
+     "DoS-Hulk",
+     "DoS-SlowHTTPTest",
+     "DoS-Slowloris",
+     "Infiltration",
+     "PortScan"
+    ]
+   },
+   "variants": {
+    "orig": {
+     "temperature": 1.2195622255601863,
+     "temperature_info": {
+      "fit": "2017 calibration (labelled)",
+      "n": 99999,
+      "nll_before": 0.01675509709879251,
+      "nll_after": 0.01562910617939913
+     },
+     "threshold": -5.838662869060491,
+     "calibration_fpr": 0.04999093710349828,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 111025,
+     "benign_only_flows": 82755,
+     "far": 0.04977644373573461,
+     "detection_rate": 0.9998591632479681,
+     "detection_rate_excl_portscan": 0.9998016139663768,
+     "macro_f1": 0.6613816565910479,
+     "dr_at_test_far_5pct": 0.9998591632479681,
+     "achieved_test_far_5pct": 0.04999977666706867,
+     "dr_at_test_far_1pct": 0.999036858340943,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.04977644373573461,
+      "Bot": 0.9749687108886108,
+      "DDoS": 0.999960964946522,
+      "DoS GoldenEye": 1.0,
+      "DoS Hulk": 1.0,
+      "DoS Slowhttptest": 0.9990958408679927,
+      "DoS slowloris": 0.9995771670190274,
+      "Heartbleed": 1.0,
+      "Infiltration": 0.625,
+      "PortScan": 1.0
+     }
+    },
+    "budget_T": {
+     "temperature": 0.5567514617994688,
+     "temperature_info": {
+      "fit": "labelled budget (in-sample)",
+      "n": 11026,
+      "nll_before": 0.001219624985804211,
+      "nll_after": 0.000651559108021445
+     },
+     "threshold": -14.178044341506837,
+     "calibration_fpr": 0.04999093710349828,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 11026,
+     "benign_only_flows": 82755,
+     "far": 0.050109954246526804,
+     "detection_rate": 0.9998409907638349,
+     "detection_rate_excl_portscan": 0.9997760157684898,
+     "macro_f1": 0.66148900765754,
+     "dr_at_test_far_5pct": 0.9998409907638349,
+     "achieved_test_far_5pct": 0.04999977666706867,
+     "dr_at_test_far_1pct": 0.9990050564937101,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.050109954246526804,
+      "Bot": 0.9712140175219024,
+      "DDoS": 0.999960964946522,
+      "DoS GoldenEye": 1.0,
+      "DoS Hulk": 0.9999895366843845,
+      "DoS Slowhttptest": 0.9990958408679927,
+      "DoS slowloris": 0.9995771670190274,
+      "Heartbleed": 1.0,
+      "Infiltration": 0.625,
+      "PortScan": 1.0
+     }
+    },
+    "no_T": {
+     "temperature": 1.0,
+     "temperature_info": {
+      "fit": "none"
+     },
+     "threshold": -7.41764994862215,
+     "calibration_fpr": 0.04999093710349828,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 11026,
+     "benign_only_flows": 82755,
+     "far": 0.04926724465229296,
+     "detection_rate": 0.9998500770059016,
+     "detection_rate_excl_portscan": 0.9997888148674333,
+     "macro_f1": 0.6628070064435216,
+     "dr_at_test_far_5pct": 0.9998500770059016,
+     "achieved_test_far_5pct": 0.04999977666706867,
+     "dr_at_test_far_1pct": 0.9990277720988765,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.04926724465229296,
+      "Bot": 0.9724655819774718,
+      "DDoS": 0.999960964946522,
+      "DoS GoldenEye": 1.0,
+      "DoS Hulk": 1.0,
+      "DoS Slowhttptest": 0.9990958408679927,
+      "DoS slowloris": 0.9995771670190274,
+      "Heartbleed": 1.0,
+      "Infiltration": 0.625,
+      "PortScan": 1.0
+     }
+    },
+    "strict": {
+     "temperature": 0.5567514617994688,
+     "temperature_info": {
+      "fit": "labelled budget (in-sample)",
+      "n": 11026,
+      "nll_before": 0.001219624985804211,
+      "nll_after": 0.000651559108021445
+     },
+     "threshold": -14.320506765689547,
+     "calibration_fpr": 0.04989828885963862,
+     "threshold_benign_support": 8357,
+     "labelled_flows": 11026,
+     "benign_only_flows": 0,
+     "far": 0.05389768076195241,
+     "detection_rate": 0.9998546201269348,
+     "detection_rate_excl_portscan": 0.999795214416905,
+     "macro_f1": 0.6542531202054594,
+     "dr_at_test_far_5pct": 0.9998409907638349,
+     "achieved_test_far_5pct": 0.04999977666706867,
+     "dr_at_test_far_1pct": 0.9990050564937101,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.05389768076195241,
+      "Bot": 0.9749687108886108,
+      "DDoS": 0.999960964946522,
+      "DoS GoldenEye": 1.0,
+      "DoS Hulk": 0.9999895366843845,
+      "DoS Slowhttptest": 0.9990958408679927,
+      "DoS slowloris": 0.9995771670190274,
+      "Heartbleed": 1.0,
+      "Infiltration": 0.625,
+      "PortScan": 1.0
+     }
+    }
+   }
+  },
+  {
+   "method": "xgb_continue",
+   "budget": 0.01,
+   "seed": 44,
+   "budget_size": 11026,
+   "info": {
+    "extra_rounds": 100,
+    "dropped_portscan_rows": 790
+   },
+   "variants": {
+    "orig": {
+     "temperature": 1.537008550388085,
+     "temperature_info": {
+      "fit": "2017 calibration (labelled)",
+      "n": 92886,
+      "nll_before": 0.06273804092942767,
+      "nll_after": 0.050753420771024356
+     },
+     "threshold": -3.989136951681,
+     "calibration_fpr": 0.04999093710349828,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 103912,
+     "benign_only_flows": 82755,
+     "far": 0.04872380118604675,
+     "detection_rate": 0.7343955150309159,
+     "detection_rate_excl_portscan": 0.9971586000345576,
+     "macro_f1": 0.4875984680881098,
+     "dr_at_test_far_5pct": 0.7362581946545638,
+     "achieved_test_far_5pct": 0.04999977666706867,
+     "dr_at_test_far_1pct": 0.7070277539263924,
+     "achieved_test_far_1pct": 0.009997870892721281,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.04872380118604675,
+      "Bot": 0.9136420525657072,
+      "DDoS": 0.9997267546256539,
+      "DoS GoldenEye": 0.9595660749506904,
+      "DoS Hulk": 0.9995919306909974,
+      "DoS Slowhttptest": 0.9674502712477396,
+      "DoS slowloris": 0.9704016913319239,
+      "Heartbleed": 1.0,
+      "Infiltration": 0.0,
+      "PortScan": 0.09135187621374428
+     }
+    },
+    "budget_T": {
+     "temperature": 1.390047885793218,
+     "temperature_info": {
+      "fit": "labelled budget (in-sample)",
+      "n": 10236,
+      "nll_before": 0.030668410194718197,
+      "nll_after": 0.026607693257041928
+     },
+     "threshold": -4.511448998466502,
+     "calibration_fpr": 0.04999093710349828,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 11026,
+     "benign_only_flows": 82755,
+     "far": 0.048784845520611395,
+     "detection_rate": 0.7359810642715332,
+     "detection_rate_excl_portscan": 0.9971649995840293,
+     "macro_f1": 0.4875970826385939,
+     "dr_at_test_far_5pct": 0.7366034718530936,
+     "achieved_test_far_5pct": 0.04999977666706867,
+     "dr_at_test_far_1pct": 0.7068823740533271,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.048784845520611395,
+      "Bot": 0.9111389236545682,
+      "DDoS": 0.9997462721523929,
+      "DoS GoldenEye": 0.9598126232741617,
+      "DoS Hulk": 0.9995919306909974,
+      "DoS Slowhttptest": 0.9674502712477396,
+      "DoS slowloris": 0.9708245243128965,
+      "Heartbleed": 1.0,
+      "Infiltration": 0.0,
+      "PortScan": 0.0968019795777736
+     }
+    },
+    "no_T": {
+     "temperature": 1.0,
+     "temperature_info": {
+      "fit": "none"
+     },
+     "threshold": -6.592697406281744,
+     "calibration_fpr": 0.04999093710349828,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 11026,
+     "benign_only_flows": 82755,
+     "far": 0.04886226760347387,
+     "detection_rate": 0.7414509819956113,
+     "detection_rate_excl_portscan": 0.9971649995840293,
+     "macro_f1": 0.4880092330753981,
+     "dr_at_test_far_5pct": 0.742550417285667,
+     "achieved_test_far_5pct": 0.04999977666706867,
+     "dr_at_test_far_1pct": 0.7068596584481607,
+     "achieved_test_far_1pct": 0.009997870892721281,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.04886226760347387,
+      "Bot": 0.9023779724655819,
+      "DDoS": 0.9997462721523929,
+      "DoS GoldenEye": 0.9610453648915187,
+      "DoS Hulk": 0.9995919306909974,
+      "DoS Slowhttptest": 0.9674502712477396,
+      "DoS slowloris": 0.9716701902748415,
+      "Heartbleed": 1.0,
+      "Infiltration": 0.0,
+      "PortScan": 0.11565808431998997
+     }
+    },
+    "strict": {
+     "temperature": 1.390047885793218,
+     "temperature_info": {
+      "fit": "labelled budget (in-sample)",
+      "n": 10236,
+      "nll_before": 0.030668410194718197,
+      "nll_after": 0.026607693257041928
+     },
+     "threshold": -4.644873797303979,
+     "calibration_fpr": 0.04989828885963862,
+     "threshold_benign_support": 8357,
+     "labelled_flows": 11026,
+     "benign_only_flows": 0,
+     "far": 0.05389172521711683,
+     "detection_rate": 0.7456351964672691,
+     "detection_rate_excl_portscan": 0.9972737919250485,
+     "macro_f1": 0.48250230836417946,
+     "dr_at_test_far_5pct": 0.7366034718530936,
+     "achieved_test_far_5pct": 0.04999977666706867,
+     "dr_at_test_far_1pct": 0.7068823740533271,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.05389172521711683,
+      "Bot": 0.9261576971214017,
+      "DDoS": 0.9997462721523929,
+      "DoS GoldenEye": 0.960552268244576,
+      "DoS Hulk": 0.9995919306909974,
+      "DoS Slowhttptest": 0.9674502712477396,
+      "DoS slowloris": 0.9716701902748415,
+      "Heartbleed": 1.0,
+      "Infiltration": 0.0,
+      "PortScan": 0.12981582409321557
+     }
+    }
+   }
+  },
+  {
+   "method": "esnn_t4_finetune",
+   "budget": 0.05,
+   "seed": 42,
+   "budget_size": 55153,
+   "info": {
+    "epochs": 5
+   },
+   "variants": {
+    "orig": {
+     "temperature": 1.0352414929908786,
+     "temperature_info": {
+      "fit": "2017 calibration (labelled)",
+      "n": 99999,
+      "nll_before": 0.031361925388009096,
+      "nll_after": 0.03129999897665423
+     },
+     "threshold": -4.96393116655404,
+     "calibration_fpr": 0.04997885324149598,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 155152,
+     "benign_only_flows": 82755,
+     "far": 0.0526678607534062,
+     "detection_rate": 0.9955522845084116,
+     "detection_rate_excl_portscan": 0.9949955523131172,
+     "macro_f1": 0.7046575124470239,
+     "dr_at_test_far_5pct": 0.995447792724646,
+     "achieved_test_far_5pct": 0.04999977666706867,
+     "dr_at_test_far_1pct": 0.9935396818906652,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.0526678607534062,
+      "Bot": 0.2528160200250313,
+      "DDoS": 0.9990436411897884,
+      "DoS GoldenEye": 0.995069033530572,
+      "DoS Hulk": 0.9991943246976102,
+      "DoS Slowhttptest": 0.994122965641953,
+      "DoS slowloris": 0.9974630021141649,
+      "Heartbleed": 0.0,
+      "Infiltration": 0.0625,
+      "PortScan": 0.9969147403370294
+     }
+    },
+    "budget_T": {
+     "temperature": 1.0326363750956546,
+     "temperature_info": {
+      "fit": "labelled budget (in-sample)",
+      "n": 55153,
+      "nll_before": 0.030622081051021495,
+      "nll_after": 0.030570537190297307
+     },
+     "threshold": -4.978921908437504,
+     "calibration_fpr": 0.04999093710349828,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 55153,
+     "benign_only_flows": 82755,
+     "far": 0.05268126072928624,
+     "detection_rate": 0.9955522845084116,
+     "detection_rate_excl_portscan": 0.9949955523131172,
+     "macro_f1": 0.7046527397997538,
+     "dr_at_test_far_5pct": 0.995447792724646,
+     "achieved_test_far_5pct": 0.04999977666706867,
+     "dr_at_test_far_1pct": 0.9935396818906652,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.05268126072928624,
+      "Bot": 0.2528160200250313,
+      "DDoS": 0.9990436411897884,
+      "DoS GoldenEye": 0.995069033530572,
+      "DoS Hulk": 0.9991943246976102,
+      "DoS Slowhttptest": 0.994122965641953,
+      "DoS slowloris": 0.9974630021141649,
+      "Heartbleed": 0.0,
+      "Infiltration": 0.0625,
+      "PortScan": 0.9969147403370294
+     }
+    },
+    "no_T": {
+     "temperature": 1.0,
+     "temperature_info": {
+      "fit": "none"
+     },
+     "threshold": -5.16427790607703,
+     "calibration_fpr": 0.04999093710349828,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 55153,
+     "benign_only_flows": 82755,
+     "far": 0.05272146065692637,
+     "detection_rate": 0.995543198266345,
+     "detection_rate_excl_portscan": 0.9949827532141737,
+     "macro_f1": 0.7046664274991511,
+     "dr_at_test_far_5pct": 0.995447792724646,
+     "achieved_test_far_5pct": 0.04999977666706867,
+     "dr_at_test_far_1pct": 0.9935396818906652,
+     "achieved_test_far_1pct": 0.009997870892721281,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.05272146065692637,
+      "Bot": 0.2528160200250313,
+      "DDoS": 0.9990241236630494,
+      "DoS GoldenEye": 0.995069033530572,
+      "DoS Hulk": 0.9991838613819948,
+      "DoS Slowhttptest": 0.994122965641953,
+      "DoS slowloris": 0.9974630021141649,
+      "Heartbleed": 0.0,
+      "Infiltration": 0.0625,
+      "PortScan": 0.9969147403370294
+     }
+    },
+    "strict": {
+     "temperature": 1.0326363750956546,
+     "temperature_info": {
+      "fit": "labelled budget (in-sample)",
+      "n": 55153,
+      "nll_before": 0.030622081051021495,
+      "nll_after": 0.030570537190297307
+     },
+     "threshold": -4.98138917873222,
+     "calibration_fpr": 0.04996649755910788,
+     "threshold_benign_support": 41788,
+     "labelled_flows": 55153,
+     "benign_only_flows": 0,
+     "far": 0.052822704919131144,
+     "detection_rate": 0.9955522845084116,
+     "detection_rate_excl_portscan": 0.9949955523131172,
+     "macro_f1": 0.7045820587229039,
+     "dr_at_test_far_5pct": 0.995447792724646,
+     "achieved_test_far_5pct": 0.04999977666706867,
+     "dr_at_test_far_1pct": 0.9935396818906652,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.052822704919131144,
+      "Bot": 0.2528160200250313,
+      "DDoS": 0.9990436411897884,
+      "DoS GoldenEye": 0.995069033530572,
+      "DoS Hulk": 0.9991943246976102,
+      "DoS Slowhttptest": 0.994122965641953,
+      "DoS slowloris": 0.9974630021141649,
+      "Heartbleed": 0.0,
+      "Infiltration": 0.0625,
+      "PortScan": 0.9969147403370294
+     }
+    }
+   }
+  },
+  {
+   "method": "xgb_scratch",
+   "budget": 0.05,
+   "seed": 42,
+   "budget_size": 55153,
+   "info": {
+    "trees": 400,
+    "classes": [
+     "Benign",
+     "Bot",
+     "DDoS-LOIC-HTTP",
+     "DoS-GoldenEye",
+     "DoS-Hulk",
+     "DoS-SlowHTTPTest",
+     "DoS-Slowloris",
+     "Infiltration",
+     "PortScan"
+    ]
+   },
+   "variants": {
+    "orig": {
+     "temperature": 1.2519559561074085,
+     "temperature_info": {
+      "fit": "2017 calibration (labelled)",
+      "n": 99999,
+      "nll_before": 0.008208450894422287,
+      "nll_after": 0.0075287960326139765
+     },
+     "threshold": -6.647584461483117,
+     "calibration_fpr": 0.04999093710349828,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 155152,
+     "benign_only_flows": 82755,
+     "far": 0.051259374399792744,
+     "detection_rate": 0.9999409394265673,
+     "detection_rate_excl_portscan": 0.9999168058568677,
+     "macro_f1": 0.6693666003650673,
+     "dr_at_test_far_5pct": 0.9999409394265673,
+     "achieved_test_far_5pct": 0.049996798894650876,
+     "dr_at_test_far_1pct": 0.9997319558590361,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.051259374399792744,
+      "Bot": 0.9937421777221527,
+      "DDoS": 0.999960964946522,
+      "DoS GoldenEye": 1.0,
+      "DoS Hulk": 0.9999895366843845,
+      "DoS Slowhttptest": 1.0,
+      "DoS slowloris": 0.9995771670190274,
+      "Heartbleed": 1.0,
+      "Infiltration": 0.75,
+      "PortScan": 1.0
+     }
+    },
+    "budget_T": {
+     "temperature": 0.67889671372647,
+     "temperature_info": {
+      "fit": "labelled budget (in-sample)",
+      "n": 55153,
+      "nll_before": 0.0010716602623147473,
+      "nll_after": 0.0008846260486282623
+     },
+     "threshold": -13.210232313529087,
+     "calibration_fpr": 0.04999093710349828,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 55153,
+     "benign_only_flows": 82755,
+     "far": 0.051177485658303594,
+     "detection_rate": 0.9999409394265673,
+     "detection_rate_excl_portscan": 0.9999168058568677,
+     "macro_f1": 0.6726557462412803,
+     "dr_at_test_far_5pct": 0.9999409394265673,
+     "achieved_test_far_5pct": 0.049998287780859775,
+     "dr_at_test_far_1pct": 0.9997501283431692,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.051177485658303594,
+      "Bot": 0.9937421777221527,
+      "DDoS": 0.999960964946522,
+      "DoS GoldenEye": 1.0,
+      "DoS Hulk": 0.9999895366843845,
+      "DoS Slowhttptest": 1.0,
+      "DoS slowloris": 0.9995771670190274,
+      "Heartbleed": 1.0,
+      "Infiltration": 0.75,
+      "PortScan": 1.0
+     }
+    },
+    "no_T": {
+     "temperature": 1.0,
+     "temperature_info": {
+      "fit": "none"
+     },
+     "threshold": -8.651682478702813,
+     "calibration_fpr": 0.04999093710349828,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 55153,
+     "benign_only_flows": 82755,
+     "far": 0.051455907379366714,
+     "detection_rate": 0.9999409394265673,
+     "detection_rate_excl_portscan": 0.9999168058568677,
+     "macro_f1": 0.6704156705421538,
+     "dr_at_test_far_5pct": 0.9999409394265673,
+     "achieved_test_far_5pct": 0.04999977666706867,
+     "dr_at_test_far_1pct": 0.9997410421011026,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.051455907379366714,
+      "Bot": 0.9937421777221527,
+      "DDoS": 0.999960964946522,
+      "DoS GoldenEye": 1.0,
+      "DoS Hulk": 0.9999895366843845,
+      "DoS Slowhttptest": 1.0,
+      "DoS slowloris": 0.9995771670190274,
+      "Heartbleed": 1.0,
+      "Infiltration": 0.75,
+      "PortScan": 1.0
+     }
+    },
+    "strict": {
+     "temperature": 0.67889671372647,
+     "temperature_info": {
+      "fit": "labelled budget (in-sample)",
+      "n": 55153,
+      "nll_before": 0.0010716602623147473,
+      "nll_after": 0.0008846260486282623
+     },
+     "threshold": -13.247012352982047,
+     "calibration_fpr": 0.049990427874030824,
+     "threshold_benign_support": 41788,
+     "labelled_flows": 55153,
+     "benign_only_flows": 0,
+     "far": 0.05218248384930685,
+     "detection_rate": 0.9999454825476005,
+     "detection_rate_excl_portscan": 0.9999232054063394,
+     "macro_f1": 0.6706445365684266,
+     "dr_at_test_far_5pct": 0.9999409394265673,
+     "achieved_test_far_5pct": 0.049998287780859775,
+     "dr_at_test_far_1pct": 0.9997501283431692,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.05218248384930685,
+      "Bot": 0.9937421777221527,
+      "DDoS": 0.999960964946522,
+      "DoS GoldenEye": 1.0,
+      "DoS Hulk": 0.9999895366843845,
+      "DoS Slowhttptest": 1.0,
+      "DoS slowloris": 1.0,
+      "Heartbleed": 1.0,
+      "Infiltration": 0.75,
+      "PortScan": 1.0
+     }
+    }
+   }
+  },
+  {
+   "method": "xgb_continue",
+   "budget": 0.05,
+   "seed": 42,
+   "budget_size": 55153,
+   "info": {
+    "extra_rounds": 100,
+    "dropped_portscan_rows": 3951
+   },
+   "variants": {
+    "orig": {
+     "temperature": 2.4404175198628515,
+     "temperature_info": {
+      "fit": "2017 calibration (labelled)",
+      "n": 92886,
+      "nll_before": 0.19031476594221394,
+      "nll_after": 0.1022466693089725
+     },
+     "threshold": -2.6971314775882074,
+     "calibration_fpr": 0.04999093710349828,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 148039,
+     "benign_only_flows": 82755,
+     "far": 0.060228424922168476,
+     "detection_rate": 0.7846606061432082,
+     "detection_rate_excl_portscan": 0.9876360704206424,
+     "macro_f1": 0.4234491141394272,
+     "dr_at_test_far_5pct": 0.7627264177944965,
+     "achieved_test_far_5pct": 0.04174390263875303,
+     "dr_at_test_far_1pct": 0.7022620199624738,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.060228424922168476,
+      "Bot": 0.8310387984981227,
+      "DDoS": 0.9953353111093762,
+      "DoS GoldenEye": 0.9795364891518737,
+      "DoS Hulk": 0.9958983802787428,
+      "DoS Slowhttptest": 0.895117540687161,
+      "DoS slowloris": 0.6486257928118393,
+      "Heartbleed": 0.0,
+      "Infiltration": 0.0625,
+      "PortScan": 0.287931466516319
+     }
+    },
+    "budget_T": {
+     "temperature": 2.3917162810648174,
+     "temperature_info": {
+      "fit": "labelled budget (in-sample)",
+      "n": 51202,
+      "nll_before": 0.16443522601057006,
+      "nll_after": 0.08933762162109304
+     },
+     "threshold": -2.776953061202447,
+     "calibration_fpr": 0.04999093710349828,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 55153,
+     "benign_only_flows": 82755,
+     "far": 0.060168869473812725,
+     "detection_rate": 0.7859235937904622,
+     "detection_rate_excl_portscan": 0.9876488695195859,
+     "macro_f1": 0.4233763047349702,
+     "dr_at_test_far_5pct": 0.7640757247413829,
+     "achieved_test_far_5pct": 0.04143272542109424,
+     "dr_at_test_far_1pct": 0.7022620199624738,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.060168869473812725,
+      "Bot": 0.8322903629536921,
+      "DDoS": 0.9953353111093762,
+      "DoS GoldenEye": 0.9795364891518737,
+      "DoS Hulk": 0.9958983802787428,
+      "DoS Slowhttptest": 0.895117540687161,
+      "DoS slowloris": 0.6490486257928119,
+      "Heartbleed": 0.0,
+      "Infiltration": 0.0625,
+      "PortScan": 0.2922539622877905
+     }
+    },
+    "no_T": {
+     "temperature": 1.0,
+     "temperature_info": {
+      "fit": "none"
+     },
+     "threshold": -7.9717497904629795,
+     "calibration_fpr": 0.04999093710349828,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 55153,
+     "benign_only_flows": 82755,
+     "far": 0.06034753581887997,
+     "detection_rate": 0.8507448446934075,
+     "detection_rate_excl_portscan": 0.9879816460921151,
+     "macro_f1": 0.42061189859730974,
+     "dr_at_test_far_5pct": 0.8311685361609719,
+     "achieved_test_far_5pct": 0.04997744337393526,
+     "dr_at_test_far_1pct": 0.7034296020680287,
+     "achieved_test_far_1pct": 0.009996382006512388,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.06034753581887997,
+      "Bot": 0.853566958698373,
+      "DDoS": 0.9953353111093762,
+      "DoS GoldenEye": 0.9800295857988166,
+      "DoS Hulk": 0.996044866697359,
+      "DoS Slowhttptest": 0.8996383363471971,
+      "DoS slowloris": 0.6528541226215645,
+      "Heartbleed": 0.0,
+      "Infiltration": 0.0625,
+      "PortScan": 0.5148938169517008
+     }
+    },
+    "strict": {
+     "temperature": 2.3917162810648174,
+     "temperature_info": {
+      "fit": "labelled budget (in-sample)",
+      "n": 51202,
+      "nll_before": 0.16443522601057006,
+      "nll_after": 0.08933762162109304
+     },
+     "threshold": -2.7828454136819807,
+     "calibration_fpr": 0.049990427874030824,
+     "threshold_benign_support": 41788,
+     "labelled_flows": 55153,
+     "benign_only_flows": 0,
+     "far": 0.060870134878201664,
+     "detection_rate": 0.7867368124554206,
+     "detection_rate_excl_portscan": 0.987668068168001,
+     "macro_f1": 0.422926558493049,
+     "dr_at_test_far_5pct": 0.7640757247413829,
+     "achieved_test_far_5pct": 0.04143272542109424,
+     "dr_at_test_far_1pct": 0.7022620199624738,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.060870134878201664,
+      "Bot": 0.8322903629536921,
+      "DDoS": 0.9953353111093762,
+      "DoS GoldenEye": 0.9795364891518737,
+      "DoS Hulk": 0.995929770225589,
+      "DoS Slowhttptest": 0.895117540687161,
+      "DoS slowloris": 0.6490486257928119,
+      "Heartbleed": 0.0,
+      "Infiltration": 0.0625,
+      "PortScan": 0.2950103364029318
+     }
+    }
+   }
+  },
+  {
+   "method": "esnn_t4_finetune",
+   "budget": 0.05,
+   "seed": 43,
+   "budget_size": 55153,
+   "info": {
+    "epochs": 5
+   },
+   "variants": {
+    "orig": {
+     "temperature": 1.0559128922950014,
+     "temperature_info": {
+      "fit": "2017 calibration (labelled)",
+      "n": 99999,
+      "nll_before": 0.0322228693052851,
+      "nll_after": 0.03206497277186295
+     },
+     "threshold": -4.406444519662142,
+     "calibration_fpr": 0.049845930759470726,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 155152,
+     "benign_only_flows": 82755,
+     "far": 0.05323959305762139,
+     "detection_rate": 0.9958021561652424,
+     "detection_rate_excl_portscan": 0.9955331144687414,
+     "macro_f1": 0.7070968043832546,
+     "dr_at_test_far_5pct": 0.9957885268021426,
+     "achieved_test_far_5pct": 0.049969998942890795,
+     "dr_at_test_far_1pct": 0.9936032855851312,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.05323959305762139,
+      "Bot": 0.29411764705882354,
+      "DDoS": 0.9988875009758763,
+      "DoS GoldenEye": 0.9995069033530573,
+      "DoS Hulk": 0.9995186874816891,
+      "DoS Slowhttptest": 0.9977396021699819,
+      "DoS slowloris": 0.99830866807611,
+      "Heartbleed": 0.0,
+      "Infiltration": 0.0625,
+      "PortScan": 0.9964605650566936
+     }
+    },
+    "budget_T": {
+     "temperature": 1.0147159203525198,
+     "temperature_info": {
+      "fit": "labelled budget (in-sample)",
+      "n": 55153,
+      "nll_before": 0.027686594472455743,
+      "nll_after": 0.02767640333637278
+     },
+     "threshold": -4.614551472097746,
+     "calibration_fpr": 0.04997885324149598,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 55153,
+     "benign_only_flows": 82755,
+     "far": 0.05337657058883961,
+     "detection_rate": 0.9958157855283423,
+     "detection_rate_excl_portscan": 0.9955523131171565,
+     "macro_f1": 0.7072216920165779,
+     "dr_at_test_far_5pct": 0.9957930699231758,
+     "achieved_test_far_5pct": 0.04997893226014415,
+     "dr_at_test_far_1pct": 0.9936123718271979,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.05337657058883961,
+      "Bot": 0.2978723404255319,
+      "DDoS": 0.9988875009758763,
+      "DoS GoldenEye": 0.9995069033530573,
+      "DoS Hulk": 0.9995186874816891,
+      "DoS Slowhttptest": 0.9977396021699819,
+      "DoS slowloris": 0.99830866807611,
+      "Heartbleed": 0.0,
+      "Infiltration": 0.0625,
+      "PortScan": 0.9964605650566936
+     }
+    },
+    "no_T": {
+     "temperature": 1.0,
+     "temperature_info": {
+      "fit": "none"
+     },
+     "threshold": -4.6929012560374295,
+     "calibration_fpr": 0.04999093710349828,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 55153,
+     "benign_only_flows": 82755,
+     "far": 0.05337954836125739,
+     "detection_rate": 0.9958157855283423,
+     "detection_rate_excl_portscan": 0.9955523131171565,
+     "macro_f1": 0.7071941361264322,
+     "dr_at_test_far_5pct": 0.9957930699231758,
+     "achieved_test_far_5pct": 0.049914910153161726,
+     "dr_at_test_far_1pct": 0.9936169149482311,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.05337954836125739,
+      "Bot": 0.2978723404255319,
+      "DDoS": 0.9988875009758763,
+      "DoS GoldenEye": 0.9995069033530573,
+      "DoS Hulk": 0.9995186874816891,
+      "DoS Slowhttptest": 0.9977396021699819,
+      "DoS slowloris": 0.99830866807611,
+      "Heartbleed": 0.0,
+      "Infiltration": 0.0625,
+      "PortScan": 0.9964605650566936
+     }
+    },
+    "strict": {
+     "temperature": 1.0147159203525198,
+     "temperature_info": {
+      "fit": "labelled budget (in-sample)",
+      "n": 55153,
+      "nll_before": 0.027686594472455743,
+      "nll_after": 0.02767640333637278
+     },
+     "threshold": -4.580508663307754,
+     "calibration_fpr": 0.049990427874030824,
+     "threshold_benign_support": 41788,
+     "labelled_flows": 55153,
+     "benign_only_flows": 0,
+     "far": 0.05206337295259535,
+     "detection_rate": 0.9958021561652424,
+     "detection_rate_excl_portscan": 0.9955331144687414,
+     "macro_f1": 0.7080599448896899,
+     "dr_at_test_far_5pct": 0.9957930699231758,
+     "achieved_test_far_5pct": 0.04997893226014415,
+     "dr_at_test_far_1pct": 0.9936123718271979,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.05206337295259535,
+      "Bot": 0.29411764705882354,
+      "DDoS": 0.9988875009758763,
+      "DoS GoldenEye": 0.9995069033530573,
+      "DoS Hulk": 0.9995186874816891,
+      "DoS Slowhttptest": 0.9977396021699819,
+      "DoS slowloris": 0.99830866807611,
+      "Heartbleed": 0.0,
+      "Infiltration": 0.0625,
+      "PortScan": 0.9964605650566936
+     }
+    }
+   }
+  },
+  {
+   "method": "xgb_scratch",
+   "budget": 0.05,
+   "seed": 43,
+   "budget_size": 55153,
+   "info": {
+    "trees": 400,
+    "classes": [
+     "Benign",
+     "Bot",
+     "DDoS-LOIC-HTTP",
+     "DoS-GoldenEye",
+     "DoS-Hulk",
+     "DoS-SlowHTTPTest",
+     "DoS-Slowloris",
+     "Infiltration",
+     "PortScan"
+    ]
+   },
+   "variants": {
+    "orig": {
+     "temperature": 1.2856626232358361,
+     "temperature_info": {
+      "fit": "2017 calibration (labelled)",
+      "n": 99999,
+      "nll_before": 0.008336441165491086,
+      "nll_after": 0.007484777938541937
+     },
+     "threshold": -6.623586365484192,
+     "calibration_fpr": 0.04999093710349828,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 155152,
+     "benign_only_flows": 82755,
+     "far": 0.05097648602010294,
+     "detection_rate": 0.999936396305534,
+     "detection_rate_excl_portscan": 0.9999104063073959,
+     "macro_f1": 0.700908619880416,
+     "dr_at_test_far_5pct": 0.9999318531845007,
+     "achieved_test_far_5pct": 0.0499908433498153,
+     "dr_at_test_far_1pct": 0.9996547228014702,
+     "achieved_test_far_1pct": 0.0099934042340946,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.05097648602010294,
+      "Bot": 0.9924906132665833,
+      "DDoS": 0.999941447419783,
+      "DoS GoldenEye": 1.0,
+      "DoS Hulk": 1.0,
+      "DoS Slowhttptest": 1.0,
+      "DoS slowloris": 1.0,
+      "Heartbleed": 1.0,
+      "Infiltration": 0.6875,
+      "PortScan": 1.0
+     }
+    },
+    "budget_T": {
+     "temperature": 0.6773849744772961,
+     "temperature_info": {
+      "fit": "labelled budget (in-sample)",
+      "n": 55153,
+      "nll_before": 0.0008555086919241572,
+      "nll_after": 0.0006902506220258574
+     },
+     "threshold": -13.750832282309723,
+     "calibration_fpr": 0.04999093710349828,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 55153,
+     "benign_only_flows": 82755,
+     "far": 0.0513412631412819,
+     "detection_rate": 0.9999409394265673,
+     "detection_rate_excl_portscan": 0.9999168058568677,
+     "macro_f1": 0.6984898352066335,
+     "dr_at_test_far_5pct": 0.999936396305534,
+     "achieved_test_far_5pct": 0.04999977666706867,
+     "dr_at_test_far_1pct": 0.9996320071963037,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.0513412631412819,
+      "Bot": 0.9937421777221527,
+      "DDoS": 0.999941447419783,
+      "DoS GoldenEye": 1.0,
+      "DoS Hulk": 1.0,
+      "DoS Slowhttptest": 1.0,
+      "DoS slowloris": 1.0,
+      "Heartbleed": 1.0,
+      "Infiltration": 0.6875,
+      "PortScan": 1.0
+     }
+    },
+    "no_T": {
+     "temperature": 1.0,
+     "temperature_info": {
+      "fit": "none"
+     },
+     "threshold": -8.93294408647321,
+     "calibration_fpr": 0.04997885324149598,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 55153,
+     "benign_only_flows": 82755,
+     "far": 0.051222152244570406,
+     "detection_rate": 0.9999454825476005,
+     "detection_rate_excl_portscan": 0.9999232054063394,
+     "macro_f1": 0.6996743226360655,
+     "dr_at_test_far_5pct": 0.9999409394265673,
+     "achieved_test_far_5pct": 0.04995362119459296,
+     "dr_at_test_far_1pct": 0.9996547228014702,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.051222152244570406,
+      "Bot": 0.9937421777221527,
+      "DDoS": 0.999960964946522,
+      "DoS GoldenEye": 1.0,
+      "DoS Hulk": 1.0,
+      "DoS Slowhttptest": 1.0,
+      "DoS slowloris": 1.0,
+      "Heartbleed": 1.0,
+      "Infiltration": 0.6875,
+      "PortScan": 1.0
+     }
+    },
+    "strict": {
+     "temperature": 0.6773849744772961,
+     "temperature_info": {
+      "fit": "labelled budget (in-sample)",
+      "n": 55153,
+      "nll_before": 0.0008555086919241572,
+      "nll_after": 0.0006902506220258574
+     },
+     "threshold": -13.763867620549291,
+     "calibration_fpr": 0.049990427874030824,
+     "threshold_benign_support": 41788,
+     "labelled_flows": 55153,
+     "benign_only_flows": 0,
+     "far": 0.05165392924514958,
+     "detection_rate": 0.9999454825476005,
+     "detection_rate_excl_portscan": 0.9999232054063394,
+     "macro_f1": 0.6980236246474939,
+     "dr_at_test_far_5pct": 0.999936396305534,
+     "achieved_test_far_5pct": 0.04999977666706867,
+     "dr_at_test_far_1pct": 0.9996320071963037,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.05165392924514958,
+      "Bot": 0.9937421777221527,
+      "DDoS": 0.999960964946522,
+      "DoS GoldenEye": 1.0,
+      "DoS Hulk": 1.0,
+      "DoS Slowhttptest": 1.0,
+      "DoS slowloris": 1.0,
+      "Heartbleed": 1.0,
+      "Infiltration": 0.6875,
+      "PortScan": 1.0
+     }
+    }
+   }
+  },
+  {
+   "method": "xgb_continue",
+   "budget": 0.05,
+   "seed": 43,
+   "budget_size": 55153,
+   "info": {
+    "extra_rounds": 100,
+    "dropped_portscan_rows": 3951
+   },
+   "variants": {
+    "orig": {
+     "temperature": 2.2167301630272633,
+     "temperature_info": {
+      "fit": "2017 calibration (labelled)",
+      "n": 92886,
+      "nll_before": 0.09767858137648472,
+      "nll_after": 0.05720070064808779
+     },
+     "threshold": -3.3245515303881894,
+     "calibration_fpr": 0.04999093710349828,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 148039,
+     "benign_only_flows": 82755,
+     "far": 0.06071082405385004,
+     "detection_rate": 0.7419052940989401,
+     "detection_rate_excl_portscan": 0.9957954959970818,
+     "macro_f1": 0.5299156608919227,
+     "dr_at_test_far_5pct": 0.7324056280183361,
+     "achieved_test_far_5pct": 0.049996798894650876,
+     "dr_at_test_far_1pct": 0.7087041655876755,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.06071082405385004,
+      "Bot": 0.704630788485607,
+      "DDoS": 0.9962526348661098,
+      "DoS GoldenEye": 0.9965483234714004,
+      "DoS Hulk": 0.9991106181726865,
+      "DoS Slowhttptest": 0.9642857142857143,
+      "DoS slowloris": 0.9864693446088795,
+      "Heartbleed": 0.0,
+      "Infiltration": 0.125,
+      "PortScan": 0.120575706320867
+     }
+    },
+    "budget_T": {
+     "temperature": 2.2215207108115713,
+     "temperature_info": {
+      "fit": "labelled budget (in-sample)",
+      "n": 51202,
+      "nll_before": 0.08664938443155508,
+      "nll_after": 0.05049812436187076
+     },
+     "threshold": -3.3152879001710476,
+     "calibration_fpr": 0.04999093710349828,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 55153,
+     "benign_only_flows": 82755,
+     "far": 0.06070040185038778,
+     "detection_rate": 0.7419052940989401,
+     "detection_rate_excl_portscan": 0.9957954959970818,
+     "macro_f1": 0.530098262420252,
+     "dr_at_test_far_5pct": 0.7324056280183361,
+     "achieved_test_far_5pct": 0.04999977666706867,
+     "dr_at_test_far_1pct": 0.7086996224666421,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.06070040185038778,
+      "Bot": 0.704630788485607,
+      "DDoS": 0.9962526348661098,
+      "DoS GoldenEye": 0.9965483234714004,
+      "DoS Hulk": 0.9991106181726865,
+      "DoS Slowhttptest": 0.9642857142857143,
+      "DoS slowloris": 0.9864693446088795,
+      "Heartbleed": 0.0,
+      "Infiltration": 0.125,
+      "PortScan": 0.120575706320867
+     }
+    },
+    "no_T": {
+     "temperature": 1.0,
+     "temperature_info": {
+      "fit": "none"
+     },
+     "threshold": -8.338129368596043,
+     "calibration_fpr": 0.04999093710349828,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 55153,
+     "benign_only_flows": 82755,
+     "far": 0.06096393470936197,
+     "detection_rate": 0.7452944623897725,
+     "detection_rate_excl_portscan": 0.9958722905907424,
+     "macro_f1": 0.5277070227408895,
+     "dr_at_test_far_5pct": 0.7381163311571783,
+     "achieved_test_far_5pct": 0.04999977666706867,
+     "dr_at_test_far_1pct": 0.7086314756511428,
+     "achieved_test_far_1pct": 0.009997870892721281,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.06096393470936197,
+      "Bot": 0.704630788485607,
+      "DDoS": 0.9963111874463269,
+      "DoS GoldenEye": 0.9967948717948718,
+      "DoS Hulk": 0.9991943246976102,
+      "DoS Slowhttptest": 0.9642857142857143,
+      "DoS slowloris": 0.9864693446088795,
+      "Heartbleed": 0.0,
+      "Infiltration": 0.125,
+      "PortScan": 0.13207103927833114
+     }
+    },
+    "strict": {
+     "temperature": 2.2215207108115713,
+     "temperature_info": {
+      "fit": "labelled budget (in-sample)",
+      "n": 51202,
+      "nll_before": 0.08664938443155508,
+      "nll_after": 0.05049812436187076
+     },
+     "threshold": -3.194880983109792,
+     "calibration_fpr": 0.04996649755910788,
+     "threshold_benign_support": 41788,
+     "labelled_flows": 55153,
+     "benign_only_flows": 0,
+     "far": 0.052839082667428976,
+     "detection_rate": 0.7370123527460896,
+     "detection_rate_excl_portscan": 0.9957570987002515,
+     "macro_f1": 0.5397101210030159,
+     "dr_at_test_far_5pct": 0.7324056280183361,
+     "achieved_test_far_5pct": 0.04999977666706867,
+     "dr_at_test_far_1pct": 0.7086996224666421,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.052839082667428976,
+      "Bot": 0.7033792240300375,
+      "DDoS": 0.9962331173393707,
+      "DoS GoldenEye": 0.9965483234714004,
+      "DoS Hulk": 0.9990896915414557,
+      "DoS Slowhttptest": 0.9642857142857143,
+      "DoS slowloris": 0.986046511627907,
+      "Heartbleed": 0.0,
+      "Infiltration": 0.0625,
+      "PortScan": 0.10380254338156988
+     }
+    }
+   }
+  },
+  {
+   "method": "esnn_t4_finetune",
+   "budget": 0.05,
+   "seed": 44,
+   "budget_size": 55153,
+   "info": {
+    "epochs": 5
+   },
+   "variants": {
+    "orig": {
+     "temperature": 1.0121251038429386,
+     "temperature_info": {
+      "fit": "2017 calibration (labelled)",
+      "n": 99999,
+      "nll_before": 0.030842021412731437,
+      "nll_after": 0.030834616729622063
+     },
+     "threshold": -4.477467447950646,
+     "calibration_fpr": 0.04999093710349828,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 155152,
+     "benign_only_flows": 82755,
+     "far": 0.05181770672812789,
+     "detection_rate": 0.9960156828538069,
+     "detection_rate_excl_portscan": 0.9957379000518364,
+     "macro_f1": 0.7078195053554673,
+     "dr_at_test_far_5pct": 0.9959429929172743,
+     "achieved_test_far_5pct": 0.04992235458420619,
+     "dr_at_test_far_1pct": 0.9928536706146388,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.05181770672812789,
+      "Bot": 0.409261576971214,
+      "DDoS": 0.9994339917245687,
+      "DoS GoldenEye": 0.9930966469428008,
+      "DoS Hulk": 0.9988071820198384,
+      "DoS Slowhttptest": 0.9981916817359855,
+      "DoS slowloris": 0.99830866807611,
+      "Heartbleed": 1.0,
+      "Infiltration": 0.0625,
+      "PortScan": 0.9966954833051431
+     }
+    },
+    "budget_T": {
+     "temperature": 0.9995556276036713,
+     "temperature_info": {
+      "fit": "labelled budget (in-sample)",
+      "n": 55153,
+      "nll_before": 0.030050645303826222,
+      "nll_after": 0.030050635354619243
+     },
+     "threshold": -4.539170463998788,
+     "calibration_fpr": 0.04999093710349828,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 55153,
+     "benign_only_flows": 82755,
+     "far": 0.05178644011774112,
+     "detection_rate": 0.9960156828538069,
+     "detection_rate_excl_portscan": 0.9957379000518364,
+     "macro_f1": 0.7078511751831046,
+     "dr_at_test_far_5pct": 0.9959520791593409,
+     "achieved_test_far_5pct": 0.04998637669118862,
+     "dr_at_test_far_1pct": 0.9928536706146388,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.05178644011774112,
+      "Bot": 0.409261576971214,
+      "DDoS": 0.9994339917245687,
+      "DoS GoldenEye": 0.9930966469428008,
+      "DoS Hulk": 0.9988071820198384,
+      "DoS Slowhttptest": 0.9981916817359855,
+      "DoS slowloris": 0.99830866807611,
+      "Heartbleed": 1.0,
+      "Infiltration": 0.0625,
+      "PortScan": 0.9966954833051431
+     }
+    },
+    "no_T": {
+     "temperature": 1.0,
+     "temperature_info": {
+      "fit": "none"
+     },
+     "threshold": -4.536741980794346,
+     "calibration_fpr": 0.04999093710349828,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 55153,
+     "benign_only_flows": 82755,
+     "far": 0.05177750680048776,
+     "detection_rate": 0.9960156828538069,
+     "detection_rate_excl_portscan": 0.9957379000518364,
+     "macro_f1": 0.7078560833861884,
+     "dr_at_test_far_5pct": 0.9959520791593409,
+     "achieved_test_far_5pct": 0.04998935446360641,
+     "dr_at_test_far_1pct": 0.9928536706146388,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.05177750680048776,
+      "Bot": 0.409261576971214,
+      "DDoS": 0.9994339917245687,
+      "DoS GoldenEye": 0.9930966469428008,
+      "DoS Hulk": 0.9988071820198384,
+      "DoS Slowhttptest": 0.9981916817359855,
+      "DoS slowloris": 0.99830866807611,
+      "Heartbleed": 1.0,
+      "Infiltration": 0.0625,
+      "PortScan": 0.9966954833051431
+     }
+    },
+    "strict": {
+     "temperature": 0.9995556276036713,
+     "temperature_info": {
+      "fit": "labelled budget (in-sample)",
+      "n": 55153,
+      "nll_before": 0.030050645303826222,
+      "nll_after": 0.030050635354619243
+     },
+     "threshold": -4.461534271886494,
+     "calibration_fpr": 0.049990427874030824,
+     "threshold_benign_support": 41788,
+     "labelled_flows": 55153,
+     "benign_only_flows": 0,
+     "far": 0.04800764691956888,
+     "detection_rate": 0.9958884754648749,
+     "detection_rate_excl_portscan": 0.9955779113150435,
+     "macro_f1": 0.7104611010743257,
+     "dr_at_test_far_5pct": 0.9959520791593409,
+     "achieved_test_far_5pct": 0.04998637669118862,
+     "dr_at_test_far_1pct": 0.9928536706146388,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.04800764691956888,
+      "Bot": 0.3879849812265332,
+      "DDoS": 0.9993754391443517,
+      "DoS GoldenEye": 0.9923570019723866,
+      "DoS Hulk": 0.9988071820198384,
+      "DoS Slowhttptest": 0.9972875226039783,
+      "DoS slowloris": 0.99830866807611,
+      "Heartbleed": 1.0,
+      "Infiltration": 0.0625,
+      "PortScan": 0.9966484996554532
+     }
+    }
+   }
+  },
+  {
+   "method": "xgb_scratch",
+   "budget": 0.05,
+   "seed": 44,
+   "budget_size": 55153,
+   "info": {
+    "trees": 400,
+    "classes": [
+     "Benign",
+     "Bot",
+     "DDoS-LOIC-HTTP",
+     "DoS-GoldenEye",
+     "DoS-Hulk",
+     "DoS-SlowHTTPTest",
+     "DoS-Slowloris",
+     "Infiltration",
+     "PortScan"
+    ]
+   },
+   "variants": {
+    "orig": {
+     "temperature": 1.2673100990248696,
+     "temperature_info": {
+      "fit": "2017 calibration (labelled)",
+      "n": 99999,
+      "nll_before": 0.008305698216157188,
+      "nll_after": 0.0075608696584288605
+     },
+     "threshold": -6.711164484803032,
+     "calibration_fpr": 0.04999093710349828,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 155152,
+     "benign_only_flows": 82755,
+     "far": 0.050474731367705764,
+     "detection_rate": 0.9999136807003676,
+     "detection_rate_excl_portscan": 0.9998784085600374,
+     "macro_f1": 0.6867762628071139,
+     "dr_at_test_far_5pct": 0.9999136807003676,
+     "achieved_test_far_5pct": 0.04999977666706867,
+     "dr_at_test_far_1pct": 0.9998001026745353,
+     "achieved_test_far_1pct": 0.009991915347885707,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.050474731367705764,
+      "Bot": 0.9974968710888611,
+      "DDoS": 0.9998048247326099,
+      "DoS GoldenEye": 1.0,
+      "DoS Hulk": 0.9999895366843845,
+      "DoS Slowhttptest": 1.0,
+      "DoS slowloris": 0.9995771670190274,
+      "Heartbleed": 1.0,
+      "Infiltration": 0.6875,
+      "PortScan": 1.0
+     }
+    },
+    "budget_T": {
+     "temperature": 0.4726639294518457,
+     "temperature_info": {
+      "fit": "labelled budget (in-sample)",
+      "n": 55153,
+      "nll_before": 0.0005919058460695953,
+      "nll_after": 0.00029574637404034606
+     },
+     "threshold": -19.785146784160766,
+     "calibration_fpr": 0.049882182345477616,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 55153,
+     "benign_only_flows": 82755,
+     "far": 0.05018439855697149,
+     "detection_rate": 0.9999045944583009,
+     "detection_rate_excl_portscan": 0.9998656094610939,
+     "macro_f1": 0.6877729405407034,
+     "dr_at_test_far_5pct": 0.9999045944583009,
+     "achieved_test_far_5pct": 0.04999977666706867,
+     "dr_at_test_far_1pct": 0.9998137320376352,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.05018439855697149,
+      "Bot": 0.9987484355444305,
+      "DDoS": 0.9997657896791319,
+      "DoS GoldenEye": 1.0,
+      "DoS Hulk": 0.9999895366843845,
+      "DoS Slowhttptest": 1.0,
+      "DoS slowloris": 0.9995771670190274,
+      "Heartbleed": 0.8,
+      "Infiltration": 0.6875,
+      "PortScan": 1.0
+     }
+    },
+    "no_T": {
+     "temperature": 1.0,
+     "temperature_info": {
+      "fit": "none"
+     },
+     "threshold": -8.88474305136117,
+     "calibration_fpr": 0.04999093710349828,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 55153,
+     "benign_only_flows": 82755,
+     "far": 0.050589375605790576,
+     "detection_rate": 0.9999136807003676,
+     "detection_rate_excl_portscan": 0.9998784085600374,
+     "macro_f1": 0.6862746866438574,
+     "dr_at_test_far_5pct": 0.9999136807003676,
+     "achieved_test_far_5pct": 0.04999977666706867,
+     "dr_at_test_far_1pct": 0.9997955595535021,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.050589375605790576,
+      "Bot": 0.9974968710888611,
+      "DDoS": 0.9998048247326099,
+      "DoS GoldenEye": 1.0,
+      "DoS Hulk": 0.9999895366843845,
+      "DoS Slowhttptest": 1.0,
+      "DoS slowloris": 0.9995771670190274,
+      "Heartbleed": 1.0,
+      "Infiltration": 0.6875,
+      "PortScan": 1.0
+     }
+    },
+    "strict": {
+     "temperature": 0.4726639294518457,
+     "temperature_info": {
+      "fit": "labelled budget (in-sample)",
+      "n": 55153,
+      "nll_before": 0.0005919058460695953,
+      "nll_after": 0.00029574637404034606
+     },
+     "threshold": -19.747203560081825,
+     "calibration_fpr": 0.049990427874030824,
+     "threshold_benign_support": 41788,
+     "labelled_flows": 55153,
+     "benign_only_flows": 0,
+     "far": 0.049518866421595996,
+     "detection_rate": 0.9999045944583009,
+     "detection_rate_excl_portscan": 0.9998656094610939,
+     "macro_f1": 0.6901978401961943,
+     "dr_at_test_far_5pct": 0.9999045944583009,
+     "achieved_test_far_5pct": 0.04999977666706867,
+     "dr_at_test_far_1pct": 0.9998137320376352,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.049518866421595996,
+      "Bot": 0.9987484355444305,
+      "DDoS": 0.9997657896791319,
+      "DoS GoldenEye": 1.0,
+      "DoS Hulk": 0.9999895366843845,
+      "DoS Slowhttptest": 1.0,
+      "DoS slowloris": 0.9995771670190274,
+      "Heartbleed": 0.8,
+      "Infiltration": 0.6875,
+      "PortScan": 1.0
+     }
+    }
+   }
+  },
+  {
+   "method": "xgb_continue",
+   "budget": 0.05,
+   "seed": 44,
+   "budget_size": 55153,
+   "info": {
+    "extra_rounds": 100,
+    "dropped_portscan_rows": 3951
+   },
+   "variants": {
+    "orig": {
+     "temperature": 3.1423999052927334,
+     "temperature_info": {
+      "fit": "2017 calibration (labelled)",
+      "n": 92886,
+      "nll_before": 0.1576606119033839,
+      "nll_after": 0.06937096377945445
+     },
+     "threshold": -2.672658446959574,
+     "calibration_fpr": 0.04999093710349828,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 148039,
+     "benign_only_flows": 82755,
+     "far": 0.050334776064069754,
+     "detection_rate": 0.7198075533930299,
+     "detection_rate_excl_portscan": 0.9897735199441959,
+     "macro_f1": 0.49511330876461934,
+     "dr_at_test_far_5pct": 0.7198075533930299,
+     "achieved_test_far_5pct": 0.049998287780859775,
+     "dr_at_test_far_1pct": 0.7004084265808925,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.050334776064069754,
+      "Bot": 0.35544430538172717,
+      "DDoS": 0.9894800530876727,
+      "DoS GoldenEye": 0.9933431952662722,
+      "DoS Hulk": 0.9969656384715189,
+      "DoS Slowhttptest": 0.9507233273056058,
+      "DoS slowloris": 0.958985200845666,
+      "Heartbleed": 0.0,
+      "Infiltration": 0.0,
+      "PortScan": 0.059136753743030755
+     }
+    },
+    "budget_T": {
+     "temperature": 3.000054903487616,
+     "temperature_info": {
+      "fit": "labelled budget (in-sample)",
+      "n": 51202,
+      "nll_before": 0.13253183763321386,
+      "nll_after": 0.061470616157379164
+     },
+     "threshold": -2.847596178633772,
+     "calibration_fpr": 0.04999093710349828,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 55153,
+     "benign_only_flows": 82755,
+     "far": 0.05037199821929209,
+     "detection_rate": 0.7197530359406304,
+     "detection_rate_excl_portscan": 0.9897799194936676,
+     "macro_f1": 0.49505489900507715,
+     "dr_at_test_far_5pct": 0.7194622761945001,
+     "achieved_test_far_5pct": 0.049998287780859775,
+     "dr_at_test_far_1pct": 0.7004720302753585,
+     "achieved_test_far_1pct": 0.009991915347885707,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.05037199821929209,
+      "Bot": 0.35544430538172717,
+      "DDoS": 0.9894800530876727,
+      "DoS GoldenEye": 0.9933431952662722,
+      "DoS Hulk": 0.9969761017871344,
+      "DoS Slowhttptest": 0.9507233273056058,
+      "DoS slowloris": 0.958985200845666,
+      "Heartbleed": 0.0,
+      "Infiltration": 0.0,
+      "PortScan": 0.05893315792770783
+     }
+    },
+    "no_T": {
+     "temperature": 1.0,
+     "temperature_info": {
+      "fit": "none"
+     },
+     "threshold": -9.78152834015704,
+     "calibration_fpr": 0.04999093710349828,
+     "threshold_benign_support": 82755,
+     "labelled_flows": 55153,
+     "benign_only_flows": 82755,
+     "far": 0.0512236411307793,
+     "detection_rate": 0.7191533439642366,
+     "detection_rate_excl_portscan": 0.9898631136368,
+     "macro_f1": 0.494942859962494,
+     "dr_at_test_far_5pct": 0.7190715677856374,
+     "achieved_test_far_5pct": 0.04999977666706867,
+     "dr_at_test_far_1pct": 0.7015305774761146,
+     "achieved_test_far_1pct": 0.009999359778930175,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.0512236411307793,
+      "Bot": 0.3591989987484355,
+      "DDoS": 0.9895971582481068,
+      "DoS GoldenEye": 0.9933431952662722,
+      "DoS Hulk": 0.9970179550495961,
+      "DoS Slowhttptest": 0.9507233273056058,
+      "DoS slowloris": 0.958985200845666,
+      "Heartbleed": 0.0,
+      "Infiltration": 0.0,
+      "PortScan": 0.056662281526028944
+     }
+    },
+    "strict": {
+     "temperature": 3.000054903487616,
+     "temperature_info": {
+      "fit": "labelled budget (in-sample)",
+      "n": 51202,
+      "nll_before": 0.13253183763321386,
+      "nll_after": 0.061470616157379164
+     },
+     "threshold": -2.8696864785440703,
+     "calibration_fpr": 0.049990427874030824,
+     "threshold_benign_support": 41788,
+     "labelled_flows": 55153,
+     "benign_only_flows": 0,
+     "far": 0.05124448553770381,
+     "detection_rate": 0.7198529846033628,
+     "detection_rate_excl_portscan": 0.9897799194936676,
+     "macro_f1": 0.4940800064095273,
+     "dr_at_test_far_5pct": 0.7194622761945001,
+     "achieved_test_far_5pct": 0.049998287780859775,
+     "dr_at_test_far_1pct": 0.7004720302753585,
+     "achieved_test_far_1pct": 0.009991915347885707,
+     "alarm_rate_per_label": {
+      "BENIGN": 0.05124448553770381,
+      "Bot": 0.35544430538172717,
+      "DDoS": 0.9894800530876727,
+      "DoS GoldenEye": 0.9933431952662722,
+      "DoS Hulk": 0.9969761017871344,
+      "DoS Slowhttptest": 0.9507233273056058,
+      "DoS slowloris": 0.958985200845666,
+      "Heartbleed": 0.0,
+      "Infiltration": 0.0,
+      "PortScan": 0.05927770469210048
+     }
+    }
+   }
   }
- ]
+ ],
+ "seconds_total": 946.4832081659988
 }

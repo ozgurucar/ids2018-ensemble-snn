@@ -1,0 +1,957 @@
+{
+ "name_map": {
+  "Destination Port": "Dst Port",
+  "Flow Duration": "Flow Duration",
+  "Total Fwd Packets": "Tot Fwd Pkts",
+  "Total Backward Packets": "Tot Bwd Pkts",
+  "Total Length of Fwd Packets": "TotLen Fwd Pkts",
+  "Total Length of Bwd Packets": "TotLen Bwd Pkts",
+  "Fwd Packet Length Max": "Fwd Pkt Len Max",
+  "Fwd Packet Length Min": "Fwd Pkt Len Min",
+  "Fwd Packet Length Mean": "Fwd Pkt Len Mean",
+  "Fwd Packet Length Std": "Fwd Pkt Len Std",
+  "Bwd Packet Length Max": "Bwd Pkt Len Max",
+  "Bwd Packet Length Min": "Bwd Pkt Len Min",
+  "Bwd Packet Length Mean": "Bwd Pkt Len Mean",
+  "Bwd Packet Length Std": "Bwd Pkt Len Std",
+  "Flow Bytes/s": "Flow Byts/s",
+  "Flow Packets/s": "Flow Pkts/s",
+  "Flow IAT Mean": "Flow IAT Mean",
+  "Flow IAT Std": "Flow IAT Std",
+  "Flow IAT Max": "Flow IAT Max",
+  "Flow IAT Min": "Flow IAT Min",
+  "Fwd IAT Total": "Fwd IAT Tot",
+  "Fwd IAT Mean": "Fwd IAT Mean",
+  "Fwd IAT Std": "Fwd IAT Std",
+  "Fwd IAT Max": "Fwd IAT Max",
+  "Fwd IAT Min": "Fwd IAT Min",
+  "Bwd IAT Total": "Bwd IAT Tot",
+  "Bwd IAT Mean": "Bwd IAT Mean",
+  "Bwd IAT Std": "Bwd IAT Std",
+  "Bwd IAT Max": "Bwd IAT Max",
+  "Bwd IAT Min": "Bwd IAT Min",
+  "Fwd PSH Flags": "Fwd PSH Flags",
+  "Bwd PSH Flags": "Bwd PSH Flags",
+  "Fwd URG Flags": "Fwd URG Flags",
+  "Bwd URG Flags": "Bwd URG Flags",
+  "Fwd Header Length": "Fwd Header Len",
+  "Bwd Header Length": "Bwd Header Len",
+  "Fwd Packets/s": "Fwd Pkts/s",
+  "Bwd Packets/s": "Bwd Pkts/s",
+  "Min Packet Length": "Pkt Len Min",
+  "Max Packet Length": "Pkt Len Max",
+  "Packet Length Mean": "Pkt Len Mean",
+  "Packet Length Std": "Pkt Len Std",
+  "Packet Length Variance": "Pkt Len Var",
+  "FIN Flag Count": "FIN Flag Cnt",
+  "SYN Flag Count": "SYN Flag Cnt",
+  "RST Flag Count": "RST Flag Cnt",
+  "PSH Flag Count": "PSH Flag Cnt",
+  "ACK Flag Count": "ACK Flag Cnt",
+  "URG Flag Count": "URG Flag Cnt",
+  "CWE Flag Count": "CWE Flag Count",
+  "ECE Flag Count": "ECE Flag Cnt",
+  "Down/Up Ratio": "Down/Up Ratio",
+  "Average Packet Size": "Pkt Size Avg",
+  "Avg Fwd Segment Size": "Fwd Seg Size Avg",
+  "Avg Bwd Segment Size": "Bwd Seg Size Avg",
+  "Fwd Avg Bytes/Bulk": "Fwd Byts/b Avg",
+  "Fwd Avg Packets/Bulk": "Fwd Pkts/b Avg",
+  "Fwd Avg Bulk Rate": "Fwd Blk Rate Avg",
+  "Bwd Avg Bytes/Bulk": "Bwd Byts/b Avg",
+  "Bwd Avg Packets/Bulk": "Bwd Pkts/b Avg",
+  "Bwd Avg Bulk Rate": "Bwd Blk Rate Avg",
+  "Subflow Fwd Packets": "Subflow Fwd Pkts",
+  "Subflow Fwd Bytes": "Subflow Fwd Byts",
+  "Subflow Bwd Packets": "Subflow Bwd Pkts",
+  "Subflow Bwd Bytes": "Subflow Bwd Byts",
+  "Init_Win_bytes_forward": "Init Fwd Win Byts",
+  "Init_Win_bytes_backward": "Init Bwd Win Byts",
+  "act_data_pkt_fwd": "Fwd Act Data Pkts",
+  "min_seg_size_forward": "Fwd Seg Size Min",
+  "Active Mean": "Active Mean",
+  "Active Std": "Active Std",
+  "Active Max": "Active Max",
+  "Active Min": "Active Min",
+  "Idle Mean": "Idle Mean",
+  "Idle Std": "Idle Std",
+  "Idle Max": "Idle Max",
+  "Idle Min": "Idle Min"
+ },
+ "protocol": "not in the 2017 export; imputed from Dst Port as in cross_dataset_cic2017.py",
+ "duplicate_fwd_header_length": {
+  "present": true,
+  "identical": true,
+  "rows_differing": 0
+ },
+ "positional_vs_name_frames_identical": true,
+ "rows": 2214468,
+ "rescore_vs_published": {
+  "esnn": {
+   "name_mapped": {
+    "false_alarm_rate": 0.26208112326544664,
+    "detection_rate_all_attacks": 0.6300156379527759,
+    "recal_false_alarm_rate": 0.04974181600370149,
+    "recal_detection_rate": 0.230383785270784
+   },
+   "published": {
+    "false_alarm_rate": 0.26208112326544664,
+    "detection_rate_all_attacks": 0.6300156379527759,
+    "recal_false_alarm_rate": 0.04974181600370149,
+    "recal_detection_rate": 0.230383785270784
+   },
+   "max_abs_diff": 0.0
+  },
+  "esnn_t4": {
+   "name_mapped": {
+    "false_alarm_rate": 0.2275924073893631,
+    "detection_rate_all_attacks": 0.4195734734533289,
+    "recal_false_alarm_rate": 0.049945063419171494,
+    "recal_detection_rate": 0.2392034429343963
+   },
+   "published": {
+    "false_alarm_rate": 0.2275924073893631,
+    "detection_rate_all_attacks": 0.4195734734533289,
+    "recal_false_alarm_rate": 0.049945063419171494,
+    "recal_detection_rate": 0.2392034429343963
+   },
+   "max_abs_diff": 0.0
+  },
+  "xgb": {
+   "name_mapped": {
+    "false_alarm_rate": 0.2522965477210272,
+    "detection_rate_all_attacks": 0.4935241889773665,
+    "recal_false_alarm_rate": 0.05027623714908437,
+    "recal_detection_rate": 0.31714765218386687
+   },
+   "published": {
+    "false_alarm_rate": 0.2522965477210272,
+    "detection_rate_all_attacks": 0.4935241889773665,
+    "recal_false_alarm_rate": 0.05027623714908437,
+    "recal_detection_rate": 0.31714765218386687
+   },
+   "max_abs_diff": 0.0
+  }
+ },
+ "ks": {
+  "reference_2018": {
+   "days": [
+    "02-14-2018",
+    "02-15-2018",
+    "02-21-2018",
+    "03-02-2018"
+   ],
+   "rows": 800000,
+   "per_day_cap": 200000,
+   "note": "benign flows from the locally available raw 2018 days; approximates, does not equal, the calibration partition"
+  },
+  "benign_2017_rows": 1672837,
+  "per_feature": {
+   "Dst Port": {
+    "ks": 0.29058194664513043,
+    "median_2018": 445.0,
+    "median_2017": 80.0,
+    "zero_frac_2018": 0.01358375,
+    "zero_frac_2017": 0.0007370712149480194,
+    "model_input": true
+   },
+   "Protocol": {
+    "ks": 0.19394999330702867,
+    "median_2018": 6.0,
+    "median_2017": 6.0,
+    "zero_frac_2018": 0.01358375,
+    "zero_frac_2017": 0.0,
+    "model_input": true
+   },
+   "Flow Duration": {
+    "ks": 0.22364894690725992,
+    "median_2018": 7208.0,
+    "median_2017": 30926.0,
+    "zero_frac_2018": 0.00486,
+    "zero_frac_2017": 0.0008255436722167192,
+    "model_input": true
+   },
+   "Tot Fwd Pkts": {
+    "ks": 0.27467501317372817,
+    "median_2018": 4.0,
+    "median_2017": 2.0,
+    "zero_frac_2018": 0.0,
+    "zero_frac_2017": 0.0,
+    "model_input": true
+   },
+   "Tot Bwd Pkts": {
+    "ks": 0.042683357185278714,
+    "median_2018": 2.0,
+    "median_2017": 2.0,
+    "zero_frac_2018": 0.17342875,
+    "zero_frac_2017": 0.15034818096443348,
+    "model_input": true
+   },
+   "TotLen Fwd Pkts": {
+    "ks": 0.2778253893266349,
+    "median_2018": 161.0,
+    "median_2017": 66.0,
+    "zero_frac_2018": 0.19259375,
+    "zero_frac_2017": 0.09899529960181416,
+    "model_input": true
+   },
+   "TotLen Bwd Pkts": {
+    "ks": 0.21227008376862183,
+    "median_2018": 248.0,
+    "median_2017": 126.0,
+    "zero_frac_2018": 0.2488575,
+    "zero_frac_2017": 0.23478079454244496,
+    "model_input": true
+   },
+   "Fwd Pkt Len Max": {
+    "ks": 0.30095979275476337,
+    "median_2018": 103.0,
+    "median_2017": 39.0,
+    "zero_frac_2018": 0.19259375,
+    "zero_frac_2017": 0.09899529960181416,
+    "model_input": true
+   },
+   "Fwd Pkt Len Min": {
+    "ks": 0.40255957963178723,
+    "median_2018": 0.0,
+    "median_2017": 6.0,
+    "zero_frac_2018": 0.7652525,
+    "zero_frac_2017": 0.3630909646307441,
+    "model_input": true
+   },
+   "Fwd Pkt Len Mean": {
+    "ks": 0.289563396382164,
+    "median_2018": 49.86811447143555,
+    "median_2017": 36.15999984741211,
+    "zero_frac_2018": 0.19259375,
+    "zero_frac_2017": 0.09899529960181416,
+    "model_input": true
+   },
+   "Fwd Pkt Len Std": {
+    "ks": 0.3084736127047943,
+    "median_2018": 49.21720504760742,
+    "median_2017": 0.0,
+    "zero_frac_2018": 0.4249025,
+    "zero_frac_2017": 0.6806317650793233,
+    "model_input": true
+   },
+   "Bwd Pkt Len Max": {
+    "ks": 0.29511854448834524,
+    "median_2018": 232.0,
+    "median_2017": 82.0,
+    "zero_frac_2018": 0.2488575,
+    "zero_frac_2017": 0.23478079454244496,
+    "model_input": true
+   },
+   "Bwd Pkt Len Min": {
+    "ks": 0.3296754761454643,
+    "median_2018": 0.0,
+    "median_2017": 6.0,
+    "zero_frac_2018": 0.77351125,
+    "zero_frac_2017": 0.44387827385453577,
+    "model_input": true
+   },
+   "Bwd Pkt Len Mean": {
+    "ks": 0.2044236231145054,
+    "median_2018": 123.5,
+    "median_2017": 75.0,
+    "zero_frac_2018": 0.2488575,
+    "zero_frac_2017": 0.23478079454244496,
+    "model_input": true
+   },
+   "Bwd Pkt Len Std": {
+    "ks": 0.3121359720896298,
+    "median_2018": 115.5,
+    "median_2017": 0.0,
+    "zero_frac_2018": 0.47321625,
+    "zero_frac_2017": 0.7559768226073431,
+    "model_input": true
+   },
+   "Flow Byts/s": {
+    "ks": 0.15352633191548248,
+    "median_2018": 7501.97900390625,
+    "median_2017": 5938.85205078125,
+    "zero_frac_2018": 0.19410125,
+    "zero_frac_2017": 0.09370787470626248,
+    "model_input": true
+   },
+   "Flow Pkts/s": {
+    "ks": 0.24469503133299897,
+    "median_2018": 727.0083618164062,
+    "median_2017": 123.84412384033203,
+    "zero_frac_2018": 0.00486,
+    "zero_frac_2017": 0.0008255436722167192,
+    "model_input": true
+   },
+   "Flow IAT Mean": {
+    "ks": 0.24328394833372885,
+    "median_2018": 2040.25,
+    "median_2017": 10490.3330078125,
+    "zero_frac_2018": 0.00486,
+    "zero_frac_2017": 0.0008255436722167192,
+    "model_input": true
+   },
+   "Flow IAT Std": {
+    "ks": 0.1310553180151443,
+    "median_2018": 283.3476257324219,
+    "median_2017": 108.5418472290039,
+    "zero_frac_2018": 0.3511175,
+    "zero_frac_2017": 0.3375750297249523,
+    "model_input": true
+   },
+   "Flow IAT Max": {
+    "ks": 0.22168065635728404,
+    "median_2018": 6562.0,
+    "median_2017": 30609.0,
+    "zero_frac_2018": 0.00486,
+    "zero_frac_2017": 0.0008255436722167192,
+    "model_input": true
+   },
+   "Flow IAT Min": {
+    "ks": 0.2998313171038183,
+    "median_2018": 28.0,
+    "median_2017": 4.0,
+    "zero_frac_2018": 0.05539,
+    "zero_frac_2017": 0.02367714248309907,
+    "model_input": true
+   },
+   "Fwd IAT Tot": {
+    "ks": 0.35147593594145754,
+    "median_2018": 1663.0,
+    "median_2017": 4.0,
+    "zero_frac_2018": 0.2234375,
+    "zero_frac_2017": 0.23577969640795846,
+    "model_input": true
+   },
+   "Fwd IAT Mean": {
+    "ks": 0.34979516707022257,
+    "median_2018": 467.75,
+    "median_2017": 4.0,
+    "zero_frac_2018": 0.2234375,
+    "zero_frac_2017": 0.23577969640795846,
+    "model_input": true
+   },
+   "Fwd IAT Std": {
+    "ks": 0.2787808215489614,
+    "median_2018": 434.9281005859375,
+    "median_2017": 0.0,
+    "zero_frac_2018": 0.40319125,
+    "zero_frac_2017": 0.678180838898231,
+    "model_input": true
+   },
+   "Fwd IAT Max": {
+    "ks": 0.35099837700564973,
+    "median_2018": 1273.0,
+    "median_2017": 4.0,
+    "zero_frac_2018": 0.2234375,
+    "zero_frac_2017": 0.23577969640795846,
+    "model_input": true
+   },
+   "Fwd IAT Min": {
+    "ks": 0.2907541907609648,
+    "median_2018": 7.0,
+    "median_2017": 3.0,
+    "zero_frac_2018": 0.23156375,
+    "zero_frac_2017": 0.24053329762553077,
+    "model_input": true
+   },
+   "Bwd IAT Tot": {
+    "ks": 0.2820302664649933,
+    "median_2018": 604.0,
+    "median_2017": 3.0,
+    "zero_frac_2018": 0.42844375,
+    "zero_frac_2017": 0.41538416474528,
+    "model_input": true
+   },
+   "Bwd IAT Mean": {
+    "ks": 0.28156383181908934,
+    "median_2018": 580.0,
+    "median_2017": 3.0,
+    "zero_frac_2018": 0.42844375,
+    "zero_frac_2017": 0.41538416474528,
+    "model_input": true
+   },
+   "Bwd IAT Std": {
+    "ks": 0.056466550643457736,
+    "median_2018": 0.0,
+    "median_2017": 0.0,
+    "zero_frac_2018": 0.71893625,
+    "zero_frac_2017": 0.7518556799018673,
+    "model_input": true
+   },
+   "Bwd IAT Max": {
+    "ks": 0.2825693550589508,
+    "median_2018": 583.0,
+    "median_2017": 3.0,
+    "zero_frac_2018": 0.42844375,
+    "zero_frac_2017": 0.41538416474528,
+    "model_input": true
+   },
+   "Bwd IAT Min": {
+    "ks": 0.3525131815472756,
+    "median_2018": 1.0,
+    "median_2017": 2.0,
+    "zero_frac_2018": 0.46831375,
+    "zero_frac_2017": 0.4202083048139179,
+    "model_input": true
+   },
+   "Fwd PSH Flags": {
+    "ks": 0.02266929651095717,
+    "median_2018": 0.0,
+    "median_2017": 0.0,
+    "zero_frac_2018": 0.9663775,
+    "zero_frac_2017": 0.9437082034890428,
+    "model_input": true
+   },
+   "Bwd PSH Flags": {
+    "ks": 0.0,
+    "median_2018": 0.0,
+    "median_2017": 0.0,
+    "zero_frac_2018": 1.0,
+    "zero_frac_2017": 1.0,
+    "model_input": false
+   },
+   "Fwd URG Flags": {
+    "ks": 0.00018830286513271677,
+    "median_2018": 0.0,
+    "median_2017": 0.0,
+    "zero_frac_2018": 1.0,
+    "zero_frac_2017": 0.9998116971348673,
+    "model_input": true
+   },
+   "Bwd URG Flags": {
+    "ks": 0.0,
+    "median_2018": 0.0,
+    "median_2017": 0.0,
+    "zero_frac_2018": 1.0,
+    "zero_frac_2017": 1.0,
+    "model_input": false
+   },
+   "Fwd Header Len": {
+    "ks": 0.2441582289338412,
+    "median_2018": 84.0,
+    "median_2017": 64.0,
+    "zero_frac_2018": 0.01358375,
+    "zero_frac_2017": 0.0007526136736573856,
+    "model_input": true
+   },
+   "Bwd Header Len": {
+    "ks": 0.24534883461075407,
+    "median_2018": 40.0,
+    "median_2017": 40.0,
+    "zero_frac_2018": 0.1741825,
+    "zero_frac_2017": 0.15040556850428344,
+    "model_input": true
+   },
+   "Fwd Pkts/s": {
+    "ks": 0.24460557902309077,
+    "median_2018": 427.71600341796875,
+    "median_2017": 64.07278442382812,
+    "zero_frac_2018": 0.00486,
+    "zero_frac_2017": 0.0008775511302057523,
+    "model_input": true
+   },
+   "Bwd Pkts/s": {
+    "ks": 0.21200447837565772,
+    "median_2018": 52.87578201293945,
+    "median_2017": 23.908573150634766,
+    "zero_frac_2018": 0.17356,
+    "zero_frac_2017": 0.1508102702176004,
+    "model_input": true
+   },
+   "Pkt Len Min": {
+    "ks": 0.39440192825795334,
+    "median_2018": 0.0,
+    "median_2017": 6.0,
+    "zero_frac_2018": 0.76679625,
+    "zero_frac_2017": 0.3723943217420466,
+    "model_input": true
+   },
+   "Pkt Len Max": {
+    "ks": 0.268153335686621,
+    "median_2018": 232.0,
+    "median_2017": 90.0,
+    "zero_frac_2018": 0.192265,
+    "zero_frac_2017": 0.09299471496625195,
+    "model_input": true
+   },
+   "Pkt Len Mean": {
+    "ks": 0.24077877337795017,
+    "median_2018": 79.5999984741211,
+    "median_2017": 58.33333206176758,
+    "zero_frac_2018": 0.192265,
+    "zero_frac_2017": 0.09299471496625195,
+    "model_input": true
+   },
+   "Pkt Len Std": {
+    "ks": 0.2598436074749064,
+    "median_2018": 85.44471740722656,
+    "median_2017": 27.32520294189453,
+    "zero_frac_2018": 0.20295375,
+    "zero_frac_2017": 0.25338033532256876,
+    "model_input": true
+   },
+   "Pkt Len Var": {
+    "ks": 0.2598436074749064,
+    "median_2018": 7300.7998046875,
+    "median_2017": 746.6666870117188,
+    "zero_frac_2018": 0.20295375,
+    "zero_frac_2017": 0.25338033532256876,
+    "model_input": true
+   },
+   "FIN Flag Cnt": {
+    "ks": 0.0144193221732003,
+    "median_2018": 0.0,
+    "median_2017": 0.0,
+    "zero_frac_2018": 0.99580125,
+    "zero_frac_2017": 0.9813819278267997,
+    "model_input": true
+   },
+   "SYN Flag Cnt": {
+    "ks": 0.02266929651095717,
+    "median_2018": 0.0,
+    "median_2017": 0.0,
+    "zero_frac_2018": 0.9663775,
+    "zero_frac_2017": 0.9437082034890428,
+    "model_input": true
+   },
+   "RST Flag Cnt": {
+    "ks": 0.32389181230075015,
+    "median_2018": 0.0,
+    "median_2017": 0.0,
+    "zero_frac_2018": 0.67582125,
+    "zero_frac_2017": 0.9997130623007502,
+    "model_input": true
+   },
+   "PSH Flag Cnt": {
+    "ks": 0.27779159617763116,
+    "median_2018": 1.0,
+    "median_2017": 0.0,
+    "zero_frac_2018": 0.455125,
+    "zero_frac_2017": 0.7329165961776312,
+    "model_input": true
+   },
+   "ACK Flag Cnt": {
+    "ks": 0.08157525339737226,
+    "median_2018": 0.0,
+    "median_2017": 0.0,
+    "zero_frac_2018": 0.7929775,
+    "zero_frac_2017": 0.7114022466026277,
+    "model_input": true
+   },
+   "URG Flag Cnt": {
+    "ks": 0.08175894399678507,
+    "median_2018": 0.0,
+    "median_2017": 0.0,
+    "zero_frac_2018": 0.96458375,
+    "zero_frac_2017": 0.8828248060032149,
+    "model_input": true
+   },
+   "CWE Flag Count": {
+    "ks": 0.00018830286513271677,
+    "median_2018": 0.0,
+    "median_2017": 0.0,
+    "zero_frac_2018": 1.0,
+    "zero_frac_2017": 0.9998116971348673,
+    "model_input": true
+   },
+   "ECE Flag Cnt": {
+    "ks": 0.3238893667270033,
+    "median_2018": 0.0,
+    "median_2017": 0.0,
+    "zero_frac_2018": 0.6758225,
+    "zero_frac_2017": 0.9997118667270033,
+    "model_input": true
+   },
+   "Down/Up Ratio": {
+    "ks": 0.26190073527561264,
+    "median_2018": 0.0,
+    "median_2017": 1.0,
+    "zero_frac_2018": 0.62025125,
+    "zero_frac_2017": 0.3583505147243874,
+    "model_input": true
+   },
+   "Pkt Size Avg": {
+    "ks": 0.2206412871023895,
+    "median_2018": 100.5,
+    "median_2017": 74.0,
+    "zero_frac_2018": 0.192265,
+    "zero_frac_2017": 0.09299471496625195,
+    "model_input": true
+   },
+   "Fwd Seg Size Avg": {
+    "ks": 0.289563396382164,
+    "median_2018": 49.86811447143555,
+    "median_2017": 36.15999984741211,
+    "zero_frac_2018": 0.19259375,
+    "zero_frac_2017": 0.09899529960181416,
+    "model_input": true
+   },
+   "Bwd Seg Size Avg": {
+    "ks": 0.2044236231145054,
+    "median_2018": 123.5,
+    "median_2017": 75.0,
+    "zero_frac_2018": 0.2488575,
+    "zero_frac_2017": 0.23478079454244496,
+    "model_input": true
+   },
+   "Fwd Byts/b Avg": {
+    "ks": 0.0,
+    "median_2018": 0.0,
+    "median_2017": 0.0,
+    "zero_frac_2018": 1.0,
+    "zero_frac_2017": 1.0,
+    "model_input": false
+   },
+   "Fwd Pkts/b Avg": {
+    "ks": 0.0,
+    "median_2018": 0.0,
+    "median_2017": 0.0,
+    "zero_frac_2018": 1.0,
+    "zero_frac_2017": 1.0,
+    "model_input": false
+   },
+   "Fwd Blk Rate Avg": {
+    "ks": 0.0,
+    "median_2018": 0.0,
+    "median_2017": 0.0,
+    "zero_frac_2018": 1.0,
+    "zero_frac_2017": 1.0,
+    "model_input": false
+   },
+   "Bwd Byts/b Avg": {
+    "ks": 0.0,
+    "median_2018": 0.0,
+    "median_2017": 0.0,
+    "zero_frac_2018": 1.0,
+    "zero_frac_2017": 1.0,
+    "model_input": false
+   },
+   "Bwd Pkts/b Avg": {
+    "ks": 0.0,
+    "median_2018": 0.0,
+    "median_2017": 0.0,
+    "zero_frac_2018": 1.0,
+    "zero_frac_2017": 1.0,
+    "model_input": false
+   },
+   "Bwd Blk Rate Avg": {
+    "ks": 0.0,
+    "median_2018": 0.0,
+    "median_2017": 0.0,
+    "zero_frac_2018": 1.0,
+    "zero_frac_2017": 1.0,
+    "model_input": false
+   },
+   "Subflow Fwd Pkts": {
+    "ks": 0.27467501317372817,
+    "median_2018": 4.0,
+    "median_2017": 2.0,
+    "zero_frac_2018": 0.0,
+    "zero_frac_2017": 0.0,
+    "model_input": true
+   },
+   "Subflow Fwd Byts": {
+    "ks": 0.2778253893266349,
+    "median_2018": 161.0,
+    "median_2017": 66.0,
+    "zero_frac_2018": 0.19259375,
+    "zero_frac_2017": 0.09899529960181416,
+    "model_input": true
+   },
+   "Subflow Bwd Pkts": {
+    "ks": 0.042683357185278714,
+    "median_2018": 2.0,
+    "median_2017": 2.0,
+    "zero_frac_2018": 0.17342875,
+    "zero_frac_2017": 0.15034818096443348,
+    "model_input": true
+   },
+   "Subflow Bwd Byts": {
+    "ks": 0.21227008376862183,
+    "median_2018": 248.0,
+    "median_2017": 126.0,
+    "zero_frac_2018": 0.2488575,
+    "zero_frac_2017": 0.23478079454244496,
+    "model_input": true
+   },
+   "Init Fwd Win Byts": {
+    "ks": 0.30014257012712536,
+    "median_2018": 8192.0,
+    "median_2017": 122.0,
+    "zero_frac_2018": 0.00418625,
+    "zero_frac_2017": 0.018453680783005157,
+    "model_input": true
+   },
+   "Init Bwd Win Byts": {
+    "ks": 0.33470238558732857,
+    "median_2018": 149.0,
+    "median_2017": -1.0,
+    "zero_frac_2018": 0.03331125,
+    "zero_frac_2017": 0.05579443783225742,
+    "model_input": true
+   },
+   "Fwd Act Data Pkts": {
+    "ks": 0.09470222367750114,
+    "median_2018": 1.0,
+    "median_2017": 1.0,
+    "zero_frac_2018": 0.38875,
+    "zero_frac_2017": 0.29404777632249884,
+    "model_input": true
+   },
+   "Fwd Seg Size Min": {
+    "ks": 0.48481899766459613,
+    "median_2018": 20.0,
+    "median_2017": 20.0,
+    "zero_frac_2018": 0.01358375,
+    "zero_frac_2017": 0.0007633738373792545,
+    "model_input": true
+   },
+   "Active Mean": {
+    "ks": 0.07482052170354914,
+    "median_2018": 0.0,
+    "median_2017": 0.0,
+    "zero_frac_2018": 0.916245,
+    "zero_frac_2017": 0.8414244782964508,
+    "model_input": true
+   },
+   "Active Std": {
+    "ks": 0.025705999763425913,
+    "median_2018": 0.0,
+    "median_2017": 0.0,
+    "zero_frac_2018": 0.93749,
+    "zero_frac_2017": 0.9122927099292998,
+    "model_input": true
+   },
+   "Active Max": {
+    "ks": 0.07482052170354914,
+    "median_2018": 0.0,
+    "median_2017": 0.0,
+    "zero_frac_2018": 0.916245,
+    "zero_frac_2017": 0.8414244782964508,
+    "model_input": true
+   },
+   "Active Min": {
+    "ks": 0.08214031021327839,
+    "median_2018": 0.0,
+    "median_2017": 0.0,
+    "zero_frac_2018": 0.916245,
+    "zero_frac_2017": 0.8414244782964508,
+    "model_input": true
+   },
+   "Idle Mean": {
+    "ks": 0.054437550217086295,
+    "median_2018": 0.0,
+    "median_2017": 0.0,
+    "zero_frac_2018": 0.8953025,
+    "zero_frac_2017": 0.8408649497829137,
+    "model_input": true
+   },
+   "Idle Std": {
+    "ks": 0.02490128306209749,
+    "median_2018": 0.0,
+    "median_2017": 0.0,
+    "zero_frac_2018": 0.92695875,
+    "zero_frac_2017": 0.9090174356497376,
+    "model_input": true
+   },
+   "Idle Max": {
+    "ks": 0.054437550217086295,
+    "median_2018": 0.0,
+    "median_2017": 0.0,
+    "zero_frac_2018": 0.8953025,
+    "zero_frac_2017": 0.8408649497829137,
+    "model_input": true
+   },
+   "Idle Min": {
+    "ks": 0.054636290886380445,
+    "median_2018": 0.0,
+    "median_2017": 0.0,
+    "zero_frac_2018": 0.8953025,
+    "zero_frac_2017": 0.8408649497829137,
+    "model_input": true
+   }
+  },
+  "within_2018_day_pairs_max": {
+   "Dst Port": 0.87402,
+   "Protocol": 0.34043999999999996,
+   "Flow Duration": 0.552325,
+   "Tot Fwd Pkts": 0.750735,
+   "Tot Bwd Pkts": 0.612605,
+   "TotLen Fwd Pkts": 0.8622650000000001,
+   "TotLen Bwd Pkts": 0.70264,
+   "Fwd Pkt Len Max": 0.985465,
+   "Fwd Pkt Len Min": 0.34348999999999996,
+   "Fwd Pkt Len Mean": 0.98145,
+   "Fwd Pkt Len Std": 0.990945,
+   "Bwd Pkt Len Max": 0.738745,
+   "Bwd Pkt Len Min": 0.34157499999999996,
+   "Bwd Pkt Len Mean": 0.7016549999999999,
+   "Bwd Pkt Len Std": 0.76235,
+   "Flow Byts/s": 0.736765,
+   "Flow Pkts/s": 0.596195,
+   "Flow IAT Mean": 0.5964700000000001,
+   "Flow IAT Std": 0.57947,
+   "Flow IAT Max": 0.53661,
+   "Flow IAT Min": 0.7365250000000001,
+   "Fwd IAT Tot": 0.52812,
+   "Fwd IAT Mean": 0.5650999999999999,
+   "Fwd IAT Std": 0.654855,
+   "Fwd IAT Max": 0.5216049999999999,
+   "Fwd IAT Min": 0.59413,
+   "Bwd IAT Tot": 0.637035,
+   "Bwd IAT Mean": 0.66866,
+   "Bwd IAT Std": 0.42762,
+   "Bwd IAT Max": 0.6577700000000001,
+   "Bwd IAT Min": 0.81961,
+   "Fwd PSH Flags": 0.05037500000000006,
+   "Fwd URG Flags": 0.0,
+   "Fwd Header Len": 0.7634150000000001,
+   "Bwd Header Len": 0.668065,
+   "Fwd Pkts/s": 0.608775,
+   "Bwd Pkts/s": 0.684215,
+   "Pkt Len Min": 0.341565,
+   "Pkt Len Max": 0.812055,
+   "Pkt Len Mean": 0.827595,
+   "Pkt Len Std": 0.9062749999999999,
+   "Pkt Len Var": 0.9062749999999999,
+   "FIN Flag Cnt": 0.006059999999999954,
+   "SYN Flag Cnt": 0.05037500000000006,
+   "RST Flag Cnt": 0.930985,
+   "PSH Flag Cnt": 0.64514,
+   "ACK Flag Cnt": 0.28235,
+   "URG Flag Cnt": 0.050095,
+   "CWE Flag Count": 0.0,
+   "ECE Flag Cnt": 0.93099,
+   "Down/Up Ratio": 0.558225,
+   "Pkt Size Avg": 0.8389300000000001,
+   "Fwd Seg Size Avg": 0.98145,
+   "Bwd Seg Size Avg": 0.7016549999999999,
+   "Subflow Fwd Pkts": 0.750735,
+   "Subflow Fwd Byts": 0.8622650000000001,
+   "Subflow Bwd Pkts": 0.612605,
+   "Subflow Bwd Byts": 0.70264,
+   "Init Fwd Win Byts": 0.9934149999999999,
+   "Init Bwd Win Byts": 0.908045,
+   "Fwd Act Data Pkts": 0.564585,
+   "Fwd Seg Size Min": 0.35906499999999997,
+   "Active Mean": 0.11443999999999999,
+   "Active Std": 0.08560500000000004,
+   "Active Max": 0.11443999999999999,
+   "Active Min": 0.11443999999999999,
+   "Idle Mean": 0.14713999999999994,
+   "Idle Std": 0.09728999999999999,
+   "Idle Max": 0.14713999999999994,
+   "Idle Min": 0.14763499999999996
+  },
+  "top10": [
+   {
+    "feature": "Fwd Seg Size Min",
+    "ks": 0.48481899766459613,
+    "median_2018": 20.0,
+    "median_2017": 20.0,
+    "zero_frac_2018": 0.01358375,
+    "zero_frac_2017": 0.0007633738373792545,
+    "model_input": true,
+    "within_2018_max": 0.35906499999999997
+   },
+   {
+    "feature": "Fwd Pkt Len Min",
+    "ks": 0.40255957963178723,
+    "median_2018": 0.0,
+    "median_2017": 6.0,
+    "zero_frac_2018": 0.7652525,
+    "zero_frac_2017": 0.3630909646307441,
+    "model_input": true,
+    "within_2018_max": 0.34348999999999996
+   },
+   {
+    "feature": "Pkt Len Min",
+    "ks": 0.39440192825795334,
+    "median_2018": 0.0,
+    "median_2017": 6.0,
+    "zero_frac_2018": 0.76679625,
+    "zero_frac_2017": 0.3723943217420466,
+    "model_input": true,
+    "within_2018_max": 0.341565
+   },
+   {
+    "feature": "Bwd IAT Min",
+    "ks": 0.3525131815472756,
+    "median_2018": 1.0,
+    "median_2017": 2.0,
+    "zero_frac_2018": 0.46831375,
+    "zero_frac_2017": 0.4202083048139179,
+    "model_input": true,
+    "within_2018_max": 0.81961
+   },
+   {
+    "feature": "Fwd IAT Tot",
+    "ks": 0.35147593594145754,
+    "median_2018": 1663.0,
+    "median_2017": 4.0,
+    "zero_frac_2018": 0.2234375,
+    "zero_frac_2017": 0.23577969640795846,
+    "model_input": true,
+    "within_2018_max": 0.52812
+   },
+   {
+    "feature": "Fwd IAT Max",
+    "ks": 0.35099837700564973,
+    "median_2018": 1273.0,
+    "median_2017": 4.0,
+    "zero_frac_2018": 0.2234375,
+    "zero_frac_2017": 0.23577969640795846,
+    "model_input": true,
+    "within_2018_max": 0.5216049999999999
+   },
+   {
+    "feature": "Fwd IAT Mean",
+    "ks": 0.34979516707022257,
+    "median_2018": 467.75,
+    "median_2017": 4.0,
+    "zero_frac_2018": 0.2234375,
+    "zero_frac_2017": 0.23577969640795846,
+    "model_input": true,
+    "within_2018_max": 0.5650999999999999
+   },
+   {
+    "feature": "Init Bwd Win Byts",
+    "ks": 0.33470238558732857,
+    "median_2018": 149.0,
+    "median_2017": -1.0,
+    "zero_frac_2018": 0.03331125,
+    "zero_frac_2017": 0.05579443783225742,
+    "model_input": true,
+    "within_2018_max": 0.908045
+   },
+   {
+    "feature": "Bwd Pkt Len Min",
+    "ks": 0.3296754761454643,
+    "median_2018": 0.0,
+    "median_2017": 6.0,
+    "zero_frac_2018": 0.77351125,
+    "zero_frac_2017": 0.44387827385453577,
+    "model_input": true,
+    "within_2018_max": 0.34157499999999996
+   },
+   {
+    "feature": "RST Flag Cnt",
+    "ks": 0.32389181230075015,
+    "median_2018": 0.0,
+    "median_2017": 0.0,
+    "zero_frac_2018": 0.67582125,
+    "zero_frac_2017": 0.9997130623007502,
+    "model_input": true,
+    "within_2018_max": 0.930985
+   }
+  ],
+  "summary": {
+   "model_inputs": 70,
+   "median_ks": 0.24502193297187652,
+   "n_ks_above_0.3": 15,
+   "n_ks_above_within_2018_max": 7,
+   "median_within_2018_max": 0.6248199999999999
+  }
+ }
+}
