@@ -1,0 +1,921 @@
+{
+ "demo": {
+  "esnn_T4": {
+   "counts": {
+    "acs": 116864.43590909091,
+    "macs": 3367.0,
+    "ln_elements": 2304.0,
+    "membrane_updates": 2304.0,
+    "readout_updates": 156,
+    "input_spikes": 716.7804545454546,
+    "hidden_spikes": 583.2652272727273,
+    "hidden_sparsity": 0.7468466895517676,
+    "loihi_total_uJ": 3.017352565113637,
+    "loihi_on_chip_uJ": 2.959470765113637,
+    "loihi_host_uJ": 0.05788180000000001
+   },
+   "energy": {
+    "45nm_optimistic_uJ": 0.12066619231818182,
+    "45nm_layernorm_uJ": 0.042393600000000004,
+    "45nm_membrane_readout_uJ": 0.011316000000000001,
+    "45nm_complete_uJ": 0.17437579231818182,
+    "45nm_complete_sram_uJ": 1.3766901514090908,
+    "int8_uJ": 0.006965823077272727,
+    "loihi_uJ": 3.017352565113637
+   }
+  },
+  "esnn_T8": {
+   "counts": {
+    "acs": 227501.04227272727,
+    "macs": 3367.0,
+    "ln_elements": 4608.0,
+    "membrane_updates": 4608.0,
+    "readout_updates": 312,
+    "input_spikes": 1364.2902272727272,
+    "hidden_spikes": 1237.7777272727274,
+    "hidden_sparsity": 0.7313850418244949,
+    "loihi_total_uJ": 5.87224351315909,
+    "loihi_on_chip_uJ": 5.77196811315909,
+    "loihi_host_uJ": 0.1002754
+   },
+   "energy": {
+    "45nm_optimistic_uJ": 0.22023913804545453,
+    "45nm_layernorm_uJ": 0.08478720000000001,
+    "45nm_membrane_readout_uJ": 0.022632000000000003,
+    "45nm_complete_uJ": 0.3276583380454546,
+    "45nm_complete_sram_uJ": 2.6363387607727273,
+    "int8_uJ": 0.012970401268181816,
+    "loihi_uJ": 5.87224351315909
+   }
+  },
+  "esnn_T12": {
+   "counts": {
+    "acs": 339800.6931818182,
+    "macs": 3367.0,
+    "ln_elements": 6912.0,
+    "membrane_updates": 6912.0,
+    "readout_updates": 468,
+    "input_spikes": 2008.6347727272728,
+    "hidden_spikes": 1927.6954545454546,
+    "hidden_sparsity": 0.7211088752104378,
+    "loihi_total_uJ": 8.766437120477272,
+    "loihi_on_chip_uJ": 8.623768120477271,
+    "loihi_host_uJ": 0.14266900000000002
+   },
+   "energy": {
+    "45nm_optimistic_uJ": 0.32130882386363635,
+    "45nm_layernorm_uJ": 0.1271808,
+    "45nm_membrane_readout_uJ": 0.033948000000000006,
+    "45nm_complete_uJ": 0.48243762386363637,
+    "45nm_complete_sram_uJ": 3.914114555681818,
+    "int8_uJ": 0.019024870795454545,
+    "loihi_uJ": 8.766437120477272
+   }
+  },
+  "encoded_ann_T4": {
+   "counts": {
+    "acs": 30271.73363636364,
+    "macs": 12352.0,
+    "ln_elements": 290.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   },
+   "energy": {
+    "45nm_optimistic_uJ": 0.08406376027272727,
+    "45nm_layernorm_uJ": 0.0053360000000000005,
+    "45nm_membrane_readout_uJ": 0.0,
+    "45nm_complete_uJ": 0.08939976027272727,
+    "45nm_complete_sram_uJ": 0.5156370966363637,
+    "int8_uJ": 0.0040159120090909085,
+    "loihi_uJ": null
+   }
+  },
+  "encoded_ann_T8": {
+   "counts": {
+    "acs": 29881.04090909091,
+    "macs": 6568.0,
+    "ln_elements": 160.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   },
+   "energy": {
+    "45nm_optimistic_uJ": 0.05710573681818181,
+    "45nm_layernorm_uJ": 0.0029440000000000004,
+    "45nm_membrane_readout_uJ": 0.0,
+    "45nm_complete_uJ": 0.06004973681818181,
+    "45nm_complete_sram_uJ": 0.42454014590909084,
+    "int8_uJ": 0.0025542712272727274,
+    "loihi_uJ": null
+   }
+  },
+  "encoded_ann_T12": {
+   "counts": {
+    "acs": 28956.179318181818,
+    "macs": 5094.0,
+    "ln_elements": 110.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   },
+   "energy": {
+    "45nm_optimistic_uJ": 0.04949296138636363,
+    "45nm_layernorm_uJ": 0.002024,
+    "45nm_membrane_readout_uJ": 0.0,
+    "45nm_complete_uJ": 0.05151696138636363,
+    "45nm_complete_sram_uJ": 0.3920187545681818,
+    "int8_uJ": 0.0021415053795454547,
+    "loihi_uJ": null
+   }
+  },
+  "ann": {
+   "counts": {
+    "acs": 0,
+    "macs": 84420.0,
+    "ln_elements": 504.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   },
+   "energy": {
+    "45nm_optimistic_uJ": 0.38833200000000007,
+    "45nm_layernorm_uJ": 0.0092736,
+    "45nm_membrane_readout_uJ": 0.0,
+    "45nm_complete_uJ": 0.3976056,
+    "45nm_complete_sram_uJ": 1.2418056,
+    "int8_uJ": 0.01988028,
+    "loihi_uJ": null
+   }
+  }
+ },
+ "test_mix": {
+  "esnn_T4": {
+   "counts": {
+    "acs": 120028.31086869024,
+    "macs": 3367.0,
+    "ln_elements": 2304.0,
+    "membrane_updates": 2304.0,
+    "readout_updates": 156.0,
+    "input_spikes": 740.2383201156654,
+    "hidden_spikes": 589.3718573036515,
+    "hidden_sparsity": 0.7441962424897347,
+    "loihi_total_uJ": 3.092070273802703,
+    "loihi_on_chip_uJ": 3.0341884738027027,
+    "loihi_host_uJ": 0.05788180000000001
+   },
+   "energy": {
+    "45nm_optimistic_uJ": 0.12351367978182122,
+    "45nm_layernorm_uJ": 0.042393600000000004,
+    "45nm_membrane_readout_uJ": 0.011316000000000001,
+    "45nm_complete_uJ": 0.17722327978182123,
+    "45nm_complete_sram_uJ": 1.4111763884687234,
+    "int8_uJ": 0.007060739326060708,
+    "loihi_uJ": 3.092070273802703
+   }
+  },
+  "esnn_T8": {
+   "counts": {
+    "acs": 233577.46190916022,
+    "macs": 3367.0,
+    "ln_elements": 4608.0,
+    "membrane_updates": 4608.0,
+    "readout_updates": 312.0,
+    "input_spikes": 1409.8348064792378,
+    "hidden_spikes": 1257.4916188843072,
+    "hidden_sparsity": 0.7271068535407319,
+    "loihi_total_uJ": 6.015757955979301,
+    "loihi_on_chip_uJ": 5.915482555979301,
+    "loihi_host_uJ": 0.10027539999999999
+   },
+   "energy": {
+    "45nm_optimistic_uJ": 0.2257079157182442,
+    "45nm_layernorm_uJ": 0.08478720000000001,
+    "45nm_membrane_readout_uJ": 0.022632000000000003,
+    "45nm_complete_uJ": 0.3331271157182442,
+    "45nm_complete_sram_uJ": 2.702571734809846,
+    "int8_uJ": 0.013152693857274805,
+    "loihi_uJ": 6.015757955979301
+   }
+  },
+  "esnn_T12": {
+   "counts": {
+    "acs": 347762.1295214129,
+    "macs": 3367.0,
+    "ln_elements": 6912.0,
+    "membrane_updates": 6912.0,
+    "readout_updates": 468.0,
+    "input_spikes": 2078.4182835198694,
+    "hidden_spikes": 1923.5047780523107,
+    "hidden_sparsity": 0.7217151652123392,
+    "loihi_total_uJ": 8.954438525910017,
+    "loihi_on_chip_uJ": 8.811769525910018,
+    "loihi_host_uJ": 0.14266900000000002
+   },
+   "energy": {
+    "45nm_optimistic_uJ": 0.3284741165692716,
+    "45nm_layernorm_uJ": 0.1271808,
+    "45nm_membrane_readout_uJ": 0.033948000000000006,
+    "45nm_complete_uJ": 0.4896029165692716,
+    "45nm_complete_sram_uJ": 4.0008942117834,
+    "int8_uJ": 0.019263713885642384,
+    "loihi_uJ": 8.954438525910017
+   }
+  },
+  "encoded_ann_T4": {
+   "counts": {
+    "acs": 31348.5816872149,
+    "macs": 12352.0,
+    "ln_elements": 290.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   },
+   "energy": {
+    "45nm_optimistic_uJ": 0.08503292351849343,
+    "45nm_layernorm_uJ": 0.0053360000000000005,
+    "45nm_membrane_readout_uJ": 0.0,
+    "45nm_complete_uJ": 0.09036892351849342,
+    "45nm_complete_sram_uJ": 0.5273747403906424,
+    "int8_uJ": 0.004048217450616448,
+    "loihi_uJ": null
+   }
+  },
+  "encoded_ann_T8": {
+   "counts": {
+    "acs": 31034.420949686555,
+    "macs": 6568.0,
+    "ln_elements": 160.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   },
+   "energy": {
+    "45nm_optimistic_uJ": 0.05814377885471791,
+    "45nm_layernorm_uJ": 0.0029440000000000004,
+    "45nm_membrane_readout_uJ": 0.0,
+    "45nm_complete_uJ": 0.0610877788547179,
+    "45nm_complete_sram_uJ": 0.4371119883515834,
+    "int8_uJ": 0.0025888726284905967,
+    "loihi_uJ": null
+   }
+  },
+  "encoded_ann_T12": {
+   "counts": {
+    "acs": 30153.071292169298,
+    "macs": 5094.0,
+    "ln_elements": 110.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   },
+   "energy": {
+    "45nm_optimistic_uJ": 0.05057016416295236,
+    "45nm_layernorm_uJ": 0.002024,
+    "45nm_membrane_readout_uJ": 0.0,
+    "45nm_complete_uJ": 0.052594164162952366,
+    "45nm_complete_sram_uJ": 0.4050648770846453,
+    "int8_uJ": 0.002177412138765079,
+    "loihi_uJ": null
+   }
+  },
+  "ann": {
+   "counts": {
+    "acs": 0.0,
+    "macs": 84420.0,
+    "ln_elements": 504.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   },
+   "energy": {
+    "45nm_optimistic_uJ": 0.38833200000000007,
+    "45nm_layernorm_uJ": 0.0092736,
+    "45nm_membrane_readout_uJ": 0.0,
+    "45nm_complete_uJ": 0.3976056,
+    "45nm_complete_sram_uJ": 1.2418056,
+    "int8_uJ": 0.01988028,
+    "loihi_uJ": null
+   }
+  }
+ },
+ "per_class_counts": {
+  "esnn_T4": {
+   "Benign": {
+    "acs": 120671.3415,
+    "macs": 3367.0,
+    "ln_elements": 2304.0,
+    "membrane_updates": 2304.0,
+    "readout_updates": 156,
+    "input_spikes": 744.4948333333333,
+    "hidden_spikes": 592.0453333333334,
+    "hidden_sparsity": 0.7430358796296297,
+    "loihi_total_uJ": 3.1072575776833338,
+    "loihi_on_chip_uJ": 3.0493757776833332,
+    "loihi_host_uJ": 0.05788180000000001
+   },
+   "Bot": {
+    "acs": 115683.74066666666,
+    "macs": 3367.0,
+    "ln_elements": 2304.0,
+    "membrane_updates": 2304.0,
+    "readout_updates": 156,
+    "input_spikes": 720.4906666666667,
+    "hidden_spikes": 550.9033333333333,
+    "hidden_sparsity": 0.760892650462963,
+    "loihi_total_uJ": 2.989439449533333,
+    "loihi_on_chip_uJ": 2.931557649533333,
+    "loihi_host_uJ": 0.05788180000000001
+   },
+   "DDoS-HOIC": {
+    "acs": 110952.776,
+    "macs": 3367.0,
+    "ln_elements": 2304.0,
+    "membrane_updates": 2304.0,
+    "readout_updates": 156,
+    "input_spikes": 680.652,
+    "hidden_spikes": 551.528,
+    "hidden_sparsity": 0.7606215277777778,
+    "loihi_total_uJ": 2.8777220196,
+    "loihi_on_chip_uJ": 2.8198402195999996,
+    "loihi_host_uJ": 0.05788180000000001
+   },
+   "DDoS-LOIC-UDP": {
+    "acs": 113509.16466666666,
+    "macs": 3367.0,
+    "ln_elements": 2304.0,
+    "membrane_updates": 2304.0,
+    "readout_updates": 156,
+    "input_spikes": 685.0073333333333,
+    "hidden_spikes": 595.436,
+    "hidden_sparsity": 0.7415642361111111,
+    "loihi_total_uJ": 2.9381348398000005,
+    "loihi_on_chip_uJ": 2.8802530398000004,
+    "loihi_host_uJ": 0.05788180000000001
+   },
+   "DoS-GoldenEye": {
+    "acs": 122003.138,
+    "macs": 3367.0,
+    "ln_elements": 2304.0,
+    "membrane_updates": 2304.0,
+    "readout_updates": 156,
+    "input_spikes": 750.888,
+    "hidden_spikes": 605.76,
+    "hidden_sparsity": 0.7370833333333333,
+    "loihi_total_uJ": 3.1387221584000002,
+    "loihi_on_chip_uJ": 3.0808403584,
+    "loihi_host_uJ": 0.05788180000000001
+   },
+   "DoS-Slowloris": {
+    "acs": 120653.98666666668,
+    "macs": 3367.0,
+    "ln_elements": 2304.0,
+    "membrane_updates": 2304.0,
+    "readout_updates": 156,
+    "input_spikes": 738.37,
+    "hidden_spikes": 610.7126666666667,
+    "hidden_sparsity": 0.7349337384259259,
+    "loihi_total_uJ": 3.1068693258666675,
+    "loihi_on_chip_uJ": 3.048987525866667,
+    "loihi_host_uJ": 0.05788180000000001
+   },
+   "FTP-BruteForce": {
+    "acs": 103507.58733333334,
+    "macs": 3367.0,
+    "ln_elements": 2304.0,
+    "membrane_updates": 2304.0,
+    "readout_updates": 156,
+    "input_spikes": 622.8126666666667,
+    "hidden_spikes": 542.544,
+    "hidden_sparsity": 0.7645208333333333,
+    "loihi_total_uJ": 2.701901967400001,
+    "loihi_on_chip_uJ": 2.6440201674000003,
+    "loihi_host_uJ": 0.05788180000000001
+   },
+   "SSH-Bruteforce": {
+    "acs": 117214.72933333334,
+    "macs": 3367.0,
+    "ln_elements": 2304.0,
+    "membrane_updates": 2304.0,
+    "readout_updates": 156,
+    "input_spikes": 714.0966666666667,
+    "hidden_spikes": 591.514,
+    "hidden_sparsity": 0.7432664930555555,
+    "loihi_total_uJ": 3.0256289504000002,
+    "loihi_on_chip_uJ": 2.9677471504,
+    "loihi_host_uJ": 0.05788180000000001
+   }
+  },
+  "esnn_T8": {
+   "Benign": {
+    "acs": 234900.3855,
+    "macs": 3367.0,
+    "ln_elements": 4608.0,
+    "membrane_updates": 4608.0,
+    "readout_updates": 312,
+    "input_spikes": 1418.1743333333334,
+    "hidden_spikes": 1263.9058333333332,
+    "hidden_sparsity": 0.7257148799189814,
+    "loihi_total_uJ": 6.047004034083335,
+    "loihi_on_chip_uJ": 5.9467286340833345,
+    "loihi_host_uJ": 0.1002754
+   },
+   "Bot": {
+    "acs": 225519.59000000003,
+    "macs": 3367.0,
+    "ln_elements": 4608.0,
+    "membrane_updates": 4608.0,
+    "readout_updates": 312,
+    "input_spikes": 1372.7133333333334,
+    "hidden_spikes": 1171.5253333333333,
+    "hidden_sparsity": 0.7457627314814814,
+    "loihi_total_uJ": 5.825382929733335,
+    "loihi_on_chip_uJ": 5.725107529733334,
+    "loihi_host_uJ": 0.1002754
+   },
+   "DDoS-HOIC": {
+    "acs": 215522.94466666668,
+    "macs": 3367.0,
+    "ln_elements": 4608.0,
+    "membrane_updates": 4608.0,
+    "readout_updates": 312,
+    "input_spikes": 1293.036,
+    "hidden_spikes": 1182.1326666666666,
+    "hidden_sparsity": 0.7434607928240741,
+    "loihi_total_uJ": 5.589344680866667,
+    "loihi_on_chip_uJ": 5.489069280866667,
+    "loihi_host_uJ": 0.1002754
+   },
+   "DDoS-LOIC-UDP": {
+    "acs": 224496.00333333333,
+    "macs": 3367.0,
+    "ln_elements": 4608.0,
+    "membrane_updates": 4608.0,
+    "readout_updates": 312,
+    "input_spikes": 1304.554,
+    "hidden_spikes": 1266.3313333333333,
+    "hidden_sparsity": 0.7251885127314814,
+    "loihi_total_uJ": 5.8012715837333335,
+    "loihi_on_chip_uJ": 5.700996183733333,
+    "loihi_host_uJ": 0.1002754
+   },
+   "DoS-GoldenEye": {
+    "acs": 236294.412,
+    "macs": 3367.0,
+    "ln_elements": 4608.0,
+    "membrane_updates": 4608.0,
+    "readout_updates": 312,
+    "input_spikes": 1433.0606666666667,
+    "hidden_spikes": 1238.6506666666667,
+    "hidden_sparsity": 0.7311956018518518,
+    "loihi_total_uJ": 6.079885432466667,
+    "loihi_on_chip_uJ": 5.979610032466667,
+    "loihi_host_uJ": 0.1002754
+   },
+   "DoS-Slowloris": {
+    "acs": 234525.19933333332,
+    "macs": 3367.0,
+    "ln_elements": 4608.0,
+    "membrane_updates": 4608.0,
+    "readout_updates": 312,
+    "input_spikes": 1409.6433333333334,
+    "hidden_spikes": 1275.0926666666667,
+    "hidden_sparsity": 0.7232871817129629,
+    "loihi_total_uJ": 6.038154155466666,
+    "loihi_on_chip_uJ": 5.937878755466666,
+    "loihi_host_uJ": 0.1002754
+   },
+   "FTP-BruteForce": {
+    "acs": 202610.7953333333,
+    "macs": 3367.0,
+    "ln_elements": 4608.0,
+    "membrane_updates": 4608.0,
+    "readout_updates": 312,
+    "input_spikes": 1176.908,
+    "hidden_spikes": 1201.5693333333334,
+    "hidden_sparsity": 0.7392427662037038,
+    "loihi_total_uJ": 5.2844535813333335,
+    "loihi_on_chip_uJ": 5.184178181333333,
+    "loihi_host_uJ": 0.1002754
+   },
+   "SSH-Bruteforce": {
+    "acs": 225488.35666666666,
+    "macs": 3367.0,
+    "ln_elements": 4608.0,
+    "membrane_updates": 4608.0,
+    "readout_updates": 312,
+    "input_spikes": 1357.1979999999999,
+    "hidden_spikes": 1226.1006666666667,
+    "hidden_sparsity": 0.7339191261574074,
+    "loihi_total_uJ": 5.824712225066667,
+    "loihi_on_chip_uJ": 5.724436825066666,
+    "loihi_host_uJ": 0.1002754
+   }
+  },
+  "esnn_T12": {
+   "Benign": {
+    "acs": 349607.4756666667,
+    "macs": 3367.0,
+    "ln_elements": 6912.0,
+    "membrane_updates": 6912.0,
+    "readout_updates": 468,
+    "input_spikes": 2091.1731666666665,
+    "hidden_spikes": 1930.4033333333332,
+    "hidden_sparsity": 0.7207171103395063,
+    "loihi_total_uJ": 8.998022105783335,
+    "loihi_on_chip_uJ": 8.855353105783335,
+    "loihi_host_uJ": 0.14266900000000002
+   },
+   "Bot": {
+    "acs": 337055.6813333333,
+    "macs": 3367.0,
+    "ln_elements": 6912.0,
+    "membrane_updates": 6912.0,
+    "readout_updates": 468,
+    "input_spikes": 2024.422,
+    "hidden_spikes": 1856.8053333333335,
+    "hidden_sparsity": 0.7313649691358024,
+    "loihi_total_uJ": 8.701561165933333,
+    "loihi_on_chip_uJ": 8.558892165933333,
+    "loihi_host_uJ": 0.14266900000000002
+   },
+   "DDoS-HOIC": {
+    "acs": 321014.54866666667,
+    "macs": 3367.0,
+    "ln_elements": 6912.0,
+    "membrane_updates": 6912.0,
+    "readout_updates": 468,
+    "input_spikes": 1898.2740000000001,
+    "hidden_spikes": 1809.5926666666667,
+    "hidden_sparsity": 0.7381955054012346,
+    "loihi_total_uJ": 8.322695721866667,
+    "loihi_on_chip_uJ": 8.180026721866668,
+    "loihi_host_uJ": 0.14266900000000002
+   },
+   "DDoS-LOIC-UDP": {
+    "acs": 333757.96266666666,
+    "macs": 3367.0,
+    "ln_elements": 6912.0,
+    "membrane_updates": 6912.0,
+    "readout_updates": 468,
+    "input_spikes": 1913.576,
+    "hidden_spikes": 2011.7926666666667,
+    "hidden_sparsity": 0.7089420331790124,
+    "loihi_total_uJ": 8.623810045666666,
+    "loihi_on_chip_uJ": 8.481141045666666,
+    "loihi_host_uJ": 0.14266900000000002
+   },
+   "DoS-GoldenEye": {
+    "acs": 353763.166,
+    "macs": 3367.0,
+    "ln_elements": 6912.0,
+    "membrane_updates": 6912.0,
+    "readout_updates": 468,
+    "input_spikes": 2107.7013333333334,
+    "hidden_spikes": 1963.1793333333333,
+    "hidden_sparsity": 0.7159752121913581,
+    "loihi_total_uJ": 9.096180214733334,
+    "loihi_on_chip_uJ": 8.953511214733334,
+    "loihi_host_uJ": 0.14266900000000002
+   },
+   "DoS-Slowloris": {
+    "acs": 349975.8993333333,
+    "macs": 3367.0,
+    "ln_elements": 6912.0,
+    "membrane_updates": 6912.0,
+    "readout_updates": 468,
+    "input_spikes": 2073.061333333333,
+    "hidden_spikes": 1961.7806666666665,
+    "hidden_sparsity": 0.7161775655864198,
+    "loihi_total_uJ": 9.006739455666667,
+    "loihi_on_chip_uJ": 8.864070455666667,
+    "loihi_host_uJ": 0.14266900000000002
+   },
+   "FTP-BruteForce": {
+    "acs": 307284.0333333333,
+    "macs": 3367.0,
+    "ln_elements": 6912.0,
+    "membrane_updates": 6912.0,
+    "readout_updates": 468,
+    "input_spikes": 1733.246,
+    "hidden_spikes": 1963.2993333333334,
+    "hidden_sparsity": 0.7159578510802469,
+    "loihi_total_uJ": 7.998636313733332,
+    "loihi_on_chip_uJ": 7.855967313733332,
+    "loihi_host_uJ": 0.14266900000000002
+   },
+   "SSH-Bruteforce": {
+    "acs": 338780.97866666666,
+    "macs": 3367.0,
+    "ln_elements": 6912.0,
+    "membrane_updates": 6912.0,
+    "readout_updates": 468,
+    "input_spikes": 1998.5366666666669,
+    "hidden_spikes": 1917.9313333333334,
+    "hidden_sparsity": 0.7225215084876543,
+    "loihi_total_uJ": 8.742338092133334,
+    "loihi_on_chip_uJ": 8.599669092133334,
+    "loihi_host_uJ": 0.14266900000000002
+   }
+  },
+  "encoded_ann_T4": {
+   "Benign": {
+    "acs": 31555.314833333334,
+    "macs": 12352.0,
+    "ln_elements": 290.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   },
+   "Bot": {
+    "acs": 30268.622666666666,
+    "macs": 12352.0,
+    "ln_elements": 290.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   },
+   "DDoS-HOIC": {
+    "acs": 28445.265333333336,
+    "macs": 12352.0,
+    "ln_elements": 290.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   },
+   "DDoS-LOIC-UDP": {
+    "acs": 28819.560666666668,
+    "macs": 12352.0,
+    "ln_elements": 290.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   },
+   "DoS-GoldenEye": {
+    "acs": 31990.048000000003,
+    "macs": 12352.0,
+    "ln_elements": 290.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   },
+   "DoS-Slowloris": {
+    "acs": 31518.59933333333,
+    "macs": 12352.0,
+    "ln_elements": 290.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   },
+   "FTP-BruteForce": {
+    "acs": 25820.528666666665,
+    "macs": 12352.0,
+    "ln_elements": 290.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   },
+   "SSH-Bruteforce": {
+    "acs": 30158.519333333334,
+    "macs": 12352.0,
+    "ln_elements": 290.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   }
+  },
+  "encoded_ann_T8": {
+   "Benign": {
+    "acs": 31260.118333333332,
+    "macs": 6568.0,
+    "ln_elements": 160.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   },
+   "Bot": {
+    "acs": 29829.933333333334,
+    "macs": 6568.0,
+    "ln_elements": 160.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   },
+   "DDoS-HOIC": {
+    "acs": 27868.166666666668,
+    "macs": 6568.0,
+    "ln_elements": 160.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   },
+   "DDoS-LOIC-UDP": {
+    "acs": 28346.20666666667,
+    "macs": 6568.0,
+    "ln_elements": 160.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   },
+   "DoS-GoldenEye": {
+    "acs": 31814.6,
+    "macs": 6568.0,
+    "ln_elements": 160.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   },
+   "DoS-Slowloris": {
+    "acs": 31360.573333333334,
+    "macs": 6568.0,
+    "ln_elements": 160.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   },
+   "FTP-BruteForce": {
+    "acs": 24998.026666666665,
+    "macs": 6568.0,
+    "ln_elements": 160.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   },
+   "SSH-Bruteforce": {
+    "acs": 29733.753333333334,
+    "macs": 6568.0,
+    "ln_elements": 160.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   }
+  },
+  "encoded_ann_T12": {
+   "Benign": {
+    "acs": 30389.475166666667,
+    "macs": 5094.0,
+    "ln_elements": 110.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   },
+   "Bot": {
+    "acs": 28910.355333333333,
+    "macs": 5094.0,
+    "ln_elements": 110.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   },
+   "DDoS-HOIC": {
+    "acs": 26810.964666666667,
+    "macs": 5094.0,
+    "ln_elements": 110.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   },
+   "DDoS-LOIC-UDP": {
+    "acs": 27312.802666666666,
+    "macs": 5094.0,
+    "ln_elements": 110.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   },
+   "DoS-GoldenEye": {
+    "acs": 30910.085333333336,
+    "macs": 5094.0,
+    "ln_elements": 110.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   },
+   "DoS-Slowloris": {
+    "acs": 30490.176,
+    "macs": 5094.0,
+    "ln_elements": 110.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   },
+   "FTP-BruteForce": {
+    "acs": 24009.056666666667,
+    "macs": 5094.0,
+    "ln_elements": 110.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   },
+   "SSH-Bruteforce": {
+    "acs": 28817.99,
+    "macs": 5094.0,
+    "ln_elements": 110.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   }
+  },
+  "ann": {
+   "Benign": {
+    "acs": 0,
+    "macs": 84420.0,
+    "ln_elements": 504.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   },
+   "Bot": {
+    "acs": 0,
+    "macs": 84420.0,
+    "ln_elements": 504.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   },
+   "DDoS-HOIC": {
+    "acs": 0,
+    "macs": 84420.0,
+    "ln_elements": 504.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   },
+   "DDoS-LOIC-UDP": {
+    "acs": 0,
+    "macs": 84420.0,
+    "ln_elements": 504.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   },
+   "DoS-GoldenEye": {
+    "acs": 0,
+    "macs": 84420.0,
+    "ln_elements": 504.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   },
+   "DoS-Slowloris": {
+    "acs": 0,
+    "macs": 84420.0,
+    "ln_elements": 504.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   },
+   "FTP-BruteForce": {
+    "acs": 0,
+    "macs": 84420.0,
+    "ln_elements": 504.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   },
+   "SSH-Bruteforce": {
+    "acs": 0,
+    "macs": 84420.0,
+    "ln_elements": 504.0,
+    "membrane_updates": 0.0,
+    "readout_updates": 0.0
+   }
+  }
+ },
+ "test_mix_sample": {
+  "days": [
+   "02-14-2018",
+   "02-15-2018",
+   "02-21-2018",
+   "03-02-2018"
+  ],
+  "rows_per_class": {
+   "Benign": 6000,
+   "Bot": 1500,
+   "DDoS-HOIC": 1500,
+   "DDoS-LOIC-UDP": 1500,
+   "DoS-GoldenEye": 1500,
+   "DoS-Slowloris": 1500,
+   "FTP-BruteForce": 1500,
+   "SSH-Bruteforce": 1500
+  },
+  "measured_classes": [
+   "Benign",
+   "Bot",
+   "DDoS-HOIC",
+   "DDoS-LOIC-UDP",
+   "DoS-GoldenEye",
+   "DoS-Slowloris",
+   "FTP-BruteForce",
+   "SSH-Bruteforce"
+  ],
+  "weights": {
+   "Benign": 2699900,
+   "Bot": 54821,
+   "DDoS-HOIC": 134836,
+   "DDoS-LOIC-UDP": 324,
+   "DoS-GoldenEye": 8362,
+   "DoS-Slowloris": 2451,
+   "FTP-BruteForce": 7049,
+   "SSH-Bruteforce": 61742
+  },
+  "test_rows_covered": 0.9217588968264266,
+  "benign_weight_after_renormalisation": 0.9092148975327372,
+  "missing_classes": [
+   "DDoS-LOIC-HTTP",
+   "DoS-Hulk",
+   "DoS-SlowHTTPTest",
+   "Infiltration",
+   "Web Attacks"
+  ]
+ },
+ "constants_pJ": {
+  "AC_fp32": 0.9,
+  "MAC_fp32": 4.6000000000000005,
+  "AC_int8": 0.03,
+  "MAC_int8": 0.23,
+  "SRAM_per_weight": 10.0,
+  "layernorm_mac_eq_per_element": 4,
+  "membrane_update": "1 FP32 MAC per LIF neuron per step",
+  "loihi": {
+   "E_syn_op_min": 23.6,
+   "E_neuron_update_active": 81.0,
+   "E_neuron_update_inactive": 52.0,
+   "E_spike_within_tile": 1.7,
+   "E_tile_hop_EW": 3.0,
+   "E_tile_hop_NS": 4.0,
+   "E_syn_update_pairwise_STDP": 120.0
+  }
+ },
+ "assumptions": [
+  "Estimates from operation counts and published per-operation energies, not measurements.",
+  "Membrane update = decay multiply + input add = 1 MAC; threshold compare and reset are not charged (lower bound for the E-SNN).",
+  "LayerNorm = 4 MAC-equivalents per element for every model that has it (E-SNN per time step, ANN and Enc-ANN once).",
+  "Encoding (spike generation), preprocessing, activations, control and static power are excluded for all models.",
+  "INT8 row uses int8 adds for accumulates and int8 MACs elsewhere (as results/v4/energy_loihi.json); it is the like-for-like point for Loihi's <=9-bit weights.",
+  "SRAM variant charges one 32 KB SRAM read (20 pJ per 64 bit -> 10 pJ per FP32 weight) per AC and MAC; membrane-state traffic is not charged.",
+  "Enc-ANN has no spiking layers, so it has no Loihi row; its hardware-style cost is the SRAM variant.",
+  "test_mix: per-class counts on flows from the locally available raw days (02-14, 02-15, 02-21, 03-02), weighted by test-partition support of the measured classes; classes from other days are not measured and their weight is redistributed."
+ ]
+}

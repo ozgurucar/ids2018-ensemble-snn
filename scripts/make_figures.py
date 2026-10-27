@@ -143,7 +143,7 @@ def steps(png):
     style = {"esnn": dict(color=BLUE, marker="o", ls="-", label="E-SNN", mfc=BLUE),
              "encoded_ann": dict(color=VERM, marker="s", ls="--", label="Enc-ANN", mfc="white")}
     refstyle = {"xgb": dict(color=BLACK, ls="-.", lw=0.9, label="XGBoost"),
-                "ann": dict(color=GRAY, ls=":", lw=1.2, label="Matched ANN")}
+                "ann": dict(color=GRAY, ls=":", lw=1.2, label="Matched MLP")}
     shift = {"esnn": -0.22, "encoded_ann": 0.22}
     xlim = (Ts[0] - 1.2, Ts[-1] + 1.2)
 
@@ -182,10 +182,10 @@ def steps(png):
     lines.append((en["encoded_ann_45nm"][-1], "Enc-ANN, 45 nm AC/MAC", VERM))
     if "ann_45nm_sram" in en:
         b.axhline(en["ann_45nm_sram"], color=GRAY, ls="-", lw=0.9, zorder=1)
-        b.text(5.2, en["ann_45nm_sram"] * 1.12, "Matched ANN, FP32 MAC + SRAM weight reads",
+        b.text(5.2, en["ann_45nm_sram"] * 1.12, "Matched MLP, FP32 MAC + SRAM weight reads",
                color="#4D4D4D", fontsize=6.5, va="bottom", ha="left")
     b.axhline(en["ann_45nm"], **{**refstyle["ann"], "label": None}, zorder=1)
-    b.text(5.2, en["ann_45nm"] * 1.12, "Matched ANN, FP32 MAC", color="#4D4D4D", fontsize=6.5,
+    b.text(5.2, en["ann_45nm"] * 1.12, "Matched MLP, FP32 MAC", color="#4D4D4D", fontsize=6.5,
            va="bottom", ha="left")
     # spread inline labels so they do not collide (log space)
     lines.sort(key=lambda t: t[0])
