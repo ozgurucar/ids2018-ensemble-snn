@@ -1,0 +1,26 @@
+{
+  "parent": "/kaggle/input/notebooks/ozgurucar/notebookeb0d7e9071/ids2018-v3/experiments/group_ce",
+  "runs": {
+    "seeds5_T4": {
+      "change": {
+        "models": [
+          "esnn",
+          "encoded_ann",
+          "ann",
+          "ple_mlp",
+          "xgb"
+        ],
+        "seeds": [
+          42,
+          43,
+          44,
+          45,
+          46
+        ],
+        "steps": 4
+      },
+      "experiment_id": "1d16467ae67fe1996e09b0b5a7f5b5c6ae634c5936a52e3ec67e61c93093701d",
+      "seconds": 16956.300050735474
+    }
+  }
+}

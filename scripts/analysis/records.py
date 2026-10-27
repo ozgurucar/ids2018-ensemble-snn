@@ -27,7 +27,7 @@ CONFLICTED = ("FTP-BruteForce", "DoS-SlowHTTPTest")
 INFILTRATION = "Infiltration"
 TAUS = ("0.01", "0.05", "0.1")
 MODEL_NAMES = {"esnn": "E-SNN", "ann": "Matched ANN", "encoded_ann": "Enc-ANN",
-               "rf": "Random forest", "catboost": "CatBoost", "xgb": "XGBoost"}
+               "rf": "Random forest", "catboost": "CatBoost", "xgb": "XGBoost", "ple_mlp": "PLE-MLP"}
 
 DEFAULT_SUMMARIES = [
     ("T12", "results/v3/experiments/group_ce/summary.json"),

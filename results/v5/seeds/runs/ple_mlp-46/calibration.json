@@ -1,0 +1,137 @@
+{
+  "checkpoint_sha256": "6aff5ad9147597df3c51ab3f25b1c236f4087b5f279f747f74f3daef2c606600",
+  "decision_ablation_thresholds": {
+    "prior_only": {
+      "benign_support": 671766,
+      "decision": "log_odds > threshold",
+      "delta": null,
+      "empirical_calibration_fpr": 0.049998064802327,
+      "fit_partition": "alarm_calibration",
+      "guarantee": "No unconditional guarantee: IID independent calibration units from the deployment benign distribution are required for the NP bound. Fingerprint groups and temporal data do not establish these assumptions.",
+      "iid_violation_bound_reference": 0.5007816678763168,
+      "method": "empirical",
+      "order_statistic": 638178,
+      "tau": 0.05,
+      "threshold": -3.6042694654065195
+    },
+    "raw": {
+      "benign_support": 671766,
+      "decision": "log_odds > threshold",
+      "delta": null,
+      "empirical_calibration_fpr": 0.04999955341592162,
+      "fit_partition": "alarm_calibration",
+      "guarantee": "No unconditional guarantee: IID independent calibration units from the deployment benign distribution are required for the NP bound. Fingerprint groups and temporal data do not establish these assumptions.",
+      "iid_violation_bound_reference": 0.5007816678763168,
+      "method": "empirical",
+      "order_statistic": 638178,
+      "tau": 0.05,
+      "threshold": -2.3873311166431677
+    }
+  },
+  "partitions": {
+    "alarm_class_counts": {
+      "Benign": 671766,
+      "Bot": 18445,
+      "DDoS-HOIC": 34471,
+      "DDoS-LOIC-HTTP": 28602,
+      "DDoS-LOIC-UDP": 81,
+      "DoS-GoldenEye": 2019,
+      "DoS-Hulk": 21609,
+      "DoS-SlowHTTPTest": 0,
+      "DoS-Slowloris": 543,
+      "FTP-BruteForce": 6,
+      "Infiltration": 8156,
+      "SSH-Bruteforce": 5239,
+      "Web Attacks": 54
+    },
+    "alarm_ids_sha256": "d77d9506b207c3c15181a3c307a0dd9e5a05bdc45da10bb64ef842bc47a84385",
+    "alarm_rows": 790991,
+    "group_overlap": 0,
+    "probability_fit_class_counts": {
+      "Benign": 84061,
+      "Bot": 1925,
+      "DDoS-HOIC": 4376,
+      "DDoS-LOIC-HTTP": 3750,
+      "DDoS-LOIC-UDP": 17,
+      "DoS-GoldenEye": 260,
+      "DoS-Hulk": 3088,
+      "DoS-SlowHTTPTest": 63,
+      "DoS-Slowloris": 62,
+      "FTP-BruteForce": 805,
+      "Infiltration": 1036,
+      "SSH-Bruteforce": 553,
+      "Web Attacks": 4
+    },
+    "probability_fit_rows": 100000,
+    "probability_ids_sha256": "738f0d7afaeb5207910bd7a94391c659dcfbd4ff5a6d39b1373e7239c6b7388a",
+    "probability_rows": 783245
+  },
+  "prior_assumption": "CE optimum and unchanged class-conditional features; approximation for fitted models. Full training priors are not deployment priors.",
+  "temperature": {
+    "bounds": [
+      0.05,
+      20.0
+    ],
+    "fit_partition": "probability_calibration",
+    "n": 100000,
+    "nll_after": 0.05272130618861834,
+    "nll_before": 0.05284928204485594,
+    "temperature": 0.9590253326992225
+  },
+  "thresholds": {
+    "0.01": {
+      "benign_support": 671766,
+      "decision": "log_odds > threshold",
+      "delta": null,
+      "empirical_calibration_fpr": 0.009999017515027554,
+      "fit_partition": "alarm_calibration",
+      "guarantee": "No unconditional guarantee: IID independent calibration units from the deployment benign distribution are required for the NP bound. Fingerprint groups and temporal data do not establish these assumptions.",
+      "iid_violation_bound_reference": 0.5000163209259642,
+      "method": "empirical",
+      "order_statistic": 665049,
+      "tau": 0.01,
+      "threshold": -3.0212434736894274
+    },
+    "0.05": {
+      "benign_support": 671766,
+      "decision": "log_odds > threshold",
+      "delta": null,
+      "empirical_calibration_fpr": 0.04999955341592162,
+      "fit_partition": "alarm_calibration",
+      "guarantee": "No unconditional guarantee: IID independent calibration units from the deployment benign distribution are required for the NP bound. Fingerprint groups and temporal data do not establish these assumptions.",
+      "iid_violation_bound_reference": 0.5007816678763168,
+      "method": "empirical",
+      "order_statistic": 638178,
+      "tau": 0.05,
+      "threshold": -3.7585899642876517
+    },
+    "0.1": {
+      "benign_support": 671766,
+      "decision": "log_odds > threshold",
+      "delta": null,
+      "empirical_calibration_fpr": 0.09999910683184324,
+      "fit_partition": "alarm_calibration",
+      "guarantee": "No unconditional guarantee: IID independent calibration units from the deployment benign distribution are required for the NP bound. Fingerprint groups and temporal data do not establish these assumptions.",
+      "iid_violation_bound_reference": 0.50005408317088,
+      "method": "empirical",
+      "order_statistic": 604590,
+      "tau": 0.1,
+      "threshold": -4.10068918278924
+    }
+  },
+  "training_prior_offset": [
+    0.2033930619294879,
+    -0.6263842412433172,
+    -0.22246909592043096,
+    -2.9795681349225402,
+    -0.29203369167318405,
+    -2.1243242439745007,
+    -0.38797129805856034,
+    -0.8537093466853918,
+    -2.9795681349225385,
+    -0.6161404101773726,
+    -1.009109692439837,
+    -0.9421509737655995,
+    -2.9795681349225385
+  ]
+}
