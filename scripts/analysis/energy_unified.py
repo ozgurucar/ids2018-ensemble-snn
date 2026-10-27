@@ -30,6 +30,7 @@ The paper should use 45nm_complete for every model (one ANN number,
     python scripts/analysis/energy_unified.py [--per-class 1500] [--skip-test-mix]
 """
 import argparse
+import json
 import sys
 from pathlib import Path
 
@@ -126,7 +127,7 @@ def weighted(per_class, weights):
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--per-class", type=int, default=1500, help="rows per (day, class) from the raw days")
-    ap.add_argument("--skip-test-mix", action="store_true")
+    ap.add_argument("--skip-test-mix", action="store_true", help="reuse the committed test-mix counts instead of re-sampling the raw days")
     args = ap.parse_args()
     torch.set_num_threads(4)
     det = Detector("esnn")
@@ -139,7 +140,13 @@ def main():
         result["demo"][key] = {"counts": c, "energy": energies(c)}
         print("demo", key, {k: round(v, 4) for k, v in result["demo"][key]["energy"].items() if v is not None}, flush=True)
 
-    if not args.skip_test_mix:
+    if args.skip_test_mix:
+        # Keep the committed test-mix section (it needs the raw CSE-CIC-IDS2018 days) and refresh only the demo part.
+        previous = json.loads((OUT / "energy_unified.json").read_text())
+        for key in ("test_mix", "test_mix_sample", "per_class_counts"):
+            if key in previous:
+                result[key] = previous[key]
+    else:
         frame = raw_sample(args.per_class)
         X = np.asarray(det.features(frame), dtype=np.float32)
         cls = frame["__class"].to_numpy()
