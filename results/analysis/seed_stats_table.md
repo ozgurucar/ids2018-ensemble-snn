@@ -22,7 +22,7 @@ Differences are first model minus second model, in macro-F1 points x 100 would b
 | macro_f1_11 | 0.01 | esnn - encoded_ann | -0.0222 | [-0.043, -0.001] | 0.044 | 0.088 | -0.022, -0.018, -0.026 | [-0.032, -0.012] | 0.010 | 0.031 | 0.028 |
 | macro_f1_11 | 0.01 | esnn - xgb | -0.0440 | [-0.069, -0.019] | 0.016 | 0.049 | -0.054, -0.034, -0.043 | [-0.069, -0.019] | 0.017 | 0.031 | 0.031 |
 
-## Per-model seeds (T = 12, tau = 5%)
+## Per-model seeds (T12, tau = 5%)
 
 | Model | 13-class seeds | mean [95% CI] | 11-class seeds | mean [95% CI] |
 |---|---|---|---|---|

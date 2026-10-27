@@ -26,7 +26,7 @@ Differences are first model minus second model, in macro-F1 points x 100 would b
 | macro_f1_11 | 0.01 | esnn - xgb | -0.0419 | [-0.067, -0.016] | 0.010 | 0.041 | -0.048, -0.021, -0.070, -0.048, -0.023 | [-0.068, -0.016] | 0.011 | 0.042 | 0.034 |
 | macro_f1_11 | 0.01 | esnn - ple_mlp | +0.0059 | [-0.020, +0.032] | 0.606 | 0.606 | +0.006, +0.020, -0.039, -0.000, +0.043 | [-0.031, +0.043] | 0.681 | 0.681 | 0.036 |
 
-## Per-model seeds (T = 12, tau = 5%)
+## Per-model seeds (T4, tau = 5%)
 
 | Model | 13-class seeds | mean [95% CI] | 11-class seeds | mean [95% CI] |
 |---|---|---|---|---|
@@ -39,14 +39,6 @@ Differences are first model minus second model, in macro-F1 points x 100 would b
 
 | a | b | metric | tau | diff | 90% CI | p TOST | equivalent? |
 |---|---|---|---|---|---|---|---|
-| T4:esnn | T4:esnn | macro_f1_13 | 0.05 | +0.0000 | [-0.014, +0.014] | 0.012 | yes |
-| T4:esnn | T4:esnn | macro_f1_13 | 0.01 | +0.0000 | [-0.020, +0.020] | 0.053 | no |
-| T4:esnn | T4:esnn | macro_f1_11 | 0.05 | +0.0000 | [-0.016, +0.016] | 0.024 | yes |
-| T4:esnn | T4:esnn | macro_f1_11 | 0.01 | +0.0000 | [-0.024, +0.024] | 0.081 | no |
-| T4:encoded_ann | T4:encoded_ann | macro_f1_13 | 0.05 | +0.0000 | [-0.024, +0.024] | 0.077 | no |
-| T4:encoded_ann | T4:encoded_ann | macro_f1_13 | 0.01 | +0.0000 | [-0.022, +0.022] | 0.067 | no |
-| T4:encoded_ann | T4:encoded_ann | macro_f1_11 | 0.05 | +0.0000 | [-0.016, +0.016] | 0.023 | yes |
-| T4:encoded_ann | T4:encoded_ann | macro_f1_11 | 0.01 | +0.0000 | [-0.011, +0.011] | 0.005 | yes |
 
 ## Exploratory (unadjusted Welch), tau = 5%
 
@@ -56,10 +48,6 @@ Differences are first model minus second model, in macro-F1 points x 100 would b
 | T4:encoded_ann | T4:ann | macro_f1_11 | +0.0215 | [+0.005, +0.038] | 0.020 |
 | T4:encoded_ann | T4:xgb | macro_f1_13 | -0.0290 | [-0.054, -0.004] | 0.030 |
 | T4:encoded_ann | T4:xgb | macro_f1_11 | -0.0164 | [-0.033, +0.000] | 0.052 |
-| T4:esnn | T4:esnn | macro_f1_13 | +0.0000 | [-0.017, +0.017] | 1.000 |
-| T4:esnn | T4:esnn | macro_f1_11 | +0.0000 | [-0.020, +0.020] | 1.000 |
-| T4:encoded_ann | T4:encoded_ann | macro_f1_13 | +0.0000 | [-0.029, +0.029] | 1.000 |
-| T4:encoded_ann | T4:encoded_ann | macro_f1_11 | +0.0000 | [-0.019, +0.019] | 1.000 |
 | T4:esnn | T4:encoded_ann | macro_f1_13 | -0.0129 | [-0.038, +0.012] | 0.257 |
 | T4:esnn | T4:encoded_ann | macro_f1_11 | -0.0136 | [-0.033, +0.006] | 0.149 |
 | T4:esnn | T4:ann | macro_f1_13 | +0.0107 | [-0.003, +0.025] | 0.107 |

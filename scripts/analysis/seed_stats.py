@@ -152,6 +152,7 @@ def main():
         pairs += [((T, "esnn"), (L, "esnn")), ((T, "encoded_ann"), (L, "encoded_ann")), ((T, "esnn"), (T, "encoded_ann")),
                   ((T, "esnn"), (L, "ann")), ((T, "esnn"), (L, "xgb"))]
     pairs += [(("T8_wide", "esnn"), ("T8", "esnn")), (("T12_weighted", "esnn"), (L, "esnn")), (("T12_weighted", "ann"), (L, "ann"))]
+    pairs = [(a, b) for a, b in pairs if a != b]
     for (a, b), metric, tau in itertools.product(pairs, METRICS, ["0.05", "0.01", "0.1"]):
         c = compare(data, a, b, tau, metric)
         if c:
@@ -162,6 +163,8 @@ def main():
     for (a, b), metric, tau in itertools.product([(("T4", "esnn"), (L, "esnn")), (("T8", "esnn"), (L, "esnn")),
                                                    (("T4", "encoded_ann"), (L, "encoded_ann")), (("T8", "encoded_ann"), (L, "encoded_ann"))],
                                                   METRICS, ["0.05", "0.01"]):
+        if a == b:
+            continue
         A = list(by_seed(data, *a, tau, metric).values())
         B = list(by_seed(data, *b, tau, metric).values())
         if len(A) > 1 and len(B) > 1:
@@ -191,7 +194,7 @@ def main():
                      f"[{w['ci95'][0]:+.3f}, {w['ci95'][1]:+.3f}] | {w['p']:.3f} | {w['p_holm_family_declared']:.3f} | "
                      f"{', '.join(f'{x:+.3f}' for x in pr['differences'])} | [{pr['ci95'][0]:+.3f}, {pr['ci95'][1]:+.3f}] | "
                      f"{pr['p']:.3f} | {pr['p_holm_family_declared']:.3f} | {w['mde80']:.3f} |")
-    lines += ["", "## Per-model seeds (T = 12, tau = 5%)", "", "| Model | 13-class seeds | mean [95% CI] | 11-class seeds | mean [95% CI] |", "|---|---|---|---|---|"]
+    lines += ["", f"## Per-model seeds ({L}, tau = 5%)", "", "| Model | 13-class seeds | mean [95% CI] | 11-class seeds | mean [95% CI] |", "|---|---|---|---|---|"]
     for m in ("esnn", "ann", "encoded_ann", "rf", "catboost", "xgb"):
         r = models[L].get(m)
         if not r:
