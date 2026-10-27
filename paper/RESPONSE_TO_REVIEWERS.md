@@ -1,27 +1,27 @@
 # Response to reviewer comments (Amir, Pablo)
 
-Thank you both for the careful reading. Since the version you reviewed, the study has been rebuilt rather than patched: a new split, a new decision rule, three seeds, stronger baselines and two follow-up experiments. Several comments therefore no longer apply in their original form. Each one is listed below with what changed and where to find it.
+Thank you both for the careful reading. Since the version you reviewed, the study has been rebuilt rather than patched: a new split, a new decision rule, three seeds (five for the main comparison), stronger baselines and several follow-up experiments. Several comments therefore no longer apply in their original form. Each one is listed below with what changed and where to find it.
 
 ## Amir
 
 | # | Comment (short) | What we did |
 |---|---|---|
 | C1, C16 | FPR 0.11 in abstract vs ≤ 0.10 in Table I | Every model now uses one decision rule. The threshold is fitted on a separate alarm-calibration partition and the achieved test FPR is reported next to every result (4.9–5.0% at the 5% budget, Table II). The abstract and the tables use the same numbers. |
-| C2, C14 | Do not claim the ceiling is enforced on test | The text says that the threshold is fitted on calibration data only and that the test FPR is measured, not guaranteed (Sec. III-D). We also report the KS distance between benign calibration and test scores (0.006). |
+| C2, C14 | Do not claim the ceiling is enforced on test | The text says that the threshold is fitted on calibration data only and that the test FPR is measured, not guaranteed (Sec. III-D). We also report the KS distance between benign calibration and test scores (0.005–0.014 across models and seeds) and the per-day FAR, which reaches 24% for the E-SNN on the Infiltration days (Sec. V-A). |
 | C3, C4, C17 | Tone too strong | Rewritten throughout in neutral wording. The SNN is no longer called superior; trees are reported as the strongest models. |
 | C5, C6, C22 | Unsupported claims (10–20 point drop, consensus statements) | Removed. Every remaining quantitative claim comes from our own runs or a cited source. |
-| C7, C8, C21 | Energy claims without hardware | Energy is given only as a first-order estimate from counted operations under the Horowitz 45 nm model, with the excluded costs listed. We call it a potential advantage and make no hardware claims (Sec. V-E, Limitations). |
+| C7, C8, C21 | Energy claims without hardware | Energy is given only as an estimate from counted operations, under four cost models (45 nm with layer normalisation and membrane updates, 45 nm with SRAM reads, INT8, and published Loihi per-operation costs; Table V, Sec. V-C). The models disagree on whether the SNN is cheaper, and the paper says so. No hardware claims are made. |
 | C9 | "Full dataset" while capping rows | Table I gives the support of every class in every partition. Only training is capped, and the text says so. |
 | C10, C24 | "Guarantee", row order as time order, exact time gap | The chronological row-order split is gone. Rows with identical feature vectors are grouped, and groups are assigned to partitions, so no test vector appears verbatim in training. We state what this does not prevent (near-duplicates, within-episode leakage) and that the timestamps are unverified. |
 | C11 | SMOTETomek ablation | Synthetic oversampling was removed from the protocol. Classes are capped and corrected afterwards with a training-prior offset. |
-| C12 | Why 60/40 mixture | The ratio was fixed in the earlier version and is now stated as untuned. The architecture screen includes the pure weighted average (1.0/0) as one variant (Table IV). |
-| C13 | One seed is not enough | All main results use three seeds (42, 43, 44) and report mean ± s.d. |
+| C12 | Why 60/40 mixture | The ratio was fixed in the earlier version and is now stated as untuned. The architecture screen includes the pure weighted average (1.0/0) as one variant (Sec. V-E). |
+| C13 | One seed is not enough | The main run uses three seeds (42–44); the primary model comparison uses five seeds (42–46) at T = 4, with Welch tests, 95% CIs and Holm correction over four pre-declared comparisons (Table II, Sec. V-A). The split seed is fixed, so the intervals cover seed variance only; this is stated as a limitation. |
 | C15 | Stronger baselines | XGBoost, CatBoost and random forest are added, along with a parameter-matched MLP and a spike-input control network. We did not add LSTM/CNN models because the inputs are static flow vectors, not sequences. |
-| C18 | Do not overstate per-class results | Table V lists the four weak classes for all models, and the text explains their causes. |
-| C19 | Web Attacks: high AUC, near-zero F1 | Added TP/FP/FN analysis. AUC is 0.994, but at the 5% budget the E-SNN finds 98 of 179 attacks with 661 false assignments; average precision is reported as the fairer measure (Sec. V-D). |
-| C20 | Exact numbers for Slowloris / SlowHTTPTest | SlowHTTPTest is in Table V. Slowloris is omitted there because every model exceeds 0.96 F1 on it (0.964 for the E-SNN, 0.998 for XGBoost); the paper says so. SlowHTTPTest flows almost all share feature vectors with FTP-BruteForce, which explains the low F1 for every model. |
+| C18 | Do not overstate per-class results | Table III lists the five classes below F1 0.96 for all six models, and the text explains their causes. Macro-F1 over the 11 identifiable classes is reported next to the 13-class figure (Table II). |
+| C19 | Web Attacks: high AUC, near-zero F1 | Added TP/FP/FN analysis. AUC is 0.994, but at the 5% budget the E-SNN finds 98 of 179 attacks with 661 false assignments; average precision is reported as the fairer measure (Sec. V-B). |
+| C20 | Exact numbers for Slowloris / SlowHTTPTest | SlowHTTPTest is in Table III. Slowloris is omitted there because every model exceeds 0.96 F1 on it (0.964 for the E-SNN, 0.998 for XGBoost); the paper says so. SlowHTTPTest flows almost all share feature vectors with FTP-BruteForce, which explains the low F1 for every model. |
 | C23 | "Dataset limitation" too strong | Now supported by the feature-group audit: 193,353 of 193,360 FTP-BruteForce flows and 139,884 of 139,890 SlowHTTPTest flows have vectors that also occur under other labels. |
-| C25 | Conclusion contradicts RF > E-SNN | The conclusion now says plainly that the trees and the spike-input control outperform the SNN. |
+| C25 | Conclusion contradicts RF > E-SNN | The conclusion now says that XGBoost is about 4 points ahead of the SNN (Holm p = 0.002, five seeds) and that the SNN cannot be separated from the MLP, the piecewise-linear MLP or the spike-input control. |
 
 ## Pablo
 
@@ -31,11 +31,28 @@ Thank you both for the careful reading. Since the version you reviewed, the stud
 | SNNs address efficiency, the split addresses leakage | Agreed. The introduction now separates the two questions. |
 | Energy needs hardware or "potentially" | See Amir C7. |
 | Which features keep temporal dynamics / what is the SNN input? | Sec. IV now says explicitly that every model receives one static vector of 70 flow statistics, and that the SNN time steps are an encoding device, not network time. |
-| Link coding schemes to features; justify combining three codes | A short paragraph connects each code to feature types. The population-only variant in Table IV shows what a single code achieves. |
+| Link coding schemes to features; justify combining three codes | A short paragraph connects each code to feature types. The population-only variant in the architecture screen (Sec. V-E) shows what a single code achieves. |
 | Final sample and class counts | Table I. |
 | Setting per session/day? | The split is by feature group across all days, not by day. |
-| One seed is not enough | Three seeds. |
-| Report parameters, time steps, spike rate, latency | Table VI (parameters, operations, CPU time) and Table III (time steps 4/8/12). Hidden-layer sparsity (72–75%) is given in the text. |
+| One seed is not enough | Three seeds, and five for the main comparison (see Amir C13). |
+| Report parameters, time steps, spike rate, latency | Sec. IV (parameters), Table IV (time steps 4/8/12 and operations per flow), Sec. V-C (CPU time). Hidden-layer sparsity (72–74%) is given in the text. |
 | Is the reported metric after calibration on validation data? | Yes. Sec. III-D describes the full chain, and test labels are never used to fit anything. |
 | Small font in tables | Tables now use the normal font size where the column width allows. |
 | Avoid citations in the conclusion | The conclusion has no citations. |
+
+## Round 3 (reviewers A, B, C)
+
+| Point | What we did |
+|---|---|
+| Claims exceed n = 3 (A-M1, B-M2) | Five seeds at T = 4 for E-SNN, Enc-ANN, matched MLP, PLE-MLP and XGBoost. Only E-SNN vs XGBoost is significant (−4.2 points at 5% FAR, 95% CI [−5.6, −2.8], Holm p = 0.002; −5.2 at 1%, Holm p = 0.007). Wording changed to "no detectable difference" elsewhere. Source: `results/v5/seeds/summary.json`, `results/analysis/seed_stats_5seed_table.md`. |
+| Encoding vs dynamics needs a spike-free control (B-M3) | PLE-MLP added (16-bin piecewise-linear encoding, 85,923 parameters): 0.761 ± 0.005 vs 0.766 ± 0.012 for the E-SNN (Holm p = 0.51). The paper now says any gain over the raw MLP comes from the input encoding. |
+| Two non-identifiable classes drive the ranking (A-M3) | 11-class macro-F1 reported as a co-primary column (Table II). |
+| Dst Port undisclosed (A-M2) | Disclosed as an input and ablated: about −1 point in-distribution for every model; transfer does not improve (recalibrated DR E-SNN 0.239→0.135, XGBoost 0.317→0.310); the slow-DoS transfer claim is now qualified as port-dependent. Source: `results/analysis/NOTE_7_noport.md`. |
+| 45 nm energy omits LayerNorm/membrane updates (A-M6) | Unified energy table (Table V) with one MLP figure (0.40 µJ), INT8 and SRAM rows, Enc-ANN rows, op counts weighted to the test mix. E-SNN at T = 12 is 23% above the MLP under the complete 45 nm model. Source: `results/analysis/NOTE_4_energy.md`. |
+| Adaptation label accounting (A-M7) | Temperature fitted on the label budget alone changes DR/FAR by ≤ 0.001; DR at matched 1% test FAR is 95.9% (E-SNN) vs 99.0% (XGBoost) with 1,101 labels. Source: `results/analysis/NOTE_5_adaptation.md`. |
+| Transfer confounded by extractor version (A-M8) | Name-based column map (bit-identical to the positional one) and per-feature KS shift reported (median 0.245; flag counts and window bytes point to the extractor). Source: `results/analysis/NOTE_6_transfer_hygiene.md`. |
+| Prior work and framing (B-M1, M4, M7, M8) | Added D'hooge 2023 ×2, Cantone 2024, Apruzzese 2023, Flood 2024, Lanvin 2023, Dampfhoffer 2023, Davies 2021, Gorishniy 2022, Shwartz-Ziv 2022 (all checked against Crossref or arXiv). Transfer is framed as confirming known results; new title; abstract ≤ 250 words; Docker removed from contributions. |
+| Error-floor logic (B-M4) | Rewritten: an error below the floor implies different labels or preprocessing, not leakage. |
+| Presentation (C) | Figures cited, Section V reordered, Tables VI and IV folded into text and other tables, terminology unified (FAR/DR, matched MLP, latency branch, label budget), training details added. |
+| Group bootstrap, episode-blocked split | Not done. The split seed is fixed, so intervals cover seed variance only; this and episode-level leakage are stated as limitations. |
+| Factual slips (A minor) | "nine"→"eight" classes, τ = 10% ranking, five partitions, 0.052 FAR, 24.8%/23.9% frozen baseline, "class-balanced" removed. |
