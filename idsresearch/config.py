@@ -79,7 +79,7 @@ class Config:
             raise ValueError("Branches must be unique")
         if set(self.branches) - {"rate", "temporal", "population"}:
             raise ValueError("Unsupported branch")
-        if set(self.models) - {"esnn", "ann", "encoded_ann", "ple_mlp", "ann_ensemble", "cnn", "rf", "xgb", "catboost"}:
+        if set(self.models) - {"esnn", "ann", "encoded_ann", "ple_mlp", "ple_ensemble", "ann_ensemble", "cnn", "rf", "xgb", "catboost"}:
             raise ValueError("Unsupported model")
         if self.scaler not in ("quantile", "robust") or self.loss not in ("ce", "weighted_ce", "focal"):
             raise ValueError("Unsupported preprocessing/loss")

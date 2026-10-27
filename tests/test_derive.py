@@ -66,3 +66,18 @@ def test_ple_mlp_is_parameter_matched_and_trains(smoke_experiment, tmp_path):
     train(tmp_path/"ple")
     score(tmp_path/"ple")
     assert (tmp_path/"ple"/"runs"/"ple_mlp-42"/"evaluated.json").exists()
+
+
+def test_ple_ensemble_matches_esnn_size_and_trains(smoke_experiment, tmp_path):
+    import torch
+    from idsresearch.data import CLASSES
+    from idsresearch.models import build
+    config = Config(hidden=(128, 64))
+    esnn = sum(p.numel() for p in build("esnn", 70, len(CLASSES), config).parameters())
+    ple = build("ple_ensemble", 70, len(CLASSES), config)
+    assert abs(sum(p.numel() for p in ple.parameters())-esnn)/esnn < 0.05
+    assert ple(torch.rand(5, 70)).shape == (5, len(CLASSES))
+    derive(smoke_experiment, tmp_path/"plee", {"models": ["ple_ensemble"]})
+    train(tmp_path/"plee")
+    score(tmp_path/"plee")
+    assert (tmp_path/"plee"/"runs"/"ple_ensemble-42"/"evaluated.json").exists()

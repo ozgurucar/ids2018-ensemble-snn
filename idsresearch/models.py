@@ -159,6 +159,17 @@ def build(name, features, classes, config):
             return (d+1)*width + 2*width + (width+1)*width + 2*width + (width+1)*classes
         width = min(range(8, 1025), key=lambda w: abs(size(w)-target))
         return PLEMLP(features, classes, config.ple_bins, (width, width), config.dropout)
+    if name == "ple_ensemble":
+        # Three PLE-MLP branches under the E-SNN fusion head, each matched to the
+        # mean E-SNN branch size; separates the fusion head from the spike codes.
+        esnn = build("esnn", features, classes, config)
+        target = sum(p.numel() for p in esnn.branches.parameters()) / len(config.branches)
+        d = features*config.ple_bins
+        def size(width):
+            return (d+1)*width + 2*width + (width+1)*width + 2*width + (width+1)*classes
+        width = min(range(8, 1025), key=lambda w: abs(size(w)-target))
+        return Fusion({k: PLEMLP(features, classes, config.ple_bins, (width, width), config.dropout) for k in config.branches},
+                      classes, config.alpha)
     if name == "ann":
         # Select width from parameter counts, not validation/test performance.
         target = sum(p.numel() for p in build("esnn", features, classes, config).parameters())
