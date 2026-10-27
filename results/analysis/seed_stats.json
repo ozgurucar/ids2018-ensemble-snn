@@ -36,7 +36,8 @@
  "declared_comparisons": [
   "esnn - ann",
   "esnn - encoded_ann",
-  "esnn - xgb"
+  "esnn - xgb",
+  "esnn - ple_mlp"
  ],
  "declared_taus": [
   "0.05",
@@ -49,7 +50,7 @@
  "notes": [
   "Seeds vary initialisation and order only; split seed 2026 is fixed, so partition variance is not covered.",
   "Paired differences pair runs by seed number; tree and neural seeds control different random streams, so pairing is nominal.",
-  "Holm family3: the three declared comparisons within one (metric, tau). family6: the three comparisons at both declared taus, per metric.",
+  "Holm family_declared: the declared comparisons (four with PLE-MLP) within one (metric, tau). family6: the three comparisons at both declared taus, per metric.",
   "mde80: smallest true difference a two-sided Welch test at alpha 0.05 would detect with 80% power given the observed s.d. (normal-theory approximation).",
   "TOST margin 0.02 macro-F1 (2 points), Welch, alpha 0.05; equivalence needs the 90% CI inside the margin."
  ],
@@ -2998,7 +2999,7 @@
     "t": 1.038596003872678,
     "p": 0.40126654499760667,
     "mde80": 0.0656237546791115,
-    "p_holm_family3": 0.6640464608337642,
+    "p_holm_family_declared": 0.6640464608337642,
     "p_holm_family6": 0.6640464608337642
    },
    "paired": {
@@ -3022,7 +3023,7 @@
     "p": 0.4131083323100494,
     "wins": 2,
     "losses": 1,
-    "p_holm_family3": 0.4131083323100494,
+    "p_holm_family_declared": 0.4131083323100494,
     "p_holm_family6": 0.4131083323100494
    }
   },
@@ -3080,7 +3081,7 @@
     "t": -1.1139049494404445,
     "p": 0.3320232304168821,
     "mde80": 0.060751000955708255,
-    "p_holm_family3": 0.6640464608337642,
+    "p_holm_family_declared": 0.6640464608337642,
     "p_holm_family6": 0.6640464608337642
    },
    "paired": {
@@ -3104,7 +3105,7 @@
     "p": 0.051162776849111614,
     "wins": 0,
     "losses": 3,
-    "p_holm_family3": 0.15348833054733485,
+    "p_holm_family_declared": 0.15348833054733485,
     "p_holm_family6": 0.23537583688293948
    }
   },
@@ -3162,7 +3163,7 @@
     "t": -2.999630783418964,
     "p": 0.08345776001644044,
     "mde80": 0.06457237631763774,
-    "p_holm_family3": 0.2503732800493213,
+    "p_holm_family_declared": 0.2503732800493213,
     "p_holm_family6": 0.3564780717833311
    },
    "paired": {
@@ -3186,7 +3187,7 @@
     "p": 0.12873079312129126,
     "wins": 0,
     "losses": 3,
-    "p_holm_family3": 0.25746158624258253,
+    "p_holm_family_declared": 0.25746158624258253,
     "p_holm_family6": 0.3861923793638738
    }
   },
@@ -3244,7 +3245,7 @@
     "t": 1.9751701280789868,
     "p": 0.14685200562167222,
     "mde80": 0.03817755241066901,
-    "p_holm_family3": 0.14685200562167222,
+    "p_holm_family_declared": 0.14685200562167222,
     "p_holm_family6": 0.44055601686501666
    },
    "paired": {
@@ -3268,7 +3269,7 @@
     "p": 0.15091599680136447,
     "wins": 3,
     "losses": 0,
-    "p_holm_family3": 0.15091599680136447,
+    "p_holm_family_declared": 0.15091599680136447,
     "p_holm_family6": 0.3861923793638738
    }
   },
@@ -3326,7 +3327,7 @@
     "t": -2.4457796239451985,
     "p": 0.07129561435666622,
     "mde80": 0.04087799695731649,
-    "p_holm_family3": 0.14259122871333244,
+    "p_holm_family_declared": 0.14259122871333244,
     "p_holm_family6": 0.3564780717833311
    },
    "paired": {
@@ -3350,7 +3351,7 @@
     "p": 0.047075167376587894,
     "wins": 0,
     "losses": 3,
-    "p_holm_family3": 0.09673835150770468,
+    "p_holm_family_declared": 0.09673835150770468,
     "p_holm_family6": 0.23537583688293948
    }
   },
@@ -3408,7 +3409,7 @@
     "t": -6.826391485450915,
     "p": 0.011580145443181079,
     "mde80": 0.039563081530405095,
-    "p_holm_family3": 0.03474043632954324,
+    "p_holm_family_declared": 0.03474043632954324,
     "p_holm_family6": 0.06948087265908648
    },
    "paired": {
@@ -3432,7 +3433,7 @@
     "p": 0.032246117169234895,
     "wins": 0,
     "losses": 3,
-    "p_holm_family3": 0.09673835150770468,
+    "p_holm_family_declared": 0.09673835150770468,
     "p_holm_family6": 0.19347670301540937
    }
   },
@@ -3490,7 +3491,7 @@
     "t": 1.3682500677332297,
     "p": 0.2920004257449334,
     "mde80": 0.055864811986234726,
-    "p_holm_family3": 0.5840008514898668,
+    "p_holm_family_declared": 0.5840008514898668,
     "p_holm_family6": 0.5840008514898668
    },
    "paired": {
@@ -3514,7 +3515,7 @@
     "p": 0.223963639273642,
     "wins": 2,
     "losses": 1,
-    "p_holm_family3": 0.41163012769846047,
+    "p_holm_family_declared": 0.41163012769846047,
     "p_holm_family6": 0.41163012769846047
    }
   },
@@ -3572,7 +3573,7 @@
     "t": -0.779103146898546,
     "p": 0.4800942711160527,
     "mde80": 0.054933061145880875,
-    "p_holm_family3": 0.5840008514898668,
+    "p_holm_family_declared": 0.5840008514898668,
     "p_holm_family6": 0.5840008514898668
    },
    "paired": {
@@ -3596,7 +3597,7 @@
     "p": 0.03376293024412065,
     "wins": 0,
     "losses": 3,
-    "p_holm_family3": 0.10128879073236195,
+    "p_holm_family_declared": 0.10128879073236195,
     "p_holm_family6": 0.10128879073236195
    }
   },
@@ -3654,7 +3655,7 @@
     "t": -1.9223125909896965,
     "p": 0.1936620290559567,
     "mde80": 0.058959877137464964,
-    "p_holm_family3": 0.58098608716787,
+    "p_holm_family_declared": 0.58098608716787,
     "p_holm_family6": 0.58098608716787
    },
    "paired": {
@@ -3678,7 +3679,7 @@
     "p": 0.20581506384923023,
     "wins": 0,
     "losses": 3,
-    "p_holm_family3": 0.41163012769846047,
+    "p_holm_family_declared": 0.41163012769846047,
     "p_holm_family6": 0.41163012769846047
    }
   },
@@ -3736,7 +3737,7 @@
     "t": 2.756898063522866,
     "p": 0.053076661043533556,
     "mde80": 0.02811882383433029,
-    "p_holm_family3": 0.0878194921283499,
+    "p_holm_family_declared": 0.0878194921283499,
     "p_holm_family6": 0.21954873032087474
    },
    "paired": {
@@ -3760,7 +3761,7 @@
     "p": 0.015031507029716269,
     "wins": 3,
     "losses": 0,
-    "p_holm_family3": 0.030514011375707004,
+    "p_holm_family_declared": 0.030514011375707004,
     "p_holm_family6": 0.07515753514858134
    }
   },
@@ -3818,7 +3819,7 @@
     "t": -2.940937028736176,
     "p": 0.04390974606417495,
     "mde80": 0.028278093030935664,
-    "p_holm_family3": 0.0878194921283499,
+    "p_holm_family_declared": 0.0878194921283499,
     "p_holm_family6": 0.21954873032087474
    },
    "paired": {
@@ -3842,7 +3843,7 @@
     "p": 0.010171337125235668,
     "wins": 0,
     "losses": 3,
-    "p_holm_family3": 0.030514011375707004,
+    "p_holm_family_declared": 0.030514011375707004,
     "p_holm_family6": 0.06102802275141401
    }
   },
@@ -3900,7 +3901,7 @@
     "t": -7.6155626915829115,
     "p": 0.01647086759277579,
     "mde80": 0.03081031853932157,
-    "p_holm_family3": 0.049412602778327375,
+    "p_holm_family_declared": 0.049412602778327375,
     "p_holm_family6": 0.09882520555665475
    },
    "paired": {
@@ -3924,7 +3925,7 @@
     "p": 0.01686964238208009,
     "wins": 0,
     "losses": 3,
-    "p_holm_family3": 0.030514011375707004,
+    "p_holm_family_declared": 0.030514011375707004,
     "p_holm_family6": 0.07515753514858134
    }
   }

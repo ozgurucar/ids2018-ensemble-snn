@@ -134,7 +134,7 @@ def main():
             for key in ("welch", "paired"):
                 adj = holm([f[key]["p"] for f in fam])
                 for f, p in zip(fam, adj):
-                    f[key]["p_holm_family3"] = p
+                    f[key]["p_holm_family_declared"] = p
             confirmatory.extend(fam)
         # Holm across both budgets (6 tests) per metric.
         sub = [f for f in confirmatory if f["metric"] == metric]
@@ -171,7 +171,7 @@ def main():
                "declared_comparisons": [f"{a} - {b}" for a, b in DECLARED], "declared_taus": TAUS, "metrics": METRICS,
                "notes": ["Seeds vary initialisation and order only; split seed 2026 is fixed, so partition variance is not covered.",
                          "Paired differences pair runs by seed number; tree and neural seeds control different random streams, so pairing is nominal.",
-                         "Holm family3: the three declared comparisons within one (metric, tau). family6: the three comparisons at both declared taus, per metric.",
+                         "Holm family_declared: the declared comparisons (four with PLE-MLP) within one (metric, tau). family6: the three comparisons at both declared taus, per metric.",
                          "mde80: smallest true difference a two-sided Welch test at alpha 0.05 would detect with 80% power given the observed s.d. (normal-theory approximation).",
                          f"TOST margin {TOST_MARGIN} macro-F1 (2 points), Welch, alpha 0.05; equivalence needs the 90% CI inside the margin."],
                "models": models, "confirmatory": confirmatory, "exploratory_unadjusted": exploratory, "equivalence_tost": equivalence}
@@ -183,14 +183,14 @@ def main():
              f"JSON: `results/analysis/{args.out}.json`. Seed conflicts: {len(conflicts)}.", "",
              "## Pre-declared comparisons ({L})", "",
              "Differences are first model minus second model, in macro-F1 points x 100 would be the paper's 'points'. CI: 95%.", "",
-             "| Metric | tau | Comparison | Mean diff | Welch 95% CI | p Welch | p Holm (3) | Paired diffs (by seed) | Paired 95% CI | p paired | p Holm (3) | MDE80 |",
+             "| Metric | tau | Comparison | Mean diff | Welch 95% CI | p Welch | p Holm (declared) | Paired diffs (by seed) | Paired 95% CI | p paired | p Holm (declared) | MDE80 |",
              "|---|---|---|---|---|---|---|---|---|---|---|---|"]
     for f in confirmatory:
         w, pr = f["welch"], f["paired"]
         lines.append(f"| {f['metric']} | {f['tau']} | {f['a'].split(':')[1]} - {f['b'].split(':')[1]} | {w['diff']:+.4f} | "
-                     f"[{w['ci95'][0]:+.3f}, {w['ci95'][1]:+.3f}] | {w['p']:.3f} | {w['p_holm_family3']:.3f} | "
+                     f"[{w['ci95'][0]:+.3f}, {w['ci95'][1]:+.3f}] | {w['p']:.3f} | {w['p_holm_family_declared']:.3f} | "
                      f"{', '.join(f'{x:+.3f}' for x in pr['differences'])} | [{pr['ci95'][0]:+.3f}, {pr['ci95'][1]:+.3f}] | "
-                     f"{pr['p']:.3f} | {pr['p_holm_family3']:.3f} | {w['mde80']:.3f} |")
+                     f"{pr['p']:.3f} | {pr['p_holm_family_declared']:.3f} | {w['mde80']:.3f} |")
     lines += ["", "## Per-model seeds (T = 12, tau = 5%)", "", "| Model | 13-class seeds | mean [95% CI] | 11-class seeds | mean [95% CI] |", "|---|---|---|---|---|"]
     for m in ("esnn", "ann", "encoded_ann", "rf", "catboost", "xgb"):
         r = models[L].get(m)
