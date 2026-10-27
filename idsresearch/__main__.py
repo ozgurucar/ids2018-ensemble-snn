@@ -9,7 +9,7 @@ from .synthetic import generate
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Auditable IDS experiments; see docs/PLAN_TR.md")
+    parser = argparse.ArgumentParser(description="Auditable IDS experiments; see README.md")
     sub = parser.add_subparsers(dest="command", required=True)
     a = sub.add_parser("audit")
     a.add_argument("--data", required=True)

@@ -20,8 +20,14 @@ Seeds vary initialisation and data order only; the split seed is fixed, so
 none of these intervals covers partition variance. Rows within the test set
 are dependent, so no row-level test is attempted.
 
-Rerun with more seeds (e.g. when the v5 5-seed records arrive):
-    python scripts/analysis/seed_stats.py --summary T12=results/v5/seeds/summary.json
+Default run (three-seed v3/v4 records, T = 12 primary) -> results/analysis/seed_stats_table.md:
+    python scripts/analysis/seed_stats.py
+
+Five-seed T = 4 run (v5, the paper's primary comparison) -> results/analysis/seed_stats_5seed_table.md:
+    python scripts/analysis/seed_stats.py --no-defaults \
+        --summary T4=results/v5/seeds/summary.json --primary-label T4 --out seed_stats_5seed
+
+The label given to --summary must match --primary-label (the v5 run is T = 4, not T = 12).
 """
 import argparse
 import itertools
@@ -196,7 +202,7 @@ def main():
                      f"{', '.join(f'{x:+.3f}' for x in pr['differences'])} | [{pr['ci95'][0]:+.3f}, {pr['ci95'][1]:+.3f}] | "
                      f"{pr['p']:.3f} | {pr['p_holm_family_declared']:.3f} | {w['mde80']:.3f} |")
     lines += ["", f"## Per-model seeds ({L}, tau = 5%)", "", "| Model | 13-class seeds | mean [95% CI] | 11-class seeds | mean [95% CI] |", "|---|---|---|---|---|"]
-    for m in ("esnn", "ann", "encoded_ann", "rf", "catboost", "xgb"):
+    for m in ("esnn", "ann", "encoded_ann", "ple_mlp", "rf", "catboost", "xgb"):
         r = models[L].get(m)
         if not r:
             continue

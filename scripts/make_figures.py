@@ -32,8 +32,10 @@ RES = ROOT / "results"
 STEPS = {4: RES / "v4/steps/summary_T4.json", 8: RES / "v4/steps/summary_T8.json",
          12: RES / "v3/experiments/group_ce/summary.json"}
 BASELINE = RES / "v3/experiments/group_ce/summary.json"
-EFF_45NM = RES / "v4/efficiency_cpu_v4.json"
-EFF_LOIHI = RES / "v4/energy_loihi.json"
+# Five-seed T = 4 run (v5): primary values for T = 4 and for the T-independent references.
+SEEDS5 = RES / "v5/seeds/summary.json"
+# Unified energy model (complete 45 nm, +SRAM, Loihi), test-mix sample; see results/analysis/NOTE_4_energy.md.
+ENERGY = RES / "analysis/energy_unified.json"
 TRANSFER = RES / "cross_dataset/cic2017.json"
 FINETUNE = RES / "cross_dataset/finetune_cic2017.json"
 BUDGET = "0.05"
@@ -108,47 +110,47 @@ def mf1(path, model):
 
 
 def energies():
-    """Energy per flow (uJ) under the two cost models.
+    """Energy per flow (uJ), test-mix sample of results/analysis/energy_unified.json.
 
-    45nm: Horowitz 45 nm synaptic operations only (0.9 pJ AC, 4.6 pJ MAC), efficiency_cpu_v4.json.
-    loihi: E-SNN on published Loihi per-op costs plus host LayerNorm/fusion (total_uJ), and the
-           matched ANN on a 45 nm FP32 accelerator with and without SRAM weight reads, energy_loihi.json.
+    45nm: complete 45 nm model (ACs, MACs, layer normalisation and, for the E-SNN, membrane
+          and readout updates). sram: the same plus one 32 KB SRAM read per weight use.
+    loihi: E-SNN on published Loihi per-operation costs with host LayerNorm and fusion.
     """
-    m = load(EFF_45NM)
-    e = {"esnn_45nm": [m[f"esnn_T{T}"]["energy_pj_45nm"] / 1e6 for T in sorted(STEPS)],
-         "encoded_ann_45nm": [m[f"encoded_ann_T{T}"]["energy_pj_45nm"] / 1e6 for T in sorted(STEPS)],
-         "ann_45nm": m["ann_T12"]["energy_pj_45nm"] / 1e6}
-    sources = [EFF_45NM]
-    if EFF_LOIHI.exists():
-        lo = load(EFF_LOIHI)["models"]
-        e["esnn_loihi"] = [lo[f"esnn_T{T}"]["total_uJ"] for T in sorted(STEPS)]
-        e["ann_45nm_sram"] = lo["ann"]["accel_45nm_with_sram_weights_uJ"]
-        sources.append(EFF_LOIHI)
-    else:
-        print("  energy_loihi.json not found; panel (b) shows the 45 nm model only")
-    return e, sources
+    m = load(ENERGY)["test_mix"]
+    Ts = sorted(STEPS)
+    e = {"esnn_45nm": [m[f"esnn_T{T}"]["energy"]["45nm_complete_uJ"] for T in Ts],
+         "esnn_45nm_sram": [m[f"esnn_T{T}"]["energy"]["45nm_complete_sram_uJ"] for T in Ts],
+         "esnn_loihi": [m[f"esnn_T{T}"]["energy"]["loihi_uJ"] for T in Ts],
+         "encoded_ann_45nm": [m[f"encoded_ann_T{T}"]["energy"]["45nm_complete_uJ"] for T in Ts],
+         "ann_45nm": m["ann"]["energy"]["45nm_complete_uJ"],
+         "ann_45nm_sram": m["ann"]["energy"]["45nm_complete_sram_uJ"]}
+    return e, [ENERGY]
 
 
 def steps(png):
     Ts = sorted(STEPS)
-    series = {k: [mf1(STEPS[T], k) for T in Ts] for k in ("esnn", "encoded_ann")}
-    ref = {k: mf1(BASELINE, k) for k in ("ann", "xgb")}
+    # T = 4 from the five-seed run; T = 8 and 12 from the three-seed runs.
+    src = {T: (SEEDS5 if T == 4 else STEPS[T]) for T in Ts}
+    series = {k: [mf1(src[T], k) for T in Ts] for k in ("esnn", "encoded_ann")}
+    ref = {k: mf1(SEEDS5, k) for k in ("ann", "ple_mlp", "xgb")}
     en, en_src = energies()
     record["fig_steps"] = {
         "budget": BUDGET, "T": Ts,
         "macro_f1": {k: [{"mean": m, "sd": s, "n": n} for m, s, n in v] for k, v in series.items()},
         "reference_macro_f1": {k: {"mean": m, "sd": s, "n": n} for k, (m, s, n) in ref.items()},
-        "energy_uJ": en, "sources": sorted(str(p.relative_to(ROOT)) for p in {*STEPS.values(), *en_src})}
+        "energy_uJ": en,
+        "sources": sorted(str(p.relative_to(ROOT)) for p in {*src.values(), SEEDS5, *en_src})}
 
     style = {"esnn": dict(color=BLUE, marker="o", ls="-", label="E-SNN", mfc=BLUE),
              "encoded_ann": dict(color=VERM, marker="s", ls="--", label="Enc-ANN", mfc="white")}
     refstyle = {"xgb": dict(color=BLACK, ls="-.", lw=0.9, label="XGBoost"),
-                "ann": dict(color=GRAY, ls=":", lw=1.2, label="Matched MLP")}
+                "ple_mlp": dict(color=GREEN, ls=(0, (5, 2)), lw=0.9, label="PLE-MLP"),
+                "ann": dict(color=GRAY, ls=":", lw=1.2, label="MLP")}
     shift = {"esnn": -0.22, "encoded_ann": 0.22}
     xlim = (Ts[0] - 1.2, Ts[-1] + 1.2)
 
-    fig, (a, b) = plt.subplots(2, 1, figsize=(SINGLE, 3.45), sharex=False,
-                               gridspec_kw={"hspace": 0.62, "height_ratios": [1, 1.12]})
+    fig, (a, b) = plt.subplots(2, 1, figsize=(SINGLE, 2.95), sharex=False,
+                               gridspec_kw={"hspace": 0.18, "height_ratios": [1, 1.2]})
     # (a) accuracy
     for k, (m_, _, _) in ref.items():
         a.axhline(m_, **refstyle[k], zorder=1)
@@ -157,54 +159,52 @@ def steps(png):
                    capsize=2, elinewidth=0.7, capthick=0.7, mew=0.9, zorder=3, **style[k])
     a.set_xticks(Ts)
     a.set_xlim(*xlim)
-    a.set_xlabel("Time window $T$ (steps)")
-    a.set_ylabel(f"Macro-F1 at {float(BUDGET):.0%} FAR")
+    a.set_ylabel(f"Macro-F1, {float(BUDGET):.0%} FAR")
     lo = min(min(x[0] - x[1] for x in v) for v in series.values())
     hi = max(max(x[0] + x[1] for x in v) for v in series.values())
     lo, hi = min(lo, *(m_ for m_, _, _ in ref.values())), max(hi, *(m_ for m_, _, _ in ref.values()))
-    a.set_ylim(math.floor((lo - 0.004) * 100) / 100, math.ceil((hi + 0.012) * 100) / 100)
-    a.text(0.02, 0.97, "(a)", transform=a.transAxes, fontsize=8, va="top", fontweight="bold")
+    a.set_ylim(math.floor((lo - 0.004) * 100) / 100, math.ceil((hi + 0.006) * 100) / 100)
+    a.text(0.02, 0.95, "(a)", transform=a.transAxes, fontsize=8, va="top", fontweight="bold")
     handles = [Line2D([], [], **style["esnn"]), Line2D([], [], **style["encoded_ann"]),
-               Line2D([], [], **refstyle["ann"]), Line2D([], [], **refstyle["xgb"])]
-    a.legend(handles=handles, loc="lower left", ncol=4, bbox_to_anchor=(-0.2, 1.01),
-             handlelength=2.2, columnspacing=1.0, handletextpad=0.4)
+               Line2D([], [], **refstyle["ann"]), Line2D([], [], **refstyle["ple_mlp"]),
+               Line2D([], [], **refstyle["xgb"])]
+    a.legend(handles=handles, loc="center left", bbox_to_anchor=(1.02, 0.5), fontsize=7,
+             handlelength=2.2, handletextpad=0.4, frameon=False)
 
-    # (b) energy under two cost models, log scale, inline labels at the right
+    # (b) energy, log scale, inline labels at the right
     lab = dict(fontsize=7, va="center", ha="left")
     xr = xlim[1] + 0.25
     lines = []
-    if "esnn_loihi" in en:
-        b.plot(Ts, en["esnn_loihi"], color=BLUE, marker="o", ls="-", mfc=BLUE, mew=0.9, zorder=3)
-        lines.append((en["esnn_loihi"][-1], "E-SNN, Loihi costs", BLUE))
+    b.plot(Ts, en["esnn_loihi"], color=BLUE, marker="o", ls="-", mfc=BLUE, mew=0.9, zorder=3)
+    lines.append((en["esnn_loihi"][-1], "E-SNN, Loihi", BLUE))
+    b.plot(Ts, en["esnn_45nm_sram"], color=BLUE, marker="^", ls="-.", mfc="white", mew=0.9, zorder=3)
+    lines.append((en["esnn_45nm_sram"][-1], "E-SNN, 45 nm+SRAM", BLUE))
     b.plot(Ts, en["esnn_45nm"], color=BLUE, marker="o", ls="--", mfc="white", mew=0.9, zorder=3)
-    lines.append((en["esnn_45nm"][-1], "E-SNN, 45 nm AC/MAC", BLUE))
+    lines.append((en["esnn_45nm"][-1], "E-SNN, 45 nm", BLUE))
     b.plot(Ts, en["encoded_ann_45nm"], color=VERM, marker="s", ls="--", mfc="white", mew=0.9, zorder=3)
-    lines.append((en["encoded_ann_45nm"][-1], "Enc-ANN, 45 nm AC/MAC", VERM))
-    if "ann_45nm_sram" in en:
-        b.axhline(en["ann_45nm_sram"], color=GRAY, ls="-", lw=0.9, zorder=1)
-        b.text(5.2, en["ann_45nm_sram"] * 1.12, "Matched MLP, FP32 MAC + SRAM weight reads",
-               color="#4D4D4D", fontsize=6.5, va="bottom", ha="left")
+    lines.append((en["encoded_ann_45nm"][-1], "Enc-ANN, 45 nm", VERM))
+    b.axhline(en["ann_45nm_sram"], color=GRAY, ls="-", lw=0.9, zorder=1)
+    lines.append((en["ann_45nm_sram"], "MLP, 45 nm+SRAM", "#4D4D4D"))
     b.axhline(en["ann_45nm"], **{**refstyle["ann"], "label": None}, zorder=1)
-    b.text(5.2, en["ann_45nm"] * 1.12, "Matched MLP, FP32 MAC", color="#4D4D4D", fontsize=6.5,
-           va="bottom", ha="left")
+    lines.append((en["ann_45nm"], "MLP, 45 nm", "#4D4D4D"))
     # spread inline labels so they do not collide (log space)
     lines.sort(key=lambda t: t[0])
     ys = [math.log10(y) for y, _, _ in lines]
     for i in range(1, len(ys)):
-        ys[i] = max(ys[i], ys[i - 1] + 0.25)
+        ys[i] = max(ys[i], ys[i - 1] + 0.2)
     for (y, text, c), ly in zip(lines, ys):
         b.text(xr, 10 ** ly, text, color=c, clip_on=False, **lab)
     b.set_yscale("log")
     b.yaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(lambda y, _: f"{y:g}"))
     vals = [v for x in en.values() for v in (x if isinstance(x, list) else [x])]
-    b.set_ylim(min(vals) / 1.7, max(vals) * 1.7)
+    b.set_ylim(min(vals) / 1.6, max(vals) * 1.6)
     b.set_xticks(Ts)
     b.set_xlim(*xlim)
     b.set_xlabel("Time window $T$ (steps)")
-    b.set_ylabel(r"Est. energy per flow ($\mu$J)")
-    b.text(0.02, 0.97, "(b)", transform=b.transAxes, fontsize=8, va="top", fontweight="bold")
-    # keep both panels the same width; labels live in the right margin
-    fig.subplots_adjust(right=0.66)
+    b.set_ylabel(r"Energy per flow ($\mu$J)")
+    b.text(0.02, 0.95, "(b)", transform=b.transAxes, fontsize=8, va="top", fontweight="bold")
+    # keep both panels the same width; labels and legend live in the right margin
+    fig.subplots_adjust(right=0.64, left=0.15, top=0.98, bottom=0.11)
     save(fig, "fig_steps", png)
 
 
