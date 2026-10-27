@@ -1,4 +1,4 @@
-# CIC-IDS2017 adaptation with label accounting and matched FAR (item 5)
+# CIC-IDS2017 adaptation with label accounting and matched FAR
 
 Source: `results/analysis/adapt_label_budget.json` (script `scripts/analysis/adapt_label_budget.py`). Means over seeds 42, 43, 44 (s.d. in the JSON).
 Labelled = flows with a class label (budget + temperature rows). Benign-only = flows that must be known benign for the alarm threshold (no attack labels).

@@ -1,9 +1,10 @@
-"""IDS2018 v5: reviewer-requested experiments (more seeds, a spike-free PLE-MLP control, a Dst Port ablation).
+"""IDS2018 v5: more seeds, a spike-free PLE-MLP control and a Dst Port ablation.
 
-Reuses the prepared v3 group_ce partitions and preprocessor byte for byte
-(attached as the output of ozgurucar/notebookeb0d7e9071). Only the number of
-time steps changes. Decision rule, budgets and seeds are those of v3 and were
-fixed before this run. Development evidence, not independent validation.
+Derives from the prepared v3 group_ce experiment (the output of Kaggle notebook
+ozgurucar/notebookeb0d7e9071) and reuses its partitions and preprocessor byte
+for byte. Only model fields and seeds change (EXPERIMENTS is filled in at
+build time); the decision rule and budgets are those of v3. Development
+evidence, not independent validation.
 """
 import base64, io, json, os, subprocess, sys, time, zipfile
 from pathlib import Path

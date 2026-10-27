@@ -1,4 +1,4 @@
-"""Item 3: operating-point context from the run records.
+"""Operating-point context from the run records.
 
 For every model of the primary T = 12 experiment (and the T = 4 / T = 8 runs):
   * per-day test FPR and ADR at the 5% budget (diagnostics.per_recorded_day),
@@ -106,7 +106,7 @@ def main():
 
     # ---------------------------------------------------------------- markdown
     T = out["T12"]
-    L = ["# Operating-point context (item 3)", "", "Source: run records; script `scripts/analysis/operating_context.py`; JSON `results/analysis/operating_context.json`.", "",
+    L = ["# Operating-point context", "", "Source: run records; script `scripts/analysis/operating_context.py`; JSON `results/analysis/operating_context.json`.", "",
          "## Per-day test FPR at the 5% budget (T = 12, mean over seeds)", "",
          "| Day | benign rows | " + " | ".join(MODEL_NAMES[m] for m in ORDER) + " |", "|---|---|" + "---|" * len(ORDER)]
     for d in T["esnn"]["per_day"]:

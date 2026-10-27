@@ -1,4 +1,4 @@
-# Item 6: transfer hygiene (name-based mapping, KS shift)
+# CIC-IDS2017 transfer: name-based column mapping and KS shift
 
 Script: `scripts/analysis/transfer_hygiene.py ~/.cache/ids-x17/combine.csv`. Outputs: `results/analysis/transfer_hygiene.json`, `results/analysis/transfer_hygiene_table.md` (includes the full explicit 2017 to 2018 column map, suitable for an appendix or the repository).
 
@@ -34,13 +34,13 @@ Two observations matter for interpretation:
 1. Extractor-version signatures. RST Flag Cnt and ECE Flag Cnt are zero in 99.97% of 2017 benign flows but only 68% of 2018 benign flows; minimum packet lengths are zero in 77% of 2018 flows against 36% to 44% in 2017; Init Bwd Win Byts has median -1 in 2017 and 149 in 2018. These look like differences in how the two CICFlowMeter versions compute the features, not only network differences.
 2. Benign traffic in 2018 is itself very heterogeneous across days. Only 7 of the 70 inputs shift more between 2018 and 2017 than between the two most different 2018 days (median of that day-to-day maximum 0.63). Marginal shift therefore does not by itself explain the transfer failure; the 2017 benign flows mostly fall inside the range of 2018 days, but in combinations (and on the flag and minimum-length features) the models have not seen.
 
-## LaTeX-ready sentences
+## Sentences for the paper
 
 - We map the CIC-IDS2017 columns to the CSE-CIC-IDS2018 names with an explicit table (released with the code); the result is identical to the positional mapping, and the duplicated 2017 header length column equals its first copy in every row.
 - The largest per-feature shifts between 2018 and 2017 benign flows (two-sample KS 0.32 to 0.49) are in the minimum segment and packet lengths, the forward inter-arrival times, the initial backward window and the RST and ECE flag counts. The flag counts are zero in 99.97\% of 2017 flows but only in 68\% of 2018 flows, which points to a change in the flow extractor rather than in the network alone.
 - 2018 benign traffic varies almost as much between capture days: only 7 of the 70 inputs shift more between the two datasets than between the two most different 2018 days, so we cannot attribute the transfer failure to network shift rather than to the extractor version and the destination-port input.
 
-## What changes in the paper
+## Consequences for the paper
 
 - Sec. V-F "Its features match ours one to one": true by name, now verified; state the name map rather than a positional match.
-- The transfer failure is confounded with an extractor-version shift (flag counts, minimum lengths, window bytes); the paper should say so (reviewer A, M8). A re-extracted, version-consistent 2017/2018 pair or the complete 2017 export was not tested here (the local export still lacks Tuesday and Thursday morning).
+- The transfer failure is confounded with an extractor-version shift (flag counts, minimum lengths, window bytes); the paper should say so. A re-extracted, version-consistent 2017/2018 pair or the complete 2017 export was not tested here (the local export still lacks Tuesday and Thursday morning).

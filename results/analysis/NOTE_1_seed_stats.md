@@ -1,4 +1,4 @@
-# Item 1: seed-level statistics
+# Seed-level statistics (three seeds, T = 12)
 
 Script: `scripts/analysis/seed_stats.py` (reads only `summary.json` records).
 Outputs: `results/analysis/seed_stats.json`, `results/analysis/seed_stats_table.md`.
@@ -29,7 +29,7 @@ Time window (Welch TOST, margin 2 points): no pair is shown equivalent. E-SNN T 
 
 Exploratory (unadjusted): Enc-ANN minus RF at 5% is -0.1 points (p = 0.93, 13-class) and +0.6 (p = 0.58, 11-class). XGBoost is above RF and CatBoost (p = 0.018 and 0.015, 13-class), the only tree gaps that the seeds resolve.
 
-## LaTeX-ready sentences
+## Sentences for the paper
 
 - With three seeds, none of the three pre-declared comparisons at the 5\% budget is significant after Holm correction: the E-SNN differs from the matched ANN by $+1.3$ points (95\% CI $[-3.9, 6.6]$, Welch $p = 0.40$), from Enc-ANN by $-1.8$ points ($[-6.3, 2.8]$, $p = 0.33$) and from XGBoost by $-3.9$ points ($[-9.0, 1.2]$, $p = 0.08$; Holm-adjusted $0.66$, $0.66$ and $0.25$).
 - Enc-ANN scored higher than the E-SNN on all three seeds, by 1.0 to 2.3 points (paired $p = 0.051$, Holm $0.15$), so the direction is consistent but the evidence is weak.
@@ -37,7 +37,7 @@ Exploratory (unadjusted): Enc-ANN minus RF at 5% is -0.1 points (p = 0.93, 13-cl
 - With three seeds a two-sided test has 80\% power only for differences of about 6 points, so the absence of significance at the 5\% budget is not evidence of equality.
 - For the time window we can only say that we found no detectable difference: the 90\% CI of the $T{=}4$ minus $T{=}12$ difference is $[-3.7, 3.1]$ points, which does not exclude a 2-point effect.
 
-## What changes in the paper
+## Consequences for the paper
 
 - "above the matched perceptron", "beats a parameter-matched perceptron" (abstract, conclusion) and "below the spike-input control" are not supported as stated; use "no detectable difference at n = 3" with the CIs above.
 - "The three are indistinguishable given the seed spread" (Sec. V-B) should become "no detectable difference"; equivalence within 2 points is not shown.

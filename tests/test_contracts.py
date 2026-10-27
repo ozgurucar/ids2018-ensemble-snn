@@ -211,29 +211,29 @@ def test_protocol_comparison_requires_paired_budgets(tmp_path):
 
 
 def test_recorded_time_run_remains_unverified_and_cannot_export(tmp_path):
-    data = generate(tmp_path/'data', 200)
-    config = Config(provenance='real', timestamp_policy='recorded_unverified',
-                    models=('rf',), seeds=(42,), rf_trees=3, min_calibration_benign=3)
-    exp = tmp_path/'exp'
-    manifest = prepare(data, config, exp, '%Y-%m-%d %H:%M:%S')
-    assert manifest['timestamp_review']['timestamp_status'] == 'unverified'
+    data = generate(tmp_path/"data", 200)
+    config = Config(provenance="real", timestamp_policy="recorded_unverified",
+                    models=("rf",), seeds=(42,), rf_trees=3, min_calibration_benign=3)
+    exp = tmp_path/"exp"
+    manifest = prepare(data, config, exp, "%Y-%m-%d %H:%M:%S")
+    assert manifest["timestamp_review"]["timestamp_status"] == "unverified"
     train(exp)
     score(exp)
-    with pytest.raises(ValueError, match='timestamp review'):
-        export(exp, tmp_path/'paper')
-    export(exp, tmp_path/'draft', draft=True)
-    assert 'DRAFT / REAL' in (tmp_path/'draft/main_table.tex').read_text()
+    with pytest.raises(ValueError, match="timestamp review"):
+        export(exp, tmp_path/"paper")
+    export(exp, tmp_path/"draft", draft=True)
+    assert "DRAFT / REAL" in (tmp_path/"draft/main_table.tex").read_text()
 
 
 def test_kaggle_discovery_and_explicit_time_format(tmp_path):
     from idsresearch.kaggle import EXPECTED, find_data, detect_time_format
-    data = tmp_path/'datasets/solarmainframe/ids-intrusion-csv'
+    data = tmp_path/"datasets/solarmainframe/ids-intrusion-csv"
     data.mkdir(parents=True)
     for name in EXPECTED:
-        month,day,year = name.removesuffix('.csv').split('-')
+        month, day, year = name.removesuffix(".csv").split("-")
         (data/name).write_text(f'Timestamp,Label,f1\n{day}/{month}/{year} 13:45:27,Benign,1\n')
     assert find_data(tmp_path) == data
-    assert detect_time_format(data,tmp_path/'check.json') == '%d/%m/%Y %H:%M:%S'
-    report = read_json(tmp_path/'check.json')
-    assert report['timestamp_status'] == 'unverified'
-    assert report['files'][0]['timestamp_examples'][0].endswith('13:45:27')
+    assert detect_time_format(data, tmp_path/"check.json") == "%d/%m/%Y %H:%M:%S"
+    report = read_json(tmp_path/"check.json")
+    assert report["timestamp_status"] == "unverified"
+    assert report["files"][0]["timestamp_examples"][0].endswith("13:45:27")

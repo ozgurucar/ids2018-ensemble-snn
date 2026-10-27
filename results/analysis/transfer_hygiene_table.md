@@ -1,4 +1,4 @@
-# Transfer hygiene (item 6)
+# Transfer hygiene
 
 Script `scripts/analysis/transfer_hygiene.py`; JSON `results/analysis/transfer_hygiene.json`.
 

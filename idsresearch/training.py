@@ -66,8 +66,10 @@ def train_neural(name, X, y, tune_X, tune_y, config, seed, device, resume_path=N
         optimizer.load_state_dict(saved["optimizer"])
         history, best, best_state, stale = saved["history"], saved["best"], saved["best_state"], saved["stale"]
         start_epoch, previous_seconds = saved["epoch"], saved["seconds"]
-        random.setstate(saved["python_rng"]); np.random.set_state(saved["numpy_rng"])
-        torch.set_rng_state(saved["torch_rng"]); generator.set_state(saved["loader_rng"])
+        random.setstate(saved["python_rng"])
+        np.random.set_state(saved["numpy_rng"])
+        torch.set_rng_state(saved["torch_rng"])
+        generator.set_state(saved["loader_rng"])
         if torch.cuda.is_available() and saved["cuda_rng"] is not None:
             torch.cuda.set_rng_state_all(saved["cuda_rng"])
     start = time.perf_counter()

@@ -1,7 +1,8 @@
 """Training-prior correction, disjoint probability calibration and alarm rules.
 
-All fitting is confined to training counts or named calibration rows. These
-methods cannot repair labels or ensure control after distribution shift.
+Everything is fitted on training counts or on named calibration rows. None of
+it corrects label noise, and the FPR control is not guaranteed under
+distribution shift.
 """
 import numpy as np
 from scipy.special import logsumexp

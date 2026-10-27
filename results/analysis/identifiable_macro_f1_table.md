@@ -1,4 +1,4 @@
-# Identifiable-class macro-F1 (item 2)
+# Identifiable-class macro-F1
 
 Source: per-class test F1 and confusion matrices in the run records (`scripts/analysis/identifiable_macro_f1.py`).
 JSON: `results/analysis/identifiable_macro_f1.json` (every label, model, seed and budget).

@@ -1,4 +1,4 @@
-"""Item 4: one consistent per-flow energy table (estimates, not measurements).
+"""Per-flow energy under one consistent set of cost models (estimates, not measurements).
 
 Operation counts come from forward hooks on the seed-42 checkpoints
 (scripts/energy_loihi.py: count, esnn_energy, dense_energy, CKPT), on two
@@ -24,8 +24,8 @@ Cost models, all in pJ, Horowitz 2014 (45 nm) and Davies et al. 2018 (Loihi):
                    routing 1.7, LayerNorm and fusion on a 45 nm FP32 host
                    (identical to scripts/energy_loihi.py)
 
-The paper should use 45nm_complete for every model (one ANN number,
-0.40 uJ), and report Loihi and the SRAM/INT8 variants as sensitivity.
+The paper uses 45nm_complete for every model (one ANN figure, 0.40 uJ);
+Loihi, SRAM and INT8 are sensitivity variants.
 
     python scripts/analysis/energy_unified.py [--per-class 1500] [--skip-test-mix]
 """
@@ -184,7 +184,7 @@ def main():
     order = ["esnn_T4", "esnn_T8", "esnn_T12", "encoded_ann_T4", "encoded_ann_T8", "encoded_ann_T12", "ann"]
     names = {"esnn_T4": "E-SNN, T = 4", "esnn_T8": "E-SNN, T = 8", "esnn_T12": "E-SNN, T = 12", "encoded_ann_T4": "Enc-ANN, T = 4",
              "encoded_ann_T8": "Enc-ANN, T = 8", "encoded_ann_T12": "Enc-ANN, T = 12", "ann": "Matched ANN"}
-    L = ["# Unified per-flow energy (item 4)", "", f"Script `scripts/analysis/energy_unified.py`; JSON `results/analysis/energy_unified.json`. Estimates, not measurements.", ""]
+    L = ["# Unified per-flow energy", "", f"Script `scripts/analysis/energy_unified.py`; JSON `results/analysis/energy_unified.json`. Estimates, not measurements.", ""]
     for sample in ("test_mix", "demo"):
         if not result[sample]:
             continue

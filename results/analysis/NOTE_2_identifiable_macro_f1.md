@@ -1,4 +1,4 @@
-# Item 2: macro-F1 over identifiable classes (co-primary)
+# Macro-F1 over the identifiable classes
 
 Script: `scripts/analysis/identifiable_macro_f1.py` (per-class test F1 and confusion matrices from the records).
 Outputs: `results/analysis/identifiable_macro_f1.json` (every label, model, seed, budget), `results/analysis/identifiable_macro_f1_table.md`.
@@ -38,14 +38,14 @@ XGBoost & $\mathbf{0.808 \pm 0.005}$ & $\mathbf{0.858 \pm 0.001}$ & $\mathbf{0.9
 
 Per-class F1 at 5% with CatBoost (for Table V): DoS-SlowHTTPTest 0.552 / 0.519 / 0.625 / 0.747 / 0.757 / 0.734 (E-SNN, ANN, Enc-ANN, RF, CatBoost, XGB); FTP-BruteForce 0.243 / 0.271 / 0.274 / 0.234 / 0.255 / 0.337; Infiltration 0.127 / 0.124 / 0.152 / 0.169 / 0.166 / 0.171; Web Attacks 0.360 / 0.171 / 0.393 / 0.319 / 0.345 / 0.464; DDoS-LOIC-UDP 0.821 / 0.816 / 0.821 / 0.869 / 0.850 / 0.837. Eight classes, not nine, have F1 at or above 0.96 for every model.
 
-## LaTeX-ready sentences
+## Sentences for the paper
 
 - Because FTP-BruteForce and DoS-SlowHTTPTest are almost entirely label-conflicted, we also report macro-F1 over the remaining eleven classes as a co-primary metric (Table~\ref{tab:main}).
 - On the eleven identifiable classes the E-SNN reaches $0.837 \pm 0.019$, 0.5 points below random forest ($0.842$) instead of 1.9 points on all thirteen classes, and Enc-ANN ($0.848$) moves above random forest and CatBoost ($0.843$). XGBoost stays first ($0.858$).
 - Excluding Infiltration, every model detects at least 99.97\% of attack flows at the 5\% budget; more than 99\% of the missed attack flows are Infiltration, so the ADR column mostly measures Infiltration.
 - Eight of the thirteen classes reach F1 $\geq 0.96$ for every model; DDoS-LOIC-UDP (0.82 to 0.87) is the ninth and is omitted from Table~\ref{tab:perclass} only for space.
 
-## What changes in the paper
+## Consequences for the paper
 
 - The 13-class ranking (XGB > CatBoost > RF > Enc-ANN > E-SNN > ANN at 5%) partly reorders on 11 classes at 5% (XGB > Enc-ANN > CatBoost > RF > E-SNN > ANN). At 1% the 11-class order equals the 13-class order. At 10% on 11 classes the E-SNN is above RF.
 - "Attack detection rates differ by less than one point across all models" is close to tautological: all differences are Infiltration.

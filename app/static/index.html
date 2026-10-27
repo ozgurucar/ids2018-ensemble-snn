@@ -30,13 +30,13 @@
 <body>
 <main>
   <h1>E-SNN Intrusion Detector</h1>
-  <p class="lead">Upload CICFlowMeter flow records (CSE-CIC-IDS2018 format). Each flow is scored by the spiking ensemble or the XGBoost baseline with the alarm threshold fitted at a 5% benign false-alarm budget.</p>
+  <p class="lead">Scores CICFlowMeter flow records (CSE-CIC-IDS2018 columns). The alarm threshold was set for a 5% false-alarm rate on benign calibration flows.</p>
 
   <div class="card row">
     <label>Model
       <select id="model">
         <option value="esnn">Ensemble SNN (T=12)</option>
-        <option value="esnn_t4">Ensemble SNN (T=4, 3x fewer spikes)</option>
+        <option value="esnn_t4">Ensemble SNN (T=4)</option>
         <option value="xgb">XGBoost baseline</option>
       </select>
     </label>

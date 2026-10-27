@@ -25,7 +25,7 @@ def main():
                                       "values": [x[k] for x in rows]} for k in KEYS}}
         agg[f"{m}|{b}|{v}"]["bot_alarm_rate"] = float(np.mean([x["alarm_rate_per_label"].get("Bot", np.nan) for x in rows]))
     write("adapt_label_budget_summary.json", agg)
-    L = ["# CIC-IDS2017 adaptation with label accounting and matched FAR (item 5)", "",
+    L = ["# CIC-IDS2017 adaptation with label accounting and matched FAR", "",
          "Source: `results/analysis/adapt_label_budget.json` (script `scripts/analysis/adapt_label_budget.py`). Means over seeds 42, 43, 44 (s.d. in the JSON).",
          "Labelled = flows with a class label (budget + temperature rows). Benign-only = flows that must be known benign for the alarm threshold (no attack labels).",
          "DR@FAR is read off the test ROC at exactly that test FAR (oracle comparison view).", "",

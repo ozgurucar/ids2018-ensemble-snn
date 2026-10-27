@@ -26,7 +26,7 @@ def prepare(data_path, config, out, timestamp_format, time_review=None):
         if (review.get("dataset_id") != raw.report["dataset_id"] or review.get("timestamp_status") != "verified"
                 or not review.get("evidence") or not review.get("reviewer")):
             if config.timestamp_policy != "recorded_unverified":
-                raise ValueError("Timestamp evidence must be reviewed for this exact dataset_id. Audit saved; provide a reviewed file with timestamp_status=verified, reviewer and evidence. Do not change status without checking the source timestamps.")
+                raise ValueError("Timestamp evidence must be reviewed for this exact dataset_id. The audit is saved; supply a review file with timestamp_status=verified, reviewer and evidence.")
             review = {"dataset_id": raw.report["dataset_id"], "timestamp_status": "unverified",
                       "policy": "recorded_unverified", "reviewer": None,
                       "evidence": "Automatic run on recorded CSV timestamps. Parsing is checked; capture-clock semantics and AM/PM are not independently verified. No timestamp repair is applied.",
@@ -47,7 +47,7 @@ def prepare(data_path, config, out, timestamp_format, time_review=None):
     joblib.dump(preprocessing, out/"preprocessor.joblib")
     array_hashes = {}
     for part, index in splits.items():
-        # Transform in chunks so full test/validation copies need not coexist.
+        # Transform in chunks so no second full copy of a partition is held in memory.
         destination = out/f"{part}_X.npy"
         arr = np.lib.format.open_memmap(destination, mode="w+", dtype="float32", shape=(len(index), len(preprocessing.columns_)))
         for start in range(0, len(index), 100000):
@@ -57,7 +57,6 @@ def prepare(data_path, config, out, timestamp_format, time_review=None):
         for suffix, values in (("y", raw.y[index]), ("ids", raw.ids[index]), ("time", raw.time[index]), ("groups", feature_groups[index])):
             np.save(out/f"{part}_{suffix}.npy", values, allow_pickle=False)
         array_hashes.update({p.name: file_hash(p) for p in out.glob(f"{part}_*.npy")})
-    from .groups import fingerprint
     transformed_train = fingerprint(pd.DataFrame(np.load(out/"train_X.npy", mmap_mode="r")))
     transformed_keys = np.unique(transformed_train)
     split_report["transformed_feature_overlap_with_train"] = {}
@@ -108,7 +107,7 @@ def validated(out):
     if file_hash(Path(out)/"feature-group-audit.json") != manifest["feature_audit_sha256"]:
         raise ValueError("Feature audit was modified")
     if environment()["packages"] != manifest["preparation_environment"]["packages"]:
-        raise ValueError("Package versions changed since preparation. Restore the saved environment or prepare a separate experiment.")
+        raise ValueError("Package versions changed since preparation; restore the saved environment")
     return manifest, Config(**manifest["config"]).validate()
 
 
@@ -172,7 +171,6 @@ def load_model(run, info, config, n_features):
     model = build(info["model"], n_features, len(CLASSES), config)
     model.load_state_dict(torch.load(run/info["checkpoint"], map_location="cpu", weights_only=True))
     return model
-
 
 
 def summarize(out):

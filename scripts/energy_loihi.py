@@ -1,7 +1,7 @@
 """Neuromorphic-hardware energy *estimate* per flow for the seed-42 checkpoints.
 
-Counts, per flow, on the 4,400-flow class-balanced sample in app/samples/demo_flows.csv
-(passed through the frozen preprocessor, as in app/detector.py):
+Counts, per flow, on the 4,400 flows in app/samples/demo_flows.csv (1,600 benign,
+7 x 400 attack), passed through the frozen preprocessor as in app/detector.py:
   * synaptic events per layer = presynaptic spikes x fan-out (binary inputs only),
   * LIF neuron state updates = LIF neurons x time steps x branches,
   * dense work (LayerNorm, fusion meta-network, ANN layers) in MACs / elements.
@@ -36,7 +36,7 @@ CKPT = {
     ("ann", 12): CACHE / "v3/ids2018-v3/experiments/group_ce/runs/ann-42/model.pt",
 }
 
-# ---- verified constants (pJ) -------------------------------------------------
+# ---- per-operation energies (pJ) ---------------------------------------------
 # Davies et al., IEEE Micro 38(1):82-99, 2018, Table 2 "Loihi pre-silicon performance
 # and energy measurements", values at 0.75 V.
 LOIHI = {"E_syn_op_min": 23.6, "E_neuron_update_active": 81.0, "E_neuron_update_inactive": 52.0,

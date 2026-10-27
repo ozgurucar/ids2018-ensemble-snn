@@ -135,14 +135,14 @@ class EncodedANN(nn.Module):
         d = features * config.steps * (config.populations if kind == "population" else 1)
         # Analytical count avoids constructing a randomly initialized SNN.
         dims = [features*(config.populations if kind == "population" else 1), *config.hidden]
-        target = sum((a+1)*b+2*b+1 for a,b in zip(dims,dims[1:])) + (dims[-1]+1)*classes
+        target = sum((a+1)*b+2*b+1 for a, b in zip(dims, dims[1:])) + (dims[-1]+1)*classes
         def count(w):
             return (d+1)*w+2*w+(w+1)*w+2*w+(w+1)*classes
-        width = min(range(4,1025), key=lambda w: abs(count(w)-target))
-        self.network = ANN(d, classes, (width,width), config.dropout)
+        width = min(range(4, 1025), key=lambda w: abs(count(w)-target))
+        self.network = ANN(d, classes, (width, width), config.dropout)
 
     def forward(self, x):
-        return self.network(self.encoder(x).permute(1,0,2).flatten(1))
+        return self.network(self.encoder(x).permute(1, 0, 2).flatten(1))
 
 
 def build(name, features, classes, config):

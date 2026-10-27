@@ -1,4 +1,4 @@
-# Operating-point context (item 3)
+# Operating-point context
 
 Source: run records; script `scripts/analysis/operating_context.py`; JSON `results/analysis/operating_context.json`.
 

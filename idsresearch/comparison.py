@@ -1,4 +1,8 @@
-"""Paired seed differences are descriptive, not independent-flow significance."""
+"""Paired per-seed comparison of two split protocols on the same cleaned data.
+
+The differences are descriptive. Rows are not independent flows, so no
+significance test is attached.
+"""
 from .pipeline import summarize, validated
 from .provenance import write_json
 from .metrics import aggregate

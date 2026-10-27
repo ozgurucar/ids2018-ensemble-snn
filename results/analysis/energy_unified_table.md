@@ -1,4 +1,4 @@
-# Unified per-flow energy (item 4)
+# Unified per-flow energy
 
 Script `scripts/analysis/energy_unified.py`; JSON `results/analysis/energy_unified.json`. Estimates, not measurements.
 

@@ -1,4 +1,4 @@
-"""Item 2: macro-F1 over identifiable classes, as a co-primary metric.
+"""Macro-F1 over the identifiable classes, reported next to 13-class macro-F1.
 
 From the per-class test F1 stored in every run record, for every
 (label, model, seed, tau):
@@ -65,7 +65,7 @@ def main():
     def ms(d, digits=3):
         return f"{d['mean']:.{digits}f} ± {d['sd']:.{digits}f}" if d["sd"] is not None else f"{d['mean']:.{digits}f}"
 
-    L = ["# Identifiable-class macro-F1 (item 2)", "",
+    L = ["# Identifiable-class macro-F1", "",
          "Source: per-class test F1 and confusion matrices in the run records (`scripts/analysis/identifiable_macro_f1.py`).",
          "JSON: `results/analysis/identifiable_macro_f1.json` (every label, model, seed and budget).", ""]
     for tau in TAUS:

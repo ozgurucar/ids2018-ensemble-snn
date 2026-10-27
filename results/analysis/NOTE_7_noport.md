@@ -1,4 +1,4 @@
-# Item 7: Dst Port ablation (v5 noport_T4)
+# Dst Port ablation (v5 noport_T4)
 
 Script: `scripts/analysis/noport.py ~/.cache/ids-x17/combine.csv`. Outputs: `results/analysis/noport.json`, `results/analysis/noport_table.md`, log `results/analysis/noport.log`. Kaggle records (summary, manifest, seed-42 calibration files, no checkpoints) copied to `results/v5/noport/`.
 The no-port models use the same partitions and preprocessor (sha256 8ef45cb2..., identical to `app/models/preprocessor.joblib`) and the 69 remaining preprocessed columns. With-port references: E-SNN and Enc-ANN at T = 4 (`results/v4/steps/summary_T4.json`) and XGBoost from v3 (trees do not depend on T). Diff = without port minus with port; Holm over the three models within each (metric, tau).
@@ -31,20 +31,20 @@ The with-port Enc-ANN T = 4 has no calibration record locally, so it is not in t
 
 Per attack after recalibration, the with-port E-SNN's good transfer on slow DoS depended on the port: GoldenEye 99.8% -> 32.5%, Slowloris 99.6% -> 68.8%. XGBoost loses Bot (60.8% -> 2.8%) and Slowloris (96.4% -> 12.2%) without the port but gains PortScan (49.7% -> 60.5%).
 
-## Answer: is Dst Port a shortcut?
+## Is Dst Port a shortcut?
 
 - In-distribution: a small one. Removing it costs about 1 point of 13-class macro-F1 for every model (significant only for XGBoost on the 11-class metric), leaves ADR unchanged to 0.1 point, and does not change the ranking. The loss concentrates on Slowloris, Web Attacks and Bot.
 - In transfer: the port is not what makes transfer fail. Without it the false-alarm rate at the 2018 threshold drops only from 23% to 18% (E-SNN) and from 25% to 22% (XGBoost), and detection after recalibration gets worse (E-SNN 23.9% -> 13.5%) or stays the same (XGBoost 31.7% -> 31.0%). The ROC AUC on 2017 falls (0.54 -> 0.47 and 0.66 -> 0.54), so the port carried signal that transfers. In particular, the earlier claim that slow application-layer DoS transfers well was mostly a port effect.
 
-## LaTeX-ready sentences
+## Sentences for the paper
 
 - Destination port is an input to every model. Retraining without it (three seeds, same partitions) lowers 13-class macro-F1 at the 5\% budget by about one point for each model (E-SNN at $T = 4$: $0.766 \to 0.754$; Enc-ANN: $0.787 \to 0.776$; XGBoost: $0.808 \to 0.799$), leaves the attack detection rate unchanged within 0.1 points and keeps the ranking of the models.
 - The loss is concentrated in DoS-Slowloris (F1 lower by 0.07 to 0.15), Web Attacks (0.04 to 0.17) and Bot (0.01 to 0.02), the classes for which the destination port identifies the attacked service in this testbed.
 - On CIC-IDS2017 the port-free models do not transfer better. With the 2018 threshold their false-alarm rate is still 18\% (E-SNN) and 22\% (XGBoost), and after recalibration to a 5\% budget they detect 13.5\% and 31.0\% of attack flows, against 23.9\% and 31.7\% with the port.
 - The good transfer of the slow application-layer DoS attacks in Table~\ref{tab:transfer} depends on the destination port: without it the 4-step E-SNN flags 32.5\% of GoldenEye and 68.8\% of Slowloris flows instead of 99.8\% and 99.6\%.
 
-## What changes in the paper
+## Consequences for the paper
 
 - Disclose Dst Port (and Protocol) as inputs; the ablation supports keeping the with-port models as primary, since the in-distribution effect is about 1 point and the conclusions do not change.
 - Sec. V-F "Only the slow application-layer DoS attacks transfer well" should add that this relies on the destination port.
-- The transfer failure is not explained by the port shortcut; together with item 6 it points to network and extractor-version shift.
+- The transfer failure is not explained by the port shortcut; together with the transfer checks in NOTE_6 it points to network and extractor-version shift.

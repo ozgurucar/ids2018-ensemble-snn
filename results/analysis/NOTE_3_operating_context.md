@@ -1,4 +1,4 @@
-# Item 3: operating-point context from the records
+# Operating-point context from the run records
 
 Script: `scripts/analysis/operating_context.py`. Outputs: `results/analysis/operating_context.json`, `results/analysis/operating_context_table.md`.
 All values are from the run records (T = 12 unless stated, mean over three seeds).
@@ -65,7 +65,7 @@ At 5%, 99.4% (E-SNN) to 99.9% (CatBoost) of missed attack flows are Infiltration
 - 5%: XGBoost 0.808 > CatBoost 0.791 > RF 0.788 > Enc-ANN 0.787 > E-SNN 0.769 > ANN 0.756.
 - 10%: XGBoost 0.801 > CatBoost 0.782 > **Enc-ANN 0.767 > RF 0.763** > E-SNN 0.754 > ANN 0.748. The order is not the same.
 
-## LaTeX-ready sentences
+## Sentences for the paper
 
 - The pooled false-alarm rate hides large differences between capture days. At the 5\% budget the E-SNN's per-day test FPR ranges from 0.1\% (2018-02-21) to 24.1\% (2018-02-28), and XGBoost's from below 0.1\% to 32.3\%; the two Infiltration days (02-28 and 03-01) are above 15\% for every model.
 - Prior correction accounts for the whole calibration effect: it raises the E-SNN's macro-F1 at the 5\% budget from 0.745 (raw logits) to 0.769, while the fitted temperatures lie between 0.96 and 1.01 and change neither the threshold nor macro-F1.
@@ -73,7 +73,7 @@ At 5%, 99.4% (E-SNN) to 99.9% (CatBoost) of missed attack flows are Infiltration
 - More than 99\% of the attack flows missed at the 5\% budget are Infiltration.
 - The ranking holds at the 1\% budget but not at 10\%, where Enc-ANN (0.767) is above random forest (0.763).
 
-## What changes in the paper
+## Consequences for the paper
 
 - "The ranking holds at the other budgets" is false at 10% (Enc-ANN above RF).
 - "The budget transfers well from calibration to test" holds only for the pooled FPR; per-day FPR is 0.1% to 24% for the E-SNN.

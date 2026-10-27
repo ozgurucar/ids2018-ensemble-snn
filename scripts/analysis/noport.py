@@ -1,4 +1,4 @@
-"""Item 7: Dst Port ablation (v5 noport_T4) in-distribution and on CIC-IDS2017.
+"""Dst Port ablation (v5 noport_T4), in distribution and on CIC-IDS2017.
 
 1. Copies the Kaggle records (summary.json, manifest.json, seed-42
    calibration.json; no checkpoints) into results/v5/noport/.
@@ -183,7 +183,7 @@ def main():
     write("noport.json", out)
 
     # ---------------- markdown table
-    L = ["# Dst Port ablation (item 7)", "", "Script `scripts/analysis/noport.py`; JSON `results/analysis/noport.json`; records copied to `results/v5/noport/`.", "",
+    L = ["# Dst Port ablation", "", "Script `scripts/analysis/noport.py`; JSON `results/analysis/noport.json`; records copied to `results/v5/noport/`.", "",
          "## In-distribution (three seeds; diff = without port minus with port, points x 0.01)", "",
          "| Model | tau | metric | with port | without port | diff | Welch 95% CI | p Welch (Holm 3) | paired diffs | p paired (Holm 3) |", "|---|---|---|---|---|---|---|---|---|---|"]
     for model in WITH_PORT:

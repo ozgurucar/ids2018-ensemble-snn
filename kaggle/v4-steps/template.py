@@ -1,9 +1,10 @@
-"""IDS2018 v4: time-window ablation for the spiking ensemble and its spike-input control.
+"""IDS2018 v4: time-window ablation (T = 4, 8) for esnn and its spike-input control.
 
-Reuses the prepared v3 group_ce partitions and preprocessor byte for byte
-(attached as the output of ozgurucar/notebookeb0d7e9071). Only the number of
-time steps changes. Decision rule, budgets and seeds are those of v3 and were
-fixed before this run. Development evidence, not independent validation.
+Derives from the prepared v3 group_ce experiment (the output of Kaggle notebook
+ozgurucar/notebookeb0d7e9071) and reuses its partitions and preprocessor byte
+for byte. Only the number of time steps changes; the decision rule, budgets and
+seeds are those of v3, fixed before this run. Development evidence, not
+independent validation.
 """
 import base64, io, json, os, subprocess, sys, time, zipfile
 from pathlib import Path

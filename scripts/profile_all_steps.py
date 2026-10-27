@@ -1,4 +1,4 @@
-"""Operation counts for every neural checkpoint on one class-balanced sample (single CPU thread)."""
+"""Operation counts for every neural checkpoint on one sample of up to 400 flows per label and day (single CPU thread)."""
 import json, sys, platform
 from pathlib import Path
 import joblib, numpy as np, pandas as pd, torch

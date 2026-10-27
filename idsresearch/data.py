@@ -1,4 +1,8 @@
-"""No learned preprocessing before partitioning. Timestamp grouping is a proxy."""
+"""Loading, auditing, partitioning and train-only preprocessing of the CSVs.
+
+Nothing is learned from the data before partitioning. Time groups are an
+inactivity proxy, not captured sessions.
+"""
 from dataclasses import dataclass
 from pathlib import Path
 import numpy as np
@@ -37,10 +41,11 @@ def discover(path, max_files=None):
 
 
 def load(path, timestamp_format, max_files=None):
-    """Read all rows, numeric float32 chunks, with file:physical-row identity.
+    """Read every row as float32 features, keyed by file number and physical row.
 
-    Explicit timestamp format is mandatory. No guessed AM/PM correction.
-    Only repeated headers and unknown dates are removed; all counts are logged.
+    The timestamp format must be given; no AM/PM correction is guessed. Only
+    repeated header rows and rows with unparseable or out-of-range dates are
+    dropped, and both are counted in the report.
     """
     frames, targets, times, identities, reports = [], [], [], [], []
     schema = None
@@ -119,15 +124,20 @@ def audit(raw):
 
 
 def partition(raw, config):
-    """Split equal timestamps together. Whole-group splitting has no silent fallback."""
+    """Split rows into train, tune, calibration and test.
+
+    Rows with the same timestamp (or in the same time group) stay on one side
+    of every boundary. A class that cannot be split that way raises instead of
+    falling back to a row-wise split.
+    """
     if config.split == "feature_groups":
         from .groups import fingerprint, group_partition
         groups = fingerprint(raw.X)
         chunks = group_partition(groups, config.ratios, config.split_seed)
         result = dict(zip(PARTS, chunks))
-        report = {"mode": config.split, "counts": {p: counts(raw.y[i]) for p,i in result.items()},
+        report = {"mode": config.split, "counts": {p: counts(raw.y[i]) for p, i in result.items()},
                   "boundaries": {}, "note": "Label-blind feature-fingerprint grouping; ratios hold in expectation over groups, not rows or classes; not temporal or session generalisation."}
-        report["split_id"] = digest({p: digest(raw.ids[i].tolist()) for p,i in result.items()})
+        report["split_id"] = digest({p: digest(raw.ids[i].tolist()) for p, i in result.items()})
         return result, report
     rng = np.random.default_rng(config.split_seed)
     result = {p: [] for p in PARTS}
@@ -147,7 +157,7 @@ def partition(raw, config):
             else:
                 allowed = np.flatnonzero(np.diff(t) != np.timedelta64(0, "ns")) + 1
             if len(allowed) < 3:
-                raise ValueError(f"Class {c}: fewer than four time blocks/groups. Use within_class_time or a separately declared global_time experiment; no session claim is substituted.")
+                raise ValueError(f"Class {c}: fewer than four time blocks/groups; use within_class_time or global_time")
             chosen = []
             for k, target in enumerate(targets):
                 feasible = allowed[(allowed > (chosen[-1] if chosen else 0))]
@@ -193,7 +203,7 @@ class Preprocessor:
         self.config = config
 
     def fit(self, X):
-        # X is the final real training subset only, never tuning/calibration/test.
+        # Called on the capped training subset only.
         self.input_columns_ = X.columns.tolist()
         cols = [c for c in X if X[c].nunique() > 1 and (self.config.feature_selection == "nonconstant" or X[c].value_counts(normalize=True).iloc[0] <= self.config.dominant_fraction)]
         if not cols:

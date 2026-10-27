@@ -1,4 +1,9 @@
-"""Frozen, test-independent score construction with compact error diagnostics."""
+"""Calibration and one-shot test scoring with error diagnostics.
+
+The calibration partition is split by feature group into a probability half
+(temperature scaling) and an alarm half (alarm thresholds). The resulting
+rule is written to disk before the test partition is scored.
+"""
 from pathlib import Path
 import numpy as np
 from scipy.stats import ks_2samp
@@ -37,7 +42,7 @@ def diagnostic(y, pred, logits, times, threshold):
             "alarm_precision": tp/(tp+fp) if tp+fp else None,
             "false_alarms_per_million_benign": fp/int(benign.sum())*1e6 if benign.any() else None,
             "nll": float(-log_probabilities(logits)[np.arange(len(y)), y].mean()),
-            "multiclass_brier": float((np.square(p).sum(1)-2*p[np.arange(len(y)),y]+1).mean()),
+            "multiclass_brier": float((np.square(p).sum(1)-2*p[np.arange(len(y)), y]+1).mean()),
             "per_class": rows, "per_recorded_day": daily,
             "threshold": threshold, "quantile_levels": [0, .01, .1, .5, .9, .99, 1]}
 
@@ -103,10 +108,10 @@ def score_v3(out, models=None, seeds=None, device="cpu"):
                 ref = ablation_rules[label]
                 # Thresholds depend only on calibration; all ablations are predeclared.
                 decision_ablations[label] = {"calibration": ref,
-                    "test": evaluate(test_y, predict_logits(b, ref['threshold']), np.exp(log_probabilities(b)))}
+                    "test": evaluate(test_y, predict_logits(b, ref["threshold"]), np.exp(log_probabilities(b)))}
             np.save(run/"test_proba.npy", test_p, allow_pickle=False)
             np.save(run/"test_log_odds.npy", alarm_score(test_z), allow_pickle=False)
-            points = {tau: {"calibration": t, "test": evaluate(test_y, predict_logits(test_z, t["threshold"]), test_p)} for tau,t in thresholds.items()}
+            points = {tau: {"calibration": t, "test": evaluate(test_y, predict_logits(test_z, t["threshold"]), test_p)} for tau, t in thresholds.items()}
             primary = thresholds[str(config.primary_tau)]["threshold"]
             report = {"model": name, "seed": seed, "experiment_id": manifest["experiment_id"],
                       "checkpoint_sha256": info["checkpoint_sha256"], "provenance": config.provenance,

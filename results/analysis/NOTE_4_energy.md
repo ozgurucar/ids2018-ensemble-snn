@@ -1,4 +1,4 @@
-# Item 4: one consistent energy table (45 nm and Loihi)
+# Energy per flow under one set of cost models (45 nm and Loihi)
 
 Script: `scripts/analysis/energy_unified.py` (reuses `count`, `esnn_energy`, `dense_energy` and the checkpoints of `scripts/energy_loihi.py`).
 Outputs: `results/analysis/energy_unified.json`, `results/analysis/energy_unified_table.md`. Estimates from operation counts, not measurements. Runtime about 15 s on CPU.
@@ -43,7 +43,7 @@ Ratios to the matched ANN under the same model (E-SNN / ANN):
 
 E-SNN on Loihi vs ANN: 7.8x / 15.1x / 22.5x the FP32 ANN (0.398 µJ), 2.5x / 4.8x / 7.2x the FP32 ANN with SRAM reads (1.24 µJ), and 155x / 302x / 449x the INT8 ANN (0.020 µJ).
 
-## Recommended paper table (one ANN number, 0.40 µJ, everywhere)
+## Table for the paper (one ANN figure, 0.40 µJ)
 
 ```latex
 \begin{tabular}{lrrrr}
@@ -61,7 +61,7 @@ Matched ANN & 0.40 & 1.24 & 0.020 & -- \\
 ```
 (µJ per flow; 45 nm includes LayerNorm for all models and membrane updates for the E-SNN; INT8 uses 8-bit adds and MACs.)
 
-## LaTeX-ready sentences
+## Sentences for the paper
 
 - Once the E-SNN's per-step layer normalisation and membrane updates are charged at the same 45\,nm prices as the perceptron's own layer normalisation, the estimate is 0.18, 0.33 and 0.49\,$\mu$J per flow at $T = 4$, 8 and 12, against 0.40\,$\mu$J for the matched ANN: 55\% less at $T = 4$, 16\% less at $T = 8$ and 23\% more at $T = 12$.
 - Layer normalisation alone costs the E-SNN 0.13\,$\mu$J per flow at $T = 12$, a third of the perceptron's total.
@@ -69,7 +69,7 @@ Matched ANN & 0.40 & 1.24 & 0.020 & -- \\
 - With 8-bit arithmetic, the like-for-like point for Loihi's low-precision weights, the matched ANN needs 0.020\,$\mu$J per flow, about 150 times less than the 4-step E-SNN on Loihi (3.1\,$\mu$J).
 - Operation counts are taken on a benign-heavy sample weighted to the test-partition class mix (91\% benign over the measured classes); they differ from the earlier 4{,}400-flow sample by less than 3\%.
 
-## What changes in the paper
+## Consequences for the paper
 
 - Abstract "69% less synaptic energy": with the optimistic model on the test-mix sample it is 68%; with the complete model it is 55%. Replace with the complete figure or drop.
 - Sec. V-E "the estimate ends about 17% below the ANN" at T = 12: with LayerNorm and membrane updates it is 23% above. The sign flips.

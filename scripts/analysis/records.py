@@ -93,7 +93,7 @@ def adr_excluding(test, exclude=(INFILTRATION,)):
 
 
 def metrics(test):
-    """All point metrics used in the revision for one test evaluation."""
+    """Point metrics of one test evaluation."""
     return {
         "macro_f1_13": float(test["macro_f1"]),
         "macro_f1_11": macro_f1(test, CONFLICTED),

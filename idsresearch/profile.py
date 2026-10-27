@@ -72,7 +72,7 @@ def profile(out, name, seed, device="cpu", samples_per_class=16):
         raise ValueError("Profile/checkpoint provenance mismatch")
     model = load_model(run, info, config, X.shape[1])
     if isinstance(model, dict):
-        raise ValueError("This instrumentation covers neural models only; trees require separately labelled predict_proba timing")
+        raise ValueError("Profiling covers neural models only")
     result = measure(model, np.asarray(X[index]), device)
     result.update({"experiment_id": manifest["experiment_id"], "checkpoint_sha256": info["checkpoint_sha256"],
                    "sampling": "class balanced", "sample_support": counts(y[index]),

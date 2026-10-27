@@ -1,4 +1,4 @@
-# Dst Port ablation (item 7)
+# Dst Port ablation
 
 Script `scripts/analysis/noport.py`; JSON `results/analysis/noport.json`; records copied to `results/v5/noport/`.
 

@@ -1,4 +1,4 @@
-"""Item 6: CIC-IDS2017 transfer hygiene.
+"""Checks on the CIC-IDS2017 transfer: column mapping and feature shift.
 
 1. Maps the CIC-IDS2017 MachineLearningCVE columns to the CSE-CIC-IDS2018
    names through an explicit name table (NAME_MAP), instead of by position as
@@ -182,7 +182,7 @@ def main():
                                 "median_within_2018_max": float(np.median(list(within_max.values())))}}
     write("transfer_hygiene.json", result)
 
-    L = ["# Transfer hygiene (item 6)", "", "Script `scripts/analysis/transfer_hygiene.py`; JSON `results/analysis/transfer_hygiene.json`.", "",
+    L = ["# Transfer hygiene", "", "Script `scripts/analysis/transfer_hygiene.py`; JSON `results/analysis/transfer_hygiene.json`.", "",
          f"- Name-mapped and positional feature frames identical: **{identical}** ({len(A):,} rows x {A.shape[1]} columns).",
          f"- 2017 duplicate 'Fwd Header Length' columns identical: {dup.get('identical')} (rows differing: {dup.get('rows_differing')}).", ""]
     if "rescore_vs_published" in result:

@@ -1,6 +1,6 @@
 """Software forward-pass profile of the v3 seed-42 neural checkpoints on CPU.
 
-Uses the bundled class-balanced demo flows. Counts are proxies (spike-driven
+Uses the bundled demo flows (app/samples/demo_flows.csv). Counts are proxies (spike-driven
 accumulates vs dense MACs in Linear layers), not energy measurements.
 """
 import json

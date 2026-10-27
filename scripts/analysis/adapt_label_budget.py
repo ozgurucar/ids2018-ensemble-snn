@@ -1,4 +1,4 @@
-"""Item 5: CIC-IDS2017 adaptation with honest label accounting and matched FAR.
+"""CIC-IDS2017 adaptation with explicit label accounting and matched FAR.
 
 Re-runs the protocol of scripts/finetune_cic2017.py (same data loading, same
 group split, same budgets, same training code, imported unchanged) and scores
@@ -23,7 +23,7 @@ and two matched-FAR views computed on the test ROC of the alarm score:
   dr_at_test_far_5pct, dr_at_test_far_1pct  (threshold set on test benign;
   an oracle view used only for comparison, never for a decision)
 
-Old results file is not touched. Output: results/analysis/adapt_label_budget.json
+results/cross_dataset/finetune_cic2017.json is left as it is. Output: results/analysis/adapt_label_budget.json
 
     python scripts/analysis/adapt_label_budget.py ~/.cache/ids-x17/combine.csv --seeds 42 43 44
 """
